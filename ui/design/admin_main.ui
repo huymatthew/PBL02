@@ -1,0 +1,1648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminMainWindow</class>
+ <widget class="QMainWindow" name="AdminMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Quản Lý Phòng Trọ - Admin</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/icons/home.png</normaloff>:/icons/home.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Admin Window Styling */
+QMainWindow {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+/* Menu Bar Styling */
+QMenuBar {
+    background-color: #343a40;
+    color: white;
+    border-bottom: 3px solid #495057;
+    padding: 6px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+QMenuBar::item {
+    background-color: transparent;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+QMenuBar::item:selected {
+    background-color: #007bff;
+}
+
+QMenuBar::item:pressed {
+    background-color: #0056b3;
+}
+
+QMenu {
+    background-color: white;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 12px;
+}
+
+QMenu::item {
+    padding: 10px 30px;
+    margin: 2px;
+    border-radius: 6px;
+}
+
+QMenu::item:selected {
+    background-color: #007bff;
+    color: white;
+}
+
+QMenu::separator {
+    height: 2px;
+    background-color: #dee2e6;
+    margin: 6px 20px;
+}
+
+/* Tool Bar Styling */
+QToolBar {
+    background-color: #e9ecef;
+    border: none;
+    border-bottom: 2px solid #dee2e6;
+    spacing: 10px;
+    padding: 10px;
+}
+
+QToolButton {
+    background-color: #ffffff;
+    border: 2px solid #ced4da;
+    border-radius: 10px;
+    padding: 12px 16px;
+    min-width: 100px;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+QToolButton:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+QToolButton:pressed {
+    background-color: #0056b3;
+}
+
+/* Tab Widget Styling */
+QTabWidget::pane {
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    background-color: white;
+    padding: 8px;
+}
+
+QTabBar::tab {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-bottom: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 12px 20px;
+    margin-right: 2px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #495057;
+}
+
+QTabBar::tab:selected {
+    background-color: white;
+    color: #007bff;
+    border-color: #007bff;
+    border-bottom: 2px solid white;
+}
+
+QTabBar::tab:hover {
+    background-color: #e9ecef;
+}
+
+/* Table View Styling */
+QTableView {
+    background-color: white;
+    alternate-background-color: #f8f9fa;
+    gridline-color: #dee2e6;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    selection-background-color: #007bff;
+    selection-color: white;
+    font-size: 11px;
+}
+
+QTableView::item {
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+QTableView::item:selected {
+    background-color: #007bff;
+    color: white;
+}
+
+QHeaderView::section {
+    background-color: #495057;
+    color: white;
+    padding: 12px;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+QHeaderView::section:hover {
+    background-color: #343a40;
+}
+
+/* Group Box Styling */
+QGroupBox {
+    font-weight: bold;
+    font-size: 14px;
+    color: #495057;
+    border: 2px solid #ced4da;
+    border-radius: 10px;
+    margin-top: 1.5ex;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 15px;
+    padding: 0 10px 0 10px;
+    background-color: white;
+}
+
+/* Form Labels */
+QLabel {
+    color: #495057;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+/* Input Fields Styling */
+QDateEdit, QComboBox, QDoubleSpinBox, QLineEdit, QSpinBox {
+    background-color: white;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 12px;
+    min-height: 18px;
+}
+
+QDateEdit:focus, QComboBox:focus, QDoubleSpinBox:focus, QLineEdit:focus, QSpinBox:focus {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+}
+
+QDateEdit:hover, QComboBox:hover, QDoubleSpinBox:hover, QLineEdit:hover, QSpinBox:hover {
+    border-color: #6c757d;
+}
+
+/* ComboBox Arrow */
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #ced4da;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+QComboBox::down-arrow {
+    width: 15px;
+    height: 15px;
+    background-color: #6c757d;
+}
+
+QComboBox QAbstractItemView {
+    background-color: white;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    selection-background-color: #007bff;
+    selection-color: white;
+}
+
+/* Button Styling */
+QPushButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-weight: bold;
+    font-size: 12px;
+    min-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: #0056b3;
+}
+
+QPushButton:pressed {
+    background-color: #004085;
+}
+
+#addButton {
+    background-color: #28a745;
+}
+
+#addButton:hover {
+    background-color: #1e7e34;
+}
+
+#editButton {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+#editButton:hover {
+    background-color: #e0a800;
+}
+
+#deleteButton {
+    background-color: #dc3545;
+}
+
+#deleteButton:hover {
+    background-color: #c82333;
+}
+
+#searchButton {
+    background-color: #17a2b8;
+}
+
+#searchButton:hover {
+    background-color: #138496;
+}
+
+/* Status Bar Styling */
+QStatusBar {
+    background-color: #495057;
+    color: white;
+    border-top: 3px solid #343a40;
+    padding: 6px;
+}
+
+QStatusBar QLabel {
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+/* Search Box */
+#searchBox {
+    background-color: white;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-width: 200px;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainVerticalLayout">
+    <item>
+     <widget class="QTabWidget" name="mainTabWidget">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777213</height>
+       </size>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTabBar::tab { min-width: 150px; }</string>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="movable">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="roomsTab">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="acceptDrops">
+        <bool>false</bool>
+       </property>
+       <attribute name="title">
+        <string>Quản Lý Phòng</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="roomsLayout">
+        <property name="rightMargin">
+         <number>11</number>
+        </property>
+        <item>
+         <widget class="QTableView" name="roomsTableView">
+          <property name="minimumSize">
+           <size>
+            <width>600</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="roomControlsLayout">
+          <item>
+           <widget class="QGroupBox" name="roomInfoGroup">
+            <property name="title">
+             <string>Thông Tin Phòng</string>
+            </property>
+            <layout class="QFormLayout" name="roomFormLayout">
+             <item row="0" column="0">
+              <widget class="QLabel" name="roomNumberLabel">
+               <property name="text">
+                <string>Số Phòng:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="roomNumberEdit">
+               <property name="placeholderText">
+                <string>Nhập số phòng...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="roomTypeLabel">
+               <property name="text">
+                <string>Loại Phòng:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="roomTypeComboBox">
+               <item>
+                <property name="text">
+                 <string>Phòng đơn</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Phòng đôi</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Phòng gia đình</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Phòng VIP</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="roomPriceLabel">
+               <property name="text">
+                <string>Giá Phòng:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QDoubleSpinBox" name="roomPriceSpinBox">
+               <property name="suffix">
+                <string> VND</string>
+               </property>
+               <property name="decimals">
+                <number>0</number>
+               </property>
+               <property name="minimum">
+                <double>0.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>99999999.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>100000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="roomStatusLabel">
+               <property name="text">
+                <string>Trạng Thái:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QComboBox" name="roomStatusComboBox">
+               <item>
+                <property name="text">
+                 <string>Trống</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Đã thuê</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Bảo trì</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Dọn dẹp</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="roomAreaLabel">
+               <property name="text">
+                <string>Diện Tích:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QSpinBox" name="roomAreaSpinBox">
+               <property name="suffix">
+                <string> m²</string>
+               </property>
+               <property name="minimum">
+                <number>10</number>
+               </property>
+               <property name="maximum">
+                <number>200</number>
+               </property>
+               <property name="value">
+                <number>25</number>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="roomDescLabel">
+               <property name="text">
+                <string>Mô Tả:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="roomDescEdit">
+               <property name="placeholderText">
+                <string>Mô tả phòng...</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="roomVerticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="roomButtonsLayout">
+            <item>
+             <widget class="QPushButton" name="addRoomButton">
+              <property name="text">
+               <string>Thêm Phòng</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="editRoomButton">
+              <property name="text">
+               <string>Sửa Phòng</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>:/icons/edit.png</normaloff>:/icons/edit.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="deleteRoomButton">
+              <property name="text">
+               <string>Xóa Phòng</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>:/icons/delete.png</normaloff>:/icons/delete.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tenantsTab">
+       <attribute name="title">
+        <string>Quản Lý Khách Thuê</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="tenantsLayout">
+        <item>
+         <widget class="QTableView" name="tenantsTableView">
+          <property name="minimumSize">
+           <size>
+            <width>600</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="tenantControlsLayout">
+          <item>
+           <widget class="QGroupBox" name="tenantInfoGroup">
+            <property name="title">
+             <string>Thông Tin Khách Thuê</string>
+            </property>
+            <layout class="QFormLayout" name="tenantFormLayout">
+             <item row="0" column="0">
+              <widget class="QLabel" name="tenantNameLabel">
+               <property name="text">
+                <string>Họ Tên:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="tenantNameEdit">
+               <property name="placeholderText">
+                <string>Nhập họ tên...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="tenantPhoneLabel">
+               <property name="text">
+                <string>Số Điện Thoại:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="tenantPhoneEdit">
+               <property name="placeholderText">
+                <string>Nhập số điện thoại...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="tenantEmailLabel">
+               <property name="text">
+                <string>Email:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="tenantEmailEdit">
+               <property name="placeholderText">
+                <string>Nhập email...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="tenantIdLabel">
+               <property name="text">
+                <string>CMND/CCCD:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="tenantIdEdit">
+               <property name="placeholderText">
+                <string>Nhập CCCD...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="tenantRoomLabel">
+               <property name="text">
+                <string>Phòng:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QComboBox" name="tenantRoomComboBox">
+               <property name="editable">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="tenantStartDateLabel">
+               <property name="text">
+                <string>Ngày Bắt Đầu:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QDateEdit" name="tenantStartDateEdit">
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="tenantDepositLabel">
+               <property name="text">
+                <string>Tiền Cọc:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QDoubleSpinBox" name="tenantDepositSpinBox">
+               <property name="suffix">
+                <string> VND</string>
+               </property>
+               <property name="decimals">
+                <number>0</number>
+               </property>
+               <property name="maximum">
+                <double>99999999.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>100000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="tenantVerticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="tenantButtonsLayout">
+            <item>
+             <widget class="QPushButton" name="addTenantButton">
+              <property name="text">
+               <string>Thêm Khách</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="editTenantButton">
+              <property name="text">
+               <string>Sửa Thông Tin</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>:/icons/edit.png</normaloff>:/icons/edit.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="deleteTenantButton">
+              <property name="text">
+               <string>Xóa Khách</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>:/icons/delete.png</normaloff>:/icons/delete.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="paymentsTab">
+       <attribute name="title">
+        <string>Quản Lý Thanh Toán</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="paymentsLayout">
+        <item>
+         <widget class="QTableView" name="paymentsTableView">
+          <property name="minimumSize">
+           <size>
+            <width>600</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="paymentControlsLayout">
+          <item>
+           <widget class="QGroupBox" name="paymentInfoGroup">
+            <property name="title">
+             <string>Thông Tin Thanh Toán</string>
+            </property>
+            <layout class="QFormLayout" name="paymentFormLayout">
+             <item row="0" column="0">
+              <widget class="QLabel" name="paymentRoomLabel">
+               <property name="text">
+                <string>Phòng:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="paymentRoomComboBox"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="paymentMonthLabel">
+               <property name="text">
+                <string>Tháng:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QDateEdit" name="paymentMonthEdit">
+               <property name="displayFormat">
+                <string>MM/yyyy</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="rentAmountLabel">
+               <property name="text">
+                <string>Tiền Phòng:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QDoubleSpinBox" name="rentAmountSpinBox">
+               <property name="suffix">
+                <string> VND</string>
+               </property>
+               <property name="decimals">
+                <number>0</number>
+               </property>
+               <property name="maximum">
+                <double>99999999.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>100000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="electricBillLabel">
+               <property name="text">
+                <string>Tiền Điện:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QDoubleSpinBox" name="electricBillSpinBox">
+               <property name="suffix">
+                <string> VND</string>
+               </property>
+               <property name="decimals">
+                <number>0</number>
+               </property>
+               <property name="maximum">
+                <double>99999999.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>10000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="waterBillLabel">
+               <property name="text">
+                <string>Tiền Nước:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QDoubleSpinBox" name="waterBillSpinBox">
+               <property name="suffix">
+                <string> VND</string>
+               </property>
+               <property name="decimals">
+                <number>0</number>
+               </property>
+               <property name="maximum">
+                <double>99999999.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>10000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="internetBillLabel">
+               <property name="text">
+                <string>Tiền Internet:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QDoubleSpinBox" name="internetBillSpinBox">
+               <property name="suffix">
+                <string> VND</string>
+               </property>
+               <property name="decimals">
+                <number>0</number>
+               </property>
+               <property name="maximum">
+                <double>99999999.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>10000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="paymentStatusLabel">
+               <property name="text">
+                <string>Trạng Thái:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QComboBox" name="paymentStatusComboBox">
+               <item>
+                <property name="text">
+                 <string>Chưa thanh toán</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Đã thanh toán</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Thanh toán một phần</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Quá hạn</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="paymentVerticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="paymentButtonsLayout">
+            <item>
+             <widget class="QPushButton" name="addPaymentButton">
+              <property name="text">
+               <string>Thêm Hóa Đơn</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>:/icons/add.png</normaloff>:/icons/add.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="editPaymentButton">
+              <property name="text">
+               <string>Sửa Hóa Đơn</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>:/icons/edit.png</normaloff>:/icons/edit.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="printInvoiceButton">
+              <property name="text">
+               <string>In Hóa Đơn</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="reportsTab">
+       <attribute name="title">
+        <string>Báo Cáo - Thống Kê</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="reportsMainLayout">
+        <item>
+         <layout class="QHBoxLayout" name="reportsFilterLayout">
+          <item>
+           <widget class="QGroupBox" name="filterGroup">
+            <property name="title">
+             <string>Bộ Lọc Báo Cáo</string>
+            </property>
+            <layout class="QHBoxLayout" name="filterLayout">
+             <item>
+              <widget class="QLabel" name="fromDateLabel">
+               <property name="text">
+                <string>Từ ngày:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDateEdit" name="fromDateEdit">
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="toDateLabel">
+               <property name="text">
+                <string>Đến ngày:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDateEdit" name="toDateEdit">
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="generateReportButton">
+               <property name="text">
+                <string>Tạo Báo Cáo</string>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>:/icons/report.png</normaloff>:/icons/report.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="filterHorizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="reportsContentLayout">
+          <item>
+           <widget class="QGroupBox" name="summaryGroup">
+            <property name="title">
+             <string>Tóm Tắt Tài Chính</string>
+            </property>
+            <layout class="QFormLayout" name="summaryLayout">
+             <item row="0" column="0">
+              <widget class="QLabel" name="totalRoomsLabel">
+               <property name="text">
+                <string>Tổng số phòng:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="totalRoomsValue">
+               <property name="styleSheet">
+                <string notr="true">font-weight: bold; color: #007bff;</string>
+               </property>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="occupiedRoomsLabel">
+               <property name="text">
+                <string>Phòng đã thuê:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLabel" name="occupiedRoomsValue">
+               <property name="styleSheet">
+                <string notr="true">font-weight: bold; color: #28a745;</string>
+               </property>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="emptyRoomsLabel">
+               <property name="text">
+                <string>Phòng trống:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="emptyRoomsValue">
+               <property name="styleSheet">
+                <string notr="true">font-weight: bold; color: #ffc107;</string>
+               </property>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="totalRevenueLabel">
+               <property name="text">
+                <string>Tổng doanh thu:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLabel" name="totalRevenueValue">
+               <property name="styleSheet">
+                <string notr="true">font-weight: bold; color: #007bff; font-size: 14px;</string>
+               </property>
+               <property name="text">
+                <string>0 VND</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="unpaidBillsLabel">
+               <property name="text">
+                <string>Hóa đơn chưa thanh toán:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLabel" name="unpaidBillsValue">
+               <property name="styleSheet">
+                <string notr="true">font-weight: bold; color: #dc3545;</string>
+               </property>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTableView" name="reportsTableView">
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1200</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;Tệp</string>
+    </property>
+    <addaction name="actionNewProject"/>
+    <addaction name="actionOpenProject"/>
+    <addaction name="actionSaveProject"/>
+    <addaction name="separator"/>
+    <addaction name="actionBackupData"/>
+    <addaction name="actionRestoreData"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuManagement">
+    <property name="title">
+     <string>&amp;Quản Lý</string>
+    </property>
+    <addaction name="actionRoomManagement"/>
+    <addaction name="actionTenantManagement"/>
+    <addaction name="actionPaymentManagement"/>
+    <addaction name="separator"/>
+    <addaction name="actionSettings"/>
+   </widget>
+   <widget class="QMenu" name="menuReports">
+    <property name="title">
+     <string>&amp;Báo Cáo</string>
+    </property>
+    <addaction name="actionFinancialReport"/>
+    <addaction name="actionOccupancyReport"/>
+    <addaction name="actionPaymentReport"/>
+    <addaction name="separator"/>
+    <addaction name="actionExportData"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;Trợ Giúp</string>
+    </property>
+    <addaction name="actionUserManual"/>
+    <addaction name="actionContactSupport"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuManagement"/>
+   <addaction name="menuReports"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <widget class="QLabel" name="statusInfoLabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>200</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Sẵn sàng</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dateTimeLabel">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>0</y>
+      <width>200</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>20/08/2025 - 10:30</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>80</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>Thanh Công Cụ</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionQuickAddRoom"/>
+   <addaction name="actionQuickAddTenant"/>
+   <addaction name="actionQuickSearch"/>
+   <addaction name="separator"/>
+   <addaction name="actionRefresh"/>
+   <addaction name="actionBackup"/>
+  </widget>
+  <action name="actionNewProject">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/new.png</normaloff>:/icons/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Dự án mới</string>
+   </property>
+   <property name="statusTip">
+    <string>Tạo dự án quản lý mới</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOpenProject">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/open.png</normaloff>:/icons/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Mở dự án</string>
+   </property>
+   <property name="statusTip">
+    <string>Mở dự án quản lý có sẵn</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSaveProject">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Lưu dự án</string>
+   </property>
+   <property name="statusTip">
+    <string>Lưu dự án hiện tại</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionBackupData">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/backup.png</normaloff>:/icons/backup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sao lưu dữ liệu</string>
+   </property>
+   <property name="statusTip">
+    <string>Sao lưu toàn bộ dữ liệu</string>
+   </property>
+  </action>
+  <action name="actionRestoreData">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/restore.png</normaloff>:/icons/restore.png</iconset>
+   </property>
+   <property name="text">
+    <string>Khôi phục dữ liệu</string>
+   </property>
+   <property name="statusTip">
+    <string>Khôi phục dữ liệu từ bản sao lưu</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/exit.png</normaloff>:/icons/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>T&amp;hoát</string>
+   </property>
+   <property name="statusTip">
+    <string>Thoát ứng dụng</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+F4</string>
+   </property>
+  </action>
+  <action name="actionRoomManagement">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/rooms.png</normaloff>:/icons/rooms.png</iconset>
+   </property>
+   <property name="text">
+    <string>Quản lý &amp;Phòng</string>
+   </property>
+   <property name="statusTip">
+    <string>Chuyển đến tab quản lý phòng</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionTenantManagement">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/tenants.png</normaloff>:/icons/tenants.png</iconset>
+   </property>
+   <property name="text">
+    <string>Quản lý &amp;Khách thuê</string>
+   </property>
+   <property name="statusTip">
+    <string>Chuyển đến tab quản lý khách thuê</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="actionPaymentManagement">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/payments.png</normaloff>:/icons/payments.png</iconset>
+   </property>
+   <property name="text">
+    <string>Quản lý &amp;Thanh toán</string>
+   </property>
+   <property name="statusTip">
+    <string>Chuyển đến tab quản lý thanh toán</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/settings.png</normaloff>:/icons/settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Cài đặt</string>
+   </property>
+   <property name="statusTip">
+    <string>Mở cài đặt ứng dụng</string>
+   </property>
+  </action>
+  <action name="actionFinancialReport">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/financial.png</normaloff>:/icons/financial.png</iconset>
+   </property>
+   <property name="text">
+    <string>Báo cáo &amp;Tài chính</string>
+   </property>
+   <property name="statusTip">
+    <string>Xem báo cáo tài chính</string>
+   </property>
+  </action>
+  <action name="actionOccupancyReport">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/occupancy.png</normaloff>:/icons/occupancy.png</iconset>
+   </property>
+   <property name="text">
+    <string>Báo cáo &amp;Lưu trú</string>
+   </property>
+   <property name="statusTip">
+    <string>Xem báo cáo tình hình lưu trú</string>
+   </property>
+  </action>
+  <action name="actionPaymentReport">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/payment-report.png</normaloff>:/icons/payment-report.png</iconset>
+   </property>
+   <property name="text">
+    <string>Báo cáo Thanh &amp;toán</string>
+   </property>
+   <property name="statusTip">
+    <string>Xem báo cáo thanh toán</string>
+   </property>
+  </action>
+  <action name="actionExportData">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/export.png</normaloff>:/icons/export.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Xuất dữ liệu</string>
+   </property>
+   <property name="statusTip">
+    <string>Xuất dữ liệu ra file Excel</string>
+   </property>
+  </action>
+  <action name="actionUserManual">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/manual.png</normaloff>:/icons/manual.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Hướng dẫn sử dụng</string>
+   </property>
+   <property name="statusTip">
+    <string>Mở hướng dẫn sử dụng</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionContactSupport">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/support.png</normaloff>:/icons/support.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Liên hệ hỗ trợ</string>
+   </property>
+   <property name="statusTip">
+    <string>Liên hệ bộ phận hỗ trợ</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/about.png</normaloff>:/icons/about.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Giới thiệu</string>
+   </property>
+   <property name="statusTip">
+    <string>Thông tin về ứng dụng</string>
+   </property>
+  </action>
+  <action name="actionQuickAddRoom">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/add-room.png</normaloff>:/icons/add-room.png</iconset>
+   </property>
+   <property name="text">
+    <string>Thêm Phòng</string>
+   </property>
+   <property name="statusTip">
+    <string>Thêm phòng mới nhanh</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionQuickAddTenant">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/add-tenant.png</normaloff>:/icons/add-tenant.png</iconset>
+   </property>
+   <property name="text">
+    <string>Thêm Khách</string>
+   </property>
+   <property name="statusTip">
+    <string>Thêm khách thuê mới nhanh</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionQuickSearch">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/search.png</normaloff>:/icons/search.png</iconset>
+   </property>
+   <property name="text">
+    <string>Tìm Kiếm</string>
+   </property>
+   <property name="statusTip">
+    <string>Tìm kiếm nhanh</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/refresh.png</normaloff>:/icons/refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Làm Mới</string>
+   </property>
+   <property name="statusTip">
+    <string>Làm mới dữ liệu</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="actionBackup">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/backup.png</normaloff>:/icons/backup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sao Lưu</string>
+   </property>
+   <property name="statusTip">
+    <string>Sao lưu dữ liệu nhanh</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

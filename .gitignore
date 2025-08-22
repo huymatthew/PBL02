@@ -1,0 +1,4 @@
+*.bat
+.vscode
+include
+lib
