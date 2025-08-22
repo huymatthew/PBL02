@@ -48,6 +48,7 @@ public:
     QAction *actionExit;
     QAction *actionRoomManagement;
     QAction *actionTenantManagement;
+    QAction *actionContractManagement;
     QAction *actionPaymentManagement;
     QAction *actionSettings;
     QAction *actionFinancialReport;
@@ -59,6 +60,7 @@ public:
     QAction *actionAbout;
     QAction *actionQuickAddRoom;
     QAction *actionQuickAddTenant;
+    QAction *actionQuickAddContract;
     QAction *actionQuickSearch;
     QAction *actionRefresh;
     QAction *actionBackup;
@@ -106,13 +108,36 @@ public:
     QComboBox *tenantRoomComboBox;
     QLabel *tenantStartDateLabel;
     QDateEdit *tenantStartDateEdit;
-    QLabel *tenantDepositLabel;
-    QDoubleSpinBox *tenantDepositSpinBox;
     QSpacerItem *tenantVerticalSpacer;
     QVBoxLayout *tenantButtonsLayout;
     QPushButton *addTenantButton;
     QPushButton *editTenantButton;
     QPushButton *deleteTenantButton;
+    QWidget *contractsTab;
+    QHBoxLayout *contractsLayout;
+    QTableView *contractsTableView;
+    QVBoxLayout *contractControlsLayout;
+    QGroupBox *contractInfoGroup;
+    QFormLayout *contractFormLayout;
+    QLabel *contractTenantLabel;
+    QComboBox *contractTenantComboBox;
+    QLabel *contractRoomLabel;
+    QComboBox *contractRoomComboBox;
+    QLabel *contractStartDateLabel;
+    QDateEdit *contractStartDateEdit;
+    QLabel *contractEndDateLabel;
+    QDateEdit *contractEndDateEdit;
+    QLabel *contractRentAmountLabel;
+    QDoubleSpinBox *contractRentAmountSpinBox;
+    QLabel *contractDepositLabel;
+    QDoubleSpinBox *contractDepositSpinBox;
+    QLabel *contractStatusLabel;
+    QComboBox *contractStatusComboBox;
+    QSpacerItem *contractVerticalSpacer;
+    QVBoxLayout *contractButtonsLayout;
+    QPushButton *addContractButton;
+    QPushButton *editContractButton;
+    QPushButton *terminateContractButton;
     QWidget *paymentsTab;
     QHBoxLayout *paymentsLayout;
     QTableView *paymentsTableView;
@@ -177,7 +202,7 @@ public:
     {
         if (AdminMainWindow->objectName().isEmpty())
             AdminMainWindow->setObjectName(QString::fromUtf8("AdminMainWindow"));
-        AdminMainWindow->resize(1200, 800);
+        AdminMainWindow->resize(1200, 862);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/home.png"), QSize(), QIcon::Normal, QIcon::Off);
         AdminMainWindow->setWindowIcon(icon);
@@ -526,71 +551,81 @@ public:
         QIcon icon8;
         icon8.addFile(QString::fromUtf8(":/icons/tenants.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionTenantManagement->setIcon(icon8);
+        actionContractManagement = new QAction(AdminMainWindow);
+        actionContractManagement->setObjectName(QString::fromUtf8("actionContractManagement"));
+        QIcon icon9;
+        icon9.addFile(QString::fromUtf8(":/icons/contracts.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionContractManagement->setIcon(icon9);
         actionPaymentManagement = new QAction(AdminMainWindow);
         actionPaymentManagement->setObjectName(QString::fromUtf8("actionPaymentManagement"));
-        QIcon icon9;
-        icon9.addFile(QString::fromUtf8(":/icons/payments.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionPaymentManagement->setIcon(icon9);
+        QIcon icon10;
+        icon10.addFile(QString::fromUtf8(":/icons/payments.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionPaymentManagement->setIcon(icon10);
         actionSettings = new QAction(AdminMainWindow);
         actionSettings->setObjectName(QString::fromUtf8("actionSettings"));
-        QIcon icon10;
-        icon10.addFile(QString::fromUtf8(":/icons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionSettings->setIcon(icon10);
+        QIcon icon11;
+        icon11.addFile(QString::fromUtf8(":/icons/settings.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSettings->setIcon(icon11);
         actionFinancialReport = new QAction(AdminMainWindow);
         actionFinancialReport->setObjectName(QString::fromUtf8("actionFinancialReport"));
-        QIcon icon11;
-        icon11.addFile(QString::fromUtf8(":/icons/financial.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionFinancialReport->setIcon(icon11);
+        QIcon icon12;
+        icon12.addFile(QString::fromUtf8(":/icons/financial.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionFinancialReport->setIcon(icon12);
         actionOccupancyReport = new QAction(AdminMainWindow);
         actionOccupancyReport->setObjectName(QString::fromUtf8("actionOccupancyReport"));
-        QIcon icon12;
-        icon12.addFile(QString::fromUtf8(":/icons/occupancy.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionOccupancyReport->setIcon(icon12);
+        QIcon icon13;
+        icon13.addFile(QString::fromUtf8(":/icons/occupancy.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionOccupancyReport->setIcon(icon13);
         actionPaymentReport = new QAction(AdminMainWindow);
         actionPaymentReport->setObjectName(QString::fromUtf8("actionPaymentReport"));
-        QIcon icon13;
-        icon13.addFile(QString::fromUtf8(":/icons/payment-report.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionPaymentReport->setIcon(icon13);
+        QIcon icon14;
+        icon14.addFile(QString::fromUtf8(":/icons/payment-report.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionPaymentReport->setIcon(icon14);
         actionExportData = new QAction(AdminMainWindow);
         actionExportData->setObjectName(QString::fromUtf8("actionExportData"));
-        QIcon icon14;
-        icon14.addFile(QString::fromUtf8(":/icons/export.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionExportData->setIcon(icon14);
+        QIcon icon15;
+        icon15.addFile(QString::fromUtf8(":/icons/export.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionExportData->setIcon(icon15);
         actionUserManual = new QAction(AdminMainWindow);
         actionUserManual->setObjectName(QString::fromUtf8("actionUserManual"));
-        QIcon icon15;
-        icon15.addFile(QString::fromUtf8(":/icons/manual.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionUserManual->setIcon(icon15);
+        QIcon icon16;
+        icon16.addFile(QString::fromUtf8(":/icons/manual.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionUserManual->setIcon(icon16);
         actionContactSupport = new QAction(AdminMainWindow);
         actionContactSupport->setObjectName(QString::fromUtf8("actionContactSupport"));
-        QIcon icon16;
-        icon16.addFile(QString::fromUtf8(":/icons/support.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionContactSupport->setIcon(icon16);
+        QIcon icon17;
+        icon17.addFile(QString::fromUtf8(":/icons/support.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionContactSupport->setIcon(icon17);
         actionAbout = new QAction(AdminMainWindow);
         actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
-        QIcon icon17;
-        icon17.addFile(QString::fromUtf8(":/icons/about.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionAbout->setIcon(icon17);
+        QIcon icon18;
+        icon18.addFile(QString::fromUtf8(":/icons/about.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionAbout->setIcon(icon18);
         actionQuickAddRoom = new QAction(AdminMainWindow);
         actionQuickAddRoom->setObjectName(QString::fromUtf8("actionQuickAddRoom"));
-        QIcon icon18;
-        icon18.addFile(QString::fromUtf8(":/icons/add-room.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionQuickAddRoom->setIcon(icon18);
+        QIcon icon19;
+        icon19.addFile(QString::fromUtf8(":/icons/add-room.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionQuickAddRoom->setIcon(icon19);
         actionQuickAddTenant = new QAction(AdminMainWindow);
         actionQuickAddTenant->setObjectName(QString::fromUtf8("actionQuickAddTenant"));
-        QIcon icon19;
-        icon19.addFile(QString::fromUtf8(":/icons/add-tenant.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionQuickAddTenant->setIcon(icon19);
+        QIcon icon20;
+        icon20.addFile(QString::fromUtf8(":/icons/add-tenant.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionQuickAddTenant->setIcon(icon20);
+        actionQuickAddContract = new QAction(AdminMainWindow);
+        actionQuickAddContract->setObjectName(QString::fromUtf8("actionQuickAddContract"));
+        QIcon icon21;
+        icon21.addFile(QString::fromUtf8(":/icons/add-contract.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionQuickAddContract->setIcon(icon21);
         actionQuickSearch = new QAction(AdminMainWindow);
         actionQuickSearch->setObjectName(QString::fromUtf8("actionQuickSearch"));
-        QIcon icon20;
-        icon20.addFile(QString::fromUtf8(":/icons/search.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionQuickSearch->setIcon(icon20);
+        QIcon icon22;
+        icon22.addFile(QString::fromUtf8(":/icons/search.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionQuickSearch->setIcon(icon22);
         actionRefresh = new QAction(AdminMainWindow);
         actionRefresh->setObjectName(QString::fromUtf8("actionRefresh"));
-        QIcon icon21;
-        icon21.addFile(QString::fromUtf8(":/icons/refresh.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionRefresh->setIcon(icon21);
+        QIcon icon23;
+        icon23.addFile(QString::fromUtf8(":/icons/refresh.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionRefresh->setIcon(icon23);
         actionBackup = new QAction(AdminMainWindow);
         actionBackup->setObjectName(QString::fromUtf8("actionBackup"));
         actionBackup->setIcon(icon4);
@@ -721,25 +756,25 @@ public:
         roomButtonsLayout->setObjectName(QString::fromUtf8("roomButtonsLayout"));
         addRoomButton = new QPushButton(roomsTab);
         addRoomButton->setObjectName(QString::fromUtf8("addRoomButton"));
-        QIcon icon22;
-        icon22.addFile(QString::fromUtf8(":/icons/add.png"), QSize(), QIcon::Normal, QIcon::Off);
-        addRoomButton->setIcon(icon22);
+        QIcon icon24;
+        icon24.addFile(QString::fromUtf8(":/icons/add.png"), QSize(), QIcon::Normal, QIcon::Off);
+        addRoomButton->setIcon(icon24);
 
         roomButtonsLayout->addWidget(addRoomButton);
 
         editRoomButton = new QPushButton(roomsTab);
         editRoomButton->setObjectName(QString::fromUtf8("editRoomButton"));
-        QIcon icon23;
-        icon23.addFile(QString::fromUtf8(":/icons/edit.png"), QSize(), QIcon::Normal, QIcon::Off);
-        editRoomButton->setIcon(icon23);
+        QIcon icon25;
+        icon25.addFile(QString::fromUtf8(":/icons/edit.png"), QSize(), QIcon::Normal, QIcon::Off);
+        editRoomButton->setIcon(icon25);
 
         roomButtonsLayout->addWidget(editRoomButton);
 
         deleteRoomButton = new QPushButton(roomsTab);
         deleteRoomButton->setObjectName(QString::fromUtf8("deleteRoomButton"));
-        QIcon icon24;
-        icon24.addFile(QString::fromUtf8(":/icons/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
-        deleteRoomButton->setIcon(icon24);
+        QIcon icon26;
+        icon26.addFile(QString::fromUtf8(":/icons/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
+        deleteRoomButton->setIcon(icon26);
 
         roomButtonsLayout->addWidget(deleteRoomButton);
 
@@ -831,19 +866,6 @@ public:
 
         tenantFormLayout->setWidget(5, QFormLayout::FieldRole, tenantStartDateEdit);
 
-        tenantDepositLabel = new QLabel(tenantInfoGroup);
-        tenantDepositLabel->setObjectName(QString::fromUtf8("tenantDepositLabel"));
-
-        tenantFormLayout->setWidget(6, QFormLayout::LabelRole, tenantDepositLabel);
-
-        tenantDepositSpinBox = new QDoubleSpinBox(tenantInfoGroup);
-        tenantDepositSpinBox->setObjectName(QString::fromUtf8("tenantDepositSpinBox"));
-        tenantDepositSpinBox->setDecimals(0);
-        tenantDepositSpinBox->setMaximum(99999999.000000000000000);
-        tenantDepositSpinBox->setSingleStep(100000.000000000000000);
-
-        tenantFormLayout->setWidget(6, QFormLayout::FieldRole, tenantDepositSpinBox);
-
 
         tenantControlsLayout->addWidget(tenantInfoGroup);
 
@@ -855,19 +877,19 @@ public:
         tenantButtonsLayout->setObjectName(QString::fromUtf8("tenantButtonsLayout"));
         addTenantButton = new QPushButton(tenantsTab);
         addTenantButton->setObjectName(QString::fromUtf8("addTenantButton"));
-        addTenantButton->setIcon(icon22);
+        addTenantButton->setIcon(icon24);
 
         tenantButtonsLayout->addWidget(addTenantButton);
 
         editTenantButton = new QPushButton(tenantsTab);
         editTenantButton->setObjectName(QString::fromUtf8("editTenantButton"));
-        editTenantButton->setIcon(icon23);
+        editTenantButton->setIcon(icon25);
 
         tenantButtonsLayout->addWidget(editTenantButton);
 
         deleteTenantButton = new QPushButton(tenantsTab);
         deleteTenantButton->setObjectName(QString::fromUtf8("deleteTenantButton"));
-        deleteTenantButton->setIcon(icon24);
+        deleteTenantButton->setIcon(icon26);
 
         tenantButtonsLayout->addWidget(deleteTenantButton);
 
@@ -878,6 +900,143 @@ public:
         tenantsLayout->addLayout(tenantControlsLayout);
 
         mainTabWidget->addTab(tenantsTab, QString());
+        contractsTab = new QWidget();
+        contractsTab->setObjectName(QString::fromUtf8("contractsTab"));
+        contractsLayout = new QHBoxLayout(contractsTab);
+        contractsLayout->setObjectName(QString::fromUtf8("contractsLayout"));
+        contractsTableView = new QTableView(contractsTab);
+        contractsTableView->setObjectName(QString::fromUtf8("contractsTableView"));
+        contractsTableView->setMinimumSize(QSize(600, 0));
+        contractsTableView->setAlternatingRowColors(true);
+        contractsTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        contractsTableView->setSortingEnabled(true);
+
+        contractsLayout->addWidget(contractsTableView);
+
+        contractControlsLayout = new QVBoxLayout();
+        contractControlsLayout->setObjectName(QString::fromUtf8("contractControlsLayout"));
+        contractInfoGroup = new QGroupBox(contractsTab);
+        contractInfoGroup->setObjectName(QString::fromUtf8("contractInfoGroup"));
+        contractFormLayout = new QFormLayout(contractInfoGroup);
+        contractFormLayout->setObjectName(QString::fromUtf8("contractFormLayout"));
+        contractTenantLabel = new QLabel(contractInfoGroup);
+        contractTenantLabel->setObjectName(QString::fromUtf8("contractTenantLabel"));
+
+        contractFormLayout->setWidget(0, QFormLayout::LabelRole, contractTenantLabel);
+
+        contractTenantComboBox = new QComboBox(contractInfoGroup);
+        contractTenantComboBox->setObjectName(QString::fromUtf8("contractTenantComboBox"));
+        contractTenantComboBox->setEditable(false);
+
+        contractFormLayout->setWidget(0, QFormLayout::FieldRole, contractTenantComboBox);
+
+        contractRoomLabel = new QLabel(contractInfoGroup);
+        contractRoomLabel->setObjectName(QString::fromUtf8("contractRoomLabel"));
+
+        contractFormLayout->setWidget(1, QFormLayout::LabelRole, contractRoomLabel);
+
+        contractRoomComboBox = new QComboBox(contractInfoGroup);
+        contractRoomComboBox->setObjectName(QString::fromUtf8("contractRoomComboBox"));
+        contractRoomComboBox->setEditable(false);
+
+        contractFormLayout->setWidget(1, QFormLayout::FieldRole, contractRoomComboBox);
+
+        contractStartDateLabel = new QLabel(contractInfoGroup);
+        contractStartDateLabel->setObjectName(QString::fromUtf8("contractStartDateLabel"));
+
+        contractFormLayout->setWidget(2, QFormLayout::LabelRole, contractStartDateLabel);
+
+        contractStartDateEdit = new QDateEdit(contractInfoGroup);
+        contractStartDateEdit->setObjectName(QString::fromUtf8("contractStartDateEdit"));
+        contractStartDateEdit->setCalendarPopup(true);
+
+        contractFormLayout->setWidget(2, QFormLayout::FieldRole, contractStartDateEdit);
+
+        contractEndDateLabel = new QLabel(contractInfoGroup);
+        contractEndDateLabel->setObjectName(QString::fromUtf8("contractEndDateLabel"));
+
+        contractFormLayout->setWidget(3, QFormLayout::LabelRole, contractEndDateLabel);
+
+        contractEndDateEdit = new QDateEdit(contractInfoGroup);
+        contractEndDateEdit->setObjectName(QString::fromUtf8("contractEndDateEdit"));
+        contractEndDateEdit->setCalendarPopup(true);
+
+        contractFormLayout->setWidget(3, QFormLayout::FieldRole, contractEndDateEdit);
+
+        contractRentAmountLabel = new QLabel(contractInfoGroup);
+        contractRentAmountLabel->setObjectName(QString::fromUtf8("contractRentAmountLabel"));
+
+        contractFormLayout->setWidget(4, QFormLayout::LabelRole, contractRentAmountLabel);
+
+        contractRentAmountSpinBox = new QDoubleSpinBox(contractInfoGroup);
+        contractRentAmountSpinBox->setObjectName(QString::fromUtf8("contractRentAmountSpinBox"));
+        contractRentAmountSpinBox->setDecimals(0);
+        contractRentAmountSpinBox->setMaximum(99999999.000000000000000);
+        contractRentAmountSpinBox->setSingleStep(100000.000000000000000);
+
+        contractFormLayout->setWidget(4, QFormLayout::FieldRole, contractRentAmountSpinBox);
+
+        contractDepositLabel = new QLabel(contractInfoGroup);
+        contractDepositLabel->setObjectName(QString::fromUtf8("contractDepositLabel"));
+
+        contractFormLayout->setWidget(5, QFormLayout::LabelRole, contractDepositLabel);
+
+        contractDepositSpinBox = new QDoubleSpinBox(contractInfoGroup);
+        contractDepositSpinBox->setObjectName(QString::fromUtf8("contractDepositSpinBox"));
+        contractDepositSpinBox->setDecimals(0);
+        contractDepositSpinBox->setMaximum(99999999.000000000000000);
+        contractDepositSpinBox->setSingleStep(100000.000000000000000);
+
+        contractFormLayout->setWidget(5, QFormLayout::FieldRole, contractDepositSpinBox);
+
+        contractStatusLabel = new QLabel(contractInfoGroup);
+        contractStatusLabel->setObjectName(QString::fromUtf8("contractStatusLabel"));
+
+        contractFormLayout->setWidget(6, QFormLayout::LabelRole, contractStatusLabel);
+
+        contractStatusComboBox = new QComboBox(contractInfoGroup);
+        contractStatusComboBox->addItem(QString());
+        contractStatusComboBox->addItem(QString());
+        contractStatusComboBox->addItem(QString());
+        contractStatusComboBox->addItem(QString());
+        contractStatusComboBox->setObjectName(QString::fromUtf8("contractStatusComboBox"));
+
+        contractFormLayout->setWidget(6, QFormLayout::FieldRole, contractStatusComboBox);
+
+
+        contractControlsLayout->addWidget(contractInfoGroup);
+
+        contractVerticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        contractControlsLayout->addItem(contractVerticalSpacer);
+
+        contractButtonsLayout = new QVBoxLayout();
+        contractButtonsLayout->setObjectName(QString::fromUtf8("contractButtonsLayout"));
+        addContractButton = new QPushButton(contractsTab);
+        addContractButton->setObjectName(QString::fromUtf8("addContractButton"));
+        addContractButton->setIcon(icon24);
+
+        contractButtonsLayout->addWidget(addContractButton);
+
+        editContractButton = new QPushButton(contractsTab);
+        editContractButton->setObjectName(QString::fromUtf8("editContractButton"));
+        editContractButton->setIcon(icon25);
+
+        contractButtonsLayout->addWidget(editContractButton);
+
+        terminateContractButton = new QPushButton(contractsTab);
+        terminateContractButton->setObjectName(QString::fromUtf8("terminateContractButton"));
+        terminateContractButton->setIcon(icon26);
+
+        contractButtonsLayout->addWidget(terminateContractButton);
+
+
+        contractControlsLayout->addLayout(contractButtonsLayout);
+
+
+        contractsLayout->addLayout(contractControlsLayout);
+
+        mainTabWidget->addTab(contractsTab, QString());
         paymentsTab = new QWidget();
         paymentsTab->setObjectName(QString::fromUtf8("paymentsTab"));
         paymentsLayout = new QHBoxLayout(paymentsTab);
@@ -995,21 +1154,21 @@ public:
         paymentButtonsLayout->setObjectName(QString::fromUtf8("paymentButtonsLayout"));
         addPaymentButton = new QPushButton(paymentsTab);
         addPaymentButton->setObjectName(QString::fromUtf8("addPaymentButton"));
-        addPaymentButton->setIcon(icon22);
+        addPaymentButton->setIcon(icon24);
 
         paymentButtonsLayout->addWidget(addPaymentButton);
 
         editPaymentButton = new QPushButton(paymentsTab);
         editPaymentButton->setObjectName(QString::fromUtf8("editPaymentButton"));
-        editPaymentButton->setIcon(icon23);
+        editPaymentButton->setIcon(icon25);
 
         paymentButtonsLayout->addWidget(editPaymentButton);
 
         printInvoiceButton = new QPushButton(paymentsTab);
         printInvoiceButton->setObjectName(QString::fromUtf8("printInvoiceButton"));
-        QIcon icon25;
-        icon25.addFile(QString::fromUtf8(":/icons/print.png"), QSize(), QIcon::Normal, QIcon::Off);
-        printInvoiceButton->setIcon(icon25);
+        QIcon icon27;
+        icon27.addFile(QString::fromUtf8(":/icons/print.png"), QSize(), QIcon::Normal, QIcon::Off);
+        printInvoiceButton->setIcon(icon27);
 
         paymentButtonsLayout->addWidget(printInvoiceButton);
 
@@ -1054,9 +1213,9 @@ public:
 
         generateReportButton = new QPushButton(filterGroup);
         generateReportButton->setObjectName(QString::fromUtf8("generateReportButton"));
-        QIcon icon26;
-        icon26.addFile(QString::fromUtf8(":/icons/report.png"), QSize(), QIcon::Normal, QIcon::Off);
-        generateReportButton->setIcon(icon26);
+        QIcon icon28;
+        icon28.addFile(QString::fromUtf8(":/icons/report.png"), QSize(), QIcon::Normal, QIcon::Off);
+        generateReportButton->setIcon(icon28);
 
         filterLayout->addWidget(generateReportButton);
 
@@ -1153,6 +1312,10 @@ public:
         menubar = new QMenuBar(AdminMainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 1200, 54));
+        menubar->setLayoutDirection(Qt::LeftToRight);
+        menubar->setAutoFillBackground(false);
+        menubar->setDefaultUp(false);
+        menubar->setNativeMenuBar(true);
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuManagement = new QMenu(menubar);
@@ -1176,7 +1339,8 @@ public:
         toolBar->setObjectName(QString::fromUtf8("toolBar"));
         toolBar->setMaximumSize(QSize(16777215, 80));
         toolBar->setMovable(false);
-        toolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+        toolBar->setIconSize(QSize(16, 16));
+        toolBar->setToolButtonStyle(Qt::ToolButtonTextOnly);
         AdminMainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menubar->addAction(menuFile->menuAction());
@@ -1193,6 +1357,7 @@ public:
         menuFile->addAction(actionExit);
         menuManagement->addAction(actionRoomManagement);
         menuManagement->addAction(actionTenantManagement);
+        menuManagement->addAction(actionContractManagement);
         menuManagement->addAction(actionPaymentManagement);
         menuManagement->addSeparator();
         menuManagement->addAction(actionSettings);
@@ -1207,6 +1372,7 @@ public:
         menuHelp->addAction(actionAbout);
         toolBar->addAction(actionQuickAddRoom);
         toolBar->addAction(actionQuickAddTenant);
+        toolBar->addAction(actionQuickAddContract);
         toolBar->addAction(actionQuickSearch);
         toolBar->addSeparator();
         toolBar->addAction(actionRefresh);
@@ -1273,12 +1439,19 @@ public:
 #if QT_CONFIG(shortcut)
         actionTenantManagement->setShortcut(QCoreApplication::translate("AdminMainWindow", "F2", nullptr));
 #endif // QT_CONFIG(shortcut)
+        actionContractManagement->setText(QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n l\303\275 &H\341\273\243p \304\221\341\273\223ng", nullptr));
+#if QT_CONFIG(statustip)
+        actionContractManagement->setStatusTip(QCoreApplication::translate("AdminMainWindow", "Chuy\341\273\203n \304\221\341\272\277n tab qu\341\272\243n l\303\275 h\341\273\243p \304\221\341\273\223ng thu\303\252", nullptr));
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(shortcut)
+        actionContractManagement->setShortcut(QCoreApplication::translate("AdminMainWindow", "F3", nullptr));
+#endif // QT_CONFIG(shortcut)
         actionPaymentManagement->setText(QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n l\303\275 &Thanh to\303\241n", nullptr));
 #if QT_CONFIG(statustip)
         actionPaymentManagement->setStatusTip(QCoreApplication::translate("AdminMainWindow", "Chuy\341\273\203n \304\221\341\272\277n tab qu\341\272\243n l\303\275 thanh to\303\241n", nullptr));
 #endif // QT_CONFIG(statustip)
 #if QT_CONFIG(shortcut)
-        actionPaymentManagement->setShortcut(QCoreApplication::translate("AdminMainWindow", "F3", nullptr));
+        actionPaymentManagement->setShortcut(QCoreApplication::translate("AdminMainWindow", "F4", nullptr));
 #endif // QT_CONFIG(shortcut)
         actionSettings->setText(QCoreApplication::translate("AdminMainWindow", "&C\303\240i \304\221\341\272\267t", nullptr));
 #if QT_CONFIG(statustip)
@@ -1328,6 +1501,13 @@ public:
 #endif // QT_CONFIG(statustip)
 #if QT_CONFIG(shortcut)
         actionQuickAddTenant->setShortcut(QCoreApplication::translate("AdminMainWindow", "Ctrl+T", nullptr));
+#endif // QT_CONFIG(shortcut)
+        actionQuickAddContract->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\341\273\243p \304\220\341\273\223ng", nullptr));
+#if QT_CONFIG(statustip)
+        actionQuickAddContract->setStatusTip(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o h\341\273\243p \304\221\341\273\223ng thu\303\252 m\341\273\233i nhanh", nullptr));
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(shortcut)
+        actionQuickAddContract->setShortcut(QCoreApplication::translate("AdminMainWindow", "Ctrl+H", nullptr));
 #endif // QT_CONFIG(shortcut)
         actionQuickSearch->setText(QCoreApplication::translate("AdminMainWindow", "T\303\254m Ki\341\272\277m", nullptr));
 #if QT_CONFIG(statustip)
@@ -1383,15 +1563,32 @@ public:
         tenantEmailLabel->setText(QCoreApplication::translate("AdminMainWindow", "Email:", nullptr));
         tenantEmailEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p email...", nullptr));
         tenantIdLabel->setText(QCoreApplication::translate("AdminMainWindow", "CMND/CCCD:", nullptr));
-        tenantIdEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p CMND/CCCD...", nullptr));
+        tenantIdEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p CCCD...", nullptr));
         tenantRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
         tenantStartDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y B\341\272\257t \304\220\341\272\247u:", nullptr));
-        tenantDepositLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ti\341\273\201n C\341\273\215c:", nullptr));
-        tenantDepositSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
         addTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m Kh\303\241ch", nullptr));
         editTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Th\303\264ng Tin", nullptr));
         deleteTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Kh\303\241ch", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tenantsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Kh\303\241ch Thu\303\252", nullptr));
+        contractInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin H\341\273\243p \304\220\341\273\223ng", nullptr));
+        contractTenantLabel->setText(QCoreApplication::translate("AdminMainWindow", "Kh\303\241ch Thu\303\252:", nullptr));
+        contractRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
+        contractStartDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y B\341\272\257t \304\220\341\272\247u:", nullptr));
+        contractEndDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y K\341\272\277t Th\303\272c:", nullptr));
+        contractRentAmountLabel->setText(QCoreApplication::translate("AdminMainWindow", "Gi\303\241 Thu\303\252/Th\303\241ng:", nullptr));
+        contractRentAmountSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
+        contractDepositLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ti\341\273\201n C\341\273\215c:", nullptr));
+        contractDepositSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
+        contractStatusLabel->setText(QCoreApplication::translate("AdminMainWindow", "Tr\341\272\241ng Th\303\241i:", nullptr));
+        contractStatusComboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "\304\220ang hi\341\273\207u l\341\273\261c", nullptr));
+        contractStatusComboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "H\341\272\277t h\341\272\241n", nullptr));
+        contractStatusComboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "\304\220\303\243 h\341\273\247y", nullptr));
+        contractStatusComboBox->setItemText(3, QCoreApplication::translate("AdminMainWindow", "T\341\272\241m ng\306\260ng", nullptr));
+
+        addContractButton->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\341\273\243p \304\220\341\273\223ng", nullptr));
+        editContractButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a H\341\273\243p \304\220\341\273\223ng", nullptr));
+        terminateContractButton->setText(QCoreApplication::translate("AdminMainWindow", "Ch\341\272\245m D\341\273\251t H\304\220", nullptr));
+        mainTabWidget->setTabText(mainTabWidget->indexOf(contractsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 H\341\273\243p \304\220\341\273\223ng Thu\303\252", nullptr));
         paymentInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Thanh To\303\241n", nullptr));
         paymentRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
         paymentMonthLabel->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\241ng:", nullptr));
