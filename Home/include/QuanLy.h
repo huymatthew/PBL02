@@ -8,11 +8,14 @@
 #include <Data/Service.h>
 #include <Data/ServiceType.h>
 #include <Data/Tenant.h>
+#include <admin_main.h>
 
-class QuanLy {
+class QuanLy : public Ui_AdminMainWindow {
 public:
     QuanLy();  // Declaration only
     ~QuanLy(); // Declaration only
+
+    void addTenant();
 private:
     vector<Bill> bills;
     vector<Contract> contracts;

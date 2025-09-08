@@ -5,8 +5,6 @@
 
 using namespace std;
 
-PrimaryKey<int> Service::pk_manager = PrimaryKey<int>();
-
 // Default constructor
 Service::Service()
     : service_id(0), service_type(0), bill_id(0), quantity(0), price(0.0) {}

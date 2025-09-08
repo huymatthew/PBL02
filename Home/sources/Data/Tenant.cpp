@@ -5,8 +5,6 @@
 
 using namespace std;
 
-PrimaryKey<int> Tenant::pk_manager = PrimaryKey<int>();
-
 // Default constructor
 Tenant::Tenant()
     : tenant_id(0), full_name(""), phone(""), identity_card(""),

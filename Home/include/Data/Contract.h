@@ -17,8 +17,6 @@ private:
     int status; // 0: inactive, 1: active
     string signed_date;
     string notes;
-
-    static PrimaryKey<int> pk_manager;
 public:
     Contract();
     Contract(const Contract& other);
@@ -26,10 +24,6 @@ public:
              const string& start, const string& end,
              double rent, double deposit, int status,
              const string& signedDate, const string& notes);
-
-
-    static vector<Contract> loadFromDatabase();
-    static bool saveToDatabase(const vector<Contract>& contracts);
 
     // Getter - Setter
     int getContractId() const;

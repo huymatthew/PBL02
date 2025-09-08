@@ -15,17 +15,11 @@ private:
     double total_amount;
     string due_date;
     int status; // 0: chưa thanh toán, 1: đã thanh toán
-
-    static PrimaryKey<int> pk_manager;
 public:
     Bill();
     Bill(const Bill& other);
     Bill(int id, int contractId, const string& month,
          double rent, double total, const string& due, int status);
-
-
-    static vector<Bill> loadFromDatabase();
-    static bool saveToDatabase(const vector<Bill>& bill);
 
     // Getter - Setter
     int getBillId() const;

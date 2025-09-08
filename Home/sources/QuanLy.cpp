@@ -14,6 +14,7 @@ QuanLy::QuanLy() {
     services = Service::loadFromDatabase();
     serviceTypes = ServiceType::loadFromDatabase();
     tenants = Tenant::loadFromDatabase();
+
 }
 
 QuanLy::~QuanLy() {
@@ -27,4 +28,9 @@ QuanLy::~QuanLy() {
     Tenant::saveToDatabase(tenants);
     cout << "\033[1;31m=== QuanLy destroyed completely. ===\033[0m" << endl;
 
+}
+
+void QuanLy::addTenant() {
+    tenants.emplace_back();
+    cout << "New tenant added. Total tenants: " << tenants.size() << endl;
 }

@@ -5,8 +5,6 @@
 
 using namespace std;
 
-PrimaryKey<int> Contract::pk_manager = PrimaryKey<int>();
-
 // Default constructor
 Contract::Contract()
     : contract_id(0), monthly_rent(0.0), deposit(0.0), status(0) {}
@@ -56,59 +54,3 @@ void Contract::setSignedDate(const string& signedDate) { signed_date = signedDat
 
 string Contract::getNotes() const { return notes; }
 void Contract::setNotes(const string& notes) { this->notes = notes; }
-
-// Static stub: Load contracts from database
-vector<Contract> Contract::loadFromDatabase() {
-    vector<Contract> contracts;
-
-    cout << "\033[1;32m*Loading contracts from database...\033[0m" << endl;
-    ifstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\contracts.dat");
-    if (!file) {
-        cerr << "Error opening contracts file for reading." << endl;
-        return contracts;
-    }
-    string line;
-    while (getline(file, line)) {
-        istringstream iss(line);
-        int id, status;
-        string roomId, contractNumber, startDate, endDate, signedDate, notes;
-        double monthlyRent, deposit;
-        
-        if (!(iss >> id >> roomId >> contractNumber >> startDate >> endDate >> monthlyRent >> deposit >> status >> signedDate >> notes)) {
-            cerr << "Error reading contract line: " << line << endl;
-            continue;
-        }
-        if (pk_manager.isKeyInUse(id)) {
-            cerr << "Duplicate contract ID found: " << id << endl;
-            continue;
-        }
-        contracts.emplace_back(id, roomId, contractNumber, startDate, endDate, monthlyRent, deposit, status, signedDate, notes);
-        cout << "- Loaded contract ID: " << id << endl;
-    }
-    return contracts;
-}
-
-// Static stub: Save contract to database
-bool Contract::saveToDatabase(const vector<Contract>& contracts) {
-    cout << "\033[1;32m*Saving contracts to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\contracts.dat", ios::out | ios::trunc);
-    if (!file) {
-        cerr << "Error opening contracts file for writing." << endl;
-        return false;
-    }
-    file.clear();
-    for (const auto& contract : contracts) {
-        file << contract.contract_id << " "
-             << contract.room_id << " "
-             << contract.contract_number << " "
-             << contract.start_date << " "
-             << contract.end_date << " "
-             << contract.monthly_rent << " "
-             << contract.deposit << " "
-             << contract.status << " "
-             << contract.signed_date << " "
-             << contract.notes << endl;
-        cout << "~ Saved contract ID: " << contract.contract_id << endl;
-    }
-    return true;
-}

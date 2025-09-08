@@ -5,8 +5,6 @@
 
 using namespace std;
 
-PrimaryKey<int> ServiceType::pk_manager = PrimaryKey<int>();
-
 // Dummy implementations for demonstration purposes
 ServiceType::ServiceType()
     : service_type(0), name(""), price(0.0) {}

@@ -5,7 +5,6 @@
 
 using namespace std;
 
-PrimaryKey<int> Bill::pk_manager = PrimaryKey<int>();
 Bill::Bill() : bill_id(0), contract_id(0), billing_month(""), room_rent(0.0),
                total_amount(0.0), due_date(""), status(0) {}
 Bill::Bill(const Bill& other)
@@ -65,53 +64,4 @@ int Bill::getStatus() const {
 }
 void Bill::setStatus(int status) {
     this->status = status;
-}
-
-vector<Bill> Bill::loadFromDatabase() {
-    vector<Bill> bills;
-    cout << "\033[1;32m*Loading bills from database...\033[0m" << endl;
-    ifstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\bills.dat");
-    if (!file) {
-        cerr << "Error opening file for reading." << endl;
-        return bills;
-    }
-    string line;
-    while (getline(file, line)) {
-        istringstream iss(line);
-        int id, contractId, status;
-        string month, due;
-        double rent, total;
-        if (!(iss >> id >> contractId >> month >> rent >> total >> due >> status)) {
-            cerr << "Error reading line: " << line << endl;
-            continue; // Skip malformed lines
-        }
-        if (pk_manager.isKeyInUse(id)) {
-            cerr << "Duplicate bill ID found: " << id << endl;
-            continue; // Skip duplicate IDs
-        }
-        bills.emplace_back(id, contractId, month, rent, total, due, status);
-        cout << "- Loaded bill ID: " << id << endl;
-    }
-    return bills;
-}
-
-bool Bill::saveToDatabase(const vector<Bill>& bills) {
-    cout << "\033[1;33m*Saving bills to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\bills.dat", ios::out | ios::trunc);
-    if (!file) {
-        cerr << "Error opening file for writing." << endl;
-        return false;
-    }
-    file.clear();
-    for (const auto& bill : bills) {
-        file << bill.bill_id << " "
-             << bill.contract_id << " "
-             << bill.billing_month << " "
-             << bill.room_rent << " "
-             << bill.total_amount << " "
-             << bill.due_date << " "
-             << bill.status << endl;
-        cout << "~ Saved bill ID: " << bill.bill_id << endl;
-    }
-    return true;
 }

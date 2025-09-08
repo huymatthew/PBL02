@@ -3,8 +3,6 @@
 #include <fstream>
 #include <sstream>
 
-PrimaryKey<string> Room::pk_manager = PrimaryKey<string>();
-
 // Default constructor
 Room::Room()
     : room_id(""), contract_id(0), room_type(0),
