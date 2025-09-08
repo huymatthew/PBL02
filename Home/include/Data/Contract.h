@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <PrimaryKey.h>
+#include <Core/PrimaryKey.h>
 using namespace std;
 class Contract {
 private:
@@ -29,7 +29,7 @@ public:
 
 
     static vector<Contract> loadFromDatabase();
-    static bool saveToDatabase(const Contract& contract);
+    static bool saveToDatabase(const vector<Contract>& contracts);
 
     // Getter - Setter
     int getContractId() const;

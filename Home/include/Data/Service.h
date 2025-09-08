@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <PrimaryKey.h>
+#include <Core/PrimaryKey.h>
 using namespace std;
 
 class Service {
@@ -21,7 +21,7 @@ public:
     Service(int id, int type, int billId, int qty, double price);
 
     static vector<Service> loadFromDatabase();
-    static bool saveToDatabase(const Service& service);
+    static bool saveToDatabase(const vector<Service>& services);
 
     // Getter - Setter
     int getServiceId() const;

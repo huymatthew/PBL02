@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <PrimaryKey.h>
+#include <Core/PrimaryKey.h>
 using namespace std;
 
 class Room {
@@ -23,7 +23,7 @@ public:
          double rent, const string& desc, int status);
 
     static vector<Room> loadFromDatabase();
-    static bool saveToDatabase(const Room& room);
+    static bool saveToDatabase(const vector<Room>& rooms);
 
     // Getter - Setter
     string getRoomId() const;
