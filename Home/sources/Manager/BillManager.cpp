@@ -3,8 +3,12 @@
 
 using namespace std;
 
-BillManager::BillManager() : data_loaded(false) {}
-BillManager::~BillManager() {}
+BillManager::BillManager() : data_loaded(false) {
+    loadFromDatabase();
+}
+BillManager::~BillManager() {
+    saveToDatabase();
+}
 
 bool BillManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading bills from database...\033[0m" << endl;

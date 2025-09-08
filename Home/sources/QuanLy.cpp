@@ -8,23 +8,11 @@ QuanLy::QuanLy() {
     cout << "\033[1;32mLoading database...\033[0m" << endl;
 
     billManager = BillManager();
-    billManager.loadFromDatabase();
-
     contractManager = ContractManager();
-    contractManager.loadFromDatabase();
-
     roomManager = RoomManager();
-    roomManager.loadFromDatabase();
-
     serviceManager = ServiceManager();
-    serviceManager.loadFromDatabase();
-
     serviceTypeManager = ServiceTypeManager();
-    serviceTypeManager.loadFromDatabase();
-
     tenantManager = TenantManager();
-    tenantManager.loadFromDatabase();
-
 }
 
 QuanLy::~QuanLy() {

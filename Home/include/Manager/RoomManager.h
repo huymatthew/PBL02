@@ -43,8 +43,8 @@ public:
     // Status management
     bool setRoomOccupied(const string& roomId, int contractId);
     bool setRoomAvailable(const string& roomId);
-    bool isRoomAvailable(const string& roomId) const;
-    bool isRoomOccupied(const string& roomId) const;
+    bool isRoomAvailable(const string& roomId);
+    bool isRoomOccupied(const string& roomId);
     
     // Type management
     vector<Room> getAvailableRooms() const;

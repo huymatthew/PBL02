@@ -2,8 +2,12 @@
 
 using namespace std;
 
-ContractManager::ContractManager() : data_loaded(false) {}
-ContractManager::~ContractManager() {}
+ContractManager::ContractManager() : data_loaded(false) {
+    loadFromDatabase();
+}
+ContractManager::~ContractManager() {
+    saveToDatabase();
+}
 
 bool ContractManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading contracts from database...\033[0m" << endl;
