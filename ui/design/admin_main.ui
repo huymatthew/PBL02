@@ -347,7 +347,7 @@ QStatusBar QLabel {
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <property name="iconSize">
        <size>
@@ -500,45 +500,29 @@ QStatusBar QLabel {
                  <string>Bảo trì</string>
                 </property>
                </item>
-               <item>
-                <property name="text">
-                 <string>Dọn dẹp</string>
-                </property>
-               </item>
               </widget>
              </item>
              <item row="4" column="0">
-              <widget class="QLabel" name="roomAreaLabel">
-               <property name="text">
-                <string>Diện Tích:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QSpinBox" name="roomAreaSpinBox">
-               <property name="suffix">
-                <string> m²</string>
-               </property>
-               <property name="minimum">
-                <number>10</number>
-               </property>
-               <property name="maximum">
-                <number>200</number>
-               </property>
-               <property name="value">
-                <number>25</number>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
               <widget class="QLabel" name="roomDescLabel">
                <property name="text">
                 <string>Mô Tả:</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
+             <item row="4" column="1">
               <widget class="QLineEdit" name="roomDescEdit">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>70</height>
+                </size>
+               </property>
                <property name="placeholderText">
                 <string>Mô tả phòng...</string>
                </property>
@@ -633,59 +617,24 @@ QStatusBar QLabel {
              <string>Thông Tin Khách Thuê</string>
             </property>
             <layout class="QFormLayout" name="tenantFormLayout">
-             <item row="0" column="0">
+             <item row="1" column="0">
               <widget class="QLabel" name="tenantNameLabel">
                <property name="text">
                 <string>Họ Tên:</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
+             <item row="1" column="1">
               <widget class="QLineEdit" name="tenantNameEdit">
                <property name="placeholderText">
                 <string>Nhập họ tên...</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="tenantPhoneLabel">
-               <property name="text">
-                <string>Số Điện Thoại:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
+             <item row="2" column="1">
               <widget class="QLineEdit" name="tenantPhoneEdit">
                <property name="placeholderText">
                 <string>Nhập số điện thoại...</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="tenantEmailLabel">
-               <property name="text">
-                <string>Email:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="tenantEmailEdit">
-               <property name="placeholderText">
-                <string>Nhập email...</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="tenantIdLabel">
-               <property name="text">
-                <string>CMND/CCCD:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="tenantIdEdit">
-               <property name="placeholderText">
-                <string>Nhập CCCD...</string>
                </property>
               </widget>
              </item>
@@ -703,17 +652,24 @@ QStatusBar QLabel {
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="tenantStartDateLabel">
+             <item row="0" column="0">
+              <widget class="QLabel" name="tenantIdLabel">
                <property name="text">
-                <string>Ngày Bắt Đầu:</string>
+                <string>CMND/CCCD:</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
-              <widget class="QDateEdit" name="tenantStartDateEdit">
-               <property name="calendarPopup">
-                <bool>true</bool>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="tenantIdEdit">
+               <property name="placeholderText">
+                <string>Nhập CCCD...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="tenantPhoneLabel">
+               <property name="text">
+                <string>Số Điện Thoại:</string>
                </property>
               </widget>
              </item>
@@ -863,36 +819,13 @@ QStatusBar QLabel {
               </widget>
              </item>
              <item row="4" column="0">
-              <widget class="QLabel" name="contractRentAmountLabel">
-               <property name="text">
-                <string>Giá Thuê/Tháng:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QDoubleSpinBox" name="contractRentAmountSpinBox">
-               <property name="suffix">
-                <string> VND</string>
-               </property>
-               <property name="decimals">
-                <number>0</number>
-               </property>
-               <property name="maximum">
-                <double>99999999.000000000000000</double>
-               </property>
-               <property name="singleStep">
-                <double>100000.000000000000000</double>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
               <widget class="QLabel" name="contractDepositLabel">
                <property name="text">
                 <string>Tiền Cọc:</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
+             <item row="4" column="1">
               <widget class="QDoubleSpinBox" name="contractDepositSpinBox">
                <property name="suffix">
                 <string> VND</string>
@@ -908,14 +841,14 @@ QStatusBar QLabel {
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
+             <item row="5" column="0">
               <widget class="QLabel" name="contractStatusLabel">
                <property name="text">
                 <string>Trạng Thái:</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="1">
+             <item row="5" column="1">
               <widget class="QComboBox" name="contractStatusComboBox">
                <item>
                 <property name="text">

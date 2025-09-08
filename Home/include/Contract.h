@@ -1,25 +1,63 @@
-#ifndef GUEST_H
-#define GUEST_H
+#ifndef CONTRACT_H
+#define CONTRACT_H
+
 #include <string>
+#include <vector>
 using namespace std;
+class Contract {
+private:
+    int contract_id;
+    string room_id; // FK -> Rooms
+    string contract_number;
+    string start_date;
+    string end_date;
+    double monthly_rent;
+    double deposit;
+    int status; // 0: inactive, 1: active
+    string signed_date;
+    string notes;
 
-#include "Guest.h"
-#include "Room.h"
+public:
+    Contract();
+    Contract(int id, const string& roomId, const string& number,
+             const string& start, const string& end,
+             double rent, double deposit, int status,
+             const string& signedDate, const string& notes);
 
 
-class Contract{
-    public:
+    static vector<Contract> loadFromDatabase();
+    static bool saveToDatabase(const Contract& contract);
+    
+    // Getter - Setter
+    int getContractId() const;
+    void setContractId(int id);
 
-    private:
-    string contractID;
-    string guestID;
-    string roomID;
-    string dateBegin;
-    string dateEx;
-    long price;
-    long deposit;
-    bool isActive;
+    string getRoomId() const;
+    void setRoomId(const string& roomId);
+
+    string getContractNumber() const;
+    void setContractNumber(const string& number);
+
+    string getStartDate() const;
+    void setStartDate(const string& start);
+
+    string getEndDate() const;
+    void setEndDate(const string& end);
+
+    double getMonthlyRent() const;
+    void setMonthlyRent(double rent);
+
+    double getDeposit() const;
+    void setDeposit(double deposit);
+
+    int getStatus() const;
+    void setStatus(int status);
+
+    string getSignedDate() const;
+    void setSignedDate(const string& signedDate);
+
+    string getNotes() const;
+    void setNotes(const string& notes);
 };
-
 
 #endif
