@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <PrimaryKey.h>
 using namespace std;
 
 class Service {
@@ -13,8 +14,10 @@ private:
     int quantity;
     double price;
 
+    static PrimaryKey<int> pk_manager;
 public:
     Service();
+    Service(const Service& other);
     Service(int id, int type, int billId, int qty, double price);
 
     static vector<Service> loadFromDatabase();

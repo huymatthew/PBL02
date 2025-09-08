@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <PrimaryKey.h>
 using namespace std;
 
 class Room {
@@ -14,8 +15,10 @@ private:
     string description;
     int status; // 0: trống, 1: đang thuê, ...
 
+    static PrimaryKey<string> pk_manager;
 public:
     Room();
+    Room(const Room& other);
     Room(const string& id, int contractId, int type,
          double rent, const string& desc, int status);
 

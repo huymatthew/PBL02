@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <PrimaryKey.h>
 
 using namespace std;
 class Tenant {
@@ -14,9 +15,11 @@ private:
     string date_of_birth; // ddmmyyyy
     int contract_id;           // FK -> Contracts
     bool is_main_tenant;
+    static PrimaryKey<int> pk_manager;
 
 public:
     Tenant();
+    Tenant(const Tenant& other);
     Tenant(int id, const string& name, const string& phone,
            const string& id_card, const string& dob,
            int contractId, bool isMain);
