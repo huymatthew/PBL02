@@ -74,7 +74,7 @@ vector<Room> Room::loadFromDatabase() {
 // Stub for saving room to database
 bool Room::saveToDatabase(const vector<Room>& rooms) {
     cout << "\033[1;33m*Saving rooms to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\rooms.dat", ios::app);
+    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\rooms.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening rooms file for writing." << endl;
         return false;
