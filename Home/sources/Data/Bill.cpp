@@ -97,11 +97,12 @@ vector<Bill> Bill::loadFromDatabase() {
 
 bool Bill::saveToDatabase(const vector<Bill>& bills) {
     cout << "\033[1;33m*Saving bills to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\bills.dat", ios::app);
+    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\bills.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return false;
     }
+    file.clear();
     for (const auto& bill : bills) {
         file << bill.bill_id << " "
              << bill.contract_id << " "

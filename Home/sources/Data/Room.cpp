@@ -79,6 +79,7 @@ bool Room::saveToDatabase(const vector<Room>& rooms) {
         cerr << "Error opening rooms file for writing." << endl;
         return false;
     }
+    file.clear();
     for (const auto& room : rooms) {
         file << room.room_id << " "
              << room.contract_id << " "

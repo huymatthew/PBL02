@@ -27,7 +27,6 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
@@ -81,8 +80,6 @@ public:
     QDoubleSpinBox *roomPriceSpinBox;
     QLabel *roomStatusLabel;
     QComboBox *roomStatusComboBox;
-    QLabel *roomAreaLabel;
-    QSpinBox *roomAreaSpinBox;
     QLabel *roomDescLabel;
     QLineEdit *roomDescEdit;
     QSpacerItem *roomVerticalSpacer;
@@ -98,16 +95,12 @@ public:
     QFormLayout *tenantFormLayout;
     QLabel *tenantNameLabel;
     QLineEdit *tenantNameEdit;
-    QLabel *tenantPhoneLabel;
     QLineEdit *tenantPhoneEdit;
-    QLabel *tenantEmailLabel;
-    QLineEdit *tenantEmailEdit;
-    QLabel *tenantIdLabel;
-    QLineEdit *tenantIdEdit;
     QLabel *tenantRoomLabel;
     QComboBox *tenantRoomComboBox;
-    QLabel *tenantStartDateLabel;
-    QDateEdit *tenantStartDateEdit;
+    QLabel *tenantIdLabel;
+    QLineEdit *tenantIdEdit;
+    QLabel *tenantPhoneLabel;
     QSpacerItem *tenantVerticalSpacer;
     QVBoxLayout *tenantButtonsLayout;
     QPushButton *addTenantButton;
@@ -127,8 +120,6 @@ public:
     QDateEdit *contractStartDateEdit;
     QLabel *contractEndDateLabel;
     QDateEdit *contractEndDateEdit;
-    QLabel *contractRentAmountLabel;
-    QDoubleSpinBox *contractRentAmountSpinBox;
     QLabel *contractDepositLabel;
     QDoubleSpinBox *contractDepositSpinBox;
     QLabel *contractStatusLabel;
@@ -717,33 +708,25 @@ public:
         roomStatusComboBox->addItem(QString());
         roomStatusComboBox->addItem(QString());
         roomStatusComboBox->addItem(QString());
-        roomStatusComboBox->addItem(QString());
         roomStatusComboBox->setObjectName(QString::fromUtf8("roomStatusComboBox"));
 
         roomFormLayout->setWidget(3, QFormLayout::FieldRole, roomStatusComboBox);
 
-        roomAreaLabel = new QLabel(roomInfoGroup);
-        roomAreaLabel->setObjectName(QString::fromUtf8("roomAreaLabel"));
-
-        roomFormLayout->setWidget(4, QFormLayout::LabelRole, roomAreaLabel);
-
-        roomAreaSpinBox = new QSpinBox(roomInfoGroup);
-        roomAreaSpinBox->setObjectName(QString::fromUtf8("roomAreaSpinBox"));
-        roomAreaSpinBox->setMinimum(10);
-        roomAreaSpinBox->setMaximum(200);
-        roomAreaSpinBox->setValue(25);
-
-        roomFormLayout->setWidget(4, QFormLayout::FieldRole, roomAreaSpinBox);
-
         roomDescLabel = new QLabel(roomInfoGroup);
         roomDescLabel->setObjectName(QString::fromUtf8("roomDescLabel"));
 
-        roomFormLayout->setWidget(5, QFormLayout::LabelRole, roomDescLabel);
+        roomFormLayout->setWidget(4, QFormLayout::LabelRole, roomDescLabel);
 
         roomDescEdit = new QLineEdit(roomInfoGroup);
         roomDescEdit->setObjectName(QString::fromUtf8("roomDescEdit"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(roomDescEdit->sizePolicy().hasHeightForWidth());
+        roomDescEdit->setSizePolicy(sizePolicy1);
+        roomDescEdit->setMinimumSize(QSize(0, 70));
 
-        roomFormLayout->setWidget(5, QFormLayout::FieldRole, roomDescEdit);
+        roomFormLayout->setWidget(4, QFormLayout::FieldRole, roomDescEdit);
 
 
         roomControlsLayout->addWidget(roomInfoGroup);
@@ -807,42 +790,17 @@ public:
         tenantNameLabel = new QLabel(tenantInfoGroup);
         tenantNameLabel->setObjectName(QString::fromUtf8("tenantNameLabel"));
 
-        tenantFormLayout->setWidget(0, QFormLayout::LabelRole, tenantNameLabel);
+        tenantFormLayout->setWidget(1, QFormLayout::LabelRole, tenantNameLabel);
 
         tenantNameEdit = new QLineEdit(tenantInfoGroup);
         tenantNameEdit->setObjectName(QString::fromUtf8("tenantNameEdit"));
 
-        tenantFormLayout->setWidget(0, QFormLayout::FieldRole, tenantNameEdit);
-
-        tenantPhoneLabel = new QLabel(tenantInfoGroup);
-        tenantPhoneLabel->setObjectName(QString::fromUtf8("tenantPhoneLabel"));
-
-        tenantFormLayout->setWidget(1, QFormLayout::LabelRole, tenantPhoneLabel);
+        tenantFormLayout->setWidget(1, QFormLayout::FieldRole, tenantNameEdit);
 
         tenantPhoneEdit = new QLineEdit(tenantInfoGroup);
         tenantPhoneEdit->setObjectName(QString::fromUtf8("tenantPhoneEdit"));
 
-        tenantFormLayout->setWidget(1, QFormLayout::FieldRole, tenantPhoneEdit);
-
-        tenantEmailLabel = new QLabel(tenantInfoGroup);
-        tenantEmailLabel->setObjectName(QString::fromUtf8("tenantEmailLabel"));
-
-        tenantFormLayout->setWidget(2, QFormLayout::LabelRole, tenantEmailLabel);
-
-        tenantEmailEdit = new QLineEdit(tenantInfoGroup);
-        tenantEmailEdit->setObjectName(QString::fromUtf8("tenantEmailEdit"));
-
-        tenantFormLayout->setWidget(2, QFormLayout::FieldRole, tenantEmailEdit);
-
-        tenantIdLabel = new QLabel(tenantInfoGroup);
-        tenantIdLabel->setObjectName(QString::fromUtf8("tenantIdLabel"));
-
-        tenantFormLayout->setWidget(3, QFormLayout::LabelRole, tenantIdLabel);
-
-        tenantIdEdit = new QLineEdit(tenantInfoGroup);
-        tenantIdEdit->setObjectName(QString::fromUtf8("tenantIdEdit"));
-
-        tenantFormLayout->setWidget(3, QFormLayout::FieldRole, tenantIdEdit);
+        tenantFormLayout->setWidget(2, QFormLayout::FieldRole, tenantPhoneEdit);
 
         tenantRoomLabel = new QLabel(tenantInfoGroup);
         tenantRoomLabel->setObjectName(QString::fromUtf8("tenantRoomLabel"));
@@ -855,16 +813,20 @@ public:
 
         tenantFormLayout->setWidget(4, QFormLayout::FieldRole, tenantRoomComboBox);
 
-        tenantStartDateLabel = new QLabel(tenantInfoGroup);
-        tenantStartDateLabel->setObjectName(QString::fromUtf8("tenantStartDateLabel"));
+        tenantIdLabel = new QLabel(tenantInfoGroup);
+        tenantIdLabel->setObjectName(QString::fromUtf8("tenantIdLabel"));
 
-        tenantFormLayout->setWidget(5, QFormLayout::LabelRole, tenantStartDateLabel);
+        tenantFormLayout->setWidget(0, QFormLayout::LabelRole, tenantIdLabel);
 
-        tenantStartDateEdit = new QDateEdit(tenantInfoGroup);
-        tenantStartDateEdit->setObjectName(QString::fromUtf8("tenantStartDateEdit"));
-        tenantStartDateEdit->setCalendarPopup(true);
+        tenantIdEdit = new QLineEdit(tenantInfoGroup);
+        tenantIdEdit->setObjectName(QString::fromUtf8("tenantIdEdit"));
 
-        tenantFormLayout->setWidget(5, QFormLayout::FieldRole, tenantStartDateEdit);
+        tenantFormLayout->setWidget(0, QFormLayout::FieldRole, tenantIdEdit);
+
+        tenantPhoneLabel = new QLabel(tenantInfoGroup);
+        tenantPhoneLabel->setObjectName(QString::fromUtf8("tenantPhoneLabel"));
+
+        tenantFormLayout->setWidget(2, QFormLayout::LabelRole, tenantPhoneLabel);
 
 
         tenantControlsLayout->addWidget(tenantInfoGroup);
@@ -963,23 +925,10 @@ public:
 
         contractFormLayout->setWidget(3, QFormLayout::FieldRole, contractEndDateEdit);
 
-        contractRentAmountLabel = new QLabel(contractInfoGroup);
-        contractRentAmountLabel->setObjectName(QString::fromUtf8("contractRentAmountLabel"));
-
-        contractFormLayout->setWidget(4, QFormLayout::LabelRole, contractRentAmountLabel);
-
-        contractRentAmountSpinBox = new QDoubleSpinBox(contractInfoGroup);
-        contractRentAmountSpinBox->setObjectName(QString::fromUtf8("contractRentAmountSpinBox"));
-        contractRentAmountSpinBox->setDecimals(0);
-        contractRentAmountSpinBox->setMaximum(99999999.000000000000000);
-        contractRentAmountSpinBox->setSingleStep(100000.000000000000000);
-
-        contractFormLayout->setWidget(4, QFormLayout::FieldRole, contractRentAmountSpinBox);
-
         contractDepositLabel = new QLabel(contractInfoGroup);
         contractDepositLabel->setObjectName(QString::fromUtf8("contractDepositLabel"));
 
-        contractFormLayout->setWidget(5, QFormLayout::LabelRole, contractDepositLabel);
+        contractFormLayout->setWidget(4, QFormLayout::LabelRole, contractDepositLabel);
 
         contractDepositSpinBox = new QDoubleSpinBox(contractInfoGroup);
         contractDepositSpinBox->setObjectName(QString::fromUtf8("contractDepositSpinBox"));
@@ -987,12 +936,12 @@ public:
         contractDepositSpinBox->setMaximum(99999999.000000000000000);
         contractDepositSpinBox->setSingleStep(100000.000000000000000);
 
-        contractFormLayout->setWidget(5, QFormLayout::FieldRole, contractDepositSpinBox);
+        contractFormLayout->setWidget(4, QFormLayout::FieldRole, contractDepositSpinBox);
 
         contractStatusLabel = new QLabel(contractInfoGroup);
         contractStatusLabel->setObjectName(QString::fromUtf8("contractStatusLabel"));
 
-        contractFormLayout->setWidget(6, QFormLayout::LabelRole, contractStatusLabel);
+        contractFormLayout->setWidget(5, QFormLayout::LabelRole, contractStatusLabel);
 
         contractStatusComboBox = new QComboBox(contractInfoGroup);
         contractStatusComboBox->addItem(QString());
@@ -1001,7 +950,7 @@ public:
         contractStatusComboBox->addItem(QString());
         contractStatusComboBox->setObjectName(QString::fromUtf8("contractStatusComboBox"));
 
-        contractFormLayout->setWidget(6, QFormLayout::FieldRole, contractStatusComboBox);
+        contractFormLayout->setWidget(5, QFormLayout::FieldRole, contractStatusComboBox);
 
 
         contractControlsLayout->addWidget(contractInfoGroup);
@@ -1380,7 +1329,7 @@ public:
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(0);
+        mainTabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);
@@ -1545,10 +1494,7 @@ public:
         roomStatusComboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "Tr\341\273\221ng", nullptr));
         roomStatusComboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "\304\220\303\243 thu\303\252", nullptr));
         roomStatusComboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "B\341\272\243o tr\303\254", nullptr));
-        roomStatusComboBox->setItemText(3, QCoreApplication::translate("AdminMainWindow", "D\341\273\215n d\341\272\271p", nullptr));
 
-        roomAreaLabel->setText(QCoreApplication::translate("AdminMainWindow", "Di\341\273\207n T\303\255ch:", nullptr));
-        roomAreaSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " m\302\262", nullptr));
         roomDescLabel->setText(QCoreApplication::translate("AdminMainWindow", "M\303\264 T\341\272\243:", nullptr));
         roomDescEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "M\303\264 t\341\272\243 ph\303\262ng...", nullptr));
         addRoomButton->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m Ph\303\262ng", nullptr));
@@ -1558,14 +1504,11 @@ public:
         tenantInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Kh\303\241ch Thu\303\252", nullptr));
         tenantNameLabel->setText(QCoreApplication::translate("AdminMainWindow", "H\341\273\215 T\303\252n:", nullptr));
         tenantNameEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p h\341\273\215 t\303\252n...", nullptr));
-        tenantPhoneLabel->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\221 \304\220i\341\273\207n Tho\341\272\241i:", nullptr));
         tenantPhoneEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p s\341\273\221 \304\221i\341\273\207n tho\341\272\241i...", nullptr));
-        tenantEmailLabel->setText(QCoreApplication::translate("AdminMainWindow", "Email:", nullptr));
-        tenantEmailEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p email...", nullptr));
+        tenantRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
         tenantIdLabel->setText(QCoreApplication::translate("AdminMainWindow", "CMND/CCCD:", nullptr));
         tenantIdEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p CCCD...", nullptr));
-        tenantRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
-        tenantStartDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y B\341\272\257t \304\220\341\272\247u:", nullptr));
+        tenantPhoneLabel->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\221 \304\220i\341\273\207n Tho\341\272\241i:", nullptr));
         addTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m Kh\303\241ch", nullptr));
         editTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Th\303\264ng Tin", nullptr));
         deleteTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Kh\303\241ch", nullptr));
@@ -1575,8 +1518,6 @@ public:
         contractRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
         contractStartDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y B\341\272\257t \304\220\341\272\247u:", nullptr));
         contractEndDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y K\341\272\277t Th\303\272c:", nullptr));
-        contractRentAmountLabel->setText(QCoreApplication::translate("AdminMainWindow", "Gi\303\241 Thu\303\252/Th\303\241ng:", nullptr));
-        contractRentAmountSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
         contractDepositLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ti\341\273\201n C\341\273\215c:", nullptr));
         contractDepositSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
         contractStatusLabel->setText(QCoreApplication::translate("AdminMainWindow", "Tr\341\272\241ng Th\303\241i:", nullptr));

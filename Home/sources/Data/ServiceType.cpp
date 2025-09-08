@@ -52,11 +52,12 @@ vector<ServiceType> ServiceType::loadFromDatabase() {
 
 bool ServiceType::saveToDatabase(const vector<ServiceType>& serviceTypes) {
     cout << "\033[1;33m*Saving service type to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\service_types.dat", ios::app);
+    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\service_types.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening service types file for writing." << endl;
         return false;
     }
+    file.clear();
     for (const auto& serviceType : serviceTypes) {
         file << serviceType.service_type << " "
              << serviceType.name << " "

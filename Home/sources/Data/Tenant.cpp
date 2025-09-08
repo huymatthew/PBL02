@@ -115,11 +115,12 @@ vector<Tenant> Tenant::loadFromDatabase() {
 
 bool Tenant::saveToDatabase(const vector<Tenant>& tenants) {
     cout << "\033[1;33m*Saving tenants to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\tenants.dat", ios::app);
+    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\tenants.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening tenants file for writing." << endl;
         return false;
     }
+    file.clear();
     for (const auto& tenant : tenants) {
         file << tenant.tenant_id << " "
             << tenant.full_name << " "

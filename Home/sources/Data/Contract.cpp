@@ -91,11 +91,12 @@ vector<Contract> Contract::loadFromDatabase() {
 // Static stub: Save contract to database
 bool Contract::saveToDatabase(const vector<Contract>& contracts) {
     cout << "\033[1;32m*Saving contracts to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\contracts.dat", ios::app);
+    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\contracts.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening contracts file for writing." << endl;
         return false;
     }
+    file.clear();
     for (const auto& contract : contracts) {
         file << contract.contract_id << " "
              << contract.room_id << " "

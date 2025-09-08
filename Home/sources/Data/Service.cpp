@@ -95,11 +95,12 @@ vector<Service> Service::loadFromDatabase() {
 
 bool Service::saveToDatabase(const vector<Service>& services) {
     cout << "\033[1;33m*Saving service to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\services.dat", ios::app);
+    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\services.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening services file for writing." << endl;
         return false;
     }
+    file.clear();
     for (const auto& service : services) {
         file << service.service_id << " "
              << service.service_type << " "
