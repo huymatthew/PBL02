@@ -2,9 +2,13 @@
 #define ROOM_MANAGER_H
 
 #include <Data/Room.h>
+#include <Core/PrimaryKey.h>
 #include <vector>
 #include <string>
 #include <memory>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 class RoomManager {
@@ -64,6 +68,7 @@ public:
 private:
     vector<Room> rooms;
     bool data_loaded;
+    PrimaryKey<string> pk_manager;
     
     // Helper methods
     vector<Room>::iterator findRoomIterator(const string& roomId);

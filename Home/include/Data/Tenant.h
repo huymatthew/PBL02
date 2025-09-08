@@ -15,7 +15,6 @@ private:
     string date_of_birth; // ddmmyyyy
     int contract_id;           // FK -> Contracts
     bool is_main_tenant;
-    static PrimaryKey<int> pk_manager;
 
 public:
     Tenant();

@@ -2,9 +2,13 @@
 #define SERVICE_TYPE_MANAGER_H
 
 #include <Data/ServiceType.h>
+#include <Core/PrimaryKey.h>
 #include <vector>
 #include <string>
 #include <memory>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 class ServiceTypeManager {
@@ -68,6 +72,7 @@ public:
 private:
     vector<ServiceType> serviceTypes;
     bool data_loaded;
+    PrimaryKey<int> pk_manager;
     
     // Helper methods
     vector<ServiceType>::iterator findServiceTypeIterator(int serviceType);

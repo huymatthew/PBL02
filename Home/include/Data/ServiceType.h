@@ -10,7 +10,6 @@ class ServiceType {
     int service_type;
     string name;
     double price;
-    static PrimaryKey<int> pk_manager;
     public:
     ServiceType();
     ServiceType(int type, const string& name, double price);

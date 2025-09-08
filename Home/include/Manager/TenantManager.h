@@ -2,9 +2,13 @@
 #define TENANT_MANAGER_H
 
 #include <Data/Tenant.h>
+#include <Core/PrimaryKey.h>
 #include <vector>
 #include <string>
 #include <memory>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 class TenantManager {
@@ -65,6 +69,7 @@ public:
 private:
     vector<Tenant> tenants;
     bool data_loaded;
+    PrimaryKey<int> pk_manager;
     
     // Helper methods
     vector<Tenant>::iterator findTenantIterator(int tenantId);

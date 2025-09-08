@@ -8,6 +8,14 @@
 #include <Data/Service.h>
 #include <Data/ServiceType.h>
 #include <Data/Tenant.h>
+
+#include <Manager/ServiceManager.h>
+#include <Manager/RoomManager.h>
+#include <Manager/BillManager.h>
+#include <Manager/ContractManager.h>
+#include <Manager/TenantManager.h>
+#include <Manager/ServiceTypeManager.h>
+
 #include <admin_main.h>
 
 class QuanLy : public Ui_AdminMainWindow {
@@ -17,12 +25,12 @@ public:
 
     void addTenant();
 private:
-    vector<Bill> bills;
-    vector<Contract> contracts;
-    vector<Room> rooms;
-    vector<Service> services;
-    vector<ServiceType> serviceTypes;
-    vector<Tenant> tenants;
+    BillManager billManager;
+    ContractManager contractManager;
+    RoomManager roomManager;
+    ServiceManager serviceManager;
+    ServiceTypeManager serviceTypeManager;
+    TenantManager tenantManager;
 };
 
 

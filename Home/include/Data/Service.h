@@ -14,7 +14,6 @@ private:
     int quantity;
     double price;
 
-    static PrimaryKey<int> pk_manager;
 public:
     Service();
     Service(const Service& other);

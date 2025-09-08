@@ -2,6 +2,9 @@
 
 using namespace std;
 
+ContractManager::ContractManager() : data_loaded(false) {}
+ContractManager::~ContractManager() {}
+
 bool ContractManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading contracts from database...\033[0m" << endl;
     ifstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\contracts.dat");
