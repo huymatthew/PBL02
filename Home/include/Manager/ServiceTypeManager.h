@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 using namespace std;
 
 class ServiceTypeManager {
@@ -18,12 +19,10 @@ public:
 
     // Database operations
     bool loadFromDatabase();
-    bool saveToDatabase();
     
     // CRUD operations
     bool addServiceType(const ServiceType& serviceType);
     bool addServiceType(int serviceType, const string& name, double price);
-    bool removeServiceType(int serviceType);
     bool updateServiceType(int serviceType, const ServiceType& updatedServiceType);
     
     // Query operations
@@ -64,11 +63,6 @@ public:
     vector<int> getAllServiceTypeIds() const;
     vector<string> getAllServiceTypeNames() const;
     vector<double> getAllServiceTypePrices() const;
-    
-    // Default service types
-    bool initializeDefaultServiceTypes();
-    bool addDefaultServiceType(const string& name, double defaultPrice);
-    
 private:
     vector<ServiceType> serviceTypes;
     bool data_loaded;

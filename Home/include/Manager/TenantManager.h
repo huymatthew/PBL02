@@ -56,11 +56,7 @@ public:
     // Contract management
     bool moveTenantsToContract(const vector<int>& tenantIds, int newContractId);
     bool removeTenantsFromContract(int contractId);
-    
-    // Age operations
-    vector<Tenant> getTenantsByAgeRange(int minAge, int maxAge) const;
-    int calculateAge(const string& dateOfBirth) const;
-    
+        
     // Validation operations
     bool isValidIdentityCard(const string& identityCard) const;
     bool isValidPhone(const string& phone) const;
