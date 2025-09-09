@@ -2,6 +2,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QWidget>
+#include <QLoggingCategory>
 #include <iostream>
 
 #include <Data/Bill.h>
@@ -14,10 +15,10 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
+    //QLoggingCategory::setFilterRules("*.debug=true\n*.info=true\nqt.*=true");
     QApplication app(argc, argv);
     QMainWindow nw;
-    QuanLy quanLy;
-    quanLy.setupUi(&nw);
+    QuanLy quanLy(&nw);
     nw.show();
     return app.exec();
 }

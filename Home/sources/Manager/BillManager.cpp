@@ -139,6 +139,30 @@ bool BillManager::markBillAsUnpaid(int billId) {
     return false;
 }
 
+QStandardItemModel* BillManager::getBillsAsModel() const {
+    QStandardItemModel* model = new QStandardItemModel();
+    model->setColumnCount(7);
+    model->setHeaderData(0, Qt::Horizontal, "Bill ID");
+    model->setHeaderData(1, Qt::Horizontal, "Contract ID");
+    model->setHeaderData(2, Qt::Horizontal, "Billing Month");
+    model->setHeaderData(3, Qt::Horizontal, "Room Rent");
+    model->setHeaderData(4, Qt::Horizontal, "Total Amount");
+    model->setHeaderData(5, Qt::Horizontal, "Due Date");
+    model->setHeaderData(6, Qt::Horizontal, "Status");
+
+    for (const auto& bill : bills) {
+        QList<QStandardItem*> rowItems;
+        rowItems.append(new QStandardItem(QString::number(bill.getBillId())));
+        rowItems.append(new QStandardItem(QString::number(bill.getContractId())));
+        rowItems.append(new QStandardItem(QString::fromStdString(bill.getBillingMonth())));
+        rowItems.append(new QStandardItem(QString::number(bill.getRoomRent())));
+        rowItems.append(new QStandardItem(QString::number(bill.getTotalAmount())));
+        rowItems.append(new QStandardItem(QString::fromStdString(bill.getDueDate())));
+        rowItems.append(new QStandardItem(bill.getStatus() == 1 ? "Paid" : "Unpaid"));
+        model->appendRow(rowItems);
+    }
+    return model;
+}
 
 vector<Bill>::iterator BillManager::findBillIterator(int billId) {
     for (auto it = bills.begin(); it != bills.end(); ++it) {

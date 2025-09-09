@@ -1,6 +1,9 @@
 #ifndef ROOM_MANAGER_H
 #define ROOM_MANAGER_H
 
+#include <QStandardItem>
+#include <QStandardItemModel>
+
 #include <Data/Room.h>
 #include <Core/PrimaryKey.h>
 #include <vector>
@@ -64,6 +67,8 @@ public:
     // Sorting operations
     vector<Room> getRoomsSortedByRent(bool ascending = true) const;
     vector<Room> getRoomsSortedById() const;
+
+    QStandardItemModel* getRoomsAsModel() const;
     
 private:
     vector<Room> rooms;

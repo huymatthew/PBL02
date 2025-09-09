@@ -1,6 +1,9 @@
 #ifndef TENANT_MANAGER_H
 #define TENANT_MANAGER_H
 
+#include <QStandardItem>
+#include <QStandardItemModel>
+
 #include <Data/Tenant.h>
 #include <Core/PrimaryKey.h>
 #include <vector>
@@ -61,6 +64,8 @@ public:
     bool isValidIdentityCard(const string& identityCard) const;
     bool isValidPhone(const string& phone) const;
     bool isValidDateOfBirth(const string& dateOfBirth) const;
+
+    QStandardItemModel* getTenantsAsModel() const;
     
 private:
     vector<Tenant> tenants;

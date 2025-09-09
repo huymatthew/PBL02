@@ -1,6 +1,9 @@
 #ifndef BILL_MANAGER_H
 #define BILL_MANAGER_H
 
+#include <QStandardItem>
+#include <QStandardItemModel>
+
 #include <Data/Bill.h>
 #include <Core/PrimaryKey.h>
 #include <vector>
@@ -48,6 +51,7 @@ public:
     // Search operations
     vector<Bill> searchBills(const string& keyword);
     
+    QStandardItemModel* getBillsAsModel() const;
 private:
     vector<Bill> bills;
     PrimaryKey<int> pk_manager;

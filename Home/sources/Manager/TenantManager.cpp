@@ -383,3 +383,21 @@ string TenantManager::formatIdentityCard(const string& identityCard) const {
     formatted.erase(remove_if(formatted.begin(), formatted.end(), [](char c) { return !isdigit(c); }), formatted.end());
     return formatted;
 }
+
+QStandardItemModel* TenantManager::getTenantsAsModel() const {
+    QStandardItemModel* model = new QStandardItemModel();
+    model->setHorizontalHeaderLabels({"Tenant ID", "Full Name", "Phone", "Identity Card", "Date of Birth", "Contract ID", "Is Main Tenant"});
+    
+    for (const auto& tenant : tenants) {
+        QList<QStandardItem*> row;
+        row.append(new QStandardItem(QString::number(tenant.getTenantId())));
+        row.append(new QStandardItem(QString::fromStdString(tenant.getFullName())));
+        row.append(new QStandardItem(QString::fromStdString(tenant.getPhone())));
+        row.append(new QStandardItem(QString::fromStdString(tenant.getIdentityCard())));
+        row.append(new QStandardItem(QString::fromStdString(tenant.getDateOfBirth())));
+        row.append(new QStandardItem(QString::number(tenant.getContractId())));
+        row.append(new QStandardItem(tenant.getIsMainTenant() ? "Yes" : "No"));
+        model->appendRow(row);
+    }
+    return model;
+}

@@ -1,6 +1,9 @@
 #ifndef CONTRACT_MANAGER_H
 #define CONTRACT_MANAGER_H
 
+#include <QStandardItem>
+#include <QStandardItemModel>
+
 #include <Data/Contract.h>
 #include <Core/PrimaryKey.h>
 #include <vector>
@@ -60,6 +63,7 @@ public:
     double getTotalMonthlyRent() const;
     double getTotalDeposits() const;
     
+    QStandardItemModel* getContractsAsModel() const;
 private:
     vector<Contract> contracts;
     PrimaryKey<int> pk_manager;

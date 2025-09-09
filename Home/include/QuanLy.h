@@ -2,6 +2,8 @@
 #define QUAN_LY_H
 
 #include <iostream>
+#include <QMainWindow>
+
 #include <Data/Bill.h>
 #include <Data/Contract.h>
 #include <Data/Room.h>
@@ -20,10 +22,12 @@
 
 class QuanLy : public Ui_AdminMainWindow {
 public:
-    QuanLy();  // Declaration only
-    ~QuanLy(); // Declaration only
+    QuanLy(QMainWindow* mainWindow);
+    ~QuanLy();
 
-    void addTenant();
+    void signalAndSlotConnect();
+
+    void onChangedTabActive(int index);
 private:
     BillManager billManager;
     ContractManager contractManager;
@@ -31,6 +35,8 @@ private:
     ServiceManager serviceManager;
     ServiceTypeManager serviceTypeManager;
     TenantManager tenantManager;
+
+    QMainWindow* mainWindow;
 };
 
 

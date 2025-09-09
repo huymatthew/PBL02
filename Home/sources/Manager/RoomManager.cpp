@@ -194,6 +194,29 @@ bool RoomManager::isRoomOccupied(const string& roomId) {
 
 // Đoạn ni lười để sau :)))
 
+QStandardItemModel* RoomManager::getRoomsAsModel() const {
+    QStandardItemModel* model = new QStandardItemModel();
+    model->setColumnCount(6);
+    model->setHeaderData(0, Qt::Horizontal, "Room ID");
+    model->setHeaderData(1, Qt::Horizontal, "Contract ID");
+    model->setHeaderData(2, Qt::Horizontal, "Room Type");
+    model->setHeaderData(3, Qt::Horizontal, "Monthly Rent");
+    model->setHeaderData(4, Qt::Horizontal, "Status");
+    model->setHeaderData(5, Qt::Horizontal, "Description");
+
+    for (const auto& room : rooms) {
+        QList<QStandardItem*> rowItems;
+        rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomId())));
+        rowItems.append(new QStandardItem(QString::number(room.getContractId())));
+        rowItems.append(new QStandardItem(QString::number(room.getRoomType())));
+        rowItems.append(new QStandardItem(QString::number(room.getMonthlyRent())));
+        rowItems.append(new QStandardItem(room.getStatus() == 0 ? "Available" : "Occupied"));
+        rowItems.append(new QStandardItem(QString::fromStdString(room.getDescription())));
+        model->appendRow(rowItems);
+    }
+    return model;
+}
+
 vector<Room>::iterator RoomManager::findRoomIterator(const string& roomId) {
     for (auto it = rooms.begin(); it != rooms.end(); ++it) {
         if (it->getRoomId() == roomId) {
