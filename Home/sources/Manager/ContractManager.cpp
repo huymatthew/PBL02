@@ -1,5 +1,5 @@
 #include <Manager/ContractManager.h>
-
+#include <Core/ExtraFormat.h>
 using namespace std;
 
 ContractManager::ContractManager() : data_loaded(false) {
@@ -22,16 +22,15 @@ bool ContractManager::loadFromDatabase() {
         int id, status;
         string roomId, number, start, end, signedDate, notes;
         double rent, deposit;
-        if (!(iss >> id >> roomId >> number >> start >> end >> rent >> deposit >> status >> signedDate)) {
+        if (!(iss >> id >> roomId >> start >> end >> rent >> deposit >> status >> notes)) {
             cerr << "Error reading line: " << line << endl;
             continue;
         }
-        getline(iss, notes);
         if (pk_manager.isKeyInUse(id)) {
             cerr << "Duplicate contract ID found: " << id << endl;
             continue; 
         }
-        contracts.emplace_back(id, roomId, number, start, end, rent, deposit, status, signedDate, notes);
+        contracts.emplace_back(id, roomId, start, end, rent, deposit, status, notes);
         cout << "- Loaded contract ID: " << id << endl;
     }
     return true;
@@ -46,13 +45,11 @@ bool ContractManager::saveToDatabase() {
     for (const auto& contract : contracts) {
         file << contract.getContractId() << " "
              << contract.getRoomId() << " "
-             << contract.getContractNumber() << " "
              << contract.getStartDate() << " "
              << contract.getEndDate() << " "
              << contract.getMonthlyRent() << " "
              << contract.getDeposit() << " "
              << contract.getStatus() << " "
-             << contract.getSignedDate() << " "
              << contract.getNotes() << endl;
         cout << "~ Saved contract ID: " << contract.getContractId() << endl;
     }
@@ -68,12 +65,10 @@ bool ContractManager::addContract(const Contract& contract) {
     cout << "+ Added contract ID: " << contract.getContractId() << endl;
     return true;
 }
-bool ContractManager::addContract(const string& roomId, const string& number,
-                                  const string& start, const string& end,
-                                  double rent, double deposit, int status,
-                                  const string& signedDate, const string& notes) {
+bool ContractManager::addContract(const string& roomId, const string& start, const string& end,
+                                  double rent, double deposit, int status, const string& notes) {
     int newId = pk_manager.getNextKey();
-    Contract newContract(newId, roomId, number, start, end, rent, deposit, status, signedDate, notes);
+    Contract newContract(newId, roomId, start, end, rent, deposit, status, notes);
     return addContract(newContract);
 }
 bool ContractManager::removeContract(int contractId) {
@@ -109,14 +104,7 @@ Contract* ContractManager::getContract(int contractId) {
 bool ContractManager::contractExists(int contractId) const {
     return pk_manager.isKeyInUse(contractId);
 }
-bool ContractManager::contractNumberExists(const string& contractNumber) const {
-    for (const auto& contract : contracts) {
-        if (contract.getContractNumber() == contractNumber) {
-            return true;
-        }
-    }
-    return false;
-}
+
 bool ContractManager::roomHasActiveContract(const string& roomId) const {
     for (const auto& contract : contracts) {
         if (contract.getRoomId() == roomId && contract.getStatus() == 1) { // 1: active
@@ -128,7 +116,6 @@ bool ContractManager::roomHasActiveContract(const string& roomId) const {
 int ContractManager::getContractCount() const {
     return contracts.size();
 }
-
 
 bool ContractManager::activateContract(int contractId) {
     auto it = findContractIterator(contractId);
@@ -178,23 +165,21 @@ double ContractManager::getTotalDeposits() const {
 
 QStandardItemModel* ContractManager::getContractsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
-    model->setColumnCount(10);
+    model->setColumnCount(8);
     model->setHorizontalHeaderLabels({
-        "Mã Hợp Đồng", "Mã Phòng", "Số Hợp Đồng", "Ngày Bắt Đầu", "Ngày Kết Thúc",
-        "Giá Thuê Tháng", "Tiền Cọc", "Trạng Thái", "Ngày Ký", "Ghi Chú"
+        "Mã Hợp Đồng", "Mã Phòng",  "Ngày Bắt Đầu", "Ngày Kết Thúc",
+        "Giá Thuê Tháng", "Tiền Cọc", "Trạng Thái", "Ghi Chú"
     });
 
     for (const auto& contract : contracts) {
         QList<QStandardItem*> rowItems;
         rowItems.append(new QStandardItem(QString::number(contract.getContractId())));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getRoomId())));
-        rowItems.append(new QStandardItem(QString::fromStdString(contract.getContractNumber())));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getStartDate())));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getEndDate())));
-        rowItems.append(new QStandardItem(QString::number(contract.getMonthlyRent())));
-        rowItems.append(new QStandardItem(QString::number(contract.getDeposit())));
+        rowItems.append(new QStandardItem(moneyFormat(contract.getMonthlyRent())));
+        rowItems.append(new QStandardItem(moneyFormat(contract.getDeposit())));
         rowItems.append(new QStandardItem(contract.getStatus() == 1 ? "Active" : "Inactive"));
-        rowItems.append(new QStandardItem(QString::fromStdString(contract.getSignedDate())));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getNotes())));
 
         model->appendRow(rowItems);

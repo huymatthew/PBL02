@@ -25,6 +25,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
@@ -84,7 +85,6 @@ public:
     QLineEdit *roomDescEdit;
     QSpacerItem *roomVerticalSpacer;
     QVBoxLayout *roomButtonsLayout;
-    QPushButton *addRoomButton;
     QPushButton *editRoomButton;
     QPushButton *deleteRoomButton;
     QWidget *tenantsTab;
@@ -105,7 +105,6 @@ public:
     QLabel *label;
     QSpacerItem *tenantVerticalSpacer;
     QVBoxLayout *tenantButtonsLayout;
-    QPushButton *addTenantButton;
     QPushButton *editTenantButton;
     QPushButton *deleteTenantButton;
     QWidget *contractsTab;
@@ -114,8 +113,6 @@ public:
     QVBoxLayout *contractControlsLayout;
     QGroupBox *contractInfoGroup;
     QFormLayout *contractFormLayout;
-    QLabel *contractTenantLabel;
-    QComboBox *contractTenantComboBox;
     QLabel *contractRoomLabel;
     QComboBox *contractRoomComboBox;
     QLabel *contractStartDateLabel;
@@ -126,9 +123,12 @@ public:
     QDoubleSpinBox *contractDepositSpinBox;
     QLabel *contractStatusLabel;
     QComboBox *contractStatusComboBox;
+    QDoubleSpinBox *contractMoney;
+    QLabel *label_2;
+    QPlainTextEdit *contractDescription;
+    QLabel *label_3;
     QSpacerItem *contractVerticalSpacer;
     QVBoxLayout *contractButtonsLayout;
-    QPushButton *addContractButton;
     QPushButton *editContractButton;
     QPushButton *terminateContractButton;
     QWidget *paymentsTab;
@@ -651,6 +651,7 @@ public:
         roomsTableView = new QTableView(roomsTab);
         roomsTableView->setObjectName(QString::fromUtf8("roomsTableView"));
         roomsTableView->setMinimumSize(QSize(600, 0));
+        roomsTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         roomsTableView->setAlternatingRowColors(true);
         roomsTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         roomsTableView->setSortingEnabled(true);
@@ -739,27 +740,19 @@ public:
 
         roomButtonsLayout = new QVBoxLayout();
         roomButtonsLayout->setObjectName(QString::fromUtf8("roomButtonsLayout"));
-        addRoomButton = new QPushButton(roomsTab);
-        addRoomButton->setObjectName(QString::fromUtf8("addRoomButton"));
-        QIcon icon24;
-        icon24.addFile(QString::fromUtf8(":/icons/add.png"), QSize(), QIcon::Normal, QIcon::Off);
-        addRoomButton->setIcon(icon24);
-
-        roomButtonsLayout->addWidget(addRoomButton);
-
         editRoomButton = new QPushButton(roomsTab);
         editRoomButton->setObjectName(QString::fromUtf8("editRoomButton"));
-        QIcon icon25;
-        icon25.addFile(QString::fromUtf8(":/icons/edit.png"), QSize(), QIcon::Normal, QIcon::Off);
-        editRoomButton->setIcon(icon25);
+        QIcon icon24;
+        icon24.addFile(QString::fromUtf8(":/icons/edit.png"), QSize(), QIcon::Normal, QIcon::Off);
+        editRoomButton->setIcon(icon24);
 
         roomButtonsLayout->addWidget(editRoomButton);
 
         deleteRoomButton = new QPushButton(roomsTab);
         deleteRoomButton->setObjectName(QString::fromUtf8("deleteRoomButton"));
-        QIcon icon26;
-        icon26.addFile(QString::fromUtf8(":/icons/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
-        deleteRoomButton->setIcon(icon26);
+        QIcon icon25;
+        icon25.addFile(QString::fromUtf8(":/icons/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
+        deleteRoomButton->setIcon(icon25);
 
         roomButtonsLayout->addWidget(deleteRoomButton);
 
@@ -776,7 +769,9 @@ public:
         tenantsLayout->setObjectName(QString::fromUtf8("tenantsLayout"));
         tenantsTableView = new QTableView(tenantsTab);
         tenantsTableView->setObjectName(QString::fromUtf8("tenantsTableView"));
+        tenantsTableView->setEnabled(true);
         tenantsTableView->setMinimumSize(QSize(600, 0));
+        tenantsTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tenantsTableView->setAlternatingRowColors(true);
         tenantsTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         tenantsTableView->setSortingEnabled(true);
@@ -787,6 +782,7 @@ public:
         tenantControlsLayout->setObjectName(QString::fromUtf8("tenantControlsLayout"));
         tenantInfoGroup = new QGroupBox(tenantsTab);
         tenantInfoGroup->setObjectName(QString::fromUtf8("tenantInfoGroup"));
+        tenantInfoGroup->setEnabled(true);
         tenantFormLayout = new QFormLayout(tenantInfoGroup);
         tenantFormLayout->setObjectName(QString::fromUtf8("tenantFormLayout"));
         tenantNameLabel = new QLabel(tenantInfoGroup);
@@ -832,6 +828,7 @@ public:
 
         dateOfBirth = new QDateEdit(tenantInfoGroup);
         dateOfBirth->setObjectName(QString::fromUtf8("dateOfBirth"));
+        dateOfBirth->setEnabled(true);
 
         tenantFormLayout->setWidget(8, QFormLayout::FieldRole, dateOfBirth);
 
@@ -849,21 +846,15 @@ public:
 
         tenantButtonsLayout = new QVBoxLayout();
         tenantButtonsLayout->setObjectName(QString::fromUtf8("tenantButtonsLayout"));
-        addTenantButton = new QPushButton(tenantsTab);
-        addTenantButton->setObjectName(QString::fromUtf8("addTenantButton"));
-        addTenantButton->setIcon(icon24);
-
-        tenantButtonsLayout->addWidget(addTenantButton);
-
         editTenantButton = new QPushButton(tenantsTab);
         editTenantButton->setObjectName(QString::fromUtf8("editTenantButton"));
-        editTenantButton->setIcon(icon25);
+        editTenantButton->setIcon(icon24);
 
         tenantButtonsLayout->addWidget(editTenantButton);
 
         deleteTenantButton = new QPushButton(tenantsTab);
         deleteTenantButton->setObjectName(QString::fromUtf8("deleteTenantButton"));
-        deleteTenantButton->setIcon(icon26);
+        deleteTenantButton->setIcon(icon25);
 
         tenantButtonsLayout->addWidget(deleteTenantButton);
 
@@ -881,6 +872,7 @@ public:
         contractsTableView = new QTableView(contractsTab);
         contractsTableView->setObjectName(QString::fromUtf8("contractsTableView"));
         contractsTableView->setMinimumSize(QSize(600, 0));
+        contractsTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         contractsTableView->setAlternatingRowColors(true);
         contractsTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         contractsTableView->setSortingEnabled(true);
@@ -893,49 +885,38 @@ public:
         contractInfoGroup->setObjectName(QString::fromUtf8("contractInfoGroup"));
         contractFormLayout = new QFormLayout(contractInfoGroup);
         contractFormLayout->setObjectName(QString::fromUtf8("contractFormLayout"));
-        contractTenantLabel = new QLabel(contractInfoGroup);
-        contractTenantLabel->setObjectName(QString::fromUtf8("contractTenantLabel"));
-
-        contractFormLayout->setWidget(0, QFormLayout::LabelRole, contractTenantLabel);
-
-        contractTenantComboBox = new QComboBox(contractInfoGroup);
-        contractTenantComboBox->setObjectName(QString::fromUtf8("contractTenantComboBox"));
-        contractTenantComboBox->setEditable(false);
-
-        contractFormLayout->setWidget(0, QFormLayout::FieldRole, contractTenantComboBox);
-
         contractRoomLabel = new QLabel(contractInfoGroup);
         contractRoomLabel->setObjectName(QString::fromUtf8("contractRoomLabel"));
 
-        contractFormLayout->setWidget(1, QFormLayout::LabelRole, contractRoomLabel);
+        contractFormLayout->setWidget(0, QFormLayout::LabelRole, contractRoomLabel);
 
         contractRoomComboBox = new QComboBox(contractInfoGroup);
         contractRoomComboBox->setObjectName(QString::fromUtf8("contractRoomComboBox"));
         contractRoomComboBox->setEditable(false);
 
-        contractFormLayout->setWidget(1, QFormLayout::FieldRole, contractRoomComboBox);
+        contractFormLayout->setWidget(0, QFormLayout::FieldRole, contractRoomComboBox);
 
         contractStartDateLabel = new QLabel(contractInfoGroup);
         contractStartDateLabel->setObjectName(QString::fromUtf8("contractStartDateLabel"));
 
-        contractFormLayout->setWidget(2, QFormLayout::LabelRole, contractStartDateLabel);
+        contractFormLayout->setWidget(1, QFormLayout::LabelRole, contractStartDateLabel);
 
         contractStartDateEdit = new QDateEdit(contractInfoGroup);
         contractStartDateEdit->setObjectName(QString::fromUtf8("contractStartDateEdit"));
         contractStartDateEdit->setCalendarPopup(true);
 
-        contractFormLayout->setWidget(2, QFormLayout::FieldRole, contractStartDateEdit);
+        contractFormLayout->setWidget(1, QFormLayout::FieldRole, contractStartDateEdit);
 
         contractEndDateLabel = new QLabel(contractInfoGroup);
         contractEndDateLabel->setObjectName(QString::fromUtf8("contractEndDateLabel"));
 
-        contractFormLayout->setWidget(3, QFormLayout::LabelRole, contractEndDateLabel);
+        contractFormLayout->setWidget(2, QFormLayout::LabelRole, contractEndDateLabel);
 
         contractEndDateEdit = new QDateEdit(contractInfoGroup);
         contractEndDateEdit->setObjectName(QString::fromUtf8("contractEndDateEdit"));
         contractEndDateEdit->setCalendarPopup(true);
 
-        contractFormLayout->setWidget(3, QFormLayout::FieldRole, contractEndDateEdit);
+        contractFormLayout->setWidget(2, QFormLayout::FieldRole, contractEndDateEdit);
 
         contractDepositLabel = new QLabel(contractInfoGroup);
         contractDepositLabel->setObjectName(QString::fromUtf8("contractDepositLabel"));
@@ -964,6 +945,29 @@ public:
 
         contractFormLayout->setWidget(5, QFormLayout::FieldRole, contractStatusComboBox);
 
+        contractMoney = new QDoubleSpinBox(contractInfoGroup);
+        contractMoney->setObjectName(QString::fromUtf8("contractMoney"));
+        contractMoney->setDecimals(0);
+        contractMoney->setMaximum(10000000.000000000000000);
+        contractMoney->setSingleStep(100000.000000000000000);
+
+        contractFormLayout->setWidget(3, QFormLayout::FieldRole, contractMoney);
+
+        label_2 = new QLabel(contractInfoGroup);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        contractFormLayout->setWidget(3, QFormLayout::LabelRole, label_2);
+
+        contractDescription = new QPlainTextEdit(contractInfoGroup);
+        contractDescription->setObjectName(QString::fromUtf8("contractDescription"));
+
+        contractFormLayout->setWidget(6, QFormLayout::FieldRole, contractDescription);
+
+        label_3 = new QLabel(contractInfoGroup);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        contractFormLayout->setWidget(6, QFormLayout::LabelRole, label_3);
+
 
         contractControlsLayout->addWidget(contractInfoGroup);
 
@@ -973,21 +977,15 @@ public:
 
         contractButtonsLayout = new QVBoxLayout();
         contractButtonsLayout->setObjectName(QString::fromUtf8("contractButtonsLayout"));
-        addContractButton = new QPushButton(contractsTab);
-        addContractButton->setObjectName(QString::fromUtf8("addContractButton"));
-        addContractButton->setIcon(icon24);
-
-        contractButtonsLayout->addWidget(addContractButton);
-
         editContractButton = new QPushButton(contractsTab);
         editContractButton->setObjectName(QString::fromUtf8("editContractButton"));
-        editContractButton->setIcon(icon25);
+        editContractButton->setIcon(icon24);
 
         contractButtonsLayout->addWidget(editContractButton);
 
         terminateContractButton = new QPushButton(contractsTab);
         terminateContractButton->setObjectName(QString::fromUtf8("terminateContractButton"));
-        terminateContractButton->setIcon(icon26);
+        terminateContractButton->setIcon(icon25);
 
         contractButtonsLayout->addWidget(terminateContractButton);
 
@@ -1005,6 +1003,7 @@ public:
         paymentsTableView = new QTableView(paymentsTab);
         paymentsTableView->setObjectName(QString::fromUtf8("paymentsTableView"));
         paymentsTableView->setMinimumSize(QSize(600, 0));
+        paymentsTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         paymentsTableView->setAlternatingRowColors(true);
         paymentsTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         paymentsTableView->setSortingEnabled(true);
@@ -1115,13 +1114,15 @@ public:
         paymentButtonsLayout->setObjectName(QString::fromUtf8("paymentButtonsLayout"));
         addPaymentButton = new QPushButton(paymentsTab);
         addPaymentButton->setObjectName(QString::fromUtf8("addPaymentButton"));
-        addPaymentButton->setIcon(icon24);
+        QIcon icon26;
+        icon26.addFile(QString::fromUtf8(":/icons/add.png"), QSize(), QIcon::Normal, QIcon::Off);
+        addPaymentButton->setIcon(icon26);
 
         paymentButtonsLayout->addWidget(addPaymentButton);
 
         editPaymentButton = new QPushButton(paymentsTab);
         editPaymentButton->setObjectName(QString::fromUtf8("editPaymentButton"));
-        editPaymentButton->setIcon(icon25);
+        editPaymentButton->setIcon(icon24);
 
         paymentButtonsLayout->addWidget(editPaymentButton);
 
@@ -1341,7 +1342,7 @@ public:
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(0);
+        mainTabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);
@@ -1509,7 +1510,6 @@ public:
 
         roomDescLabel->setText(QCoreApplication::translate("AdminMainWindow", "M\303\264 T\341\272\243:", nullptr));
         roomDescEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "M\303\264 t\341\272\243 ph\303\262ng...", nullptr));
-        addRoomButton->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m Ph\303\262ng", nullptr));
         editRoomButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Ph\303\262ng", nullptr));
         deleteRoomButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Ph\303\262ng", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(roomsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Ph\303\262ng", nullptr));
@@ -1522,12 +1522,10 @@ public:
         tenantIdEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p CCCD...", nullptr));
         tenantIdLabel->setText(QCoreApplication::translate("AdminMainWindow", "CMND/CCCD:", nullptr));
         label->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y Sinh", nullptr));
-        addTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m Kh\303\241ch", nullptr));
         editTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Th\303\264ng Tin", nullptr));
         deleteTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Kh\303\241ch", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tenantsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Kh\303\241ch Thu\303\252", nullptr));
         contractInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin H\341\273\243p \304\220\341\273\223ng", nullptr));
-        contractTenantLabel->setText(QCoreApplication::translate("AdminMainWindow", "Kh\303\241ch Thu\303\252:", nullptr));
         contractRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
         contractStartDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y B\341\272\257t \304\220\341\272\247u:", nullptr));
         contractEndDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y K\341\272\277t Th\303\272c:", nullptr));
@@ -1539,7 +1537,10 @@ public:
         contractStatusComboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "\304\220\303\243 h\341\273\247y", nullptr));
         contractStatusComboBox->setItemText(3, QCoreApplication::translate("AdminMainWindow", "T\341\272\241m ng\306\260ng", nullptr));
 
-        addContractButton->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\341\273\243p \304\220\341\273\223ng", nullptr));
+        contractMoney->setPrefix(QString());
+        contractMoney->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
+        label_2->setText(QCoreApplication::translate("AdminMainWindow", "Ti\341\273\201n Thu\303\252", nullptr));
+        label_3->setText(QCoreApplication::translate("AdminMainWindow", "Ghi ch\303\272", nullptr));
         editContractButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a H\341\273\243p \304\220\341\273\223ng", nullptr));
         terminateContractButton->setText(QCoreApplication::translate("AdminMainWindow", "Ch\341\272\245m D\341\273\251t H\304\220", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(contractsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 H\341\273\243p \304\220\341\273\223ng Thu\303\252", nullptr));

@@ -28,6 +28,7 @@ public:
     void signalAndSlotConnect();
 
     void onChangedTabActive(int index);
+    void onShowTenantDetails(int tenantId);
 private:
     BillManager billManager;
     ContractManager contractManager;

@@ -24,8 +24,11 @@ void QuanLy::signalAndSlotConnect() {
                         [this](int index) {
                             this->onChangedTabActive(index);
                         });
-}
 
+    QObject::connect(tenantsTableView, &QTableView::doubleClicked, [this](const QModelIndex &index){
+        onShowTenantDetails(index.siblingAtColumn(0).data().toInt());
+    });
+}
 void QuanLy::onChangedTabActive(int index) {
     switch (index) {
         case 0:
@@ -45,3 +48,16 @@ void QuanLy::onChangedTabActive(int index) {
             break;
     }
 }
+
+void QuanLy::onShowTenantDetails(int tenantId) {
+    Tenant* tenant = tenantManager.getTenant(tenantId);
+    if (!tenant) {
+        cerr << "Tenant ID " << tenantId << " not found." << endl;
+        return;
+    }
+    tenantNameEdit->setText(QString::fromStdString(tenant->getFullName()));
+    tenantIdEdit->setText(QString::fromStdString(to_string(tenant->getTenantId())));
+    tenantPhoneEdit->setText(QString::fromStdString(tenant->getPhone()));
+    dateOfBirth->setDate(QDate::fromString(QString::fromStdString(tenant->getDateOfBirth()), "yyyy-MM-dd"));
+}
+

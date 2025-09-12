@@ -20,21 +20,19 @@
 
 ## Contract
 
-|Contract_ID|Room_ID|Contract_Number|Start_Date|End_Date|Monthly_Rent|Deposit|Status|Signed_Date|Notes|
-|-----------|-------|---------------|----------|--------|------------|-------|------|-----------|-----|
-|int        |string |string         |string    |string  |double      |double |int   |string     |string|
+|Contract_ID|Room_ID|Start_Date|End_Date|Monthly_Rent|Deposit|Status|Notes |
+|-----------|-------|----------|--------|------------|-------|------|------|
+|int        |string |string    |string  |double      |double |int   |string|
 
 **Description:**
 
 - Contract_ID: Primary Key
 - Room_ID: Foreign Key -> Room
-- Contract_Number: Số hợp đồng
 - Start_Date: Ngày bắt đầu hợp đồng
 - End_Date: Ngày kết thúc hợp đồng
 - Monthly_Rent: Tiền thuê hàng tháng
 - Deposit: Tiền đặt cọc
 - Status: Trạng thái (0: không hoạt động, 1: đang hoạt động)
-- Signed_Date: Ngày ký hợp đồng
 - Notes: Ghi chú
 
 ---
@@ -59,9 +57,9 @@
 
 ## Tenant
 
-|Tenant_ID|Full_Name|Phone|Identity_Card|Date_Of_Birth|Contract_ID|Is_Main_Tenant|
-|---------|---------|-----|-------------|-------------|-----------|--------------|
-|int      |string   |string|string      |string       |int        |bool          |
+|Tenant_ID|Full_Name|Phone |Identity_Card|Date_Of_Birth|Contract_ID|Is_Main_Tenant|
+|---------|---------|------|-------------|-------------|-----------|--------------|
+|int      |string   |string|string       |string       |int        |bool          |
 
 **Description:**
 

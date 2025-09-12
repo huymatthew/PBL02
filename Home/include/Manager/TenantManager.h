@@ -46,10 +46,6 @@ public:
     bool hasMainTenant(int contractId) const;
     vector<Tenant> getSubTenants(int contractId);
     
-    vector<Tenant> searchTenants(const string& keyword);
-    vector<Tenant> searchTenantsByName(const string& name);
-    vector<Tenant> searchTenantsByPhone(const string& phone);
-    
     bool moveTenantsToContract(const vector<int>& tenantIds, int newContractId);
     bool removeTenantsFromContract(int contractId);
         

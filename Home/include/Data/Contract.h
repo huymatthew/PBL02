@@ -9,30 +9,24 @@ class Contract {
 private:
     int contract_id;
     string room_id; 
-    string contract_number;
     string start_date;
     string end_date;
     double monthly_rent;
     double deposit;
     int status; // 0: inactive, 1: active
-    string signed_date;
     string notes;
 public:
     Contract();
     Contract(const Contract& other);
-    Contract(int id, const string& roomId, const string& number,
+    Contract(int id, const string& roomId,
              const string& start, const string& end,
-             double rent, double deposit, int status,
-             const string& signedDate, const string& notes);
+             double rent, double deposit, int status, const string& notes);
 
     int getContractId() const;
     void setContractId(int id);
 
     string getRoomId() const;
     void setRoomId(const string& roomId);
-
-    string getContractNumber() const;
-    void setContractNumber(const string& number);
 
     string getStartDate() const;
     void setStartDate(const string& start);
@@ -48,9 +42,6 @@ public:
 
     int getStatus() const;
     void setStatus(int status);
-
-    string getSignedDate() const;
-    void setSignedDate(const string& signedDate);
 
     string getNotes() const;
     void setNotes(const string& notes);

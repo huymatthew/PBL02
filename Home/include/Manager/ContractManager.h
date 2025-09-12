@@ -24,10 +24,10 @@ public:
     bool saveToDatabase();
     
     bool addContract(const Contract& contract);
-    bool addContract(const string& roomId, const string& number,
+    bool addContract(const string& roomId,
                     const string& start, const string& end,
                     double rent, double deposit, int status,
-                    const string& signedDate, const string& notes);
+                    const string& notes);
     bool removeContract(int contractId);
     bool updateContract(int contractId, const Contract& updatedContract);
     
@@ -45,13 +45,7 @@ public:
     bool activateContract(int contractId);
     bool deactivateContract(int contractId);
     bool extendContract(int contractId, const string& newEndDate);
-    
-    vector<Contract> getExpiringContracts(const string& date) const;
-    vector<Contract> getActiveContracts() const;
-    vector<Contract> getInactiveContracts() const;
-    
-    vector<Contract> searchContracts(const string& keyword);
-    
+
     double getTotalMonthlyRent() const;
     double getTotalDeposits() const;
     
@@ -64,7 +58,6 @@ private:
     // Helper methods
     vector<Contract>::iterator findContractIterator(int contractId);
     bool isDateBefore(const string& date1, const string& date2) const;
-    void sortContractsByDate();
 };
 
 #endif // CONTRACT_MANAGER_H

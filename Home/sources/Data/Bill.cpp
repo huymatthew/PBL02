@@ -16,7 +16,6 @@ Bill::Bill(int id, int contractId, const string& month,
      : bill_id(id), contract_id(contractId), billing_month(month),
         room_rent(rent), total_amount(total), due_date(due), status(status) {}
 
-// Getter - Setter
 int Bill::getBillId() const {
     return bill_id;
 }
