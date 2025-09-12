@@ -197,17 +197,16 @@ bool RoomManager::isRoomOccupied(int roomId) {
 
 QStandardItemModel* RoomManager::getRoomsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
-    model->setColumnCount(6);
-    model->setHeaderData(0, Qt::Horizontal, "Room ID");
-    model->setHeaderData(1, Qt::Horizontal, "Contract ID");
-    model->setHeaderData(2, Qt::Horizontal, "Room Type");
-    model->setHeaderData(3, Qt::Horizontal, "Monthly Rent");
-    model->setHeaderData(4, Qt::Horizontal, "Status");
-    model->setHeaderData(5, Qt::Horizontal, "Description");
+    model->setColumnCount(7);
+    model->setHorizontalHeaderLabels({
+        "Mã Phòng", "Tên Phòng", "Mã Hợp Đồng", "Loại Phòng", 
+        "Giá Thuê Tháng", "Trạng Thái", "Mô Tả"
+    });
 
     for (const auto& room : rooms) {
         QList<QStandardItem*> rowItems;
         rowItems.append(new QStandardItem(QString::number(room.getRoomId())));
+        rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomName())));
         rowItems.append(new QStandardItem(QString::number(room.getContractId())));
         rowItems.append(new QStandardItem(QString::number(room.getRoomType())));
         rowItems.append(new QStandardItem(QString::number(room.getMonthlyRent())));

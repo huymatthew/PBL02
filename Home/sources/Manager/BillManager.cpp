@@ -25,11 +25,11 @@ bool BillManager::loadFromDatabase() {
         double rent, total;
         if (!(iss >> id >> contractId >> month >> rent >> total >> due >> status)) {
             cerr << "Error reading line: " << line << endl;
-            continue; // Skip malformed lines
+            continue;
         }
         if (pk_manager.isKeyInUse(id)) {
             cerr << "Duplicate bill ID found: " << id << endl;
-            continue; // Skip duplicate IDs
+            continue; 
         }
         bills.emplace_back(id, contractId, month, rent, total, due, status);
         cout << "- Loaded bill ID: " << id << endl;
@@ -142,13 +142,15 @@ bool BillManager::markBillAsUnpaid(int billId) {
 QStandardItemModel* BillManager::getBillsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
     model->setColumnCount(7);
-    model->setHeaderData(0, Qt::Horizontal, "Bill ID");
-    model->setHeaderData(1, Qt::Horizontal, "Contract ID");
-    model->setHeaderData(2, Qt::Horizontal, "Billing Month");
-    model->setHeaderData(3, Qt::Horizontal, "Room Rent");
-    model->setHeaderData(4, Qt::Horizontal, "Total Amount");
-    model->setHeaderData(5, Qt::Horizontal, "Due Date");
-    model->setHeaderData(6, Qt::Horizontal, "Status");
+    model->setHorizontalHeaderLabels({
+        "Mã Hóa Đơn",
+        "Mã Hợp Đồng",
+        "Tháng Thanh Toán",
+        "Giá Thuê Phòng",
+        "Tổng Số Tiền",
+        "Ngày Đến Hạn",
+        "Trạng Thái"
+    });
 
     for (const auto& bill : bills) {
         QList<QStandardItem*> rowItems;

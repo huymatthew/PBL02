@@ -179,16 +179,10 @@ double ContractManager::getTotalDeposits() const {
 QStandardItemModel* ContractManager::getContractsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
     model->setColumnCount(10);
-    model->setHeaderData(0, Qt::Horizontal, "Contract ID");
-    model->setHeaderData(1, Qt::Horizontal, "Room ID");
-    model->setHeaderData(2, Qt::Horizontal, "Contract Number");
-    model->setHeaderData(3, Qt::Horizontal, "Start Date");
-    model->setHeaderData(4, Qt::Horizontal, "End Date");
-    model->setHeaderData(5, Qt::Horizontal, "Monthly Rent");
-    model->setHeaderData(6, Qt::Horizontal, "Deposit");
-    model->setHeaderData(7, Qt::Horizontal, "Status");
-    model->setHeaderData(8, Qt::Horizontal, "Signed Date");
-    model->setHeaderData(9, Qt::Horizontal, "Notes");
+    model->setHorizontalHeaderLabels({
+        "Mã Hợp Đồng", "Mã Phòng", "Số Hợp Đồng", "Ngày Bắt Đầu", "Ngày Kết Thúc",
+        "Giá Thuê Tháng", "Tiền Cọc", "Trạng Thái", "Ngày Ký", "Ghi Chú"
+    });
 
     for (const auto& contract : contracts) {
         QList<QStandardItem*> rowItems;

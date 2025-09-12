@@ -386,7 +386,7 @@ string TenantManager::formatIdentityCard(const string& identityCard) const {
 
 QStandardItemModel* TenantManager::getTenantsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
-    model->setHorizontalHeaderLabels({"Tenant ID", "Full Name", "Phone", "Identity Card", "Date of Birth", "Contract ID", "Is Main Tenant"});
+    model->setHorizontalHeaderLabels({"Mã Khách", "Họ Tên", "Số Điện Thoại", "CMND/CCCD", "Ngày Sinh"});
     
     for (const auto& tenant : tenants) {
         QList<QStandardItem*> row;
@@ -395,8 +395,6 @@ QStandardItemModel* TenantManager::getTenantsAsModel() const {
         row.append(new QStandardItem(QString::fromStdString(tenant.getPhone())));
         row.append(new QStandardItem(QString::fromStdString(tenant.getIdentityCard())));
         row.append(new QStandardItem(QString::fromStdString(tenant.getDateOfBirth())));
-        row.append(new QStandardItem(QString::number(tenant.getContractId())));
-        row.append(new QStandardItem(tenant.getIsMainTenant() ? "Yes" : "No"));
         model->appendRow(row);
     }
     return model;
