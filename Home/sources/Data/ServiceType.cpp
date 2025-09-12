@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// Dummy implementations for demonstration purposes
 ServiceType::ServiceType()
     : service_type(0), name(""), price(0.0) {}
 

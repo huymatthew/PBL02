@@ -25,11 +25,11 @@ bool TenantManager::loadFromDatabase() {
         string fullName, phone, identityCard, dateOfBirth;
         if (!(iss >> tenantId >> fullName >> phone >> identityCard >> dateOfBirth >> contractId >> isMainTenant)) {
             cerr << "Error reading line: " << line << endl;
-            continue; // Skip malformed lines
+            continue; 
         }
         if (pk_manager.isKeyInUse(tenantId)) {
             cerr << "Duplicate tenant ID found: " << tenantId << endl;
-            continue; // Skip duplicate IDs
+            continue; 
         }
         tenants.emplace_back(tenantId, fullName, phone, identityCard, dateOfBirth, contractId, isMainTenant);
         pk_manager.addKey(tenantId);

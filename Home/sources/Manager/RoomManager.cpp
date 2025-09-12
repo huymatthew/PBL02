@@ -19,19 +19,19 @@ bool RoomManager::loadFromDatabase() {
     string line;
     while (getline(file, line)) {
         istringstream iss(line);
-        string roomId, description;
-        int contractId, roomType, status;
+        string roomName, description;
+        int contractId, roomType, status, roomId;
         double monthlyRent;
-        if (!(iss >> roomId >> contractId >> roomType >> monthlyRent >> status)) {
+        if (!(iss >> roomId >> roomName >> contractId >> roomType >> monthlyRent >> status)) {
             cerr << "Error reading line: " << line << endl;
-            continue; // Skip malformed lines
+            continue; 
         }
-        getline(iss, description); // Read the rest of the line as description
+        getline(iss, description);
         if (pk_manager.isKeyInUse(roomId)) {
             cerr << "Duplicate room ID found: " << roomId << endl;
-            continue; // Skip duplicate IDs
+            continue; 
         }
-        rooms.emplace_back(roomId, contractId, roomType, monthlyRent, description, status);
+        rooms.emplace_back(roomId, roomName, contractId, roomType, monthlyRent, description, status);
         pk_manager.addKey(roomId);
         cout << "- Loaded room ID: " << roomId << endl;
     }
@@ -46,6 +46,7 @@ bool RoomManager::saveToDatabase() {
     }
     for (const auto& room : rooms) {
         file << room.getRoomId() << " "
+             << room.getRoomName() << " "
              << room.getContractId() << " "
              << room.getRoomType() << " "
              << room.getMonthlyRent() << " "
@@ -66,18 +67,18 @@ bool RoomManager::addRoom(const Room& room) {
     cout << "+ Added room ID: " << room.getRoomId() << endl;
     return true;
 }
-bool RoomManager::addRoom(const string& roomId, int contractId, int roomType, double monthlyRent, const string& description, int status) {
+bool RoomManager::addRoom(int roomId, const string &roomName, int contractId, int roomType, double monthlyRent, const string& description, int status) {
     if (pk_manager.isKeyInUse(roomId)) {
         cerr << "Room ID already in use: " << roomId << endl;
         return false;
     }
-    Room newRoom(roomId, contractId, roomType, monthlyRent, description, status);
+    Room newRoom(roomId, roomName, contractId, roomType, monthlyRent, description, status);
     rooms.push_back(newRoom);
     pk_manager.addKey(roomId);
     cout << "+ Added room ID: " << roomId << endl;
     return true;
 }
-bool RoomManager::removeRoom(const string& roomId) {
+bool RoomManager::removeRoom(int roomId) {
     auto it = findRoomIterator(roomId);
     if (it != rooms.end()) {
         pk_manager.releaseKey(roomId);
@@ -88,7 +89,7 @@ bool RoomManager::removeRoom(const string& roomId) {
     cerr << "Room not found for removal: " << roomId << endl;
     return false;
 }
-bool RoomManager::updateRoom(const string& roomId, const Room& updatedRoom) {
+bool RoomManager::updateRoom(int roomId, const Room& updatedRoom) {
     auto it = findRoomIterator(roomId);
     if (it != rooms.end()) {
         *it = updatedRoom;
@@ -99,7 +100,7 @@ bool RoomManager::updateRoom(const string& roomId, const Room& updatedRoom) {
     return false;
 }
 
-Room* RoomManager::getRoom(const string& roomId) {
+Room* RoomManager::getRoom(int roomId) {
     auto it = findRoomIterator(roomId);
     if (it != rooms.end()) {
         return &(*it);
@@ -136,7 +137,7 @@ vector<Room> RoomManager::getAllRooms() const {
     return rooms;
 }
 
-bool RoomManager::roomExists(const string& roomId) const {
+bool RoomManager::roomExists(int roomId) const {
     return pk_manager.isKeyInUse(roomId);
 }
 int RoomManager::getRoomCount() const {
@@ -161,7 +162,7 @@ int RoomManager::getOccupiedRoomCount() const {
     return count;
 }
 
-bool RoomManager::setRoomOccupied(const string& roomId, int contractId) {
+bool RoomManager::setRoomOccupied(int roomId, int contractId) {
     auto it = findRoomIterator(roomId);
     if (it != rooms.end()) {
         it->setStatus(1); // 1: occupied
@@ -172,7 +173,7 @@ bool RoomManager::setRoomOccupied(const string& roomId, int contractId) {
     cerr << "Room not found to set as occupied: " << roomId << endl;
     return false;
 }
-bool RoomManager::setRoomAvailable(const string& roomId) {
+bool RoomManager::setRoomAvailable(int roomId) {
     auto it = findRoomIterator(roomId);
     if (it != rooms.end()) {
         it->setStatus(0); // 0: available
@@ -183,11 +184,11 @@ bool RoomManager::setRoomAvailable(const string& roomId) {
     cerr << "Room not found to set as available: " << roomId << endl;
     return false;
 }
-bool RoomManager::isRoomAvailable(const string& roomId) {
+bool RoomManager::isRoomAvailable(int roomId) {
     auto it = findRoomIterator(roomId);
     return it != rooms.end() && it->getStatus() == 0;
 }
-bool RoomManager::isRoomOccupied(const string& roomId) {
+bool RoomManager::isRoomOccupied(int roomId) {
     auto it = findRoomIterator(roomId);
     return it != rooms.end() && it->getStatus() == 1;
 }
@@ -206,7 +207,7 @@ QStandardItemModel* RoomManager::getRoomsAsModel() const {
 
     for (const auto& room : rooms) {
         QList<QStandardItem*> rowItems;
-        rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomId())));
+        rowItems.append(new QStandardItem(QString::number(room.getRoomId())));
         rowItems.append(new QStandardItem(QString::number(room.getContractId())));
         rowItems.append(new QStandardItem(QString::number(room.getRoomType())));
         rowItems.append(new QStandardItem(QString::number(room.getMonthlyRent())));
@@ -217,7 +218,7 @@ QStandardItemModel* RoomManager::getRoomsAsModel() const {
     return model;
 }
 
-vector<Room>::iterator RoomManager::findRoomIterator(const string& roomId) {
+vector<Room>::iterator RoomManager::findRoomIterator(int roomId) {
     for (auto it = rooms.begin(); it != rooms.end(); ++it) {
         if (it->getRoomId() == roomId) {
             return it;

@@ -24,11 +24,11 @@ bool ServiceTypeManager::loadFromDatabase() {
         double price;
         if (!(iss >> serviceType >> name >> price)) {
             cerr << "Error reading line: " << line << endl;
-            continue; // Skip malformed lines
+            continue; 
         }
         if (pk_manager.isKeyInUse(serviceType)) {
             cerr << "Duplicate service type ID found: " << serviceType << endl;
-            continue; // Skip duplicate IDs
+            continue; 
         }
         serviceTypes.emplace_back(serviceType, name, price);
         pk_manager.addKey(serviceType);
@@ -167,7 +167,7 @@ double ServiceTypeManager::getServiceTypePrice(int serviceType) const {
             return serviceTypeObj.getPrice();
         }
     }
-    return -1.0; // Indicate not found
+    return -1.0; 
 }
 string ServiceTypeManager::getServiceTypeName(int serviceType) const {
     for (const auto& serviceTypeObj : serviceTypes) {
@@ -175,7 +175,7 @@ string ServiceTypeManager::getServiceTypeName(int serviceType) const {
             return serviceTypeObj.getName();
         }
     }
-    return ""; // Indicate not found
+    return ""; 
 }
 
 

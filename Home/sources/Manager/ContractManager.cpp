@@ -24,12 +24,12 @@ bool ContractManager::loadFromDatabase() {
         double rent, deposit;
         if (!(iss >> id >> roomId >> number >> start >> end >> rent >> deposit >> status >> signedDate)) {
             cerr << "Error reading line: " << line << endl;
-            continue; // Skip malformed lines
+            continue;
         }
-        getline(iss, notes); // Read the rest of the line as notes
+        getline(iss, notes);
         if (pk_manager.isKeyInUse(id)) {
             cerr << "Duplicate contract ID found: " << id << endl;
-            continue; // Skip duplicate IDs
+            continue; 
         }
         contracts.emplace_back(id, roomId, number, start, end, rent, deposit, status, signedDate, notes);
         cout << "- Loaded contract ID: " << id << endl;

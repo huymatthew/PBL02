@@ -8,8 +8,9 @@ using namespace std;
 
 class Room {
 private:
-    string room_id;
-    int contract_id;       // FK -> Contracts
+    int room_id;
+    string room_name;
+    int contract_id; 
     int room_type;
     double monthly_rent;
     string description;
@@ -18,15 +19,14 @@ private:
 public:
     Room();
     Room(const Room& other);
-    Room(const string& id, int contractId, int type,
+    Room(int id, const string& name, int contractId, int type,
          double rent, const string& desc, int status);
 
-    static vector<Room> loadFromDatabase();
-    static bool saveToDatabase(const vector<Room>& rooms);
+    int getRoomId() const;
+    void setRoomId(int id);
 
-    // Getter - Setter
-    string getRoomId() const;
-    void setRoomId(const string& id);
+    string getRoomName() const;
+    void setRoomName(const string& name);
 
     int getContractId() const;
     void setContractId(int contractId);

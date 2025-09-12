@@ -23,11 +23,11 @@ bool ServiceManager::loadFromDatabase() {
         double price;
         if (!(iss >> serviceID >> serviceType >> billID >> quantity >> price)) {
             cerr << "Error reading line: " << line << endl;
-            continue; // Skip malformed lines
+            continue;
         }
         if (pk_manager.isKeyInUse(serviceID)) {
             cerr << "Duplicate service ID found: " << serviceID << endl;
-            continue; // Skip duplicate IDs
+            continue; 
         }
         services.emplace_back(serviceID, serviceType, billID, quantity, price);
         pk_manager.addKey(serviceID);

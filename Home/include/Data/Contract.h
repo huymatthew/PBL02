@@ -8,7 +8,7 @@ using namespace std;
 class Contract {
 private:
     int contract_id;
-    string room_id; // FK -> Rooms
+    string room_id; 
     string contract_number;
     string start_date;
     string end_date;
@@ -25,7 +25,6 @@ public:
              double rent, double deposit, int status,
              const string& signedDate, const string& notes);
 
-    // Getter - Setter
     int getContractId() const;
     void setContractId(int id);
 

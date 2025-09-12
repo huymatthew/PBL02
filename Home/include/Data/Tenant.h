@@ -13,7 +13,7 @@ private:
     string phone;
     string identity_card;
     string date_of_birth; // ddmmyyyy
-    int contract_id;           // FK -> Contracts
+    int contract_id;       
     bool is_main_tenant;
 
 public:
@@ -27,7 +27,6 @@ public:
     static vector<Tenant> loadFromDatabase();
     static bool saveToDatabase(const vector<Tenant>& tenants);
 
-    // Getter - Setter
     int getTenantId() const;
     void setTenantId(int id);
 

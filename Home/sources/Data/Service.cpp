@@ -5,11 +5,9 @@
 
 using namespace std;
 
-// Default constructor
 Service::Service()
     : service_id(0), service_type(0), bill_id(0), quantity(0), price(0.0) {}
 
-// Copy constructor
 Service::Service(const Service& other)
     : service_id(other.service_id),
       service_type(other.service_type),
@@ -17,11 +15,9 @@ Service::Service(const Service& other)
       quantity(other.quantity),
       price(other.price) {}
 
-// Parameterized constructor
 Service::Service(int id, int type, int billId, int qty, double price)
     : service_id(id), service_type(type), bill_id(billId), quantity(qty), price(price) {}
 
-// Getter - Setter implementations
 int Service::getServiceId() const {
     return service_id;
 }

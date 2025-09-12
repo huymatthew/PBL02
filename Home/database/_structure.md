@@ -41,13 +41,14 @@
 
 ## Room
 
-|Room_ID|Contract_ID|Room_Type|Monthly_Rent|Description|Status|
-|-------|-----------|---------|------------|-----------|------|
-|string |int        |int      |double      |string     |int   |
+|Room_ID|RoomName|Contract_ID|Room_Type|Monthly_Rent|Description|Status|
+|-------|--------|-----------|---------|------------|-----------|------|
+|int    |string  |int        |int      |double      |string     |int   |
 
 **Description:**
 
 - Room_ID: Primary Key
+- RoomName: String
 - Contract_ID: Foreign Key -> Contract
 - Room_Type: Loại phòng
 - Monthly_Rent: Tiền thuê hàng tháng

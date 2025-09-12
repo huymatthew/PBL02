@@ -9,7 +9,7 @@ using namespace std;
 class Bill {
 private:
     int bill_id;
-    int contract_id;    // FK -> Contracts
+    int contract_id;   
     string billing_month;
     double room_rent;
     double total_amount;
@@ -21,7 +21,6 @@ public:
     Bill(int id, int contractId, const string& month,
          double rent, double total, const string& due, int status);
 
-    // Getter - Setter
     int getBillId() const;
     void setBillId(int id);
 

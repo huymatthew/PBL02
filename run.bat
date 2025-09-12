@@ -1,4 +1,4 @@
-g++ main.cpp -o bin/main.exe Home/sources/QuanLy.cpp Home/sources/Data/*.cpp Home/sources/Manager/*.cpp^
+g++ main.cpp -o bin/main.exe Home/sources/QuanLy.cpp Home/sources/Data/*.cpp Home/sources/Manager/*.cpp Home/sources/Core/*.cpp^
  -I include ^
  -I include\QtWidgets ^
  -I include\QtCore ^

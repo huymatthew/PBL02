@@ -2,27 +2,25 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+using namespace std;
 
-// Default constructor
 Room::Room()
-    : room_id(""), contract_id(0), room_type(0),
+    : room_id(0), room_name(""), contract_id(0), room_type(0),
       monthly_rent(0.0), description(""), status(0) {}
-
-// Copy constructor
 Room::Room(const Room& other)
-    : room_id(other.room_id), contract_id(other.contract_id),
+    : room_id(other.room_id), room_name(other.room_name), contract_id(other.contract_id),
       room_type(other.room_type), monthly_rent(other.monthly_rent),
       description(other.description), status(other.status) {}
-
-// Parameterized constructor
-Room::Room(const string& id, int contractId, int type,
-           double rent, const string& desc, int status)
-    : room_id(id), contract_id(contractId), room_type(type),
+Room::Room(int id, const string& name, int contractId, int type,
+         double rent, const string& desc, int status)
+    : room_id(id), room_name(name), contract_id(contractId), room_type(type),
       monthly_rent(rent), description(desc), status(status) {}
 
-// Getter - Setter implementations
-string Room::getRoomId() const { return room_id; }
-void Room::setRoomId(const string& id) { room_id = id; }
+int Room::getRoomId() const { return room_id; }
+void Room::setRoomId(int id) { room_id = id; }
+
+string Room::getRoomName() const { return room_name; }
+void Room::setRoomName(const string& name) { room_name = name; }
 
 int Room::getContractId() const { return contract_id; }
 void Room::setContractId(int contractId) { contract_id = contractId; }

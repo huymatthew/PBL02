@@ -10,7 +10,7 @@ class Service {
 private:
     int service_id;
     int service_type; // enum: 0 = Điện, 1 = Nước, 2 = Internet, ...
-    int bill_id;      // FK -> Bill
+    int bill_id;    
     int quantity;
     double price;
 
@@ -22,7 +22,6 @@ public:
     static vector<Service> loadFromDatabase();
     static bool saveToDatabase(const vector<Service>& services);
 
-    // Getter - Setter
     int getServiceId() const;
     void setServiceId(int id);
 

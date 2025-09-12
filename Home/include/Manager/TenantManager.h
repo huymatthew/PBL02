@@ -19,11 +19,9 @@ public:
     TenantManager();
     ~TenantManager();
 
-    // Database operations
     bool loadFromDatabase();
     bool saveToDatabase();
     
-    // CRUD operations
     bool addTenant(const Tenant& tenant);
     bool addTenant(const string& fullName, const string& phone,
                   const string& identityCard, const string& dateOfBirth,
@@ -31,7 +29,6 @@ public:
     bool removeTenant(int tenantId);
     bool updateTenant(int tenantId, const Tenant& updatedTenant);
     
-    // Query operations
     Tenant* getTenant(int tenantId);
     Tenant* getTenantByIdentityCard(const string& identityCard);
     Tenant* getTenantByPhone(const string& phone);
@@ -39,28 +36,23 @@ public:
     Tenant* getMainTenant(int contractId);
     vector<Tenant> getAllTenants() const;
     
-    // Utility operations
     bool tenantExists(int tenantId) const;
     bool identityCardExists(const string& identityCard) const;
     bool phoneExists(const string& phone) const;
     int getTenantCount() const;
     int getTenantCountByContract(int contractId) const;
     
-    // Main tenant management
     bool setMainTenant(int tenantId, int contractId);
     bool hasMainTenant(int contractId) const;
     vector<Tenant> getSubTenants(int contractId);
     
-    // Search operations
     vector<Tenant> searchTenants(const string& keyword);
     vector<Tenant> searchTenantsByName(const string& name);
     vector<Tenant> searchTenantsByPhone(const string& phone);
     
-    // Contract management
     bool moveTenantsToContract(const vector<int>& tenantIds, int newContractId);
     bool removeTenantsFromContract(int contractId);
         
-    // Validation operations
     bool isValidIdentityCard(const string& identityCard) const;
     bool isValidPhone(const string& phone) const;
     bool isValidDateOfBirth(const string& dateOfBirth) const;
@@ -70,9 +62,8 @@ public:
 private:
     vector<Tenant> tenants;
     bool data_loaded;
-    PrimaryKey<int> pk_manager;
+    PrimaryKey pk_manager;
     
-    // Helper methods
     vector<Tenant>::iterator findTenantIterator(int tenantId);
     void sortTenantsById();
     string formatPhone(const string& phone) const;

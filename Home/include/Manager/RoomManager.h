@@ -19,66 +19,51 @@ public:
     RoomManager();
     ~RoomManager();
 
-    // Database operations
     bool loadFromDatabase();
     bool saveToDatabase();
     
-    // CRUD operations
     bool addRoom(const Room& room);
-    bool addRoom(const string& roomId, int contractId, int roomType,
+    bool addRoom(int roomId,const string& roomName, int contractId, int roomType,
                 double monthlyRent, const string& description, int status);
-    bool removeRoom(const string& roomId);
-    bool updateRoom(const string& roomId, const Room& updatedRoom);
+    bool removeRoom(int roomId);
+    bool updateRoom(int roomId, const Room& updatedRoom);
     
-    // Query operations
-    Room* getRoom(const string& roomId);
+    Room* getRoom(int roomId);
     Room* getRoomByContract(int contractId);
     vector<Room> getRoomsByType(int roomType);
     vector<Room> getRoomsByStatus(int status);
     vector<Room> getAllRooms() const;
     
-    // Utility operations
-    bool roomExists(const string& roomId) const;
+    bool roomExists(int roomId) const;
     int getRoomCount() const;
     int getAvailableRoomCount() const;
     int getOccupiedRoomCount() const;
     
     // Status management
-    bool setRoomOccupied(const string& roomId, int contractId);
-    bool setRoomAvailable(const string& roomId);
-    bool isRoomAvailable(const string& roomId);
-    bool isRoomOccupied(const string& roomId);
+    bool setRoomOccupied(int roomId, int contractId);
+    bool setRoomAvailable(int roomId);
+    bool isRoomAvailable(int roomId);
+    bool isRoomOccupied(int roomId);
     
-    // Type management
     vector<Room> getAvailableRooms() const;
     vector<Room> getOccupiedRooms() const;
     vector<Room> getRoomsByPriceRange(double minPrice, double maxPrice) const;
     
-    // Search operations
-    vector<Room> searchRooms(const string& keyword);
-    vector<Room> searchRoomsByDescription(const string& keyword);
-    
-    // Financial operations
     double getTotalRentRevenue() const;
     double getAverageRoomRent() const;
     double getMinRoomRent() const;
     double getMaxRoomRent() const;
-    
-    // Sorting operations
-    vector<Room> getRoomsSortedByRent(bool ascending = true) const;
-    vector<Room> getRoomsSortedById() const;
 
     QStandardItemModel* getRoomsAsModel() const;
     
 private:
     vector<Room> rooms;
     bool data_loaded;
-    PrimaryKey<string> pk_manager;
+    PrimaryKey pk_manager;
     
-    // Helper methods
-    vector<Room>::iterator findRoomIterator(const string& roomId);
+    vector<Room>::iterator findRoomIterator(int roomId);
     void sortRoomsById();
-    bool isValidRoomId(const string& roomId) const;
+    bool isValidRoomId(int roomId) const;
 };
 
 #endif // ROOM_MANAGER_H
