@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include <Dialogs/AddTenantDiag.h>
+#include <Dialogs/AddRoomDiag.h>
 
 #include <QStandardItem>
 #include <QStandardItemModel>
@@ -33,14 +34,19 @@ void QuanLy::signalAndSlotConnect() {
     QObject::connect(actionQuickAddTenant, &QAction::triggered, [this]() {
         AddTenantDiag addTenantDialog(mainWindow, tenantManager);
         addTenantDialog.exec();
-        cout << addTenantDialog.result() << endl;
         loadTenantView();
     });
+    QObject::connect(actionQuickAddRoom, &QAction::triggered, [this]() {
+        AddRoomDiag addRoomDialog(mainWindow, roomManager);
+        addRoomDialog.exec();
+        loadRoomView();
+    });
+
 }
 void QuanLy::onChangedTabActive(int index) {
     switch (index) {
         case 0:
-            roomsTableView->setModel(roomManager.getRoomsAsModel());
+            loadRoomView();
             break;
         case 1:
             loadTenantView();
@@ -100,5 +106,8 @@ void QuanLy::loadTenantView() {
     for (const auto& room : roomManager.getAllRooms()) {
         tenantRoomComboBox->addItem(QString::fromStdString(room.getRoomName()), QVariant::fromValue(room.getRoomId()));
     }
+}
+void QuanLy::loadRoomView() {
+    roomsTableView->setModel(roomManager.getRoomsAsModel());
 }
 

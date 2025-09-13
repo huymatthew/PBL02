@@ -14,14 +14,13 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGroupBox>
-#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPlainTextEdit>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 
@@ -37,14 +36,8 @@ public:
     QLineEdit *lineEditRoomNumber;
     QLabel *labelRoomType;
     QComboBox *comboBoxRoomType;
-    QLabel *labelArea;
-    QDoubleSpinBox *doubleSpinBoxArea;
-    QGroupBox *groupBoxPricing;
-    QFormLayout *formLayout_2;
-    QLabel *labelRentPrice;
     QDoubleSpinBox *doubleSpinBoxRentPrice;
-    QLabel *labelDeposit;
-    QDoubleSpinBox *doubleSpinBoxDeposit;
+    QLabel *labelRentPrice;
     QGroupBox *groupBoxStatus;
     QVBoxLayout *verticalLayout_2;
     QFormLayout *formLayout_3;
@@ -53,16 +46,13 @@ public:
     QLabel *labelDescription;
     QPlainTextEdit *plainTextEditDescription;
     QSpacerItem *verticalSpacer;
-    QHBoxLayout *horizontalLayoutButtons;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *buttonSave;
-    QPushButton *buttonCancel;
+    QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *AddRoomDialog)
     {
         if (AddRoomDialog->objectName().isEmpty())
             AddRoomDialog->setObjectName(QString::fromUtf8("AddRoomDialog"));
-        AddRoomDialog->resize(500, 836);
+        AddRoomDialog->resize(500, 658);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/room-add.png"), QSize(), QIcon::Normal, QIcon::Off);
         AddRoomDialog->setWindowIcon(icon);
@@ -272,38 +262,7 @@ public:
 
         formLayout->setWidget(1, QFormLayout::FieldRole, comboBoxRoomType);
 
-        labelArea = new QLabel(groupBoxRoomInfo);
-        labelArea->setObjectName(QString::fromUtf8("labelArea"));
-
-        formLayout->setWidget(2, QFormLayout::LabelRole, labelArea);
-
-        doubleSpinBoxArea = new QDoubleSpinBox(groupBoxRoomInfo);
-        doubleSpinBoxArea->setObjectName(QString::fromUtf8("doubleSpinBoxArea"));
-        doubleSpinBoxArea->setDecimals(1);
-        doubleSpinBoxArea->setMinimum(5.000000000000000);
-        doubleSpinBoxArea->setMaximum(200.000000000000000);
-        doubleSpinBoxArea->setSingleStep(0.500000000000000);
-        doubleSpinBoxArea->setValue(20.000000000000000);
-
-        formLayout->setWidget(2, QFormLayout::FieldRole, doubleSpinBoxArea);
-
-
-        verticalLayout->addWidget(groupBoxRoomInfo);
-
-        groupBoxPricing = new QGroupBox(AddRoomDialog);
-        groupBoxPricing->setObjectName(QString::fromUtf8("groupBoxPricing"));
-        formLayout_2 = new QFormLayout(groupBoxPricing);
-        formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
-        formLayout_2->setHorizontalSpacing(15);
-        formLayout_2->setVerticalSpacing(12);
-        formLayout_2->setContentsMargins(15, 15, 15, 15);
-        labelRentPrice = new QLabel(groupBoxPricing);
-        labelRentPrice->setObjectName(QString::fromUtf8("labelRentPrice"));
-        labelRentPrice->setProperty("required", QVariant(true));
-
-        formLayout_2->setWidget(0, QFormLayout::LabelRole, labelRentPrice);
-
-        doubleSpinBoxRentPrice = new QDoubleSpinBox(groupBoxPricing);
+        doubleSpinBoxRentPrice = new QDoubleSpinBox(groupBoxRoomInfo);
         doubleSpinBoxRentPrice->setObjectName(QString::fromUtf8("doubleSpinBoxRentPrice"));
         doubleSpinBoxRentPrice->setDecimals(0);
         doubleSpinBoxRentPrice->setMinimum(100000.000000000000000);
@@ -311,25 +270,16 @@ public:
         doubleSpinBoxRentPrice->setSingleStep(50000.000000000000000);
         doubleSpinBoxRentPrice->setValue(1000000.000000000000000);
 
-        formLayout_2->setWidget(0, QFormLayout::FieldRole, doubleSpinBoxRentPrice);
+        formLayout->setWidget(2, QFormLayout::FieldRole, doubleSpinBoxRentPrice);
 
-        labelDeposit = new QLabel(groupBoxPricing);
-        labelDeposit->setObjectName(QString::fromUtf8("labelDeposit"));
+        labelRentPrice = new QLabel(groupBoxRoomInfo);
+        labelRentPrice->setObjectName(QString::fromUtf8("labelRentPrice"));
+        labelRentPrice->setProperty("required", QVariant(true));
 
-        formLayout_2->setWidget(1, QFormLayout::LabelRole, labelDeposit);
-
-        doubleSpinBoxDeposit = new QDoubleSpinBox(groupBoxPricing);
-        doubleSpinBoxDeposit->setObjectName(QString::fromUtf8("doubleSpinBoxDeposit"));
-        doubleSpinBoxDeposit->setDecimals(0);
-        doubleSpinBoxDeposit->setMinimum(0.000000000000000);
-        doubleSpinBoxDeposit->setMaximum(50000000.000000000000000);
-        doubleSpinBoxDeposit->setSingleStep(50000.000000000000000);
-        doubleSpinBoxDeposit->setValue(1000000.000000000000000);
-
-        formLayout_2->setWidget(1, QFormLayout::FieldRole, doubleSpinBoxDeposit);
+        formLayout->setWidget(2, QFormLayout::LabelRole, labelRentPrice);
 
 
-        verticalLayout->addWidget(groupBoxPricing);
+        verticalLayout->addWidget(groupBoxRoomInfo);
 
         groupBoxStatus = new QGroupBox(AddRoomDialog);
         groupBoxStatus->setObjectName(QString::fromUtf8("groupBoxStatus"));
@@ -375,46 +325,17 @@ public:
 
         verticalLayout->addItem(verticalSpacer);
 
-        horizontalLayoutButtons = new QHBoxLayout();
-        horizontalLayoutButtons->setSpacing(15);
-        horizontalLayoutButtons->setObjectName(QString::fromUtf8("horizontalLayoutButtons"));
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        buttonBox = new QDialogButtonBox(AddRoomDialog);
+        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
-        horizontalLayoutButtons->addItem(horizontalSpacer);
-
-        buttonSave = new QPushButton(AddRoomDialog);
-        buttonSave->setObjectName(QString::fromUtf8("buttonSave"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/icons/save.png"), QSize(), QIcon::Normal, QIcon::Off);
-        buttonSave->setIcon(icon1);
-
-        horizontalLayoutButtons->addWidget(buttonSave);
-
-        buttonCancel = new QPushButton(AddRoomDialog);
-        buttonCancel->setObjectName(QString::fromUtf8("buttonCancel"));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/icons/cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
-        buttonCancel->setIcon(icon2);
-
-        horizontalLayoutButtons->addWidget(buttonCancel);
-
-
-        verticalLayout->addLayout(horizontalLayoutButtons);
+        verticalLayout->addWidget(buttonBox);
 
         QWidget::setTabOrder(lineEditRoomNumber, comboBoxRoomType);
-        QWidget::setTabOrder(comboBoxRoomType, doubleSpinBoxArea);
-        QWidget::setTabOrder(doubleSpinBoxArea, doubleSpinBoxRentPrice);
-        QWidget::setTabOrder(doubleSpinBoxRentPrice, doubleSpinBoxDeposit);
-        QWidget::setTabOrder(doubleSpinBoxDeposit, comboBoxStatus);
+        QWidget::setTabOrder(comboBoxRoomType, comboBoxStatus);
         QWidget::setTabOrder(comboBoxStatus, plainTextEditDescription);
-        QWidget::setTabOrder(plainTextEditDescription, buttonSave);
-        QWidget::setTabOrder(buttonSave, buttonCancel);
 
         retranslateUi(AddRoomDialog);
-        QObject::connect(buttonCancel, SIGNAL(clicked()), AddRoomDialog, SLOT(reject()));
-
-        buttonSave->setDefault(true);
-
 
         QMetaObject::connectSlotsByName(AddRoomDialog);
     } // setupUi
@@ -433,13 +354,8 @@ public:
         comboBoxRoomType->setItemText(4, QCoreApplication::translate("AddRoomDialog", "Ph\303\262ng gia \304\221\303\254nh", nullptr));
         comboBoxRoomType->setItemText(5, QCoreApplication::translate("AddRoomDialog", "Studio", nullptr));
 
-        labelArea->setText(QCoreApplication::translate("AddRoomDialog", "Di\341\273\207n T\303\255ch:", nullptr));
-        doubleSpinBoxArea->setSuffix(QCoreApplication::translate("AddRoomDialog", " m\302\262", nullptr));
-        groupBoxPricing->setTitle(QCoreApplication::translate("AddRoomDialog", "Th\303\264ng Tin Gi\303\241 C\341\272\243", nullptr));
-        labelRentPrice->setText(QCoreApplication::translate("AddRoomDialog", "Gi\303\241 Thu\303\252:", nullptr));
         doubleSpinBoxRentPrice->setSuffix(QCoreApplication::translate("AddRoomDialog", " VN\304\220", nullptr));
-        labelDeposit->setText(QCoreApplication::translate("AddRoomDialog", "Ti\341\273\201n C\341\273\215c:", nullptr));
-        doubleSpinBoxDeposit->setSuffix(QCoreApplication::translate("AddRoomDialog", " VN\304\220", nullptr));
+        labelRentPrice->setText(QCoreApplication::translate("AddRoomDialog", "Gi\303\241 Thu\303\252:", nullptr));
         groupBoxStatus->setTitle(QCoreApplication::translate("AddRoomDialog", "Tr\341\272\241ng Th\303\241i - M\303\264 T\341\272\243", nullptr));
         labelStatus->setText(QCoreApplication::translate("AddRoomDialog", "Tr\341\272\241ng Th\303\241i:", nullptr));
         comboBoxStatus->setItemText(0, QCoreApplication::translate("AddRoomDialog", "Tr\341\273\221ng", nullptr));
@@ -449,8 +365,6 @@ public:
 
         labelDescription->setText(QCoreApplication::translate("AddRoomDialog", "M\303\264 T\341\272\243:", nullptr));
         plainTextEditDescription->setPlaceholderText(QCoreApplication::translate("AddRoomDialog", "Nh\341\272\255p m\303\264 t\341\272\243 v\341\273\201 ph\303\262ng: n\341\273\231i th\341\272\245t, ti\341\273\207n nghi, ghi ch\303\272...", nullptr));
-        buttonSave->setText(QCoreApplication::translate("AddRoomDialog", "L\306\260u", nullptr));
-        buttonCancel->setText(QCoreApplication::translate("AddRoomDialog", "H\341\273\247y", nullptr));
     } // retranslateUi
 
 };

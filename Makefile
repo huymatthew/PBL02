@@ -41,4 +41,4 @@ clean:
 
 # Chạy chương trình (sau khi build)
 run: $(TARGET)
-	./$(TARGET)
+	bin\main.exe

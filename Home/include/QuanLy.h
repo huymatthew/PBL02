@@ -32,6 +32,7 @@ public:
     void onShowRoomDetails(int roomId);
 
     void loadTenantView();
+    void loadRoomView();
 private:
     BillManager billManager;
     ContractManager contractManager;

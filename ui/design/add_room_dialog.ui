@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>836</height>
+    <height>658</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -288,73 +288,7 @@ QLabel[required=&quot;true&quot;]:after {
         </item>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="labelArea">
-        <property name="text">
-         <string>Diện Tích:</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBoxArea">
-        <property name="suffix">
-         <string> m²</string>
-        </property>
-        <property name="decimals">
-         <number>1</number>
-        </property>
-        <property name="minimum">
-         <double>5.000000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>200.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>0.500000000000000</double>
-        </property>
-        <property name="value">
-         <double>20.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBoxPricing">
-     <property name="title">
-      <string>Thông Tin Giá Cả</string>
-     </property>
-     <layout class="QFormLayout" name="formLayout_2">
-      <property name="horizontalSpacing">
-       <number>15</number>
-      </property>
-      <property name="verticalSpacing">
-       <number>12</number>
-      </property>
-      <property name="leftMargin">
-       <number>15</number>
-      </property>
-      <property name="topMargin">
-       <number>15</number>
-      </property>
-      <property name="rightMargin">
-       <number>15</number>
-      </property>
-      <property name="bottomMargin">
-       <number>15</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="labelRentPrice">
-        <property name="text">
-         <string>Giá Thuê:</string>
-        </property>
-        <property name="required" stdset="0">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
        <widget class="QDoubleSpinBox" name="doubleSpinBoxRentPrice">
         <property name="suffix">
          <string> VNĐ</string>
@@ -376,32 +310,13 @@ QLabel[required=&quot;true&quot;]:after {
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="labelDeposit">
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelRentPrice">
         <property name="text">
-         <string>Tiền Cọc:</string>
+         <string>Giá Thuê:</string>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBoxDeposit">
-        <property name="suffix">
-         <string> VNĐ</string>
-        </property>
-        <property name="decimals">
-         <number>0</number>
-        </property>
-        <property name="minimum">
-         <double>0.000000000000000</double>
-        </property>
-        <property name="maximum">
-         <double>50000000.000000000000000</double>
-        </property>
-        <property name="singleStep">
-         <double>50000.000000000000000</double>
-        </property>
-        <property name="value">
-         <double>1000000.000000000000000</double>
+        <property name="required" stdset="0">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -501,80 +416,20 @@ QLabel[required=&quot;true&quot;]:after {
     </spacer>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayoutButtons">
-     <property name="spacing">
-      <number>15</number>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonSave">
-       <property name="text">
-        <string>Lưu</string>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonCancel">
-       <property name="text">
-        <string>Hủy</string>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>:/icons/cancel.png</normaloff>:/icons/cancel.png</iconset>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    </widget>
    </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>lineEditRoomNumber</tabstop>
   <tabstop>comboBoxRoomType</tabstop>
-  <tabstop>doubleSpinBoxArea</tabstop>
-  <tabstop>doubleSpinBoxRentPrice</tabstop>
-  <tabstop>doubleSpinBoxDeposit</tabstop>
   <tabstop>comboBoxStatus</tabstop>
   <tabstop>plainTextEditDescription</tabstop>
-  <tabstop>buttonSave</tabstop>
-  <tabstop>buttonCancel</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>AddRoomDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>425</x>
-     <y>565</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>249</x>
-     <y>299</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

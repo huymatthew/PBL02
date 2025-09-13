@@ -23,7 +23,7 @@ public:
     bool saveToDatabase();
     
     bool addRoom(const Room& room);
-    bool addRoom(int roomId,const string& roomName, int contractId, int roomType,
+    bool addRoom(const string& roomName, int contractId, int roomType,
                 double monthlyRent, const string& description, int status);
     bool removeRoom(int roomId);
     bool updateRoom(int roomId, const Room& updatedRoom);
