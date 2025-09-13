@@ -347,7 +347,7 @@ QStatusBar QLabel {
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -411,7 +411,7 @@ QStatusBar QLabel {
              <item row="0" column="0">
               <widget class="QLabel" name="roomNumberLabel">
                <property name="text">
-                <string>Số Phòng:</string>
+                <string>Tên Phòng</string>
                </property>
               </widget>
              </item>
@@ -456,7 +456,7 @@ QStatusBar QLabel {
              <item row="2" column="0">
               <widget class="QLabel" name="roomPriceLabel">
                <property name="text">
-                <string>Giá Phòng:</string>
+                <string>Giá Phòng Gốc:</string>
                </property>
               </widget>
              </item>

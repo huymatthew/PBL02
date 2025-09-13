@@ -51,7 +51,7 @@ bool RoomManager::saveToDatabase() {
              << room.getContractId() << " "
              << room.getRoomType() << " "
              << room.getMonthlyRent() << " "
-             << room.getStatus() << " "
+             << room.getStatus()
              << room.getDescription() << endl;
         cout << "~ Saved room ID: " << room.getRoomId() << endl;
     }

@@ -29,6 +29,9 @@ public:
 
     void onChangedTabActive(int index);
     void onShowTenantDetails(int tenantId);
+    void onShowRoomDetails(int roomId);
+
+    void loadTenantView();
 private:
     BillManager billManager;
     ContractManager contractManager;

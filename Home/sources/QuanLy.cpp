@@ -1,6 +1,8 @@
 #include <QuanLy.h>
 #include <iostream>
 
+#include <Dialogs/AddTenantDiag.h>
+
 #include <QStandardItem>
 #include <QStandardItemModel>
 #include <QDebug>
@@ -21,12 +23,18 @@ QuanLy::~QuanLy() {
 
 void QuanLy::signalAndSlotConnect() {
     QObject::connect(mainTabWidget, &QTabWidget::currentChanged,
-                        [this](int index) {
-                            this->onChangedTabActive(index);
-                        });
-
+                        [this](int index) {this->onChangedTabActive(index);});
     QObject::connect(tenantsTableView, &QTableView::doubleClicked, [this](const QModelIndex &index){
         onShowTenantDetails(index.siblingAtColumn(0).data().toInt());
+    });
+    QObject::connect(roomsTableView, &QTableView::doubleClicked, [this](const QModelIndex &index){
+        onShowRoomDetails(index.siblingAtColumn(0).data().toInt());
+    });
+    QObject::connect(actionQuickAddTenant, &QAction::triggered, [this]() {
+        AddTenantDiag addTenantDialog(mainWindow, tenantManager);
+        addTenantDialog.exec();
+        cout << addTenantDialog.result() << endl;
+        loadTenantView();
     });
 }
 void QuanLy::onChangedTabActive(int index) {
@@ -35,7 +43,7 @@ void QuanLy::onChangedTabActive(int index) {
             roomsTableView->setModel(roomManager.getRoomsAsModel());
             break;
         case 1:
-            tenantsTableView->setModel(tenantManager.getTenantsAsModel());
+            loadTenantView();
             break;
         case 2:
             contractsTableView->setModel(contractManager.getContractsAsModel());
@@ -59,5 +67,38 @@ void QuanLy::onShowTenantDetails(int tenantId) {
     tenantIdEdit->setText(QString::fromStdString(to_string(tenant->getTenantId())));
     tenantPhoneEdit->setText(QString::fromStdString(tenant->getPhone()));
     dateOfBirth->setDate(QDate::fromString(QString::fromStdString(tenant->getDateOfBirth()), "yyyy-MM-dd"));
+
+    int contractId = tenant->getContractId();
+    Contract* contract = contractManager.getContract(contractId);
+    if (!contract) {
+        cerr << "Contract ID " << contractId << " for tenant ID " << tenantId << " not found." << endl;
+        return;
+    }
+    int index = tenantRoomComboBox->findData(contract->getRoomId().c_str());
+    if (index != -1) {
+        tenantRoomComboBox->setCurrentIndex(index);
+    } else {
+        tenantRoomComboBox->setCurrentIndex(0);
+    }
+}
+void QuanLy::onShowRoomDetails(int roomId) {
+    Room* room = roomManager.getRoom(roomId);
+    if (!room) {
+        cerr << "Room ID " << roomId << " not found." << endl;
+        return;
+    }
+    roomNumberEdit->setText(QString::fromStdString(room->getRoomName()));
+    roomDescEdit->setText(QString::fromStdString(room->getDescription()));
+    roomPriceSpinBox->setValue(room->getMonthlyRent());
+
+    roomTypeComboBox->setCurrentIndex(room->getRoomType());
+    roomStatusComboBox->setCurrentIndex(room->getStatus());
+}
+void QuanLy::loadTenantView() {
+    tenantsTableView->setModel(tenantManager.getTenantsAsModel());
+    tenantRoomComboBox->clear();
+    for (const auto& room : roomManager.getAllRooms()) {
+        tenantRoomComboBox->addItem(QString::fromStdString(room.getRoomName()), QVariant::fromValue(room.getRoomId()));
+    }
 }
 

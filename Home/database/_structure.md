@@ -39,9 +39,9 @@
 
 ## Room
 
-|Room_ID|RoomName|Contract_ID|Room_Type|Monthly_Rent|Description|Status|
-|-------|--------|-----------|---------|------------|-----------|------|
-|int    |string  |int        |int      |double      |string     |int   |
+|Room_ID|RoomName|Contract_ID|Room_Type|Monthly_Rent|Status|Description|
+|-------|--------|-----------|---------|------------|------|-----------|
+|int    |string  |int        |int      |double      |int   |string     |
 
 **Description:**
 

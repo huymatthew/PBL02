@@ -6,5 +6,5 @@
 using namespace std;
 
 QString moneyFormat(double amount);
-
+string formatDate(const QString& date);
 #endif // EXTRA_FORMAT_H

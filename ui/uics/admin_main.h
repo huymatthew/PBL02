@@ -1342,7 +1342,7 @@ public:
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(3);
+        mainTabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);
@@ -1493,7 +1493,7 @@ public:
         actionBackup->setShortcut(QCoreApplication::translate("AdminMainWindow", "Ctrl+B", nullptr));
 #endif // QT_CONFIG(shortcut)
         roomInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Ph\303\262ng", nullptr));
-        roomNumberLabel->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\221 Ph\303\262ng:", nullptr));
+        roomNumberLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\303\252n Ph\303\262ng", nullptr));
         roomNumberEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p s\341\273\221 ph\303\262ng...", nullptr));
         roomTypeLabel->setText(QCoreApplication::translate("AdminMainWindow", "Lo\341\272\241i Ph\303\262ng:", nullptr));
         roomTypeComboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng \304\221\306\241n", nullptr));
@@ -1501,7 +1501,7 @@ public:
         roomTypeComboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng gia \304\221\303\254nh", nullptr));
         roomTypeComboBox->setItemText(3, QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng VIP", nullptr));
 
-        roomPriceLabel->setText(QCoreApplication::translate("AdminMainWindow", "Gi\303\241 Ph\303\262ng:", nullptr));
+        roomPriceLabel->setText(QCoreApplication::translate("AdminMainWindow", "Gi\303\241 Ph\303\262ng G\341\273\221c:", nullptr));
         roomPriceSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
         roomStatusLabel->setText(QCoreApplication::translate("AdminMainWindow", "Tr\341\272\241ng Th\303\241i:", nullptr));
         roomStatusComboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "Tr\341\273\221ng", nullptr));

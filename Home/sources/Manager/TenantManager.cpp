@@ -89,9 +89,7 @@ bool TenantManager::addTenant(const Tenant& tenant) {
     cout << "+ Added tenant ID: " << tenant.getTenantId() << endl;
     return true;
 }
-bool TenantManager::addTenant(const string& fullName, const string& phone,
-                              const string& identityCard, const string& dateOfBirth,
-                              int contractId, bool isMainTenant) {
+bool TenantManager::addTenant(const string& fullName, const string& phone, const string& identityCard, const string& dateOfBirth, int contractId, bool isMainTenant) {
     int newTenantId = pk_manager.getNextKey();
     if (identityCardExists(identityCard)) {
         cerr << "Identity card already exists: " << identityCard << endl;
@@ -120,6 +118,7 @@ bool TenantManager::addTenant(const string& fullName, const string& phone,
     cout << "+ Added tenant ID: " << newTenantId << endl;
     return true;
 }
+
 bool TenantManager::removeTenant(int tenantId) {
     auto it = findTenantIterator(tenantId);
     if (it != tenants.end()) {
@@ -334,17 +333,18 @@ bool TenantManager::isValidPhone(const string& phone) const {
     return true;
 }
 bool TenantManager::isValidDateOfBirth(const string& dateOfBirth) const {
-    if (dateOfBirth.length() != 8) {
+    // yyyy-mm-dd
+    if (dateOfBirth.length() != 10 || dateOfBirth[4] != '-' || dateOfBirth[7] != '-') {
         return false;
     }
     for (char c : dateOfBirth) {
-        if (!isdigit(c)) {
+        if (!isdigit(c) && c != '-') {
             return false;
         }
     }
-    int day = stoi(dateOfBirth.substr(0, 2));
-    int month = stoi(dateOfBirth.substr(2, 2));
-    int year = stoi(dateOfBirth.substr(4, 4));
+    int year = stoi(dateOfBirth.substr(0, 4));
+    int month = stoi(dateOfBirth.substr(5, 2));
+    int day = stoi(dateOfBirth.substr(8, 2));
     if (month < 1 || month > 12 || day < 1) {
         return false;
     }

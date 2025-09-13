@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddRoomDialog</class>
+ <widget class="QDialog" name="AddRoomDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>836</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Thêm Phòng Mới</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/icons/room-add.png</normaloff>:/icons/room-add.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Dialog Styling */
+QDialog {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+/* Group Box Styling */
+QGroupBox {
+    font-weight: bold;
+    font-size: 14px;
+    color: #495057;
+    border: 2px solid #ced4da;
+    border-radius: 10px;
+    margin-top: 1.5ex;
+    padding-top: 10px;
+    background-color: white;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 15px;
+    padding: 0 10px 0 10px;
+    background-color: white;
+}
+
+/* Form Labels */
+QLabel {
+    color: #495057;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+/* Input Fields Styling */
+QDateEdit, QComboBox, QDoubleSpinBox, QLineEdit, QSpinBox, QTextEdit, QPlainTextEdit {
+    background-color: white;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 12px;
+    min-height: 18px;
+}
+
+QDateEdit:focus, QComboBox:focus, QDoubleSpinBox:focus, QLineEdit:focus, QSpinBox:focus, QTextEdit:focus, QPlainTextEdit:focus {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+}
+
+QDateEdit:hover, QComboBox:hover, QDoubleSpinBox:hover, QLineEdit:hover, QSpinBox:hover, QTextEdit:hover, QPlainTextEdit:hover {
+    border-color: #6c757d;
+}
+
+/* SpinBox and DoubleSpinBox */
+QSpinBox, QDoubleSpinBox {
+    min-width: 80px;
+}
+
+QSpinBox::up-button, QDoubleSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #ced4da;
+    border-top-right-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+QSpinBox::down-button, QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 25px;
+    border-left: 1px solid #ced4da;
+    border-bottom-right-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+QSpinBox::up-arrow, QDoubleSpinBox::up-arrow {
+    width: 12px;
+    height: 12px;
+    background-color: #6c757d;
+}
+
+QSpinBox::down-arrow, QDoubleSpinBox::down-arrow {
+    width: 12px;
+    height: 12px;
+    background-color: #6c757d;
+}
+
+/* ComboBox Arrow */
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 25px;
+    border-left: 1px solid #ced4da;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+QComboBox::down-arrow {
+    width: 15px;
+    height: 15px;
+    background-color: #6c757d;
+}
+
+QComboBox QAbstractItemView {
+    background-color: white;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    selection-background-color: #007bff;
+    selection-color: white;
+}
+
+/* Text Edit for Description */
+QTextEdit, QPlainTextEdit {
+    min-height: 80px;
+}
+
+/* Button Styling */
+QPushButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-weight: bold;
+    font-size: 12px;
+    min-width: 100px;
+}
+
+QPushButton:hover {
+    background-color: #0056b3;
+}
+
+QPushButton:pressed {
+    background-color: #004085;
+}
+
+#buttonSave {
+    background-color: #28a745;
+}
+
+#buttonSave:hover {
+    background-color: #1e7e34;
+}
+
+#buttonCancel {
+    background-color: #dc3545;
+}
+
+#buttonCancel:hover {
+    background-color: #c82333;
+}
+
+/* Required field indicators */
+QLabel[required=&quot;true&quot;] {
+    color: #dc3545;
+}
+
+QLabel[required=&quot;true&quot;]:after {
+    content: &quot; *&quot;;
+    color: #dc3545;
+}
+</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>15</number>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="groupBoxRoomInfo">
+     <property name="title">
+      <string>Thông Tin Cơ Bản</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="horizontalSpacing">
+       <number>15</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>15</number>
+      </property>
+      <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>15</number>
+      </property>
+      <property name="bottomMargin">
+       <number>15</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelRoomNumber">
+        <property name="text">
+         <string>Số Phòng:</string>
+        </property>
+        <property name="required" stdset="0">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEditRoomNumber">
+        <property name="placeholderText">
+         <string>Ví dụ: P101, A201</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelRoomType">
+        <property name="text">
+         <string>Loại Phòng:</string>
+        </property>
+        <property name="required" stdset="0">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="comboBoxRoomType">
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>Phòng đơn</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Phòng đôi</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Phòng 3 người</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Phòng 4 người</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Phòng gia đình</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Studio</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelArea">
+        <property name="text">
+         <string>Diện Tích:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBoxArea">
+        <property name="suffix">
+         <string> m²</string>
+        </property>
+        <property name="decimals">
+         <number>1</number>
+        </property>
+        <property name="minimum">
+         <double>5.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>200.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.500000000000000</double>
+        </property>
+        <property name="value">
+         <double>20.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBoxPricing">
+     <property name="title">
+      <string>Thông Tin Giá Cả</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <property name="horizontalSpacing">
+       <number>15</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>15</number>
+      </property>
+      <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>15</number>
+      </property>
+      <property name="bottomMargin">
+       <number>15</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelRentPrice">
+        <property name="text">
+         <string>Giá Thuê:</string>
+        </property>
+        <property name="required" stdset="0">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBoxRentPrice">
+        <property name="suffix">
+         <string> VNĐ</string>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>100000.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>50000000.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>50000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1000000.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelDeposit">
+        <property name="text">
+         <string>Tiền Cọc:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBoxDeposit">
+        <property name="suffix">
+         <string> VNĐ</string>
+        </property>
+        <property name="decimals">
+         <number>0</number>
+        </property>
+        <property name="minimum">
+         <double>0.000000000000000</double>
+        </property>
+        <property name="maximum">
+         <double>50000000.000000000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>50000.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>1000000.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBoxStatus">
+     <property name="title">
+      <string>Trạng Thái - Mô Tả</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>15</number>
+      </property>
+      <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>15</number>
+      </property>
+      <property name="bottomMargin">
+       <number>15</number>
+      </property>
+      <item>
+       <layout class="QFormLayout" name="formLayout_3">
+        <property name="horizontalSpacing">
+         <number>15</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>12</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="labelStatus">
+          <property name="text">
+           <string>Trạng Thái:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="comboBoxStatus">
+          <item>
+           <property name="text">
+            <string>Trống</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Đã thuê</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Đang sửa chữa</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Tạm ngưng</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelDescription">
+        <property name="text">
+         <string>Mô Tả:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="plainTextEditDescription">
+        <property name="placeholderText">
+         <string>Nhập mô tả về phòng: nội thất, tiện nghi, ghi chú...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayoutButtons">
+     <property name="spacing">
+      <number>15</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonSave">
+       <property name="text">
+        <string>Lưu</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonCancel">
+       <property name="text">
+        <string>Hủy</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>:/icons/cancel.png</normaloff>:/icons/cancel.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEditRoomNumber</tabstop>
+  <tabstop>comboBoxRoomType</tabstop>
+  <tabstop>doubleSpinBoxArea</tabstop>
+  <tabstop>doubleSpinBoxRentPrice</tabstop>
+  <tabstop>doubleSpinBoxDeposit</tabstop>
+  <tabstop>comboBoxStatus</tabstop>
+  <tabstop>plainTextEditDescription</tabstop>
+  <tabstop>buttonSave</tabstop>
+  <tabstop>buttonCancel</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddRoomDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>425</x>
+     <y>565</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>249</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
