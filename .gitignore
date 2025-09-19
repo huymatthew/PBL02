@@ -1,9 +1,9 @@
 *.exe
 *.o
 *.bat
-include/
-lib/
-bin/
+/include/
+/lib/
+/bin/
 *.sh
 Makefile
 .vscode/
