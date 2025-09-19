@@ -209,10 +209,12 @@ QDateEdit, QComboBox, QDoubleSpinBox, QLineEdit, QSpinBox {
 QDateEdit:focus, QComboBox:focus, QDoubleSpinBox:focus, QLineEdit:focus, QSpinBox:focus {
     border-color: #007bff;
     background-color: #f0f8ff;
+    color: #212529;
 }
 
 QDateEdit:hover, QComboBox:hover, QDoubleSpinBox:hover, QLineEdit:hover, QSpinBox:hover {
     border-color: #6c757d;
+    color: #212529;
 }
 
 /* ComboBox Arrow */
@@ -224,6 +226,7 @@ QComboBox::drop-down {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     background-color: #f8f9fa;
+	color: #212529;
 }
 
 QComboBox::down-arrow {
@@ -237,7 +240,7 @@ QComboBox QAbstractItemView {
     border: 2px solid #ced4da;
     border-radius: 8px;
     selection-background-color: #007bff;
-    selection-color: white;
+    selection-color: black;
 }
 
 /* Button Styling */
@@ -307,15 +310,57 @@ QStatusBar QLabel {
     font-size: 13px;
     padding: 6px 12px;
 }
-
-/* Search Box */
-#searchBox {
-    background-color: white;
-    border: 2px solid #ced4da;
-    border-radius: 8px;
-    padding: 8px 12px;
-    min-width: 200px;
+QCalendarWidget {
+    background-color: #f0f0f0; /* Overall background */
+    border: 1px solid #cccccc;
 }
+
+/* Navigation bar */
+QCalendarWidget QToolButton {
+    background-color: #e0e0e0;
+    color: #333333;
+    border: none;
+    padding: 5px;
+}
+
+QCalendarWidget QToolButton:hover {
+    background-color: #d0d0d0;
+}
+
+QCalendarWidget QToolButton#qt_calendar_prevmonth,
+QCalendarWidget QToolButton#qt_calendar_nextmonth {
+    qproperty-icon: url(:/icons/arrow_left.png); /* Custom icons for navigation buttons */
+}
+
+/* Header (day names) */
+QCalendarWidget QTableView { /* This targets the internal table view */
+    selection-background-color: #a0c0e0; /* Selected day background */
+    selection-color: white; /* Selected day text color */
+    gridline-color: #e0e0e0; /* Grid lines */
+}
+
+QCalendarWidget QHeaderView::section { /* Day name headers */
+    background-color: #c0c0c0;
+    color: #000000;
+    padding: 5px;
+}
+
+/* Individual day cells */
+QCalendarWidget QAbstractItemView::item {
+    background-color: white;
+    color: black;
+}
+
+QCalendarWidget QAbstractItemView::item:hover {
+    background-color: #f0f8ff; /* Light blue on hover */
+}
+
+QCalendarWidget QAbstractItemView::item:selected {
+    background-color: #6a9edb; /* Darker blue for selected day */
+    color: white;
+}
+
+
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">

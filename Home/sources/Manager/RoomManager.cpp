@@ -12,7 +12,7 @@ RoomManager::~RoomManager() {
 
 bool RoomManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading rooms from database...\033[0m" << endl;
-    ifstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\rooms.dat");
+    ifstream file("./Home/database/rooms.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;
@@ -40,7 +40,7 @@ bool RoomManager::loadFromDatabase() {
 }
 bool RoomManager::saveToDatabase() {
     cout << "\033[1;33m*Saving rooms to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\rooms.dat", ios::out | ios::trunc);
+    ofstream file("./Home/database/rooms.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return false;

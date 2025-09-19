@@ -18,7 +18,9 @@ int main(int argc, char *argv[]) {
     //QLoggingCategory::setFilterRules("*.debug=true\n*.info=true\nqt.*=true");
     QApplication app(argc, argv);
     QMainWindow nw;
+    
     QuanLy quanLy(&nw);
-    nw.show();
+    nw.showMaximized();
+    nw.setFocus();
     return app.exec();
 }

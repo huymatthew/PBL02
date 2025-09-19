@@ -11,7 +11,7 @@ ServiceTypeManager::~ServiceTypeManager() {
 }
 
 bool ServiceTypeManager::loadFromDatabase() {
-    ifstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\service_types.dat");
+    ifstream file("./Home/database/");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;

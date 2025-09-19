@@ -13,7 +13,7 @@ TenantManager::~TenantManager() {
 
 bool TenantManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading tenants from database...\033[0m" << endl;
-    ifstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\tenants.dat");
+    ifstream file("./Home/database/tenants.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;
@@ -40,7 +40,7 @@ bool TenantManager::loadFromDatabase() {
 }
 bool TenantManager::saveToDatabase() {
     cout << "\033[1;33m*Saving tenants to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\tenants.dat", ios::out | ios::trunc);
+    ofstream file("./Home/database/tenants.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return false;

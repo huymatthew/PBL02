@@ -11,7 +11,7 @@ ServiceManager::~ServiceManager(){
 
 bool ServiceManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading rooms from database...\033[0m" << endl;
-    ifstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\services.dat");
+    ifstream file("./Home/database/services.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;
@@ -36,8 +36,8 @@ bool ServiceManager::loadFromDatabase() {
     return true;
 }
 bool ServiceManager::saveToDatabase() {
-    cout << "\033[1;33m*Saving rooms to database...\033[0m" << endl;
-    ofstream file("C:\\Qt\\Project\\FirstProject\\Home\\database\\rooms.dat", ios::out | ios::trunc);
+    cout << "\033[1;33m*Saving services to database...\033[0m" << endl;
+    ofstream file("./Home/database/services.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return false;
