@@ -13,8 +13,6 @@
 #include <QuanLy.h>
 
 using namespace std;
-// Chuyển qua dùng Makefile để build
-// Xử lý (space) trong database
 
 int main(int argc, char *argv[]) {
     //QLoggingCategory::setFilterRules("*.debug=true\n*.info=true\nqt.*=true");

@@ -1,3 +1,9 @@
 *.exe
 *.o
 *.bat
+include/
+lib/
+bin/
+*.sh
+Makefile
+.vscode/

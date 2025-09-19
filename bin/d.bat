@@ -1,1 +1,0 @@
-start C:\Qt\5.15.19\mingw81_32\bin\designer.exe
