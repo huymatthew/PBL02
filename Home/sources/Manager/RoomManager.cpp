@@ -224,3 +224,10 @@ vector<Room>::iterator RoomManager::findRoomIterator(int roomId) {
     return rooms.end();
 }
 
+Room* RoomManager::getRoomSelected() {
+    return selected;
+}
+
+void RoomManager::setRoomSelected(Room* room) {
+    selected = room;
+}

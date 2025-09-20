@@ -399,3 +399,11 @@ QStandardItemModel* TenantManager::getTenantsAsModel() const {
     }
     return model;
 }
+
+Tenant* TenantManager::getTenantSelected() {
+    return selected;
+}
+
+void TenantManager::setTenantSelected(Tenant* tenant) {
+    selected = tenant;
+}

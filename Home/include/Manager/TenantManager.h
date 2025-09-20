@@ -54,11 +54,15 @@ public:
     bool isValidDateOfBirth(const string& dateOfBirth) const;
 
     QStandardItemModel* getTenantsAsModel() const;
+
+    Tenant* getTenantSelected();
+    void setTenantSelected(Tenant* tenant);
     
 private:
     vector<Tenant> tenants;
     bool data_loaded;
     PrimaryKey pk_manager;
+    Tenant* selected;
     
     vector<Tenant>::iterator findTenantIterator(int tenantId);
     void sortTenantsById();

@@ -33,6 +33,12 @@ public:
 
     void loadTenantView();
     void loadRoomView();
+
+    void addTenantCall();
+    void addRoomCall();
+
+    void removeTenantCall();
+    void removeRoomCall();
 private:
     BillManager billManager;
     ContractManager contractManager;

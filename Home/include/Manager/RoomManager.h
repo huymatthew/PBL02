@@ -55,11 +55,15 @@ public:
     double getMaxRoomRent() const;
 
     QStandardItemModel* getRoomsAsModel() const;
+
+    Room* getRoomSelected();
+    void setRoomSelected(Room* room);
     
 private:
     vector<Room> rooms;
     bool data_loaded;
     PrimaryKey pk_manager;
+    Room* selected;
     
     vector<Room>::iterator findRoomIterator(int roomId);
     void sortRoomsById();
