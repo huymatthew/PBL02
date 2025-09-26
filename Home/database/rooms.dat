@@ -1,5 +1,6 @@
-1 A101 0 0 1.2e+06 1 16m2,có điều hòa, nóng lạnh.
-2 A102 0 0 1.1e+06 1 16m2,có điều hòa, không nóng lạnh.
-3 A103 0 1 1.6e+06 0 Đầy đủ
-4 P922 0 0 1e+06 0 190x
-5 F109 0 2 3e+06 0 Có đầy đủ tiện nghi chỉ cần chuyển vào ở ngay
+1 A101 0 1.2e+06 0 16m2,có điều hòa, nóng lạnh.
+2 A102 0 1.1e+06 0 16m2,có điều hòa, không nóng lạnh.
+3 A103 1 1.6e+06 0 Đầy đủ
+4 P922 0 1e+06 0 190x
+5 F109 2 3e+06 0 Có đầy đủ tiện nghi chỉ cần chuyển vào ở ngay
+6 A112 0 1e+06 0 

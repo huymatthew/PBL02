@@ -77,6 +77,7 @@ void QuanLy::onChangedTabActive(int index)
     }
 }
 // Show
+/*
 void QuanLy::onShowTenantDetails(int tenantId)
 {
     Tenant *tenant = tenantManager.getTenant(tenantId);
@@ -109,6 +110,8 @@ void QuanLy::onShowTenantDetails(int tenantId)
     else
         tenantRoomComboBox->setCurrentText("No Room Assigned");
 }
+        */
+void QuanLy::onShowTenantDetails(int tenantId){}
 void QuanLy::onShowRoomDetails(int roomId)
 {
     Room *room = roomManager.getRoom(roomId);

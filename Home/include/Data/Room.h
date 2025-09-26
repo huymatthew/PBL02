@@ -10,7 +10,6 @@ class Room {
 private:
     int room_id;
     string room_name;
-    int contract_id; 
     int room_type;
     double monthly_rent;
     string description;
@@ -19,7 +18,7 @@ private:
 public:
     Room();
     Room(const Room& other);
-    Room(int id, const string& name, int contractId, int type,
+    Room(int id, const string& name, int type,
          double rent, const string& desc, int status);
 
     int getRoomId() const;
@@ -27,9 +26,6 @@ public:
 
     string getRoomName() const;
     void setRoomName(const string& name);
-
-    int getContractId() const;
-    void setContractId(int contractId);
 
     int getRoomType() const;
     void setRoomType(int type);

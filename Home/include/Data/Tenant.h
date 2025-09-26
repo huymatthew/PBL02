@@ -13,16 +13,13 @@ private:
     string phone;
     string identity_card;
     string date_of_birth; // ddmmyyyy
-    int contract_id;       
-    bool is_main_tenant;
     int gender = 0;
 
     public:
     Tenant();
     Tenant(const Tenant& other);
     Tenant(int id, const string& name, const string& phone,
-           const string& id_card, const string& dob,
-           int contractId, bool isMain);
+           const string& id_card, const string& dob, int gender);
 
 
     static vector<Tenant> loadFromDatabase();
@@ -43,11 +40,9 @@ private:
     string getDateOfBirth() const;
     void setDateOfBirth(const string& dob);
 
-    int getContractId() const;
-    void setContractId(int contractId);
-
-    bool getIsMainTenant() const;
-    void setIsMainTenant(bool isMain);
+    int getGender() const;
+    void setGender(int gender);
+    string getGenderString() const;
 };
 
 #endif

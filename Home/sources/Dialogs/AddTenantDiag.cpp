@@ -17,8 +17,7 @@ void AddTenantDiag::on_buttonBox_accepted() {
     string phone = lineEditPhone->text().toStdString();
     string identityCard = lineEditCCCD->text().toStdString();
     string dateOfBirth = formatDate(dateEditBirthDate->text());
-    int contractId = 0;
-    bool isMainTenant = false;
+    int gender = comboBoxGender->currentIndex();
 
     if (fullName.empty() || phone.empty() || identityCard.empty() || dateOfBirth.empty()) {
         cerr << "Error: All fields must be filled." << endl;
@@ -26,7 +25,7 @@ void AddTenantDiag::on_buttonBox_accepted() {
     }
     fullName = formatName(fullName);
 
-    tenantManager.addTenant(fullName, phone, identityCard, dateOfBirth, contractId, isMainTenant);
+    tenantManager.addTenant(fullName, phone, identityCard, dateOfBirth, gender);
     accept();
 }
 

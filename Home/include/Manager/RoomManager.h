@@ -23,13 +23,12 @@ public:
     bool saveToDatabase();
     
     bool addRoom(const Room& room);
-    bool addRoom(const string& roomName, int contractId, int roomType,
+    bool addRoom(const string& roomName, int roomType,
                 double monthlyRent, const string& description, int status);
     bool removeRoom(int roomId);
     bool updateRoom(int roomId, const Room& updatedRoom);
     
     Room* getRoom(int roomId);
-    Room* getRoomByContract(int contractId);
     vector<Room> getRoomsByType(int roomType);
     vector<Room> getRoomsByStatus(int status);
     vector<Room> getAllRooms() const;
@@ -56,8 +55,6 @@ private:
     Room* selected;
     
     vector<Room>::iterator findRoomIterator(int roomId);
-    void sortRoomsById();
-    bool isValidRoomId(int roomId) const;
 };
 
 #endif // ROOM_MANAGER_H

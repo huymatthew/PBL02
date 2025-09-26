@@ -24,31 +24,20 @@ public:
     
     bool addTenant(const Tenant& tenant);
     bool addTenant(const string& fullName, const string& phone,
-                  const string& identityCard, const string& dateOfBirth,
-                  int contractId, bool isMainTenant);
+                  const string& identityCard, const string& dateOfBirth, int gender);
     bool removeTenant(int tenantId);
     bool updateTenant(int tenantId, const Tenant& updatedTenant);
     
     Tenant* getTenant(int tenantId);
     Tenant* getTenantByIdentityCard(const string& identityCard);
     Tenant* getTenantByPhone(const string& phone);
-    vector<Tenant> getTenantsByContract(int contractId);
-    Tenant* getMainTenant(int contractId);
     vector<Tenant> getAllTenants() const;
     
     bool tenantExists(int tenantId) const;
     bool identityCardExists(const string& identityCard) const;
     bool phoneExists(const string& phone) const;
     int getTenantCount() const;
-    int getTenantCountByContract(int contractId) const;
     
-    bool setMainTenant(int tenantId, int contractId);
-    bool hasMainTenant(int contractId) const;
-    vector<Tenant> getSubTenants(int contractId);
-    
-    bool moveTenantsToContract(const vector<int>& tenantIds, int newContractId);
-    bool removeTenantsFromContract(int contractId);
-        
     bool isValidIdentityCard(const string& identityCard) const;
     bool isValidPhone(const string& phone) const;
     bool isValidDateOfBirth(const string& dateOfBirth) const;

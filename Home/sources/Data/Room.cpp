@@ -5,15 +5,14 @@
 using namespace std;
 
 Room::Room()
-    : room_id(0), room_name(""), contract_id(0), room_type(0),
+    : room_id(0), room_name(""), room_type(0),
       monthly_rent(0.0), description(""), status(0) {}
 Room::Room(const Room& other)
-    : room_id(other.room_id), room_name(other.room_name), contract_id(other.contract_id),
-      room_type(other.room_type), monthly_rent(other.monthly_rent),
-      description(other.description), status(other.status) {}
-Room::Room(int id, const string& name, int contractId, int type,
+    : room_id(other.room_id), room_name(other.room_name), room_type(other.room_type),
+      monthly_rent(other.monthly_rent), description(other.description), status(other.status) {}
+Room::Room(int id, const string& name, int type,
          double rent, const string& desc, int status)
-    : room_id(id), room_name(name), contract_id(contractId), room_type(type),
+    : room_id(id), room_name(name), room_type(type),
       monthly_rent(rent), description(desc), status(status) {}
 
 int Room::getRoomId() const { return room_id; }
@@ -21,9 +20,6 @@ void Room::setRoomId(int id) { room_id = id; }
 
 string Room::getRoomName() const { return room_name; }
 void Room::setRoomName(const string& name) { room_name = name; }
-
-int Room::getContractId() const { return contract_id; }
-void Room::setContractId(int contractId) { contract_id = contractId; }
 
 int Room::getRoomType() const { return room_type; }
 string Room::getRoomTypeString() const {

@@ -49,54 +49,7 @@ void AddContractDialog::on_saveButton_clicked() {
         QMessageBox::warning(this, "Input Error", QString::fromStdString(errorlog));
         return;
     }
-    // Set room status to occupied
-    Room* room = roomManager->getRoom(roomId);
-    if (room) {
-        room->setStatus(0); // 0: occupied
-    } else {
-        QMessageBox::critical(this, "Error", "Selected room not found. Please try again.");
-        return;
-    }
-
-    // Get tenant IDs from the tenantList
-    vector<int> tenantIds;
-    bool isOverload = false;
-    for (int i = 0; i < tenantList->count(); ++i) {
-        QListWidgetItem* item = tenantList->item(i);
-        QComboBox* comboBox = qobject_cast<QComboBox*>(tenantList->itemWidget(item));
-        if (comboBox) {
-            int tenantId = comboBox->currentData().toInt();
-            tenantIds.push_back(tenantId);
-            if (tenantManager->getTenant(tenantId)->getContractId() != -1) {
-                isOverload = true;
-            }
-        }
-    }
-
-    // Handle tenant conflicts
-    if (isOverload) {
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this, "Tenant Conflict", "One or more selected tenants are already assigned to another contract. Do you want to proceed and reassign them to this contract?",
-                                      QMessageBox::Yes | QMessageBox::No);
-        if (reply == QMessageBox::No) {
-            return;
-        }
-        else {
-            for (int tenantId : tenantIds) {
-                Tenant* tenant = tenantManager->getTenant(tenantId);
-                tenant->setContractId(contractId);
-            }
-        }
-    }
-
-    // Create and add the new contract
-    Contract newContract(contractId, roomId, datetostring(startDate), datetostring(endDate), monthlyRent, deposit, status, notes.toStdString());
-    if (contractManager->addContract(newContract)) {
-        QMessageBox::information(this, "Success", "Contract added successfully.");
-        this->accept();
-    } else {
-        QMessageBox::critical(this, "Error", "Failed to add contract. Please try again.");
-    }
+    
 }
 void AddContractDialog::on_cancelButton_clicked() {
     this->reject();

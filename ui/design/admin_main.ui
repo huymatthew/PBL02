@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>:/icons/home.png</normaloff>:/icons/home.png</iconset>
+    <normaloff>../../logo.png</normaloff>../../logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">/* Admin Window Styling */

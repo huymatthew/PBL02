@@ -17,6 +17,7 @@
 #include <Manager/ContractManager.h>
 #include <Manager/TenantManager.h>
 #include <Manager/ServiceTypeManager.h>
+#include <Manager/RentManager.h>
 
 #include <admin_main.h>
 
@@ -47,7 +48,8 @@ private:
     ServiceManager serviceManager;
     ServiceTypeManager serviceTypeManager;
     TenantManager tenantManager;
-
+    RentManager rentManager;
+    
     QMainWindow* mainWindow;
 };
 

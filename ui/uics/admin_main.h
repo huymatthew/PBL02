@@ -102,6 +102,8 @@ public:
     QLabel *tenantIdLabel;
     QDateEdit *dateOfBirth;
     QLabel *label;
+    QComboBox *comboBox;
+    QLabel *label_2;
     QSpacerItem *tenantVerticalSpacer;
     QVBoxLayout *tenantButtonsLayout;
     QPushButton *editTenantButton;
@@ -176,7 +178,7 @@ public:
             AdminMainWindow->setObjectName(QString::fromUtf8("AdminMainWindow"));
         AdminMainWindow->resize(1200, 862);
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/icons/home.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("../../logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         AdminMainWindow->setWindowIcon(icon);
         AdminMainWindow->setStyleSheet(QString::fromUtf8("/* Admin Window Styling */\n"
 "QMainWindow {\n"
@@ -775,7 +777,6 @@ public:
         roomStatusComboBox = new QComboBox(roomInfoGroup);
         roomStatusComboBox->addItem(QString());
         roomStatusComboBox->addItem(QString());
-        roomStatusComboBox->addItem(QString());
         roomStatusComboBox->setObjectName(QString::fromUtf8("roomStatusComboBox"));
 
         roomFormLayout->setWidget(3, QFormLayout::FieldRole, roomStatusComboBox);
@@ -865,45 +866,58 @@ public:
         tenantPhoneEdit = new QLineEdit(tenantInfoGroup);
         tenantPhoneEdit->setObjectName(QString::fromUtf8("tenantPhoneEdit"));
 
-        tenantFormLayout->setWidget(4, QFormLayout::FieldRole, tenantPhoneEdit);
+        tenantFormLayout->setWidget(5, QFormLayout::FieldRole, tenantPhoneEdit);
 
         tenantRoomLabel = new QLabel(tenantInfoGroup);
         tenantRoomLabel->setObjectName(QString::fromUtf8("tenantRoomLabel"));
 
-        tenantFormLayout->setWidget(7, QFormLayout::LabelRole, tenantRoomLabel);
+        tenantFormLayout->setWidget(8, QFormLayout::LabelRole, tenantRoomLabel);
 
         tenantRoomComboBox = new QComboBox(tenantInfoGroup);
         tenantRoomComboBox->setObjectName(QString::fromUtf8("tenantRoomComboBox"));
         tenantRoomComboBox->setEditable(false);
 
-        tenantFormLayout->setWidget(7, QFormLayout::FieldRole, tenantRoomComboBox);
+        tenantFormLayout->setWidget(8, QFormLayout::FieldRole, tenantRoomComboBox);
 
         tenantPhoneLabel = new QLabel(tenantInfoGroup);
         tenantPhoneLabel->setObjectName(QString::fromUtf8("tenantPhoneLabel"));
 
-        tenantFormLayout->setWidget(4, QFormLayout::LabelRole, tenantPhoneLabel);
+        tenantFormLayout->setWidget(5, QFormLayout::LabelRole, tenantPhoneLabel);
 
         tenantIdEdit = new QLineEdit(tenantInfoGroup);
         tenantIdEdit->setObjectName(QString::fromUtf8("tenantIdEdit"));
 
-        tenantFormLayout->setWidget(2, QFormLayout::FieldRole, tenantIdEdit);
+        tenantFormLayout->setWidget(3, QFormLayout::FieldRole, tenantIdEdit);
 
         tenantIdLabel = new QLabel(tenantInfoGroup);
         tenantIdLabel->setObjectName(QString::fromUtf8("tenantIdLabel"));
         tenantIdLabel->setEnabled(false);
 
-        tenantFormLayout->setWidget(2, QFormLayout::LabelRole, tenantIdLabel);
+        tenantFormLayout->setWidget(3, QFormLayout::LabelRole, tenantIdLabel);
 
         dateOfBirth = new QDateEdit(tenantInfoGroup);
         dateOfBirth->setObjectName(QString::fromUtf8("dateOfBirth"));
-        dateOfBirth->setEnabled(false);
+        dateOfBirth->setEnabled(true);
 
-        tenantFormLayout->setWidget(8, QFormLayout::FieldRole, dateOfBirth);
+        tenantFormLayout->setWidget(9, QFormLayout::FieldRole, dateOfBirth);
 
         label = new QLabel(tenantInfoGroup);
         label->setObjectName(QString::fromUtf8("label"));
 
-        tenantFormLayout->setWidget(8, QFormLayout::LabelRole, label);
+        tenantFormLayout->setWidget(9, QFormLayout::LabelRole, label);
+
+        comboBox = new QComboBox(tenantInfoGroup);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        tenantFormLayout->setWidget(2, QFormLayout::FieldRole, comboBox);
+
+        label_2 = new QLabel(tenantInfoGroup);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        tenantFormLayout->setWidget(2, QFormLayout::LabelRole, label_2);
 
 
         tenantControlsLayout->addWidget(tenantInfoGroup);
@@ -1304,7 +1318,7 @@ public:
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(2);
+        mainTabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);
@@ -1468,7 +1482,6 @@ public:
         roomStatusLabel->setText(QCoreApplication::translate("AdminMainWindow", "Tr\341\272\241ng Th\303\241i:", nullptr));
         roomStatusComboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "Tr\341\273\221ng", nullptr));
         roomStatusComboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "\304\220\303\243 thu\303\252", nullptr));
-        roomStatusComboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "B\341\272\243o tr\303\254", nullptr));
 
         roomDescLabel->setText(QCoreApplication::translate("AdminMainWindow", "M\303\264 T\341\272\243:", nullptr));
         roomDescEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "M\303\264 t\341\272\243 ph\303\262ng...", nullptr));
@@ -1484,6 +1497,11 @@ public:
         tenantIdEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p CCCD...", nullptr));
         tenantIdLabel->setText(QCoreApplication::translate("AdminMainWindow", "CMND/CCCD:", nullptr));
         label->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y Sinh", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "\341\272\250n", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "Nam", nullptr));
+        comboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "N\341\273\257", nullptr));
+
+        label_2->setText(QCoreApplication::translate("AdminMainWindow", "Gi\341\273\233i T\303\255nh", nullptr));
         editTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Th\303\264ng Tin", nullptr));
         deleteTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Kh\303\241ch", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tenantsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Kh\303\241ch Thu\303\252", nullptr));

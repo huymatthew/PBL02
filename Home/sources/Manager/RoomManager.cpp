@@ -21,9 +21,9 @@ bool RoomManager::loadFromDatabase() {
     while (getline(file, line)) {
         istringstream iss(line);
         string roomName, description;
-        int contractId, roomType, status, roomId;
+        int roomType, status, roomId;
         double monthlyRent;
-        if (!(iss >> roomId >> roomName >> contractId >> roomType >> monthlyRent >> status)) {
+        if (!(iss >> roomId >> roomName >> roomType >> monthlyRent >> status)) {
             cerr << "Error reading line: " << line << endl;
             continue; 
         }
@@ -32,7 +32,7 @@ bool RoomManager::loadFromDatabase() {
             cerr << "Duplicate room ID found: " << roomId << endl;
             continue; 
         }
-        rooms.emplace_back(roomId, roomName, contractId, roomType, monthlyRent, description, status);
+        rooms.emplace_back(roomId, roomName, roomType, monthlyRent, description, status);
         pk_manager.addKey(roomId);
         cout << "- Loaded room ID: " << roomId << endl;
     }
@@ -48,7 +48,6 @@ bool RoomManager::saveToDatabase() {
     for (const auto& room : rooms) {
         file << room.getRoomId() << " "
              << room.getRoomName() << " "
-             << room.getContractId() << " "
              << room.getRoomType() << " "
              << room.getMonthlyRent() << " "
              << room.getStatus()
@@ -68,9 +67,9 @@ bool RoomManager::addRoom(const Room& room) {
     cout << "+ Added room ID: " << room.getRoomId() << endl;
     return true;
 }
-bool RoomManager::addRoom(const string &roomName, int contractId, int roomType, double monthlyRent, const string& description, int status) {
+bool RoomManager::addRoom(const string &roomName, int roomType, double monthlyRent, const string& description, int status) {
     int roomId = pk_manager.getNextKey();
-    Room newRoom(roomId, roomName, contractId, roomType, monthlyRent, description, status);
+    Room newRoom(roomId, roomName, roomType, monthlyRent, description, status);
     rooms.push_back(newRoom);
     pk_manager.addKey(roomId);
     cout << "+ Added room ID: " << roomId << endl;
@@ -102,14 +101,6 @@ Room* RoomManager::getRoom(int roomId) {
     auto it = findRoomIterator(roomId);
     if (it != rooms.end()) {
         return &(*it);
-    }
-    return nullptr;
-}
-Room* RoomManager::getRoomByContract(int contractId) {
-    for (auto& room : rooms) {
-        if (room.getContractId() == contractId) {
-            return &room;
-        }
     }
     return nullptr;
 }
@@ -163,8 +154,8 @@ int RoomManager::getOccupiedRoomCount() const {
 bool RoomManager::setRoomOccupied(int roomId, int contractId) {
     auto it = findRoomIterator(roomId);
     if (it != rooms.end()) {
+        // !#! Set hợp đồng
         it->setStatus(1); // 1: occupied
-        it->setContractId(contractId);
         cout << "* Set room ID " << roomId << " as occupied with contract ID: " << contractId << endl;
         return true;
     }
@@ -175,7 +166,7 @@ bool RoomManager::setRoomAvailable(int roomId) {
     auto it = findRoomIterator(roomId);
     if (it != rooms.end()) {
         it->setStatus(0); // 0: available
-        it->setContractId(-1); // No contract
+        // !#!  it->setContractId(-1); // No contract
         cout << "* Set room ID " << roomId << " as available." << endl;
         return true;
     }
@@ -195,9 +186,9 @@ bool RoomManager::isRoomOccupied(int roomId) {
 
 QStandardItemModel* RoomManager::getRoomsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
-    model->setColumnCount(7);
+    model->setColumnCount(6);
     model->setHorizontalHeaderLabels({
-        "Mã Phòng", "Tên Phòng", "Mã Hợp Đồng", "Loại Phòng", 
+        "Mã Phòng", "Tên Phòng", "Loại Phòng", 
         "Giá Thuê Tháng", "Trạng Thái", "Mô Tả"
     });
 
@@ -205,7 +196,6 @@ QStandardItemModel* RoomManager::getRoomsAsModel() const {
         QList<QStandardItem*> rowItems;
         rowItems.append(new QStandardItem(QString::number(room.getRoomId())));
         rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomName())));
-        rowItems.append(new QStandardItem(QString::number(room.getContractId())));
         rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomTypeString())));
         rowItems.append(new QStandardItem(moneyFormat(room.getMonthlyRent())));
         rowItems.append(new QStandardItem(room.getStatus() == 0 ? "Available" : "Occupied"));

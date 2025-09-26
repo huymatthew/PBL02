@@ -15,7 +15,6 @@ AddRoomDiag::~AddRoomDiag() {}
 
 void AddRoomDiag::on_buttonBox_accepted() {
     string roomName = lineEditRoomNumber->text().toStdString();
-    int contractId = 0;
     int roomType = comboBoxRoomType->currentIndex();
     double monthlyRent = doubleSpinBoxRentPrice->value();
     string description = plainTextEditDescription->toPlainText().toStdString();
@@ -25,7 +24,7 @@ void AddRoomDiag::on_buttonBox_accepted() {
         QMessageBox::warning(this, "Input Error", "Room Number is required.");
         return;
     }
-    roomManager.addRoom(roomName, contractId, roomType, monthlyRent, " " + description, status);
+    roomManager.addRoom(roomName, roomType, monthlyRent, " " + description, status);
     accept();
 }
 

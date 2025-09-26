@@ -13,6 +13,8 @@ public:
 
     int getTenantIdByContract(int contractId);
     int getRoomIdByTenant(int tenantId);
+    void loadFromDatabase();
+    void saveToDatabase();
 private:
     vector<Rent> rents;
     bool data_loaded;
