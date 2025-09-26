@@ -15,7 +15,11 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
+    qputenv("QT_LOGGING_RULES", "qt.qpa.*=false");
     //QLoggingCategory::setFilterRules("*.debug=true\n*.info=true\nqt.*=true");
+    QLocale locale(QLocale::Vietnamese, QLocale::Vietnam);
+    QLocale::setDefault(locale);
+    
     QApplication app(argc, argv);
     QMainWindow nw;
     

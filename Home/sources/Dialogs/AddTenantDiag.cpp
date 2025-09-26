@@ -24,6 +24,7 @@ void AddTenantDiag::on_buttonBox_accepted() {
         cerr << "Error: All fields must be filled." << endl;
         return;
     }
+    fullName = formatName(fullName);
 
     tenantManager.addTenant(fullName, phone, identityCard, dateOfBirth, contractId, isMainTenant);
     accept();

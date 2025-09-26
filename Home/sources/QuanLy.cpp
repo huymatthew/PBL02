@@ -3,6 +3,7 @@
 
 #include <Dialogs/AddTenantDiag.h>
 #include <Dialogs/AddRoomDiag.h>
+#include <Dialogs/AddContractDiag.h>
 
 #include <QStandardItem>
 #include <QStandardItemModel>
@@ -34,6 +35,8 @@ void QuanLy::signalAndSlotConnect() {
     });
     QObject::connect(actionQuickAddTenant, &QAction::triggered, [this]() {addTenantCall();});
     QObject::connect(actionQuickAddRoom, &QAction::triggered, [this]() {addRoomCall();});
+    QObject::connect(actionQuickAddContract, &QAction::triggered, [this]() {addContractCall();});
+
     QObject::connect(deleteTenantButton, &QPushButton::clicked, [this]() {removeTenantCall();});
     QObject::connect(deleteRoomButton, &QPushButton::clicked, [this]() {removeRoomCall();});
 }
@@ -80,7 +83,7 @@ void QuanLy::onShowTenantDetails(int tenantId) {
     if (index != -1) {
         tenantRoomComboBox->setCurrentIndex(index);
     } else {
-        tenantRoomComboBox->setCurrentIndex(0);
+        tenantRoomComboBox->setCurrentText("No Room Assigned");
     }
 }
 void QuanLy::onShowRoomDetails(int roomId) {
@@ -102,6 +105,7 @@ void QuanLy::loadTenantView() {
     tenantManager.setTenantSelected(nullptr);
     tenantsTableView->setModel(tenantManager.getTenantsAsModel());
     tenantRoomComboBox->clear();
+    tenantRoomComboBox->addItem("No Room Assigned", QVariant::fromValue(0));
     for (const auto& room : roomManager.getAllRooms()) {
         tenantRoomComboBox->addItem(QString::fromStdString(room.getRoomName()), QVariant::fromValue(room.getRoomId()));
     }
@@ -121,6 +125,10 @@ void QuanLy::addRoomCall(){
     AddRoomDiag addRoomDialog(mainWindow, roomManager);
     addRoomDialog.exec();
     loadRoomView();
+}
+void QuanLy::addContractCall(){
+    AddContractDialog addContractDialog(mainWindow, &contractManager, &roomManager, &tenantManager);
+    addContractDialog.exec();
 }
 //Remove
 void QuanLy::removeTenantCall(){

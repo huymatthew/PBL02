@@ -25,7 +25,7 @@ void AddRoomDiag::on_buttonBox_accepted() {
         QMessageBox::warning(this, "Input Error", "Room Number is required.");
         return;
     }
-    roomManager.addRoom(roomName, contractId, roomType, monthlyRent, description, status);
+    roomManager.addRoom(roomName, contractId, roomType, monthlyRent, " " + description, status);
     accept();
 }
 

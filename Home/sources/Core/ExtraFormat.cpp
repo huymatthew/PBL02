@@ -19,3 +19,18 @@ string formatDate(const QString& date) {
     string year = date.mid(6, 4).toStdString();
     return year + "-" + month + "-" + day;
 }
+
+string datetostring(const QDate& date) {
+    return date.toString("yyyy-MM-dd").toStdString();
+}
+
+string formatName(const string& name) {
+    ostringstream oss;
+    for (char c : name) {
+        if (c == ' ')
+            oss << '_';
+        else
+            oss << c;
+    }
+    return oss.str();
+}

@@ -48,7 +48,7 @@
 - Room_ID: Primary Key
 - RoomName: String
 - Contract_ID: Foreign Key -> Contract
-- Room_Type: Loại phòng
+- Room_Type: Loại phòng (0: Phòng đơn, 1: Phòng đôi, 2: Phòng gia đình)
 - Monthly_Rent: Tiền thuê hàng tháng
 - Description: Mô tả phòng
 - Status: Trạng thái (0: trống, 1: đang thuê)

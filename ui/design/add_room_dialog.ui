@@ -268,22 +268,7 @@ QLabel[required=&quot;true&quot;]:after {
         </item>
         <item>
          <property name="text">
-          <string>Phòng 3 người</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Phòng 4 người</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>Phòng gia đình</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Studio</string>
          </property>
         </item>
        </widget>

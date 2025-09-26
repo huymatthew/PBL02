@@ -254,9 +254,6 @@ public:
         comboBoxRoomType->addItem(QString());
         comboBoxRoomType->addItem(QString());
         comboBoxRoomType->addItem(QString());
-        comboBoxRoomType->addItem(QString());
-        comboBoxRoomType->addItem(QString());
-        comboBoxRoomType->addItem(QString());
         comboBoxRoomType->setObjectName(QString::fromUtf8("comboBoxRoomType"));
         comboBoxRoomType->setEditable(true);
 
@@ -349,10 +346,7 @@ public:
         labelRoomType->setText(QCoreApplication::translate("AddRoomDialog", "Lo\341\272\241i Ph\303\262ng:", nullptr));
         comboBoxRoomType->setItemText(0, QCoreApplication::translate("AddRoomDialog", "Ph\303\262ng \304\221\306\241n", nullptr));
         comboBoxRoomType->setItemText(1, QCoreApplication::translate("AddRoomDialog", "Ph\303\262ng \304\221\303\264i", nullptr));
-        comboBoxRoomType->setItemText(2, QCoreApplication::translate("AddRoomDialog", "Ph\303\262ng 3 ng\306\260\341\273\235i", nullptr));
-        comboBoxRoomType->setItemText(3, QCoreApplication::translate("AddRoomDialog", "Ph\303\262ng 4 ng\306\260\341\273\235i", nullptr));
-        comboBoxRoomType->setItemText(4, QCoreApplication::translate("AddRoomDialog", "Ph\303\262ng gia \304\221\303\254nh", nullptr));
-        comboBoxRoomType->setItemText(5, QCoreApplication::translate("AddRoomDialog", "Studio", nullptr));
+        comboBoxRoomType->setItemText(2, QCoreApplication::translate("AddRoomDialog", "Ph\303\262ng gia \304\221\303\254nh", nullptr));
 
         doubleSpinBoxRentPrice->setSuffix(QCoreApplication::translate("AddRoomDialog", " VN\304\220", nullptr));
         labelRentPrice->setText(QCoreApplication::translate("AddRoomDialog", "Gi\303\241 Thu\303\252:", nullptr));
