@@ -38,7 +38,7 @@ public:
     int getAvailableRoomCount() const;
     int getOccupiedRoomCount() const;
     
-    bool setRoomOccupied(int roomId, int contractId);
+    bool setRoomOccupied(int roomId);
     bool setRoomAvailable(int roomId);
     bool isRoomAvailable(int roomId);
     bool isRoomOccupied(int roomId);

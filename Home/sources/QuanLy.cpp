@@ -161,7 +161,7 @@ void QuanLy::addRoomCall()
 }
 void QuanLy::addContractCall()
 {
-    AddContractDialog addContractDialog(mainWindow, &contractManager, &roomManager, &tenantManager);
+    AddContractDialog addContractDialog(mainWindow, &contractManager, &roomManager, &tenantManager, &rentManager);
     addContractDialog.exec();
 }
 // Remove

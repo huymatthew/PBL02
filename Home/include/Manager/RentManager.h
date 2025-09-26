@@ -11,6 +11,9 @@ public:
     RentManager();
     ~RentManager();
 
+    void addRent(int contractId, int tenantId, bool isRepresentative);
+    bool removeRent(int contractId, int tenantId);
+
     int getTenantIdByContract(int contractId);
     int getRoomIdByTenant(int tenantId);
     void loadFromDatabase();

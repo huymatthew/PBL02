@@ -151,12 +151,10 @@ int RoomManager::getOccupiedRoomCount() const {
     return count;
 }
 
-bool RoomManager::setRoomOccupied(int roomId, int contractId) {
+bool RoomManager::setRoomOccupied(int roomId) {
     auto it = findRoomIterator(roomId);
     if (it != rooms.end()) {
-        // !#! Set hợp đồng
         it->setStatus(1); // 1: occupied
-        cout << "* Set room ID " << roomId << " as occupied with contract ID: " << contractId << endl;
         return true;
     }
     cerr << "Room not found to set as occupied: " << roomId << endl;

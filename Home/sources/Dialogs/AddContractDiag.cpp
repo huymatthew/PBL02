@@ -3,8 +3,8 @@
 
 using namespace std;
 
-AddContractDialog::AddContractDialog(QWidget *parent, ContractManager *contractManager, RoomManager *roomManager, TenantManager *tenantManager)
-    : QDialog(parent), contractManager(contractManager), roomManager(roomManager), tenantManager(tenantManager) {
+AddContractDialog::AddContractDialog(QWidget *parent, ContractManager *contractManager, RoomManager *roomManager, TenantManager *tenantManager, RentManager *rentManager)
+    : QDialog(parent), contractManager(contractManager), roomManager(roomManager), tenantManager(tenantManager), rentManager(rentManager) {
     setupUi(this);
     contractIdSpinBox->setValue(contractManager->getContractCount() + 1);
     for (const auto& room : roomManager->getAllRooms()) {
@@ -49,8 +49,33 @@ void AddContractDialog::on_saveButton_clicked() {
         QMessageBox::warning(this, "Input Error", QString::fromStdString(errorlog));
         return;
     }
+
+    bool checkOverlap[10000] = {false};
+    for (int i = 0; i < tenantList->count(); ++i) {
+        QListWidgetItem* item = tenantList->item(i);
+        QComboBox* tenantComboBox = qobject_cast<QComboBox*>(tenantList->itemWidget(item));
+        if (tenantComboBox) {
+            int tenantId = tenantComboBox->currentData().toInt();
+            if (checkOverlap[tenantId]) {
+                QMessageBox::warning(this, "Input Error", "Duplicate tenant detected. Please ensure each tenant is added only once.");
+                return;
+            }
+            checkOverlap[tenantId] = true;
+            rentManager->addRent(contractId, tenantId, i == 0);
+        }
+    }
+    roomManager->setRoomOccupied(roomId);
     
+    Contract newContract(contractId, roomId, startDate.toString("yyyy-MM-dd").toStdString(),
+                         endDate.toString("yyyy-MM-dd").toStdString(), monthlyRent, deposit,
+                         status, notes.toStdString());
+    if (!contractManager->addContract(newContract)) {
+        QMessageBox::critical(this, "Error", "Failed to add contract. Please check the details and try again.");
+        return;
+    }
+    accept();
 }
+
 void AddContractDialog::on_cancelButton_clicked() {
     this->reject();
 }

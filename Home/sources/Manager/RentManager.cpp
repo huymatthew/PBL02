@@ -12,6 +12,18 @@ RentManager::RentManager() : data_loaded(false) {
 RentManager::~RentManager() {
     saveToDatabase();
 }
+void RentManager::addRent(int contractId, int tenantId, bool isRepresentative) {
+    rents.emplace_back(contractId, tenantId, isRepresentative);
+}
+bool RentManager::removeRent(int contractId, int tenantId) {
+    for (auto it = rents.begin(); it != rents.end(); ++it) {
+        if (it->getRoomId() == contractId && it->getTenantId() == tenantId) {
+            rents.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
 int RentManager::getTenantIdByContract(int contractId) {
     for (const auto& rent : rents) {
         if (rent.getRoomId() == contractId && rent.getIsRepresentative()) {
