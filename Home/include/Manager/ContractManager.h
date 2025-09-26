@@ -24,7 +24,7 @@ public:
     bool saveToDatabase();
     
     bool addContract(const Contract& contract);
-    bool addContract(const string& roomId,
+    bool addContract(const int& roomId,
                     const string& start, const string& end,
                     double rent, double deposit, int status,
                     const string& notes);
@@ -32,14 +32,9 @@ public:
     bool updateContract(int contractId, const Contract& updatedContract);
     
     Contract* getContract(int contractId);
-    Contract* getContractByRoom(const string& roomId);
-    Contract* getContractByNumber(const string& contractNumber);
-    vector<Contract> getContractsByStatus(int status);
-    vector<Contract> getAllContracts() const;
     
     bool contractExists(int contractId) const;
-    bool contractNumberExists(const string& contractNumber) const;
-    bool roomHasActiveContract(const string& roomId) const;
+    bool roomHasActiveContract(const int& roomId) const;
     int getContractCount() const;
     
     bool activateContract(int contractId);
@@ -55,9 +50,7 @@ private:
     PrimaryKey pk_manager;
     bool data_loaded;
     
-    // Helper methods
     vector<Contract>::iterator findContractIterator(int contractId);
-    bool isDateBefore(const string& date1, const string& date2) const;
 };
 
 #endif // CONTRACT_MANAGER_H

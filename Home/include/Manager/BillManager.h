@@ -30,20 +30,12 @@ public:
     bool updateBill(int billId, const Bill& updatedBill);
     
     Bill* getBill(int billId);
-    vector<Bill> getBillsByContract(int contractId);
-    vector<Bill> getBillsByMonth(const string& month);
-    vector<Bill> getBillsByStatus(int status);
-    vector<Bill> getAllBills() const;
     
     bool billExists(int billId) const;
     int getBillCount() const;
-    double getTotalAmountByContract(int contractId) const;
-    double getTotalUnpaidAmount() const;
     
     bool markBillAsPaid(int billId);
     bool markBillAsUnpaid(int billId);
-    
-    vector<Bill> searchBills(const string& keyword);
     
     QStandardItemModel* getBillsAsModel() const;
 private:

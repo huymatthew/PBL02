@@ -14,7 +14,7 @@ Contract::Contract(const Contract& other)
       monthly_rent(other.monthly_rent), deposit(other.deposit),
       status(other.status), notes(other.notes) {}
 
-Contract::Contract(int id, const string& roomId,
+Contract::Contract(int id, const int& roomId,
                    const string& start, const string& end,
                    double rent, double deposit, int status,
                    const string& notes)
@@ -25,8 +25,8 @@ Contract::Contract(int id, const string& roomId,
 int Contract::getContractId() const { return contract_id; }
 void Contract::setContractId(int id) { contract_id = id; }
 
-string Contract::getRoomId() const { return room_id; }
-void Contract::setRoomId(const string& roomId) { room_id = roomId; }
+int Contract::getRoomId() const { return room_id; }
+void Contract::setRoomId(const int& roomId) { room_id = roomId; }
 
 string Contract::getStartDate() const { return start_date; }
 void Contract::setStartDate(const string& start) { start_date = start; }

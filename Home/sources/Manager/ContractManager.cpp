@@ -19,8 +19,8 @@ bool ContractManager::loadFromDatabase() {
     string line;
     while (getline(file, line)) {
         istringstream iss(line);
-        int id, status;
-        string roomId, number, start, end, signedDate, notes;
+        int id, roomId, status;
+        string  number, start, end, signedDate, notes;
         double rent, deposit;
         if (!(iss >> id >> roomId >> start >> end >> rent >> deposit >> status >> notes)) {
             cerr << "Error reading line: " << line << endl;
@@ -65,7 +65,7 @@ bool ContractManager::addContract(const Contract& contract) {
     cout << "+ Added contract ID: " << contract.getContractId() << endl;
     return true;
 }
-bool ContractManager::addContract(const string& roomId, const string& start, const string& end,
+bool ContractManager::addContract(const int& roomId, const string& start, const string& end,
                                   double rent, double deposit, int status, const string& notes) {
     int newId = pk_manager.getNextKey();
     Contract newContract(newId, roomId, start, end, rent, deposit, status, notes);
@@ -105,7 +105,7 @@ bool ContractManager::contractExists(int contractId) const {
     return pk_manager.isKeyInUse(contractId);
 }
 
-bool ContractManager::roomHasActiveContract(const string& roomId) const {
+bool ContractManager::roomHasActiveContract(const int& roomId) const {
     for (const auto& contract : contracts) {
         if (contract.getRoomId() == roomId && contract.getStatus() == 1) { // 1: active
             return true;
@@ -174,7 +174,7 @@ QStandardItemModel* ContractManager::getContractsAsModel() const {
     for (const auto& contract : contracts) {
         QList<QStandardItem*> rowItems;
         rowItems.append(new QStandardItem(QString::number(contract.getContractId())));
-        rowItems.append(new QStandardItem(QString::fromStdString(contract.getRoomId())));
+        rowItems.append(new QStandardItem(QString::number(contract.getRoomId())));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getStartDate())));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getEndDate())));
         rowItems.append(new QStandardItem(moneyFormat(contract.getMonthlyRent())));

@@ -8,7 +8,7 @@ using namespace std;
 class Contract {
 private:
     int contract_id;
-    string room_id; 
+    int room_id; 
     string start_date;
     string end_date;
     double monthly_rent;
@@ -18,15 +18,15 @@ private:
 public:
     Contract();
     Contract(const Contract& other);
-    Contract(int id, const string& roomId,
+    Contract(int id, const int& roomId,
              const string& start, const string& end,
              double rent, double deposit, int status, const string& notes);
 
     int getContractId() const;
     void setContractId(int id);
 
-    string getRoomId() const;
-    void setRoomId(const string& roomId);
+    int getRoomId() const;
+    void setRoomId(const int& roomId);
 
     string getStartDate() const;
     void setStartDate(const string& start);
@@ -47,4 +47,4 @@ public:
     void setNotes(const string& notes);
 };
 
-#endif
+#endif // CONTRACT_H

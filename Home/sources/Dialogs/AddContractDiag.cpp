@@ -8,7 +8,7 @@ AddContractDialog::AddContractDialog(QWidget *parent, ContractManager *contractM
     setupUi(this);
     contractIdSpinBox->setValue(contractManager->getContractCount() + 1);
     for (const auto& room : roomManager->getAllRooms()) {
-        roomIdComboBox->addItem(QString::fromStdString(room.getRoomName() + " - " + (room.getStatus() ? "Available" : "Occupied")), QVariant::fromValue(room.getRoomId()));
+        roomIdComboBox->addItem(QString::fromStdString(room.getRoomName() + " - " + (room.getStatus() ? "Occupied" : "Available")), QVariant::fromValue(room.getRoomId()));
     }
     signalConnections();
 }
@@ -49,6 +49,14 @@ void AddContractDialog::on_saveButton_clicked() {
         QMessageBox::warning(this, "Input Error", QString::fromStdString(errorlog));
         return;
     }
+    // Set room status to occupied
+    Room* room = roomManager->getRoom(roomId);
+    if (room) {
+        room->setStatus(0); // 0: occupied
+    } else {
+        QMessageBox::critical(this, "Error", "Selected room not found. Please try again.");
+        return;
+    }
 
     // Get tenant IDs from the tenantList
     vector<int> tenantIds;
@@ -82,7 +90,7 @@ void AddContractDialog::on_saveButton_clicked() {
     }
 
     // Create and add the new contract
-    Contract newContract(contractId, to_string(roomId), datetostring(startDate), datetostring(endDate), monthlyRent, deposit, status, notes.toStdString());
+    Contract newContract(contractId, roomId, datetostring(startDate), datetostring(endDate), monthlyRent, deposit, status, notes.toStdString());
     if (contractManager->addContract(newContract)) {
         QMessageBox::information(this, "Success", "Contract added successfully.");
         this->accept();

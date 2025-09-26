@@ -39,20 +39,10 @@ public:
     int getAvailableRoomCount() const;
     int getOccupiedRoomCount() const;
     
-    // Status management
     bool setRoomOccupied(int roomId, int contractId);
     bool setRoomAvailable(int roomId);
     bool isRoomAvailable(int roomId);
     bool isRoomOccupied(int roomId);
-    
-    vector<Room> getAvailableRooms() const;
-    vector<Room> getOccupiedRooms() const;
-    vector<Room> getRoomsByPriceRange(double minPrice, double maxPrice) const;
-    
-    double getTotalRentRevenue() const;
-    double getAverageRoomRent() const;
-    double getMinRoomRent() const;
-    double getMaxRoomRent() const;
 
     QStandardItemModel* getRoomsAsModel() const;
 
