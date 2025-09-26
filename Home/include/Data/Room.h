@@ -33,6 +33,7 @@ public:
 
     int getRoomType() const;
     void setRoomType(int type);
+    string getRoomTypeString() const;
 
     double getMonthlyRent() const;
     void setMonthlyRent(double rent);

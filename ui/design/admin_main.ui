@@ -428,7 +428,7 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -594,11 +594,6 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
                  <string>Đã thuê</string>
                 </property>
                </item>
-               <item>
-                <property name="text">
-                 <string>Bảo trì</string>
-                </property>
-               </item>
               </widget>
              </item>
              <item row="4" column="0">
@@ -734,42 +729,42 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="5" column="1">
               <widget class="QLineEdit" name="tenantPhoneEdit">
                <property name="placeholderText">
                 <string>Nhập số điện thoại...</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="0">
+             <item row="8" column="0">
               <widget class="QLabel" name="tenantRoomLabel">
                <property name="text">
                 <string>Phòng:</string>
                </property>
               </widget>
              </item>
-             <item row="7" column="1">
+             <item row="8" column="1">
               <widget class="QComboBox" name="tenantRoomComboBox">
                <property name="editable">
                 <bool>false</bool>
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="5" column="0">
               <widget class="QLabel" name="tenantPhoneLabel">
                <property name="text">
                 <string>Số Điện Thoại:</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="3" column="1">
               <widget class="QLineEdit" name="tenantIdEdit">
                <property name="placeholderText">
                 <string>Nhập CCCD...</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="3" column="0">
               <widget class="QLabel" name="tenantIdLabel">
                <property name="enabled">
                 <bool>false</bool>
@@ -779,17 +774,43 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
                </property>
               </widget>
              </item>
-             <item row="8" column="1">
+             <item row="9" column="1">
               <widget class="QDateEdit" name="dateOfBirth">
                <property name="enabled">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
+             <item row="9" column="0">
               <widget class="QLabel" name="label">
                <property name="text">
                 <string>Ngày Sinh</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="comboBox">
+               <item>
+                <property name="text">
+                 <string>Ẩn</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Nam</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Nữ</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Giới Tính</string>
                </property>
               </widget>
              </item>

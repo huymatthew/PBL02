@@ -26,6 +26,14 @@ int Room::getContractId() const { return contract_id; }
 void Room::setContractId(int contractId) { contract_id = contractId; }
 
 int Room::getRoomType() const { return room_type; }
+string Room::getRoomTypeString() const {
+    switch (room_type) {
+        case 0: return "Phòng Đơn";
+        case 1: return "Phòng Đôi";
+        case 2: return "Phòng Gia Đình";
+        default: return "Không Xác Định";
+    }
+}
 void Room::setRoomType(int type) { room_type = type; }
 
 double Room::getMonthlyRent() const { return monthly_rent; }

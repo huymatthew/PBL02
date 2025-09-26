@@ -206,7 +206,7 @@ QStandardItemModel* RoomManager::getRoomsAsModel() const {
         rowItems.append(new QStandardItem(QString::number(room.getRoomId())));
         rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomName())));
         rowItems.append(new QStandardItem(QString::number(room.getContractId())));
-        rowItems.append(new QStandardItem(QString::number(room.getRoomType())));
+        rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomTypeString())));
         rowItems.append(new QStandardItem(moneyFormat(room.getMonthlyRent())));
         rowItems.append(new QStandardItem(room.getStatus() == 0 ? "Available" : "Occupied"));
         rowItems.append(new QStandardItem(QString::fromStdString(room.getDescription())));

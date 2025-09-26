@@ -1,0 +1,17 @@
+# Note by Huy
+! Khi tạo mới tenant thì contractID mặc định là 0
+
+x RoomType
+    - 0 : Phòng đơn
+    - 1 : Phòng đôi
+    - 2 : Phòng gia đình
+x RoomStatus
+    - 0 : Trống
+    - 1 : Đã đặt
+x TenantGender:
+    - 0 : Ẩn
+    - 1 : Nam
+    - 2 : Nữ
+x ContractStatus:
+    - 0 : Đang hoạt động
+    - 1 : Đã kết thúc

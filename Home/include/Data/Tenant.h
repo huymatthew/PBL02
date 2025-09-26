@@ -15,8 +15,9 @@ private:
     string date_of_birth; // ddmmyyyy
     int contract_id;       
     bool is_main_tenant;
+    int gender = 0;
 
-public:
+    public:
     Tenant();
     Tenant(const Tenant& other);
     Tenant(int id, const string& name, const string& phone,
