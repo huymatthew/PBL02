@@ -13,24 +13,32 @@
 #include <QTimer>
 using namespace std;
 
-QuanLy::QuanLy(QMainWindow *mainWindow) : mainWindow(mainWindow)
+QuanLy::QuanLy(QMainWindow *mainWindow) : manager(), mainWindow(mainWindow)
 {
     cout << "\033[1;36mQuanLy initialized.\033[0m" << endl;
-    cout << "\033[1;32mLoading database...\033[0m" << endl;
     setupUi(mainWindow);
+    timeUpdate();
     signalAndSlotConnect();
     onChangedTabActive(0);
+    manager.loadAllData();
 
+    cout << "\033[1;31m++++++++++++++++++++++++++++++++++++++++++++++++++\033[0m" << endl;
+}
+
+QuanLy::~QuanLy()
+{
+    cout << "++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+    manager.saveAllData();
+    cout << "\033[1;31m=== QuanLy destroyed. ===\033[0m" << endl;
+}
+
+void QuanLy::timeUpdate()
+{
     dateTimeLabel->setText(QDateTime::currentDateTime().toString("hh:mm:ss dd/MM/yyyy"));
     QTimer *timer = new QTimer(mainWindow);
     QObject::connect(timer, &QTimer::timeout, [this]()
                      { dateTimeLabel->setText(QDateTime::currentDateTime().toString("hh:mm:ss dd/MM/yyyy")); });
     timer->start(1000);
-}
-
-QuanLy::~QuanLy()
-{
-    cout << "\033[1;31m=== QuanLy destroying. ===\033[0m" << endl;
 }
 
 void QuanLy::signalAndSlotConnect()
@@ -66,61 +74,46 @@ void QuanLy::onChangedTabActive(int index)
         loadTenantView();
         break;
     case 2:
-        contractsTableView->setModel(contractManager.getContractsAsModel());
+        loadContractView();
         break;
     case 3:
-        paymentsTableView->setModel(billManager.getBillsAsModel());
+        paymentsTableView->setModel(manager.billM.getBillsAsModel());
         break;
     default:
         cerr << "Invalid tab index: " << index << endl;
         break;
     }
 }
-// Show
-/*
-void QuanLy::onShowTenantDetails(int tenantId)
-{
-    Tenant *tenant = tenantManager.getTenant(tenantId);
+
+void QuanLy::onShowTenantDetails(int tenantId){
+    Tenant *tenant = manager.tenantM.getTenant(tenantId);
     if (!tenant)
     {
         cerr << "Tenant ID " << tenantId << " not found." << endl;
         return;
     }
-    tenantManager.setTenantSelected(tenant);
-    tenantNameEdit->setText(QString::fromStdString(tenant->getFullName()));
-    tenantIdEdit->setText(QString::fromStdString(to_string(tenant->getTenantId())));
-    tenantPhoneEdit->setText(QString::fromStdString(tenant->getPhone()));
-    dateOfBirth->setDate(QDate::fromString(QString::fromStdString(tenant->getDateOfBirth()), "yyyy-MM-dd"));
-
-    int contractId = tenant->getContractId();
-    if (contractId == 0)
-        tenantRoomComboBox->setCurrentText("No Room Assigned");
-
-    Contract *contract = contractManager.getContract(contractId);
-    if (!contract)
-    {
-        cerr << "Contract ID " << contractId << " for tenant ID " << tenantId << " not found." << endl;
-        return;
-    }
-    int index = tenantRoomComboBox->findData(contract->getRoomId());
-    if (index != -1)
-    {
-        tenantRoomComboBox->setCurrentIndex(index);
-    }
+    Room* tenant_room = manager.getRoomFromTenant(tenantId);
+    if(tenant_room){
+        cout << "Tenant " << tenant->getFullName() << " is in room " << tenant_room->getRoomName() << endl;
+        tenantRoom->setText(QString::fromStdString(tenant_room->getRoomName()));}
     else
-        tenantRoomComboBox->setCurrentText("No Room Assigned");
+        tenantRoom->setText("No Room");
+
+    manager.tenantM.setTenantSelected(tenant);
+    tenantNameEdit->setText(QString::fromStdString(tenant->getFullName()));
+    tenantIdEdit->setText(QString::fromStdString(tenant->getIdentityCard()));
+    tenantPhoneEdit->setText(QString::fromStdString(tenant->getPhone()));
+    dateOfBirth->setDate(QDate::fromString(QString::fromStdString(tenant->getDateOfBirth()), "ddMMyyyy"));
 }
-        */
-void QuanLy::onShowTenantDetails(int tenantId){}
 void QuanLy::onShowRoomDetails(int roomId)
 {
-    Room *room = roomManager.getRoom(roomId);
+    Room *room = manager.roomM.getRoom(roomId);
     if (!room)
     {
         cerr << "Room ID " << roomId << " not found." << endl;
         return;
     }
-    roomManager.setRoomSelected(room);
+    manager.roomM.setRoomSelected(room);
     roomNumberEdit->setText(QString::fromStdString(room->getRoomName()));
     roomDescEdit->setText(QString::fromStdString(room->getDescription()));
     roomPriceSpinBox->setValue(room->getMonthlyRent());
@@ -131,43 +124,54 @@ void QuanLy::onShowRoomDetails(int roomId)
 // Load
 void QuanLy::loadTenantView()
 {
-    tenantManager.setTenantSelected(nullptr);
-    tenantsTableView->setModel(tenantManager.getTenantsAsModel());
-    tenantRoomComboBox->clear();
-    tenantRoomComboBox->addItem("No Room Assigned", QVariant::fromValue(0));
-    for (const auto &room : roomManager.getAllRooms())
-    {
-        tenantRoomComboBox->addItem(QString::fromStdString(room.getRoomName()), QVariant::fromValue(room.getRoomId()));
-    }
+    manager.tenantM.setTenantSelected(nullptr);
+    tenantsTableView->setModel(manager.tenantM.getTenantsAsModel());
 }
 void QuanLy::loadRoomView()
 {
-    roomManager.setRoomSelected(nullptr);
-    roomsTableView->setModel(roomManager.getRoomsAsModel());
+    manager.roomM.setRoomSelected(nullptr);
+    roomsTableView->setModel(manager.roomM.getRoomsAsModel());
+}
+void QuanLy::loadContractView()
+{
+    // Sửa lại cột "Mã Phòng" thành "Phòng"
+    QStandardItemModel* model = manager.contractM.getContractsAsModel();
+    model->setHeaderData(1, Qt::Horizontal, "Phòng");
+    for (int row = 0; row < model->rowCount(); ++row) {
+        QStandardItem *item = model->item(row, 1);
+        if (item) {
+            string newItem = manager.roomM.getRoom(item->text().toInt())->getRoomName();
+            item->setData(QString::fromStdString(newItem), Qt::DisplayRole);
+        }
+    }
+    contractsTableView->setModel(model);
 }
 
 // Add
 void QuanLy::addTenantCall()
 {
-    AddTenantDiag addTenantDialog(mainWindow, tenantManager);
+    AddTenantDiag addTenantDialog(mainWindow, manager.tenantM);
     addTenantDialog.exec();
     loadTenantView();
 }
 void QuanLy::addRoomCall()
 {
-    AddRoomDiag addRoomDialog(mainWindow, roomManager);
+    AddRoomDiag addRoomDialog(mainWindow, manager.roomM);
     addRoomDialog.exec();
     loadRoomView();
 }
 void QuanLy::addContractCall()
 {
-    AddContractDialog addContractDialog(mainWindow, &contractManager, &roomManager, &tenantManager, &rentManager);
+    AddContractDialog addContractDialog(mainWindow, &manager.contractM, &manager.roomM, &manager.tenantM, &manager.rentM);
     addContractDialog.exec();
+    loadContractView();
+    loadTenantView();
+    loadRoomView();
 }
 // Remove
 void QuanLy::removeTenantCall()
 {
-    Tenant *tenant = tenantManager.getTenantSelected();
+    Tenant *tenant = manager.tenantM.getTenantSelected();
     if (tenant == nullptr)
     {
         QMessageBox::warning(mainWindow, "Remove Tenant", "Please select a tenant to remove.");
@@ -177,7 +181,7 @@ void QuanLy::removeTenantCall()
     if (confirm == QMessageBox::Yes)
     {
         cout << "Delete User: " << tenant->getFullName() << endl;
-        tenantManager.removeTenant(tenant->getTenantId());
+        manager.tenantM.removeTenant(tenant->getTenantId());
         loadTenantView();
     }
     else
@@ -188,7 +192,7 @@ void QuanLy::removeTenantCall()
 
 void QuanLy::removeRoomCall()
 {
-    Room *room = roomManager.getRoomSelected();
+    Room *room = manager.roomM.getRoomSelected();
     if (room == nullptr)
     {
         QMessageBox::warning(mainWindow, "Remove Room", "Please select a room to remove.");
@@ -198,7 +202,7 @@ void QuanLy::removeRoomCall()
     if (confirm == QMessageBox::Yes)
     {
         cout << "Delete Room: " << room->getRoomName() << endl;
-        roomManager.removeRoom(room->getRoomId());
+        manager.roomM.removeRoom(room->getRoomId());
         loadRoomView();
     }
     else

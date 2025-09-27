@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../logo.png</normaloff>../../logo.png</iconset>
+    <normaloff>./logo.png</normaloff>./logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">/* Admin Window Styling */
@@ -23,7 +23,7 @@ QMainWindow {
     background-color: #f8f9fa;
     color: #212529;
 }
-
+QAbstractItemView:disabled, QLabel:disabled, QLineEdit:disabled, QComboBox:disabled, QPushButton:disabled { color: black; font-weight: bold}
 /* Menu Bar Styling */
 QMenuBar {
     background-color: #343a40;
@@ -428,7 +428,7 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -729,62 +729,10 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
-              <widget class="QLineEdit" name="tenantPhoneEdit">
-               <property name="placeholderText">
-                <string>Nhập số điện thoại...</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="tenantRoomLabel">
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_2">
                <property name="text">
-                <string>Phòng:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="1">
-              <widget class="QComboBox" name="tenantRoomComboBox">
-               <property name="editable">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="tenantPhoneLabel">
-               <property name="text">
-                <string>Số Điện Thoại:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLineEdit" name="tenantIdEdit">
-               <property name="placeholderText">
-                <string>Nhập CCCD...</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="tenantIdLabel">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="text">
-                <string>CMND/CCCD:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="1">
-              <widget class="QDateEdit" name="dateOfBirth">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="label">
-               <property name="text">
-                <string>Ngày Sinh</string>
+                <string>Giới Tính</string>
                </property>
               </widget>
              </item>
@@ -807,10 +755,78 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
                </item>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_2">
+             <item row="3" column="0">
+              <widget class="QLabel" name="tenantIdLabel">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="text">
-                <string>Giới Tính</string>
+                <string>CMND/CCCD:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="tenantIdEdit">
+               <property name="placeholderText">
+                <string>Nhập CCCD...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="tenantPhoneLabel">
+               <property name="text">
+                <string>Số Điện Thoại:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="tenantPhoneEdit">
+               <property name="placeholderText">
+                <string>Nhập số điện thoại...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Ngày Sinh</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QDateEdit" name="dateOfBirth">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0">
+              <widget class="QLabel" name="tenantRoomLabel">
+               <property name="text">
+                <string>Đang ở Phòng:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="1">
+              <widget class="QLineEdit" name="tenantRoom">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0" colspan="2">
+              <widget class="Line" name="line">
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <property name="lineWidth">
+                <number>3</number>
+               </property>
+               <property name="midLineWidth">
+                <number>0</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
                </property>
               </widget>
              </item>

@@ -17,6 +17,7 @@
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFormLayout>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -94,16 +95,17 @@ public:
     QFormLayout *tenantFormLayout;
     QLabel *tenantNameLabel;
     QLineEdit *tenantNameEdit;
-    QLineEdit *tenantPhoneEdit;
-    QLabel *tenantRoomLabel;
-    QComboBox *tenantRoomComboBox;
-    QLabel *tenantPhoneLabel;
-    QLineEdit *tenantIdEdit;
-    QLabel *tenantIdLabel;
-    QDateEdit *dateOfBirth;
-    QLabel *label;
-    QComboBox *comboBox;
     QLabel *label_2;
+    QComboBox *comboBox;
+    QLabel *tenantIdLabel;
+    QLineEdit *tenantIdEdit;
+    QLabel *tenantPhoneLabel;
+    QLineEdit *tenantPhoneEdit;
+    QLabel *label;
+    QDateEdit *dateOfBirth;
+    QLabel *tenantRoomLabel;
+    QLineEdit *tenantRoom;
+    QFrame *line;
     QSpacerItem *tenantVerticalSpacer;
     QVBoxLayout *tenantButtonsLayout;
     QPushButton *editTenantButton;
@@ -178,14 +180,14 @@ public:
             AdminMainWindow->setObjectName(QString::fromUtf8("AdminMainWindow"));
         AdminMainWindow->resize(1200, 862);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("../../logo.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("./logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         AdminMainWindow->setWindowIcon(icon);
         AdminMainWindow->setStyleSheet(QString::fromUtf8("/* Admin Window Styling */\n"
 "QMainWindow {\n"
 "    background-color: #f8f9fa;\n"
 "    color: #212529;\n"
 "}\n"
-"\n"
+"QAbstractItemView:disabled, QLabel:disabled, QLineEdit:disabled, QComboBox:disabled, QPushButton:disabled { color: black; font-weight: bold}\n"
 "/* Menu Bar Styling */\n"
 "QMenuBar {\n"
 "    background-color: #343a40;\n"
@@ -222,7 +224,8 @@ public:
 "QMenu::item {\n"
 "    padding: 10px 30px;\n"
 "    margin: 2px;\n"
-"    border-radius: 6px;\n"
+"    bord"
+                        "er-radius: 6px;\n"
 "}\n"
 "\n"
 "QMenu::item:selected {\n"
@@ -230,8 +233,7 @@ public:
 "    color: white;\n"
 "}\n"
 "\n"
-"QMenu::separat"
-                        "or {\n"
+"QMenu::separator {\n"
 "    height: 2px;\n"
 "    background-color: #dee2e6;\n"
 "    margin: 6px 20px;\n"
@@ -271,15 +273,15 @@ public:
 "    border: 2px solid #dee2e6;\n"
 "    border-radius: 10px;\n"
 "    background-color: white;\n"
-"    padding: 8px;\n"
+"    pad"
+                        "ding: 8px;\n"
 "}\n"
 "\n"
 "QTabBar::tab {\n"
 "    background-color: #f8f9fa;\n"
 "    border: 2px solid #dee2e6;\n"
 "    border-bottom: none;\n"
-""
-                        "    border-top-left-radius: 8px;\n"
+"    border-top-left-radius: 8px;\n"
 "    border-top-right-radius: 8px;\n"
 "    padding: 12px 20px;\n"
 "    margin-right: 2px;\n"
@@ -315,15 +317,15 @@ public:
 "    padding: 10px;\n"
 "    border-bottom: 1px solid #e9ecef;\n"
 "}\n"
-"\n"
+""
+                        "\n"
 "QTableView::item:selected {\n"
 "    background-color: #007bff;\n"
 "    color: white;\n"
 "}\n"
 "\n"
 "QHeaderView::section {\n"
-"    backgr"
-                        "ound-color: #495057;\n"
+"    background-color: #495057;\n"
 "    color: white;\n"
 "    padding: 12px;\n"
 "    border: none;\n"
@@ -363,12 +365,12 @@ public:
 "\n"
 "/* Input Fields Styling */\n"
 "QDateEdit, QComboBox, QDoubleSpinBox, QLineEdit, QSpinBox {\n"
-"    background-color: white;\n"
+""
+                        "    background-color: white;\n"
 "    border: 2px solid #ced4da;\n"
 "    border-radius: 8px;\n"
 "    padding: 10px 15px;\n"
-"    font-size:"
-                        " 12px;\n"
+"    font-size: 12px;\n"
 "    min-height: 18px;\n"
 "}\n"
 "\n"
@@ -402,11 +404,11 @@ public:
 "}\n"
 "\n"
 "QComboBox QAbstractItemView {\n"
-"    background-color: white;\n"
+""
+                        "    background-color: white;\n"
 "    border: 2px solid #ced4da;\n"
 "    border-radius: 8px;\n"
-"    selection-background-color: #007bff;"
-                        "\n"
+"    selection-background-color: #007bff;\n"
 "    selection-color: black;\n"
 "}\n"
 "\n"
@@ -455,7 +457,8 @@ public:
 "    background-color: #c82333;\n"
 "}\n"
 "\n"
-"#searchButton {\n"
+"#sea"
+                        "rchButton {\n"
 "    background-color: #17a2b8;\n"
 "}\n"
 "\n"
@@ -463,8 +466,7 @@ public:
 "    background-color: #138496;\n"
 "}\n"
 "\n"
-"/*"
-                        " Status Bar Styling */\n"
+"/* Status Bar Styling */\n"
 "QStatusBar {\n"
 "    background-color: #495057;\n"
 "    color: white;\n"
@@ -503,14 +505,14 @@ public:
 "}\n"
 "\n"
 "QCalendarWidget QMenu {\n"
-"    background-color: #f8f9fa;\n"
+"    background-color"
+                        ": #f8f9fa;\n"
 "    border: 1px solid #ced4da;\n"
 "    border-radius: 6px;\n"
 "}\n"
 "\n"
 "QCalendarWidget QSpinBox {\n"
-"    background: "
-                        "#f8f9fa;\n"
+"    background: #f8f9fa;\n"
 "    border: 1px solid #ced4da;\n"
 "    border-radius: 6px;\n"
 "    font-size: 12px;\n"
@@ -543,15 +545,15 @@ public:
 "    color: #212529;\n"
 "}\n"
 "\n"
-"QCalendarWidget QAbstractItemView:disabled {\n"
+"QCalendarWidget QAbstractItemView:d"
+                        "isabled {\n"
 "    color: #adb5bd;\n"
 "}\n"
 "\n"
 "QCalendarWidget QAbstractItemView::item {\n"
 "    padding: 6px;\n"
 "    margin: 1px;\n"
-""
-                        "    border-radius: 4px;\n"
+"    border-radius: 4px;\n"
 "}\n"
 "\n"
 "QCalendarWidget QAbstractItemView::item:selected {\n"
@@ -863,48 +865,10 @@ public:
 
         tenantFormLayout->setWidget(1, QFormLayout::FieldRole, tenantNameEdit);
 
-        tenantPhoneEdit = new QLineEdit(tenantInfoGroup);
-        tenantPhoneEdit->setObjectName(QString::fromUtf8("tenantPhoneEdit"));
+        label_2 = new QLabel(tenantInfoGroup);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        tenantFormLayout->setWidget(5, QFormLayout::FieldRole, tenantPhoneEdit);
-
-        tenantRoomLabel = new QLabel(tenantInfoGroup);
-        tenantRoomLabel->setObjectName(QString::fromUtf8("tenantRoomLabel"));
-
-        tenantFormLayout->setWidget(8, QFormLayout::LabelRole, tenantRoomLabel);
-
-        tenantRoomComboBox = new QComboBox(tenantInfoGroup);
-        tenantRoomComboBox->setObjectName(QString::fromUtf8("tenantRoomComboBox"));
-        tenantRoomComboBox->setEditable(false);
-
-        tenantFormLayout->setWidget(8, QFormLayout::FieldRole, tenantRoomComboBox);
-
-        tenantPhoneLabel = new QLabel(tenantInfoGroup);
-        tenantPhoneLabel->setObjectName(QString::fromUtf8("tenantPhoneLabel"));
-
-        tenantFormLayout->setWidget(5, QFormLayout::LabelRole, tenantPhoneLabel);
-
-        tenantIdEdit = new QLineEdit(tenantInfoGroup);
-        tenantIdEdit->setObjectName(QString::fromUtf8("tenantIdEdit"));
-
-        tenantFormLayout->setWidget(3, QFormLayout::FieldRole, tenantIdEdit);
-
-        tenantIdLabel = new QLabel(tenantInfoGroup);
-        tenantIdLabel->setObjectName(QString::fromUtf8("tenantIdLabel"));
-        tenantIdLabel->setEnabled(false);
-
-        tenantFormLayout->setWidget(3, QFormLayout::LabelRole, tenantIdLabel);
-
-        dateOfBirth = new QDateEdit(tenantInfoGroup);
-        dateOfBirth->setObjectName(QString::fromUtf8("dateOfBirth"));
-        dateOfBirth->setEnabled(true);
-
-        tenantFormLayout->setWidget(9, QFormLayout::FieldRole, dateOfBirth);
-
-        label = new QLabel(tenantInfoGroup);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        tenantFormLayout->setWidget(9, QFormLayout::LabelRole, label);
+        tenantFormLayout->setWidget(2, QFormLayout::LabelRole, label_2);
 
         comboBox = new QComboBox(tenantInfoGroup);
         comboBox->addItem(QString());
@@ -914,10 +878,57 @@ public:
 
         tenantFormLayout->setWidget(2, QFormLayout::FieldRole, comboBox);
 
-        label_2 = new QLabel(tenantInfoGroup);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        tenantIdLabel = new QLabel(tenantInfoGroup);
+        tenantIdLabel->setObjectName(QString::fromUtf8("tenantIdLabel"));
+        tenantIdLabel->setEnabled(true);
 
-        tenantFormLayout->setWidget(2, QFormLayout::LabelRole, label_2);
+        tenantFormLayout->setWidget(3, QFormLayout::LabelRole, tenantIdLabel);
+
+        tenantIdEdit = new QLineEdit(tenantInfoGroup);
+        tenantIdEdit->setObjectName(QString::fromUtf8("tenantIdEdit"));
+
+        tenantFormLayout->setWidget(3, QFormLayout::FieldRole, tenantIdEdit);
+
+        tenantPhoneLabel = new QLabel(tenantInfoGroup);
+        tenantPhoneLabel->setObjectName(QString::fromUtf8("tenantPhoneLabel"));
+
+        tenantFormLayout->setWidget(5, QFormLayout::LabelRole, tenantPhoneLabel);
+
+        tenantPhoneEdit = new QLineEdit(tenantInfoGroup);
+        tenantPhoneEdit->setObjectName(QString::fromUtf8("tenantPhoneEdit"));
+
+        tenantFormLayout->setWidget(5, QFormLayout::FieldRole, tenantPhoneEdit);
+
+        label = new QLabel(tenantInfoGroup);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        tenantFormLayout->setWidget(8, QFormLayout::LabelRole, label);
+
+        dateOfBirth = new QDateEdit(tenantInfoGroup);
+        dateOfBirth->setObjectName(QString::fromUtf8("dateOfBirth"));
+        dateOfBirth->setEnabled(true);
+
+        tenantFormLayout->setWidget(8, QFormLayout::FieldRole, dateOfBirth);
+
+        tenantRoomLabel = new QLabel(tenantInfoGroup);
+        tenantRoomLabel->setObjectName(QString::fromUtf8("tenantRoomLabel"));
+
+        tenantFormLayout->setWidget(10, QFormLayout::LabelRole, tenantRoomLabel);
+
+        tenantRoom = new QLineEdit(tenantInfoGroup);
+        tenantRoom->setObjectName(QString::fromUtf8("tenantRoom"));
+        tenantRoom->setEnabled(false);
+
+        tenantFormLayout->setWidget(10, QFormLayout::FieldRole, tenantRoom);
+
+        line = new QFrame(tenantInfoGroup);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setFrameShadow(QFrame::Raised);
+        line->setLineWidth(3);
+        line->setMidLineWidth(0);
+        line->setFrameShape(QFrame::HLine);
+
+        tenantFormLayout->setWidget(9, QFormLayout::SpanningRole, line);
 
 
         tenantControlsLayout->addWidget(tenantInfoGroup);
@@ -1318,7 +1329,7 @@ public:
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(0);
+        mainTabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);
@@ -1491,17 +1502,17 @@ public:
         tenantInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Kh\303\241ch Thu\303\252", nullptr));
         tenantNameLabel->setText(QCoreApplication::translate("AdminMainWindow", "H\341\273\215 T\303\252n:", nullptr));
         tenantNameEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p h\341\273\215 t\303\252n...", nullptr));
-        tenantPhoneEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p s\341\273\221 \304\221i\341\273\207n tho\341\272\241i...", nullptr));
-        tenantRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
-        tenantPhoneLabel->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\221 \304\220i\341\273\207n Tho\341\272\241i:", nullptr));
-        tenantIdEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p CCCD...", nullptr));
-        tenantIdLabel->setText(QCoreApplication::translate("AdminMainWindow", "CMND/CCCD:", nullptr));
-        label->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y Sinh", nullptr));
+        label_2->setText(QCoreApplication::translate("AdminMainWindow", "Gi\341\273\233i T\303\255nh", nullptr));
         comboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "\341\272\250n", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "Nam", nullptr));
         comboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "N\341\273\257", nullptr));
 
-        label_2->setText(QCoreApplication::translate("AdminMainWindow", "Gi\341\273\233i T\303\255nh", nullptr));
+        tenantIdLabel->setText(QCoreApplication::translate("AdminMainWindow", "CMND/CCCD:", nullptr));
+        tenantIdEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p CCCD...", nullptr));
+        tenantPhoneLabel->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\221 \304\220i\341\273\207n Tho\341\272\241i:", nullptr));
+        tenantPhoneEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p s\341\273\221 \304\221i\341\273\207n tho\341\272\241i...", nullptr));
+        label->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y Sinh", nullptr));
+        tenantRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "\304\220ang \341\273\237 Ph\303\262ng:", nullptr));
         editTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Th\303\264ng Tin", nullptr));
         deleteTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Kh\303\241ch", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tenantsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Kh\303\241ch Thu\303\252", nullptr));

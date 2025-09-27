@@ -5,6 +5,8 @@
 #include <QStandardItemModel>
 
 #include <Data/Rent.h>
+class DataManager;
+
 
 class RentManager {
 public:
@@ -21,6 +23,8 @@ public:
 private:
     vector<Rent> rents;
     bool data_loaded;
+
+    friend class DataManager;
 };
 
 

@@ -14,6 +14,8 @@
 #include <sstream>
 
 using namespace std;
+class DataManager;
+
 
 class BillManager {
 public:
@@ -38,7 +40,8 @@ public:
     bool markBillAsUnpaid(int billId);
     
     QStandardItemModel* getBillsAsModel() const;
-private:
+
+    private:
     vector<Bill> bills;
     PrimaryKey pk_manager;
     bool data_loaded;
@@ -46,6 +49,8 @@ private:
     // Helper methods
     vector<Bill>::iterator findBillIterator(int billId);
     void sortBillsByDate();
+    
+    friend class DataManager;
 };
 
 #endif // BILL_MANAGER_H

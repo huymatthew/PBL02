@@ -13,6 +13,7 @@
 #include <fstream>
 #include <sstream>
 using namespace std;
+class DataManager;
 
 class RoomManager {
 public:
@@ -55,6 +56,8 @@ private:
     Room* selected;
     
     vector<Room>::iterator findRoomIterator(int roomId);
+
+    friend class DataManager;
 };
 
 #endif // ROOM_MANAGER_H

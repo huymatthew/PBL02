@@ -6,12 +6,9 @@
 
 using namespace std;
 
-RentManager::RentManager() : data_loaded(false) {
-    loadFromDatabase();
-}
-RentManager::~RentManager() {
-    saveToDatabase();
-}
+RentManager::RentManager() : data_loaded(false) {}
+RentManager::~RentManager() {}
+
 void RentManager::addRent(int contractId, int tenantId, bool isRepresentative) {
     rents.emplace_back(contractId, tenantId, isRepresentative);
 }

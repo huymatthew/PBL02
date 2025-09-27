@@ -1,13 +1,8 @@
 #include <Manager/ServiceManager.h>
 using namespace std;
 
-ServiceManager::ServiceManager() : data_loaded(false){
-    loadFromDatabase();
-}
-
-ServiceManager::~ServiceManager(){
-    saveToDatabase();
-}
+ServiceManager::ServiceManager() : data_loaded(false), pk_manager() {}
+ServiceManager::~ServiceManager() {}
 
 bool ServiceManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading rooms from database...\033[0m" << endl;

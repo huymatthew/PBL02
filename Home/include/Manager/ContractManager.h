@@ -14,6 +14,8 @@
 #include <sstream>
 
 using namespace std;
+class DataManager;
+
 
 class ContractManager {
 public:
@@ -51,6 +53,8 @@ private:
     bool data_loaded;
     
     vector<Contract>::iterator findContractIterator(int contractId);
+
+    friend class DataManager;
 };
 
 #endif // CONTRACT_MANAGER_H

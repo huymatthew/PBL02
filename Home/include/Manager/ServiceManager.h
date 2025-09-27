@@ -10,6 +10,7 @@
 #include <fstream>
 #include <sstream>
 using namespace std;
+class DataManager;
 
 class ServiceManager {
 public:
@@ -69,6 +70,8 @@ private:
     bool isValidServiceType(int serviceType) const;
     bool isValidQuantity(int quantity) const;
     bool isValidPrice(double price) const;
+
+    friend class DataManager;
 };
 
 #endif // SERVICE_MANAGER_H

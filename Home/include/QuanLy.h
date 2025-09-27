@@ -11,13 +11,7 @@
 #include <Data/ServiceType.h>
 #include <Data/Tenant.h>
 
-#include <Manager/ServiceManager.h>
-#include <Manager/RoomManager.h>
-#include <Manager/BillManager.h>
-#include <Manager/ContractManager.h>
-#include <Manager/TenantManager.h>
-#include <Manager/ServiceTypeManager.h>
-#include <Manager/RentManager.h>
+#include <Manager/DataManager.h>
 
 #include <admin_main.h>
 
@@ -27,6 +21,7 @@ public:
     ~QuanLy();
 
     void signalAndSlotConnect();
+    void timeUpdate();
 
     void onChangedTabActive(int index);
     void onShowTenantDetails(int tenantId);
@@ -34,6 +29,7 @@ public:
 
     void loadTenantView();
     void loadRoomView();
+    void loadContractView();
 
     void addTenantCall();
     void addRoomCall();
@@ -42,14 +38,8 @@ public:
     void removeTenantCall();
     void removeRoomCall();
 private:
-    BillManager billManager;
-    ContractManager contractManager;
-    RoomManager roomManager;
-    ServiceManager serviceManager;
-    ServiceTypeManager serviceTypeManager;
-    TenantManager tenantManager;
-    RentManager rentManager;
-    
+    DataManager manager;
+
     QMainWindow* mainWindow;
 };
 

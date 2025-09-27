@@ -13,6 +13,7 @@
 #include <fstream>
 #include <sstream>
 using namespace std;
+class DataManager;
 
 class TenantManager {
 public:
@@ -57,6 +58,8 @@ private:
     void sortTenantsById();
     string formatPhone(const string& phone) const;
     string formatIdentityCard(const string& identityCard) const;
+
+    friend class DataManager;
 };
 
 #endif // TENANT_MANAGER_H

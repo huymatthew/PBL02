@@ -3,13 +3,8 @@
 
 using namespace std;
 
-TenantManager::TenantManager() : data_loaded(false), pk_manager() {
-    loadFromDatabase();
-}
-
-TenantManager::~TenantManager() {
-    saveToDatabase();
-}
+TenantManager::TenantManager() : data_loaded(false), pk_manager() {}
+TenantManager::~TenantManager() {}
 
 bool TenantManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading tenants from database...\033[0m" << endl;
