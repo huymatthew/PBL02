@@ -18,10 +18,8 @@ public:
     Service();
     Service(const Service& other);
     Service(int id, int type, int billId, int qty, double price);
-
-    static vector<Service> loadFromDatabase();
-    static bool saveToDatabase(const vector<Service>& services);
-
+    ~Service();
+    
     int getServiceId() const;
     void setServiceId(int id);
 

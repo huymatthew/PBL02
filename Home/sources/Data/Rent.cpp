@@ -7,6 +7,7 @@ Rent::Rent(const Rent& other)
 
 Rent::Rent(int roomId, int tenantId, bool isRepresentative)
     : room_id(roomId), tenant_id(tenantId), is_representative(isRepresentative) {}
+Rent::~Rent() {}
 
 int Rent::getRoomId() const {
     return room_id;

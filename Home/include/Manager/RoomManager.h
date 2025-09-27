@@ -45,6 +45,7 @@ public:
     bool isRoomOccupied(int roomId);
 
     QStandardItemModel* getRoomsAsModel() const;
+    QStringList getRoomListForComboBox(int filter = 0) const;
 
     Room* getRoomSelected();
     void setRoomSelected(Room* room);

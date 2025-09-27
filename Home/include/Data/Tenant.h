@@ -20,10 +20,7 @@ private:
     Tenant(const Tenant& other);
     Tenant(int id, const string& name, const string& phone,
            const string& id_card, const string& dob, int gender);
-
-
-    static vector<Tenant> loadFromDatabase();
-    static bool saveToDatabase(const vector<Tenant>& tenants);
+    ~Tenant();
 
     int getTenantId() const;
     void setTenantId(int id);

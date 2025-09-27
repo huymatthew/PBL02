@@ -4,6 +4,7 @@
 #include <Dialogs/AddTenantDiag.h>
 #include <Dialogs/AddRoomDiag.h>
 #include <Dialogs/AddContractDiag.h>
+#include <Dialogs/AddBillDiag.h>
 
 #include <QStandardItem>
 #include <QStandardItemModel>
@@ -19,8 +20,8 @@ QuanLy::QuanLy(QMainWindow *mainWindow) : manager(), mainWindow(mainWindow)
     setupUi(mainWindow);
     timeUpdate();
     signalAndSlotConnect();
-    onChangedTabActive(0);
     manager.loadAllData();
+    onChangedTabActive(0);
 
     cout << "\033[1;31m++++++++++++++++++++++++++++++++++++++++++++++++++\033[0m" << endl;
 }
@@ -56,6 +57,8 @@ void QuanLy::signalAndSlotConnect()
                      { addRoomCall(); });
     QObject::connect(actionQuickAddContract, &QAction::triggered, [this]()
                      { addContractCall(); });
+    QObject::connect(actionQuickAddBill, &QAction::triggered, [this]()
+                     { addBillCall(); });
 
     QObject::connect(deleteTenantButton, &QPushButton::clicked, [this]()
                      { removeTenantCall(); });
@@ -103,6 +106,7 @@ void QuanLy::onShowTenantDetails(int tenantId){
     tenantNameEdit->setText(QString::fromStdString(tenant->getFullName()));
     tenantIdEdit->setText(QString::fromStdString(tenant->getIdentityCard()));
     tenantPhoneEdit->setText(QString::fromStdString(tenant->getPhone()));
+    comboBox->setCurrentIndex(tenant->getGender());
     dateOfBirth->setDate(QDate::fromString(QString::fromStdString(tenant->getDateOfBirth()), "ddMMyyyy"));
 }
 void QuanLy::onShowRoomDetails(int roomId)
@@ -159,6 +163,19 @@ void QuanLy::addRoomCall()
     AddRoomDiag addRoomDialog(mainWindow, manager.roomM);
     addRoomDialog.exec();
     loadRoomView();
+}
+void QuanLy::addBillCall()
+{
+    AddBillDialog addBillDialog(mainWindow, &manager);
+    addBillDialog.setFixedSize(700, 800);
+    if (manager.roomM.getRoomSelected()) {
+        addBillDialog.setRoom(manager.roomM.getRoomSelected()->getRoomId());
+        addBillDialog.exec();
+        paymentsTableView->setModel(manager.billM.getBillsAsModel());
+    } else {
+        QMessageBox::warning(mainWindow, "Add Bill", "Please select a room to add a bill.");
+    }
+    
 }
 void QuanLy::addContractCall()
 {

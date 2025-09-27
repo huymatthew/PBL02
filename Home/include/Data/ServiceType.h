@@ -10,19 +10,17 @@ class ServiceType {
     int service_type;
     string name;
     double price;
+    string unit;
     public:
     ServiceType();
-    ServiceType(int type, const string& name, double price);
+    ServiceType(const ServiceType& other);
+    ServiceType(int type, const string& name, double price, const string& unit);
+    ~ServiceType();
 
     int getServiceType() const;
-    void setServiceType(int type);
     string getName() const;
-    void setName(const string& name);
     double getPrice() const;
-    void setPrice(double price);
-
-    static vector<ServiceType> loadFromDatabase();
-    static bool saveToDatabase(const vector<ServiceType>& serviceTypes);
+    string getUnit() const;
 };
 
 #endif // SERVICE_TYPE_H

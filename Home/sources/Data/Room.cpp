@@ -14,6 +14,7 @@ Room::Room(int id, const string& name, int type,
          double rent, const string& desc, int status)
     : room_id(id), room_name(name), room_type(type),
       monthly_rent(rent), description(desc), status(status) {}
+Room::~Room() {}
 
 int Room::getRoomId() const { return room_id; }
 void Room::setRoomId(int id) { room_id = id; }

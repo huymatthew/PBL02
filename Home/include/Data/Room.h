@@ -20,6 +20,7 @@ public:
     Room(const Room& other);
     Room(int id, const string& name, int type,
          double rent, const string& desc, int status);
+    ~Room();
 
     int getRoomId() const;
     void setRoomId(int id);

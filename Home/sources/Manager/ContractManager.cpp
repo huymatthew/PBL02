@@ -96,6 +96,14 @@ Contract* ContractManager::getContract(int contractId) {
     }
     return nullptr;
 }
+Contract* ContractManager::getActiveContractByRoom(const int& roomId) {
+    for (auto it = contracts.begin(); it != contracts.end(); ++it) {
+        if (it->getRoomId() == roomId && it->getStatus() == 1) {
+            return &(*it);
+        }
+    }
+    return nullptr;
+}
 
 bool ContractManager::contractExists(int contractId) const {
     return pk_manager.isKeyInUse(contractId);

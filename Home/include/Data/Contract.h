@@ -21,7 +21,8 @@ public:
     Contract(int id, const int& roomId,
              const string& start, const string& end,
              double rent, double deposit, int status, const string& notes);
-
+    ~Contract();
+    
     int getContractId() const;
     void setContractId(int id);
 

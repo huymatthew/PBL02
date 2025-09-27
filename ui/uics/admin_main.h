@@ -64,6 +64,7 @@ public:
     QAction *actionQuickSearch;
     QAction *actionRefresh;
     QAction *actionBackup;
+    QAction *actionQuickAddBill;
     QWidget *centralwidget;
     QVBoxLayout *mainVerticalLayout;
     QTabWidget *mainTabWidget;
@@ -116,6 +117,19 @@ public:
     QVBoxLayout *contractControlsLayout;
     QWidget *paymentsTab;
     QHBoxLayout *paymentsLayout;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
+    QGroupBox *searchGroupBox;
+    QHBoxLayout *horizontalLayout;
+    QWidget *widget_2;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *roomBillLabel;
+    QComboBox *roomBillSearch;
+    QWidget *widget_3;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *label_4;
+    QComboBox *comboBox_3;
+    QSpacerItem *horizontalSpacer;
     QTableView *paymentsTableView;
     QVBoxLayout *paymentControlsLayout;
     QGroupBox *paymentInfoGroup;
@@ -180,7 +194,7 @@ public:
             AdminMainWindow->setObjectName(QString::fromUtf8("AdminMainWindow"));
         AdminMainWindow->resize(1200, 862);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("./logo.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         AdminMainWindow->setWindowIcon(icon);
         AdminMainWindow->setStyleSheet(QString::fromUtf8("/* Admin Window Styling */\n"
 "QMainWindow {\n"
@@ -685,6 +699,10 @@ public:
         actionBackup = new QAction(AdminMainWindow);
         actionBackup->setObjectName(QString::fromUtf8("actionBackup"));
         actionBackup->setIcon(icon4);
+        actionQuickAddBill = new QAction(AdminMainWindow);
+        actionQuickAddBill->setObjectName(QString::fromUtf8("actionQuickAddBill"));
+        actionQuickAddBill->setCheckable(true);
+        actionQuickAddBill->setIcon(icon4);
         centralwidget = new QWidget(AdminMainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         mainVerticalLayout = new QVBoxLayout(centralwidget);
@@ -985,7 +1003,56 @@ public:
         paymentsTab->setObjectName(QString::fromUtf8("paymentsTab"));
         paymentsLayout = new QHBoxLayout(paymentsTab);
         paymentsLayout->setObjectName(QString::fromUtf8("paymentsLayout"));
-        paymentsTableView = new QTableView(paymentsTab);
+        widget = new QWidget(paymentsTab);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        searchGroupBox = new QGroupBox(widget);
+        searchGroupBox->setObjectName(QString::fromUtf8("searchGroupBox"));
+        horizontalLayout = new QHBoxLayout(searchGroupBox);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        widget_2 = new QWidget(searchGroupBox);
+        widget_2->setObjectName(QString::fromUtf8("widget_2"));
+        verticalLayout_2 = new QVBoxLayout(widget_2);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        roomBillLabel = new QLabel(widget_2);
+        roomBillLabel->setObjectName(QString::fromUtf8("roomBillLabel"));
+
+        verticalLayout_2->addWidget(roomBillLabel);
+
+        roomBillSearch = new QComboBox(widget_2);
+        roomBillSearch->setObjectName(QString::fromUtf8("roomBillSearch"));
+
+        verticalLayout_2->addWidget(roomBillSearch);
+
+
+        horizontalLayout->addWidget(widget_2);
+
+        widget_3 = new QWidget(searchGroupBox);
+        widget_3->setObjectName(QString::fromUtf8("widget_3"));
+        verticalLayout_3 = new QVBoxLayout(widget_3);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        label_4 = new QLabel(widget_3);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        verticalLayout_3->addWidget(label_4);
+
+        comboBox_3 = new QComboBox(widget_3);
+        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
+
+        verticalLayout_3->addWidget(comboBox_3);
+
+
+        horizontalLayout->addWidget(widget_3);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+
+        verticalLayout->addWidget(searchGroupBox);
+
+        paymentsTableView = new QTableView(widget);
         paymentsTableView->setObjectName(QString::fromUtf8("paymentsTableView"));
         paymentsTableView->setMinimumSize(QSize(600, 0));
         paymentsTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -995,7 +1062,10 @@ public:
         paymentsTableView->horizontalHeader()->setMinimumSectionSize(75);
         paymentsTableView->horizontalHeader()->setDefaultSectionSize(125);
 
-        paymentsLayout->addWidget(paymentsTableView);
+        verticalLayout->addWidget(paymentsTableView);
+
+
+        paymentsLayout->addWidget(widget);
 
         paymentControlsLayout = new QVBoxLayout();
         paymentControlsLayout->setObjectName(QString::fromUtf8("paymentControlsLayout"));
@@ -1322,14 +1392,14 @@ public:
         toolBar->addAction(actionQuickAddRoom);
         toolBar->addAction(actionQuickAddTenant);
         toolBar->addAction(actionQuickAddContract);
-        toolBar->addAction(actionQuickSearch);
+        toolBar->addAction(actionQuickAddBill);
         toolBar->addSeparator();
         toolBar->addAction(actionRefresh);
         toolBar->addAction(actionBackup);
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(1);
+        mainTabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);
@@ -1479,6 +1549,16 @@ public:
 #if QT_CONFIG(shortcut)
         actionBackup->setShortcut(QCoreApplication::translate("AdminMainWindow", "Ctrl+B", nullptr));
 #endif // QT_CONFIG(shortcut)
+        actionQuickAddBill->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\303\263a \304\220\306\241n", nullptr));
+#if QT_CONFIG(tooltip)
+        actionQuickAddBill->setToolTip(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\303\263a \304\220\306\241n", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        actionQuickAddBill->setStatusTip(QCoreApplication::translate("AdminMainWindow", "Sao l\306\260u d\341\273\257 li\341\273\207u nhanh", nullptr));
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(shortcut)
+        actionQuickAddBill->setShortcut(QCoreApplication::translate("AdminMainWindow", "Ctrl+Shift+B", nullptr));
+#endif // QT_CONFIG(shortcut)
         roomInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Ph\303\262ng", nullptr));
         roomNumberLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\303\252n Ph\303\262ng", nullptr));
         roomNumberEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p s\341\273\221 ph\303\262ng...", nullptr));
@@ -1517,6 +1597,9 @@ public:
         deleteTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Kh\303\241ch", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tenantsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Kh\303\241ch Thu\303\252", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(contractsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 H\341\273\243p \304\220\341\273\223ng Thu\303\252", nullptr));
+        searchGroupBox->setTitle(QCoreApplication::translate("AdminMainWindow", "Search", nullptr));
+        roomBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "Room", nullptr));
+        label_4->setText(QCoreApplication::translate("AdminMainWindow", "TextLabel", nullptr));
         paymentInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Thanh To\303\241n", nullptr));
         paymentRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
         paymentMonthLabel->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\241ng:", nullptr));

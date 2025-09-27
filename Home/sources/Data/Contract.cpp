@@ -21,6 +21,7 @@ Contract::Contract(int id, const int& roomId,
     : contract_id(id), room_id(roomId), start_date(start),
       end_date(end), monthly_rent(rent), deposit(deposit),
       status(status), notes(notes) {}
+Contract::~Contract() {}
 
 int Contract::getContractId() const { return contract_id; }
 void Contract::setContractId(int id) { contract_id = id; }

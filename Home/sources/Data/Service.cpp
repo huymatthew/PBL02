@@ -17,6 +17,7 @@ Service::Service(const Service& other)
 
 Service::Service(int id, int type, int billId, int qty, double price)
     : service_id(id), service_type(type), bill_id(billId), quantity(qty), price(price) {}
+Service::~Service() {}
 
 int Service::getServiceId() const {
     return service_id;

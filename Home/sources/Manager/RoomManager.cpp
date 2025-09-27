@@ -145,7 +145,6 @@ vector<Room> RoomManager::getAllRooms() const
 {
     return rooms;
 }
-
 bool RoomManager::roomExists(int roomId) const
 {
     return pk_manager.isKeyInUse(roomId);
@@ -235,6 +234,15 @@ QStandardItemModel *RoomManager::getRoomsAsModel() const
         model->appendRow(rowItems);
     }
     return model;
+}
+QStringList RoomManager::getRoomListForComboBox(int filter) const { // 0: all, 1: available, 2: occupied
+    QStringList list;
+    for (const auto& room : rooms) {
+        if (filter == 0 || (filter == 1 && room.getStatus() == 0) || (filter == 2 && room.getStatus() == 1)) {
+            list << QString::fromStdString(room.getRoomName());
+        }
+    }
+    return list;
 }
 
 vector<Room>::iterator RoomManager::findRoomIterator(int roomId)

@@ -33,13 +33,13 @@ public:
 
     void addTenantCall();
     void addRoomCall();
+    void addBillCall();
     void addContractCall();
 
     void removeTenantCall();
     void removeRoomCall();
 private:
     DataManager manager;
-
     QMainWindow* mainWindow;
 };
 

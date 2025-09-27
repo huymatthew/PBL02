@@ -14,6 +14,7 @@ class Rent {
     Rent();
     Rent(const Rent& other);
     Rent(int roomId, int tenantId, bool isRepresentative);
+    ~Rent();
 
     int getRoomId() const;
     void setRoomId(int roomId);

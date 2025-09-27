@@ -15,6 +15,7 @@ Bill::Bill(int id, int contractId, const string& month,
                 double rent, double total, const string& due, int status)
      : bill_id(id), contract_id(contractId), billing_month(month),
         room_rent(rent), total_amount(total), due_date(due), status(status) {}
+Bill::~Bill() {}
 
 int Bill::getBillId() const {
     return bill_id;

@@ -34,6 +34,7 @@ public:
     bool updateContract(int contractId, const Contract& updatedContract);
     
     Contract* getContract(int contractId);
+    Contract* getActiveContractByRoom(const int& roomId);
     
     bool contractExists(int contractId) const;
     bool roomHasActiveContract(const int& roomId) const;

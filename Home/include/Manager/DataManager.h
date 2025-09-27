@@ -39,6 +39,7 @@ public:
     void loadAllData();
     void saveAllData();
     Room* getRoomFromTenant(int tenantId);
+    Tenant* getMainTenantFromContract(int contractId);
 private:
     bool dataLoaded = false;
 };

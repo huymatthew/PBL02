@@ -19,6 +19,7 @@ Tenant::Tenant(int id, const string& name, const string& phone,
                int gender)
     : tenant_id(id), full_name(name), phone(phone), identity_card(id_card),
       date_of_birth(dob), gender(gender) {}
+Tenant::~Tenant() {}
 
 int Tenant::getTenantId() const {
     return tenant_id;

@@ -20,6 +20,7 @@ public:
     Bill(const Bill& other);
     Bill(int id, int contractId, const string& month,
          double rent, double total, const string& due, int status);
+    ~Bill();
 
     int getBillId() const;
     void setBillId(int id);

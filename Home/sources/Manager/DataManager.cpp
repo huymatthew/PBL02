@@ -33,6 +33,20 @@ void DataManager::saveAllData() {
         cout << "\033[1;31mDatabase saved successfully.\033[0m" << endl;
     }
 }
+Tenant* DataManager::getMainTenantFromContract(int contractId) {
+    for (const auto &rent : rentM.rents) {
+        if (rent.getIsRepresentative()) {
+            Tenant* tenant = tenantM.getTenant(rent.getTenantId());
+            if (tenant) {
+                return tenant;
+            } else {
+                cerr << "Tenant not found for contract ID: " << contractId << endl;
+                return nullptr;
+            }
+        }
+    }
+    return nullptr;
+}
 
 Room* DataManager::getRoomFromTenant(int tenantId) {
     for (const auto &rent : rentM.rents) {
