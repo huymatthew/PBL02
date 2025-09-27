@@ -5,7 +5,7 @@ ServiceManager::ServiceManager() : data_loaded(false), pk_manager() {}
 ServiceManager::~ServiceManager() {}
 
 bool ServiceManager::loadFromDatabase() {
-    cout << "\033[1;32m*Loading rooms from database...\033[0m" << endl;
+    cout << "\033[1;32m*Loading services from database...\033[0m" << endl;
     ifstream file("./Home/database/services.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
@@ -45,6 +45,8 @@ bool ServiceManager::saveToDatabase() {
              << service.getPrice() << endl;
         cout << "~ Saved service ID: " << service.getServiceId() << endl;
     }
+    cout << services.size() << " services saved." << endl;
+    file.close();
     return true;
 }
 bool ServiceManager::addService(const Service& service) {
@@ -97,6 +99,10 @@ Service* ServiceManager::getService(int serviceId) {
         return &(*it);
     }
     return nullptr;
+}
+
+int ServiceManager::getNextServiceId() {
+    return pk_manager.getNextKey();
 }
 
 bool ServiceManager::serviceExists(int serviceId) const {

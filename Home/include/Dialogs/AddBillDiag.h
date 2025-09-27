@@ -18,15 +18,14 @@ public:
 
     void on_saveButton_clicked();
     void on_cancelButton_clicked();
-    void on_tenant_addButton_clicked();
-    void on_tenant_removeButton_clicked();
+    void on_service_addButton_clicked();
+    void on_service_removeButton_clicked();
 
     void setRoom(int roomId);
-
+    void updateTotal();
 private:
     void signalConnections();
     DataManager *dataManager;
+    friend class QServiceWidget;
 };
-
-
 #endif // ADD_BILL_DIAG_H

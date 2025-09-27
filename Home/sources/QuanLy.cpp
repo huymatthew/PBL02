@@ -167,7 +167,7 @@ void QuanLy::addRoomCall()
 void QuanLy::addBillCall()
 {
     AddBillDialog addBillDialog(mainWindow, &manager);
-    addBillDialog.setFixedSize(700, 800);
+    addBillDialog.setFixedSize(900, 800);
     if (manager.roomM.getRoomSelected()) {
         addBillDialog.setRoom(manager.roomM.getRoomSelected()->getRoomId());
         addBillDialog.exec();

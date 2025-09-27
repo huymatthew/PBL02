@@ -39,22 +39,7 @@ public:
     double getTotalServiceCostByType(int serviceType) const;
     double getAverageServiceCost() const;
     
-    int getTotalQuantityByType(int serviceType) const;
-    int getTotalQuantityByBill(int billId) const;
-    double getAverageQuantityByType(int serviceType) const;
-    
-    double getMaxPriceByType(int serviceType) const;
-    double getMinPriceByType(int serviceType) const;
-    double getAveragePriceByType(int serviceType) const;
-    
-    vector<Service> searchServices(const string& keyword);
-    vector<Service> getServicesByPriceRange(double minPrice, double maxPrice) const;
-    vector<Service> getServicesByQuantityRange(int minQuantity, int maxQuantity) const;
-    
-    bool addMultipleServices(const vector<Service>& services);
-    bool removeServicesByBill(int billId);
-    bool removeServicesByType(int serviceType);
-    bool updateServicePrices(int serviceType, double newPrice);
+    int getNextServiceId();
     
     vector<pair<int, double>> getServiceCostByType() const;
     vector<pair<int, int>> getServiceQuantityByType() const;

@@ -3,6 +3,7 @@
 
 #include <Data/ServiceType.h>
 #include <Core/PrimaryKey.h>
+#include <QStringList>
 #include <vector>
 #include <string>
 #include <memory>
@@ -29,6 +30,7 @@ public:
     
     double getServiceTypePrice(int serviceType) const;
     string getServiceTypeName(int serviceType) const;
+    QStringList getServiceTypeNamesForComboBox() const;
     
 private:
     vector<ServiceType> serviceTypes;

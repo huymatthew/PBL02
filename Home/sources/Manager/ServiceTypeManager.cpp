@@ -38,6 +38,13 @@ double ServiceTypeManager::getServiceTypePrice(int serviceType) const {
     }
     return -1.0; 
 }
+ServiceType* ServiceTypeManager::getServiceType(int serviceType) {
+    auto it = findServiceTypeIterator(serviceType);
+    if (it != serviceTypes.end()) {
+        return &(*it);
+    }
+    return nullptr;
+}
 string ServiceTypeManager::getServiceTypeName(int serviceType) const {
     for (const auto& serviceTypeObj : serviceTypes) {
         if (serviceTypeObj.getServiceType() == serviceType) {
@@ -46,6 +53,48 @@ string ServiceTypeManager::getServiceTypeName(int serviceType) const {
     }
     return ""; 
 }
+QStringList ServiceTypeManager::getServiceTypeNamesForComboBox() const {
+    QStringList names;
+    for (const auto& serviceTypeObj : serviceTypes) {
+        names << QString::fromStdString(serviceTypeObj.getName());
+    }
+    return names;
+}
+ServiceType* ServiceTypeManager::getServiceTypeByName(const string& name) {
+    for (auto& serviceTypeObj : serviceTypes) {
+        if (serviceTypeObj.getName() == name) {
+            return &serviceTypeObj;
+        }
+    }
+    return nullptr;
+}
+
+vector<ServiceType> ServiceTypeManager::getAllServiceTypes() const {
+    return serviceTypes;
+}
+
+bool ServiceTypeManager::serviceTypeExists(int serviceType) const {
+    for (const auto& serviceTypeObj : serviceTypes) {
+        if (serviceTypeObj.getServiceType() == serviceType) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ServiceTypeManager::serviceTypeNameExists(const string& name) const {
+    for (const auto& serviceTypeObj : serviceTypes) {
+        if (serviceTypeObj.getName() == name) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int ServiceTypeManager::getServiceTypeCount() const {
+    return static_cast<int>(serviceTypes.size());
+}
+
 vector<ServiceType>::iterator ServiceTypeManager::findServiceTypeIterator(int serviceType) {
     for (auto it = serviceTypes.begin(); it != serviceTypes.end(); ++it) {
         if (it->getServiceType() == serviceType) {

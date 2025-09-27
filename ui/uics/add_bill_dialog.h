@@ -42,7 +42,6 @@ public:
     QGroupBox *contractInfoGroup;
     QFormLayout *contractInfoLayout;
     QLabel *roomIdLabel;
-    QComboBox *roomComboBox;
     QLabel *contractLabel;
     QLabel *contractID;
     QLabel *resLabel;
@@ -54,6 +53,7 @@ public:
     QComboBox *monthComboBox;
     QLabel *yearLabel;
     QLineEdit *yearEdit;
+    QLabel *roomBox;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
     QWidget *widget;
@@ -65,9 +65,9 @@ public:
     QGroupBox *financialInfoGroup;
     QFormLayout *financialInfoLayout;
     QLabel *monthlyRentLabel;
+    QLabel *sumLabel;
+    QSpinBox *sumSpinBox;
     QDoubleSpinBox *monthlyRentSpinBox;
-    QLabel *depositLabel;
-    QSpinBox *depositSpinBox;
     QGroupBox *statusNotesGroup;
     QFormLayout *statusNotesLayout;
     QLabel *statusLabel;
@@ -280,7 +280,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 646, 919));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 646, 893));
         scrollLayout = new QVBoxLayout(scrollAreaWidgetContents);
         scrollLayout->setSpacing(15);
         scrollLayout->setObjectName(QString::fromUtf8("scrollLayout"));
@@ -295,11 +295,6 @@ public:
         roomIdLabel->setObjectName(QString::fromUtf8("roomIdLabel"));
 
         contractInfoLayout->setWidget(0, QFormLayout::LabelRole, roomIdLabel);
-
-        roomComboBox = new QComboBox(contractInfoGroup);
-        roomComboBox->setObjectName(QString::fromUtf8("roomComboBox"));
-
-        contractInfoLayout->setWidget(0, QFormLayout::FieldRole, roomComboBox);
 
         contractLabel = new QLabel(contractInfoGroup);
         contractLabel->setObjectName(QString::fromUtf8("contractLabel"));
@@ -373,6 +368,11 @@ public:
 
         contractInfoLayout->setWidget(3, QFormLayout::FieldRole, frame);
 
+        roomBox = new QLabel(contractInfoGroup);
+        roomBox->setObjectName(QString::fromUtf8("roomBox"));
+
+        contractInfoLayout->setWidget(0, QFormLayout::FieldRole, roomBox);
+
 
         scrollLayout->addWidget(contractInfoGroup);
 
@@ -443,6 +443,22 @@ public:
 
         financialInfoLayout->setWidget(0, QFormLayout::LabelRole, monthlyRentLabel);
 
+        sumLabel = new QLabel(financialInfoGroup);
+        sumLabel->setObjectName(QString::fromUtf8("sumLabel"));
+
+        financialInfoLayout->setWidget(1, QFormLayout::LabelRole, sumLabel);
+
+        sumSpinBox = new QSpinBox(financialInfoGroup);
+        sumSpinBox->setObjectName(QString::fromUtf8("sumSpinBox"));
+        sumSpinBox->setEnabled(false);
+        sumSpinBox->setStyleSheet(QString::fromUtf8("color: black"));
+        sumSpinBox->setProperty("showGroupSeparator", QVariant(false));
+        sumSpinBox->setMaximum(999999999);
+        sumSpinBox->setSingleStep(10000);
+        sumSpinBox->setDisplayIntegerBase(10);
+
+        financialInfoLayout->setWidget(1, QFormLayout::FieldRole, sumSpinBox);
+
         monthlyRentSpinBox = new QDoubleSpinBox(financialInfoGroup);
         monthlyRentSpinBox->setObjectName(QString::fromUtf8("monthlyRentSpinBox"));
         monthlyRentSpinBox->setDecimals(0);
@@ -452,20 +468,6 @@ public:
         monthlyRentSpinBox->setValue(0.000000000000000);
 
         financialInfoLayout->setWidget(0, QFormLayout::FieldRole, monthlyRentSpinBox);
-
-        depositLabel = new QLabel(financialInfoGroup);
-        depositLabel->setObjectName(QString::fromUtf8("depositLabel"));
-
-        financialInfoLayout->setWidget(1, QFormLayout::LabelRole, depositLabel);
-
-        depositSpinBox = new QSpinBox(financialInfoGroup);
-        depositSpinBox->setObjectName(QString::fromUtf8("depositSpinBox"));
-        depositSpinBox->setProperty("showGroupSeparator", QVariant(false));
-        depositSpinBox->setMaximum(999999999);
-        depositSpinBox->setSingleStep(10000);
-        depositSpinBox->setDisplayIntegerBase(10);
-
-        financialInfoLayout->setWidget(1, QFormLayout::FieldRole, depositSpinBox);
 
 
         scrollLayout->addWidget(financialInfoGroup);
@@ -556,8 +558,8 @@ public:
 
         QWidget::setTabOrder(scrollArea, service);
         QWidget::setTabOrder(service, monthlyRentSpinBox);
-        QWidget::setTabOrder(monthlyRentSpinBox, depositSpinBox);
-        QWidget::setTabOrder(depositSpinBox, statusComboBox);
+        QWidget::setTabOrder(monthlyRentSpinBox, sumSpinBox);
+        QWidget::setTabOrder(sumSpinBox, statusComboBox);
         QWidget::setTabOrder(statusComboBox, cancelButton);
         QWidget::setTabOrder(cancelButton, saveButton);
 
@@ -595,19 +597,20 @@ public:
         monthComboBox->setItemText(11, QCoreApplication::translate("AddBillDialog", "12", nullptr));
 
         yearLabel->setText(QCoreApplication::translate("AddBillDialog", "N\304\203m", nullptr));
+        roomBox->setText(QCoreApplication::translate("AddBillDialog", ".", nullptr));
         groupBox->setTitle(QCoreApplication::translate("AddBillDialog", "Danh s\303\241ch d\341\273\213ch v\341\273\245", nullptr));
         addService->setText(QCoreApplication::translate("AddBillDialog", "+", nullptr));
         removeService->setText(QCoreApplication::translate("AddBillDialog", "-", nullptr));
         financialInfoGroup->setTitle(QCoreApplication::translate("AddBillDialog", "Th\303\264ng Tin T\303\240i Ch\303\255nh", nullptr));
         monthlyRentLabel->setText(QCoreApplication::translate("AddBillDialog", "Ti\341\273\201n Ph\303\262ng", nullptr));
+        sumLabel->setText(QCoreApplication::translate("AddBillDialog", "T\341\273\225ng Ti\341\273\201n", nullptr));
+        sumSpinBox->setSuffix(QCoreApplication::translate("AddBillDialog", " VND", nullptr));
+        sumSpinBox->setPrefix(QString());
         monthlyRentSpinBox->setSuffix(QCoreApplication::translate("AddBillDialog", " VN\304\220", nullptr));
-        depositLabel->setText(QCoreApplication::translate("AddBillDialog", "T\341\273\225ng Ti\341\273\201n", nullptr));
-        depositSpinBox->setSuffix(QCoreApplication::translate("AddBillDialog", " VND", nullptr));
-        depositSpinBox->setPrefix(QString());
         statusNotesGroup->setTitle(QCoreApplication::translate("AddBillDialog", "Tr\341\272\241ng Th\303\241i v\303\240 Ghi Ch\303\272", nullptr));
         statusLabel->setText(QCoreApplication::translate("AddBillDialog", "Tr\341\272\241ng Th\303\241i:", nullptr));
-        statusComboBox->setItemText(0, QCoreApplication::translate("AddBillDialog", "Ng\341\273\253ng Ho\341\272\241t \304\220\341\273\231ng", nullptr));
-        statusComboBox->setItemText(1, QCoreApplication::translate("AddBillDialog", "Ho\341\272\241t \304\220\341\273\231ng", nullptr));
+        statusComboBox->setItemText(0, QCoreApplication::translate("AddBillDialog", "Ho\341\272\241t \304\220\341\273\231ng", nullptr));
+        statusComboBox->setItemText(1, QCoreApplication::translate("AddBillDialog", "Ng\341\273\253ng Ho\341\272\241t \304\220\341\273\231ng", nullptr));
 
         cancelButton->setText(QCoreApplication::translate("AddBillDialog", "H\341\273\247y", nullptr));
         saveButton->setText(QCoreApplication::translate("AddBillDialog", "T\341\272\241o H\303\263a \304\220\306\241n", nullptr));
