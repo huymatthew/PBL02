@@ -8,6 +8,7 @@ QServiceWidget::QServiceWidget(AddBillDialog* parent) : QWidget(parent), p(paren
 }
 
 void QServiceWidget::setupUi() {
+    DataManager& dataManager = DataManager::getInstance();
     this->setLayout(new QHBoxLayout(this));
     serviceTypeComboBox = new QComboBox(this);
     layout()->addWidget(serviceTypeComboBox);
@@ -19,7 +20,7 @@ void QServiceWidget::setupUi() {
     priceLabel = new QLabel("Price: 0", this);
     layout()->addWidget(priceLabel);
 
-    serviceTypeComboBox->addItems(p->dataManager->serviceTypeM.getServiceTypeNamesForComboBox());
+    serviceTypeComboBox->addItems(dataManager.getServiceTypeManager().getServiceTypeNamesForComboBox());
     setType(1);
 
     connect(quantitySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int value) {
@@ -27,7 +28,7 @@ void QServiceWidget::setupUi() {
         p->updateTotal();
     });
     connect(serviceTypeComboBox, &QComboBox::currentTextChanged, this, [this](const QString &text) {
-        ServiceType* serviceType = p->dataManager->serviceTypeM.getServiceTypeByName(text.toStdString());
+        ServiceType* serviceType = DataManager::getInstance().getServiceTypeManager().getServiceTypeByName(text.toStdString());
         if (serviceType) {
             setType(serviceType->getServiceType());
         }
@@ -37,7 +38,7 @@ void QServiceWidget::setupUi() {
 QServiceWidget::~QServiceWidget() {}
 
 void QServiceWidget::setType(int type) {
-    ServiceType* serviceType = p->dataManager->serviceTypeM.getServiceType(type);
+    ServiceType* serviceType = DataManager::getInstance().getServiceTypeManager().getServiceType(type);
     quantitySpinBox->setValue(1);
     if (serviceType) {
         pricePerUnit = serviceType->getPrice();
@@ -50,7 +51,7 @@ void QServiceWidget::setType(int type) {
     }
 }
 int QServiceWidget::getType() const {
-    ServiceType* serviceType = p->dataManager->serviceTypeM.getServiceTypeByName(serviceTypeComboBox->currentText().toStdString());
+    ServiceType* serviceType = DataManager::getInstance().getServiceTypeManager().getServiceTypeByName(serviceTypeComboBox->currentText().toStdString());
     return serviceType ? serviceType->getServiceType() : -1;
 }
 int QServiceWidget::getQuantity() const {

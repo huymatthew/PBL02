@@ -6,7 +6,7 @@ ServiceManager::~ServiceManager() {}
 
 bool ServiceManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading services from database...\033[0m" << endl;
-    ifstream file("./Home/database/services.dat");
+    ifstream file("./app/database/services.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;
@@ -32,7 +32,7 @@ bool ServiceManager::loadFromDatabase() {
 }
 bool ServiceManager::saveToDatabase() {
     cout << "\033[1;33m*Saving services to database...\033[0m" << endl;
-    ofstream file("./Home/database/services.dat", ios::out | ios::trunc);
+    ofstream file("./app/database/services.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return false;

@@ -39,7 +39,7 @@ public:
     void removeTenantCall();
     void removeRoomCall();
 private:
-    DataManager manager;
+    DataManager* manager;
     QMainWindow* mainWindow;
 };
 

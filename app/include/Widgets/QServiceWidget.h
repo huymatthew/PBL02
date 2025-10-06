@@ -2,6 +2,7 @@
 #define Q_SERVICE_WIDGET_H
 
 #include <Dialogs/AddBillDiag.h>
+#include <Manager/DataManager.h>
 #include <QWidget>
 #include <QComboBox>
 #include <QSpinBox>

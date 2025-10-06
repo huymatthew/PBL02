@@ -7,7 +7,7 @@ ContractManager::~ContractManager() {}
 
 bool ContractManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading contracts from database...\033[0m" << endl;
-    ifstream file("./Home/database/contracts.dat");
+    ifstream file("./app/database/contracts.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;
@@ -33,7 +33,7 @@ bool ContractManager::loadFromDatabase() {
 }
 bool ContractManager::saveToDatabase() {
     cout << "\033[1;33m*Saving contracts to database...\033[0m" << endl;
-    ofstream file("./Home/database/contracts.dat", ios::out | ios::trunc);
+    ofstream file("./app/database/contracts.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return false;

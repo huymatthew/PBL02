@@ -8,7 +8,7 @@ ServiceTypeManager::~ServiceTypeManager() {}
 
 bool ServiceTypeManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading service types from database...\033[0m" << endl;
-    ifstream file("./Home/database/service_types.dat");
+    ifstream file("./app/database/service_types.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;

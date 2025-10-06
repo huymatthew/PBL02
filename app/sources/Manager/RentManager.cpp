@@ -39,7 +39,7 @@ int RentManager::getRoomIdByTenant(int tenantId) {
 }
 void RentManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading rents from database...\033[0m" << endl;
-    ifstream file("./Home/database/rents.dat");
+    ifstream file("./app/database/rents.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return;
@@ -60,7 +60,7 @@ void RentManager::loadFromDatabase() {
 }
 void RentManager::saveToDatabase() {
     cout << "\033[1;33m*Saving rents to database...\033[0m" << endl;
-    ofstream file("./Home/database/rents.dat", ios::out | ios::trunc);
+    ofstream file("./app/database/rents.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return;

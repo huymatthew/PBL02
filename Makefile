@@ -1,30 +1,30 @@
 # Trình biên dịch
 CXX = g++
-CXXFLAGS = -Wall -std=c++17
+CXXFLAGS = -Wall -std=c++17 -fPIC
+
+# Qt configuration
+QT_CFLAGS = $(shell pkg-config --cflags Qt5Core Qt5Widgets Qt5Gui)
+QT_LIBS = $(shell pkg-config --libs Qt5Core Qt5Widgets Qt5Gui)
 
 # Include paths
-INCLUDES = -I include \
-           -I include/QtWidgets \
-           -I include/QtCore \
-           -I include/QtGui \
-           -I Home/include \
+INCLUDES = -I app/include \
            -I ui/uics \
-           -I ui
+           $(QT_CFLAGS)
 
 # Lib paths
-LDFLAGS = -L lib -lQt5Core -lQt5Gui -lQt5Widgets
+LDFLAGS = $(QT_LIBS)
 
 # Tên file xuất
-TARGET = bin/main.exe
+TARGET = bin/main
 
 # Lấy toàn bộ file .cpp
 SRCS = main.cpp \
-       Home/sources/QuanLy.cpp \
-       $(wildcard Home/sources/Data/*.cpp) \
-       $(wildcard Home/sources/Manager/*.cpp) \
-       $(wildcard Home/sources/Core/*.cpp) \
-       $(wildcard Home/sources/Dialogs/*.cpp) \
-       $(wildcard Home/sources/Widgets/*.cpp)
+       app/sources/QuanLy.cpp \
+       $(wildcard app/sources/Data/*.cpp) \
+       $(wildcard app/sources/Manager/*.cpp) \
+       $(wildcard app/sources/Core/*.cpp) \
+       $(wildcard app/sources/Dialogs/*.cpp) \
+       $(wildcard app/sources/Widgets/*.cpp)
 
 OBJS = $(SRCS:.cpp=.o)
 

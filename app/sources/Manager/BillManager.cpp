@@ -8,7 +8,7 @@ BillManager::~BillManager() {}
 
 bool BillManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading bills from database...\033[0m" << endl;
-    ifstream file("./Home/database/bills.dat");
+    ifstream file("./app/database/bills.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;
@@ -35,7 +35,7 @@ bool BillManager::loadFromDatabase() {
 
 bool BillManager::saveToDatabase() {
     cout << "\033[1;33m*Saving bills to database...\033[0m" << endl;
-    ofstream file("./Home/database/bills.dat", ios::out | ios::trunc);
+    ofstream file("./app/database/bills.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return false;
