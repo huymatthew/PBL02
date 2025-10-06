@@ -7,7 +7,13 @@
 using namespace std;
 
 QString moneyFormat(double amount);
+QString dateFormat(const string& date);
+QString monthFormat(const string& monthyear);
+
 string formatDate(const QString& date);
+string formatDate(const string& date);
+
 string datetostring(const QDate& date);
+string monthtostring(string monthyear);
 string formatName(const string& name);
 #endif // EXTRA_FORMAT_H

@@ -34,12 +34,12 @@ void AddBillDialog::on_saveButton_clicked() {
     Bill bill = Bill();
     int contractId = contractID->text().toInt();
     bill.setContractId(contractId);
-    QString monthYear = monthComboBox->currentText() + "/" + yearEdit->text();
+    QString monthYear = yearEdit->text() + "-" + monthComboBox->currentText();
     bill.setBillingMonth(monthYear.toStdString());
     bill.setRoomRent(monthlyRentSpinBox->value());
     bill.setTotalAmount(sumSpinBox->value());
     QDate dueDate = QDate::currentDate().addDays(30);
-    bill.setDueDate(dueDate.toString("ddMMyyyy").toStdString());
+    bill.setDueDate(dueDate.toString("yyyy-MM-dd").toStdString());
     bill.setStatus(statusComboBox->currentIndex());
     dataManager.getBillManager().addBill(bill);
 

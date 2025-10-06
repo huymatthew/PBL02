@@ -1,4 +1,5 @@
 #include <Manager/BillManager.h>
+#include <Core/ExtraFormat.h>
 #include <iostream>
 
 using namespace std;
@@ -152,10 +153,10 @@ QStandardItemModel* BillManager::getBillsAsModel() const {
         QList<QStandardItem*> rowItems;
         rowItems.append(new QStandardItem(QString::number(bill.getBillId())));
         rowItems.append(new QStandardItem(QString::number(bill.getContractId())));
-        rowItems.append(new QStandardItem(QString::fromStdString(bill.getBillingMonth())));
-        rowItems.append(new QStandardItem(QString::number(bill.getRoomRent())));
-        rowItems.append(new QStandardItem(QString::number(bill.getTotalAmount())));
-        rowItems.append(new QStandardItem(QString::fromStdString(bill.getDueDate())));
+        rowItems.append(new QStandardItem(monthFormat(bill.getBillingMonth())));
+        rowItems.append(new QStandardItem(moneyFormat(bill.getRoomRent())));
+        rowItems.append(new QStandardItem(moneyFormat(bill.getTotalAmount())));
+        rowItems.append(new QStandardItem(dateFormat(bill.getDueDate())));
         rowItems.append(new QStandardItem(bill.getStatus() == 1 ? "Paid" : "Unpaid"));
         model->appendRow(rowItems);
     }
