@@ -26,8 +26,29 @@
 
 class DataManager {
 public:
+    DataManager(const DataManager&) = delete;
+    DataManager& operator=(const DataManager&) = delete;
+    
+    static DataManager& getInstance();
+    
+    void loadAllData();
+    void saveAllData();
+
+    BillManager& getBillManager() { return billM; }
+    ContractManager& getContractManager() { return contractM; }
+    RoomManager& getRoomManager() { return roomM; }
+    TenantManager& getTenantManager() { return tenantM; }
+    ServiceManager& getServiceManager() { return serviceM; }
+    ServiceTypeManager& getServiceTypeManager() { return serviceTypeM; }
+    RentManager& getRentManager() { return rentM; }
+    
+    Room* getRoomFromTenant(int tenantId);
+    Tenant* getMainTenantFromContract(int contractId);
+    
+private:
     DataManager();
-    ~DataManager();
+    ~DataManager() = default;
+    
     BillManager billM;
     ContractManager contractM;
     RoomManager roomM;
@@ -35,12 +56,7 @@ public:
     ServiceManager serviceM;
     ServiceTypeManager serviceTypeM;
     RentManager rentM;
-
-    void loadAllData();
-    void saveAllData();
-    Room* getRoomFromTenant(int tenantId);
-    Tenant* getMainTenantFromContract(int contractId);
-private:
+    
     bool dataLoaded = false;
 };
 

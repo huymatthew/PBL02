@@ -3,7 +3,11 @@ using namespace std;
 
 
 DataManager::DataManager() {}
-DataManager::~DataManager() {}
+
+DataManager& DataManager::getInstance() {
+    static DataManager instance;
+    return instance;
+}
 
 void DataManager::loadAllData() {
     if (!dataLoaded) {
