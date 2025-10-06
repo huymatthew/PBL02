@@ -5,8 +5,7 @@
 
 using namespace std;
 
-AddRoomDiag::AddRoomDiag(QWidget* parent, RoomManager& roomManager)
-    : QDialog(parent), roomManager(roomManager) {
+AddRoomDiag::AddRoomDiag(QWidget* parent) : QDialog(parent), Ui_AddRoomDialog() {
     setupUi(this);
     signalConnect();
 }
@@ -24,7 +23,7 @@ void AddRoomDiag::on_buttonBox_accepted() {
         QMessageBox::warning(this, "Input Error", "Room Number is required.");
         return;
     }
-    roomManager.addRoom(roomName, roomType, monthlyRent, " " + description, status);
+    DataManager::getInstance().getRoomManager().addRoom(roomName, roomType, monthlyRent, " " + description, status);
     accept();
 }
 

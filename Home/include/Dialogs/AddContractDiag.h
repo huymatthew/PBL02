@@ -5,6 +5,7 @@
 #include <QComboBox>
 #include <Data/Tenant.h>
 
+#include <Manager/DataManager.h>
 #include <Manager/ContractManager.h>
 #include <Manager/RoomManager.h>
 #include <Manager/TenantManager.h>
@@ -16,7 +17,7 @@
 class AddContractDialog : public QDialog, public Ui_AddContractDialog
 {
 public:
-    AddContractDialog(QWidget *parent, ContractManager *contractManager, RoomManager *roomManager, TenantManager *tenantManager, RentManager *rentManager);
+    AddContractDialog(QWidget *parent);
     ~AddContractDialog();
 
     void on_saveButton_clicked();
@@ -26,10 +27,6 @@ public:
 
 private:
     void signalConnections();
-    ContractManager *contractManager;
-    RoomManager *roomManager;
-    TenantManager *tenantManager;
-    RentManager *rentManager;
 };
 
 #endif // ADD_CONTRACT_DIAG_H

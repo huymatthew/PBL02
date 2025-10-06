@@ -3,7 +3,7 @@
 
 using namespace std;
 
-AddTenantDiag::AddTenantDiag(QWidget *parent, TenantManager& tenantManager) : QDialog(parent), Ui_AddTenantDialog(), tenantManager(tenantManager) {
+AddTenantDiag::AddTenantDiag(QWidget *parent) : QDialog(parent), Ui_AddTenantDialog() {
     setupUi(this);
     signalConnect();
 }
@@ -25,7 +25,7 @@ void AddTenantDiag::on_buttonBox_accepted() {
     }
     fullName = formatName(fullName);
 
-    tenantManager.addTenant(fullName, phone, identityCard, dateOfBirth, gender);
+    DataManager::getInstance().getTenantManager().addTenant(fullName, phone, identityCard, dateOfBirth, gender);
     accept();
 }
 

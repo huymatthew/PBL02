@@ -19,7 +19,7 @@ using namespace std;
 
 
 
-AddBillDialog::AddBillDialog(QWidget *parent, DataManager *dataManager) : QDialog(parent), dataManager(dataManager) {
+AddBillDialog::AddBillDialog(QWidget *parent) : QDialog(parent){
     setupUi(this);
     signalConnections();
     setFixedSize(400, 300);
@@ -29,6 +29,8 @@ AddBillDialog::AddBillDialog(QWidget *parent, DataManager *dataManager) : QDialo
 AddBillDialog::~AddBillDialog() {}
 
 void AddBillDialog::on_saveButton_clicked() {
+    DataManager& dataManager = DataManager::getInstance();
+
     Bill bill = Bill();
     int contractId = contractID->text().toInt();
     bill.setContractId(contractId);
@@ -39,14 +41,14 @@ void AddBillDialog::on_saveButton_clicked() {
     QDate dueDate = QDate::currentDate().addDays(30);
     bill.setDueDate(dueDate.toString("ddMMyyyy").toStdString());
     bill.setStatus(statusComboBox->currentIndex());
-    dataManager->billM.addBill(bill);
+    dataManager.getBillManager().addBill(bill);
 
     for (int i = 0; i < service->count(); ++i) {
         cout << "Adding service " << i << endl;
         QListWidgetItem* item = service->item(i);
         QServiceWidget* serviceWidget = static_cast<QServiceWidget*>(service->itemWidget(item));
         if (serviceWidget) {
-            dataManager->serviceM.addService(serviceWidget->getType(), 
+            dataManager.getServiceManager().addService(serviceWidget->getType(),
                             bill.getBillId(),
                             serviceWidget->getQuantity(), 
                             serviceWidget->getPricePerUnit() * serviceWidget->getQuantity());
@@ -70,14 +72,15 @@ void AddBillDialog::on_service_addButton_clicked() {
 }
 
 void AddBillDialog::setRoom(int roomId) {
-    Contract* contract = dataManager->contractM.getActiveContractByRoom(roomId);
+    DataManager& dataManager = DataManager::getInstance();
+    Contract* contract = dataManager.getContractManager().getActiveContractByRoom(roomId);
     if (contract) {
         contractID->setText(QString::number(contract->getContractId()));
-        Room* room = dataManager->roomM.getRoom(roomId);
+        Room* room = dataManager.getRoomManager().getRoom(roomId);
         if (room) {
             roomBox->setText(QString::fromStdString(room->getRoomName()));
         }
-        Tenant* tenant = dataManager->getMainTenantFromContract(contract->getContractId());
+        Tenant* tenant = dataManager.getMainTenantFromContract(contract->getContractId());
         if (tenant) {
             resName->setText(QString::fromStdString(tenant->getFullName()));
         }

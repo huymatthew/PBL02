@@ -3,11 +3,10 @@
 
 using namespace std;
 
-AddContractDialog::AddContractDialog(QWidget *parent, ContractManager *contractManager, RoomManager *roomManager, TenantManager *tenantManager, RentManager *rentManager)
-    : QDialog(parent), contractManager(contractManager), roomManager(roomManager), tenantManager(tenantManager), rentManager(rentManager) {
+AddContractDialog::AddContractDialog(QWidget *parent) : QDialog(parent), Ui_AddContractDialog() {
     setupUi(this);
-    contractIdSpinBox->setValue(contractManager->getContractCount() + 1);
-    for (const auto& room : roomManager->getAllRooms()) {
+    contractIdSpinBox->setValue(1);
+    for (const auto& room : DataManager::getInstance().getRoomManager().getAllRooms()) {
         roomIdComboBox->addItem(QString::fromStdString(room.getRoomName() + " - " + (room.getStatus() ? "Occupied" : "Available")), QVariant::fromValue(room.getRoomId()));
     }
     signalConnections();
@@ -61,11 +60,11 @@ void AddContractDialog::on_saveButton_clicked() {
                 return;
             }
             checkOverlap[tenantId] = true;
-            rentManager->addRent(contractId, tenantId, i == 0);
+            DataManager::getInstance().getRentManager().addRent(contractId, tenantId, i == 0);
         }
     }
-    roomManager->setRoomOccupied(roomId);
-    
+    DataManager::getInstance().getRoomManager().setRoomOccupied(roomId);
+    ContractManager* contractManager = &DataManager::getInstance().getContractManager();
     Contract newContract(contractId, roomId, startDate.toString("yyyy-MM-dd").toStdString(),
                          endDate.toString("yyyy-MM-dd").toStdString(), monthlyRent, deposit,
                          status, notes.toStdString());
@@ -84,6 +83,7 @@ void AddContractDialog::on_tenant_addButton_clicked() {
         qWarning("tenantList is not initialized!");
         return;
     }
+    TenantManager* tenantManager = &DataManager::getInstance().getTenantManager();
     QComboBox* tenantComboBox = new QComboBox(this);
     tenantComboBox->setFixedWidth(tenantList->width() - 50);
     tenantComboBox->setEditable(false);

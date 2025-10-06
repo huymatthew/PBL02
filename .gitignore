@@ -5,5 +5,4 @@
 /lib/
 /bin/
 *.sh
-Makefile
 .vscode/

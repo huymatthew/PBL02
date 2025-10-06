@@ -13,7 +13,7 @@
 class AddBillDialog : public QDialog, public Ui_AddBillDialog
 {
 public:
-    AddBillDialog(QWidget *parent, DataManager *dataManager);
+    AddBillDialog(QWidget *parent);
     ~AddBillDialog();
 
     void on_saveButton_clicked();
@@ -25,7 +25,6 @@ public:
     void updateTotal();
 private:
     void signalConnections();
-    DataManager *dataManager;
     friend class QServiceWidget;
 };
 #endif // ADD_BILL_DIAG_H
