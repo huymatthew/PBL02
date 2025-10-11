@@ -22,8 +22,8 @@ private:
            const string& id_card, const string& dob, int gender);
     ~Tenant();
 
-    int getTenantId() const;
-    void setTenantId(int id);
+    int getId() const;
+    void setId(int id);
 
     string getFullName() const;
     void setFullName(const string& name);

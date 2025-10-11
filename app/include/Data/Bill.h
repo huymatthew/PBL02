@@ -22,8 +22,8 @@ public:
          double rent, double total, const string& due, int status);
     ~Bill();
 
-    int getBillId() const;
-    void setBillId(int id);
+    int getId() const;
+    void setId(int id);
 
     int getContractId() const;
     void setContractId(int contractId);

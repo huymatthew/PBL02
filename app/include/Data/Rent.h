@@ -16,8 +16,8 @@ class Rent {
     Rent(int roomId, int tenantId, bool isRepresentative);
     ~Rent();
 
-    int getRoomId() const;
-    void setRoomId(int roomId);
+    int getId() const;
+    void setId(int id);
 
     int getTenantId() const;
     void setTenantId(int tenantId);

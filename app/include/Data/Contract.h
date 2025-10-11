@@ -23,8 +23,8 @@ public:
              double rent, double deposit, int status, const string& notes);
     ~Contract();
     
-    int getContractId() const;
-    void setContractId(int id);
+    int getId() const;
+    void setId(int id);
 
     int getRoomId() const;
     void setRoomId(const int& roomId);

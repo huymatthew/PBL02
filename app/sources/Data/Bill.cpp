@@ -17,10 +17,10 @@ Bill::Bill(int id, int contractId, const string& month,
         room_rent(rent), total_amount(total), due_date(due), status(status) {}
 Bill::~Bill() {}
 
-int Bill::getBillId() const {
+int Bill::getId() const {
     return bill_id;
 }
-void Bill::setBillId(int id) {
+void Bill::setId(int id) {
     bill_id = id;
 }
 

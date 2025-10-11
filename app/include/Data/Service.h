@@ -19,9 +19,9 @@ public:
     Service(const Service& other);
     Service(int id, int type, int billId, int qty, double price);
     ~Service();
-    
-    int getServiceId() const;
-    void setServiceId(int id);
+
+    int getId() const;
+    void setId(int id);
 
     int getServiceType() const;
     void setServiceType(int type);

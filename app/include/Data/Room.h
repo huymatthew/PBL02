@@ -22,8 +22,8 @@ public:
          double rent, const string& desc, int status);
     ~Room();
 
-    int getRoomId() const;
-    void setRoomId(int id);
+    int getId() const;
+    void setId(int id);
 
     string getRoomName() const;
     void setRoomName(const string& name);

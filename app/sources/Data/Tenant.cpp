@@ -21,10 +21,10 @@ Tenant::Tenant(int id, const string& name, const string& phone,
       date_of_birth(dob), gender(gender) {}
 Tenant::~Tenant() {}
 
-int Tenant::getTenantId() const {
+int Tenant::getId() const {
     return tenant_id;
 }
-void Tenant::setTenantId(int id) {
+void Tenant::setId(int id) {
     tenant_id = id;
 }
 

@@ -19,11 +19,11 @@ Service::Service(int id, int type, int billId, int qty, double price)
     : service_id(id), service_type(type), bill_id(billId), quantity(qty), price(price) {}
 Service::~Service() {}
 
-int Service::getServiceId() const {
+int Service::getId() const {
     return service_id;
 }
 
-void Service::setServiceId(int id) {
+void Service::setId(int id) {
     service_id = id;
 }
 

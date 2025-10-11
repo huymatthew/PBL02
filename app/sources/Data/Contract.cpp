@@ -23,8 +23,8 @@ Contract::Contract(int id, const int& roomId,
       status(status), notes(notes) {}
 Contract::~Contract() {}
 
-int Contract::getContractId() const { return contract_id; }
-void Contract::setContractId(int id) { contract_id = id; }
+int Contract::getId() const { return contract_id; }
+void Contract::setId(int id) { contract_id = id; }
 
 int Contract::getRoomId() const { return room_id; }
 void Contract::setRoomId(const int& roomId) { room_id = roomId; }

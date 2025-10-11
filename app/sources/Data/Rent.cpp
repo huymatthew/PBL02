@@ -9,12 +9,12 @@ Rent::Rent(int roomId, int tenantId, bool isRepresentative)
     : room_id(roomId), tenant_id(tenantId), is_representative(isRepresentative) {}
 Rent::~Rent() {}
 
-int Rent::getRoomId() const {
+int Rent::getId() const {
     return room_id;
 }
 
-void Rent::setRoomId(int roomId) {
-    room_id = roomId;
+void Rent::setId(int id) {
+    room_id = id;
 }
 
 int Rent::getTenantId() const {
