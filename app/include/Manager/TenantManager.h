@@ -25,6 +25,8 @@ public:
     bool saveToDatabase() override;
     
     bool add(const Tenant& tenant) override;
+    bool addTenant(const string& fullName, const string& phone,
+                  const string& identityCard, const string& dateOfBirth, int gender);
     bool remove(int tenantId) override;
     bool update(int tenantId, const Tenant& updatedTenant) override;
     
@@ -36,7 +38,7 @@ public:
     bool exists(int tenantId) const override;
     bool identityCardExists(const string& identityCard) const;
     bool phoneExists(const string& phone) const;
-    int getTenantCount() const;
+    int getCount() const override;
     
     bool isValidIdentityCard(const string& identityCard) const;
     bool isValidPhone(const string& phone) const;

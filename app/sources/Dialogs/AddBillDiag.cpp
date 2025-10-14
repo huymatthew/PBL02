@@ -41,7 +41,7 @@ void AddBillDialog::on_saveButton_clicked() {
     QDate dueDate = QDate::currentDate().addDays(30);
     bill.setDueDate(dueDate.toString("yyyy-MM-dd").toStdString());
     bill.setStatus(statusComboBox->currentIndex());
-    dataManager.getBillManager().addBill(bill);
+    dataManager.getBillManager().add(bill);
 
     for (int i = 0; i < service->count(); ++i) {
         cout << "Adding service " << i << endl;
@@ -49,13 +49,13 @@ void AddBillDialog::on_saveButton_clicked() {
         QServiceWidget* serviceWidget = static_cast<QServiceWidget*>(service->itemWidget(item));
         if (serviceWidget) {
             dataManager.getServiceManager().addService(serviceWidget->getType(),
-                            bill.getBillId(),
+                            bill.getId(),
                             serviceWidget->getQuantity(), 
                             serviceWidget->getPricePerUnit() * serviceWidget->getQuantity());
 
         }
     }
-    QMessageBox::information(this, "Bill Saved", "The bill has been saved successfully. \n Bill ID: " + QString::number(bill.getBillId()));
+    QMessageBox::information(this, "Bill Saved", "The bill has been saved successfully. \n Bill ID: " + QString::number(bill.getId()));
     accept();
 }
 
@@ -75,12 +75,12 @@ void AddBillDialog::setRoom(int roomId) {
     DataManager& dataManager = DataManager::getInstance();
     Contract* contract = dataManager.getContractManager().getActiveContractByRoom(roomId);
     if (contract) {
-        contractID->setText(QString::number(contract->getContractId()));
-        Room* room = dataManager.getRoomManager().getRoom(roomId);
+        contractID->setText(QString::number(contract->getId()));
+        Room* room = dataManager.getRoomManager().get(roomId);
         if (room) {
             roomBox->setText(QString::fromStdString(room->getRoomName()));
         }
-        Tenant* tenant = dataManager.getMainTenantFromContract(contract->getContractId());
+        Tenant* tenant = dataManager.getMainTenantFromContract(contract->getId());
         if (tenant) {
             resName->setText(QString::fromStdString(tenant->getFullName()));
         }

@@ -7,7 +7,7 @@ AddContractDialog::AddContractDialog(QWidget *parent) : QDialog(parent), Ui_AddC
     setupUi(this);
     contractIdSpinBox->setValue(1);
     for (const auto& room : DataManager::getInstance().getRoomManager().getAllRooms()) {
-        roomIdComboBox->addItem(QString::fromStdString(room.getRoomName() + " - " + (room.getStatus() ? "Occupied" : "Available")), QVariant::fromValue(room.getRoomId()));
+        roomIdComboBox->addItem(QString::fromStdString(room.getRoomName() + " - " + (room.getStatus() ? "Occupied" : "Available")), QVariant::fromValue(room.getId()));
     }
     signalConnections();
 }
@@ -68,7 +68,7 @@ void AddContractDialog::on_saveButton_clicked() {
     Contract newContract(contractId, roomId, startDate.toString("yyyy-MM-dd").toStdString(),
                          endDate.toString("yyyy-MM-dd").toStdString(), monthlyRent, deposit,
                          status, notes.toStdString());
-    if (!contractManager->addContract(newContract)) {
+    if (!contractManager->add(newContract)) {
         QMessageBox::critical(this, "Error", "Failed to add contract. Please check the details and try again.");
         return;
     }
@@ -90,7 +90,7 @@ void AddContractDialog::on_tenant_addButton_clicked() {
     tenantComboBox->setStyleSheet("QComboBox::drop-down{subcontrol-origin:padding;subcontrol-position:top right;width:25px;border-left:1px solid #ced4da;border-top-right-radius:8px;border-bottom-right-radius:8px;background-color:#f8f9fa;color:#212529;}QComboBox::down-arrow{width:15px;height:15px;background-color:#6c757d;}QComboBox QAbstractItemView{background-color:white;border:2px solid #ced4da;border-radius:8px;selection-background-color:#007bff;selection-color:black;}");
 
     for (const auto& tenant : tenantManager->getAllTenants()) {
-        tenantComboBox->addItem(QString::fromStdString(tenant.getFullName() + " - " + std::to_string(tenant.getTenantId())), QVariant::fromValue(tenant.getTenantId()));
+        tenantComboBox->addItem(QString::fromStdString(tenant.getFullName() + " - " + std::to_string(tenant.getId())), QVariant::fromValue(tenant.getId()));
     }
     QListWidgetItem* item = new QListWidgetItem();
     item->setSizeHint(tenantComboBox->sizeHint());

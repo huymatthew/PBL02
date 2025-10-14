@@ -73,6 +73,15 @@ bool RoomManager::add(const Room &room)
     cout << "+ Added room ID: " << room.getId() << endl;
     return true;
 }
+bool RoomManager::addRoom(const string &roomName, int roomType, double monthlyRent, const string &description, int status)
+{
+    int roomId = pk_manager.getNextKey();
+    Room newRoom(roomId, roomName, roomType, monthlyRent, description, status);
+    items.push_back(newRoom);
+    pk_manager.addKey(roomId);
+    cout << "+ Added room ID: " << roomId << endl;
+    return true;
+}
 bool RoomManager::remove(int roomId)
 {
     auto it = this->findIterator(roomId);
@@ -140,7 +149,7 @@ bool RoomManager::exists(int roomId) const
 {
     return pk_manager.isKeyInUse(roomId);
 }
-int RoomManager::getRoomCount() const
+int RoomManager::getCount() const
 {
     return items.size();
 }

@@ -8,7 +8,7 @@ TenantManager::~TenantManager() {}
 
 bool TenantManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading tenants from database...\033[0m" << endl;
-    ifstream file("./app/database/items.dat");
+    ifstream file("./app/database/tenants.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;
@@ -35,7 +35,7 @@ bool TenantManager::loadFromDatabase() {
 }
 bool TenantManager::saveToDatabase() {
     cout << "\033[1;33m*Saving tenants to database...\033[0m" << endl;
-    ofstream file("./app/database/items.dat", ios::out | ios::trunc);
+    ofstream file("./app/database/tenants.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return false;
@@ -80,6 +80,34 @@ bool TenantManager::add(const Tenant& tenant) {
     items.push_back(tenant);
     pk_manager.addKey(tenant.getId());
     cout << "+ Added tenant ID: " << tenant.getId() << endl;
+    return true;
+}
+bool TenantManager::addTenant(const string& fullName, const string& phone, const string& identityCard, const string& dateOfBirth, int gender) {
+    int newTenantId = pk_manager.getNextKey();
+    if (identityCardExists(identityCard)) {
+        cerr << "Identity card already exists: " << identityCard << endl;
+        return false;
+    }
+    if (phoneExists(phone)) {
+        cerr << "Phone number already exists: " << phone << endl;
+        return false;
+    }
+    if (!isValidIdentityCard(identityCard)) {
+        cerr << "Invalid identity card: " << identityCard << endl;
+        return false;
+    }
+    if (!isValidPhone(phone)) {
+        cerr << "Invalid phone number: " << phone << endl;
+        return false;
+    }
+    if (!isValidDateOfBirth(dateOfBirth)) {
+        cerr << "Invalid date of birth: " << dateOfBirth << endl;
+        return false;
+    }
+    Tenant newTenant(newTenantId, fullName, phone, identityCard, dateOfBirth, gender);
+    items.push_back(newTenant);
+    pk_manager.addKey(newTenantId);
+    cout << "+ Added tenant ID: " << newTenantId << endl;
     return true;
 }
 
@@ -178,7 +206,7 @@ bool TenantManager::phoneExists(const string& phone) const {
     }
     return false;
 }
-int TenantManager::getTenantCount() const {
+int TenantManager::getCount() const {
     return items.size();
 }
 

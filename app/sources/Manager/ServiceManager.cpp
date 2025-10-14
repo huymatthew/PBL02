@@ -1,12 +1,12 @@
 #include <Manager/ServiceManager.h>
 using namespace std;
 
-ServiceManager::ServiceManager() : Manager<Service>(){}
+ServiceManager::ServiceManager() : Manager<Service>() {}
 ServiceManager::~ServiceManager() {}
 
 bool ServiceManager::loadFromDatabase() {
     cout << "\033[1;32m*Loading services from database...\033[0m" << endl;
-    ifstream file("./app/database/items.dat");
+    ifstream file("./app/database/services.dat");
     if (!file) {
         cerr << "Error opening file for reading." << endl;
         return false;
@@ -32,7 +32,7 @@ bool ServiceManager::loadFromDatabase() {
 }
 bool ServiceManager::saveToDatabase() {
     cout << "\033[1;33m*Saving services to database...\033[0m" << endl;
-    ofstream file("./app/database/items.dat", ios::out | ios::trunc);
+    ofstream file("./app/database/services.dat", ios::out | ios::trunc);
     if (!file) {
         cerr << "Error opening file for writing." << endl;
         return false;
@@ -58,7 +58,16 @@ bool ServiceManager::add(const Service& service) {
     pk_manager.addKey(service.getId());
     return true;
 }
-
+bool ServiceManager::addService(int serviceType, int billId, int quantity, double price) {
+    if (!isValidServiceType(serviceType) || !isValidQuantity(quantity) || !isValidPrice(price)) {
+        cerr << "Invalid service parameters." << endl;
+        return false;
+    }
+    int newServiceId = pk_manager.getNextKey();
+    Service newService(newServiceId, serviceType, billId, quantity, price);
+    items.push_back(newService);
+    return true;
+}
 bool ServiceManager::remove(int serviceId) {
     auto it = findIterator(serviceId);
     if (it != items.end()) {
@@ -98,7 +107,7 @@ int ServiceManager::getNextServiceId() {
 bool ServiceManager::exists(int serviceId) const {
     return pk_manager.isKeyInUse(serviceId);
 }
-int ServiceManager::getServiceCount() const {
+int ServiceManager::getCount() const {
     return items.size();
 }
 int ServiceManager::getServiceCountByBill(int billId) const {

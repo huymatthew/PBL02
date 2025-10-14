@@ -25,6 +25,8 @@ public:
     bool saveToDatabase() override;
     
     bool add(const Room& room) override;
+    bool addRoom(const string& roomName, int roomType,
+                double monthlyRent, const string& description, int status);
     bool remove(int roomId) override;
     bool update(int roomId, const Room& updatedRoom) override;
     
@@ -34,7 +36,7 @@ public:
     vector<Room> getAllRooms() const;
     
     bool exists(int roomId) const override;
-    int getRoomCount() const;
+    int getCount() const override;
     int getAvailableRoomCount() const;
     int getOccupiedRoomCount() const;
     

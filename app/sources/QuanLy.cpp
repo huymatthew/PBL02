@@ -90,7 +90,7 @@ void QuanLy::onChangedTabActive(int index)
 }
 
 void QuanLy::onShowTenantDetails(int tenantId){
-    Tenant *tenant = manager->getTenantManager().getTenant(tenantId);
+    Tenant *tenant = manager->getTenantManager().get(tenantId);
     if (!tenant)
     {
         cerr << "Tenant ID " << tenantId << " not found." << endl;
@@ -112,7 +112,7 @@ void QuanLy::onShowTenantDetails(int tenantId){
 }
 void QuanLy::onShowRoomDetails(int roomId)
 {
-    Room *room = manager->getRoomManager().getRoom(roomId);
+    Room *room = manager->getRoomManager().get(roomId);
     if (!room)
     {
         cerr << "Room ID " << roomId << " not found." << endl;
@@ -145,7 +145,7 @@ void QuanLy::loadContractView()
     for (int row = 0; row < model->rowCount(); ++row) {
         QStandardItem *item = model->item(row, 1);
         if (item) {
-            string newItem = manager->getRoomManager().getRoom(item->text().toInt())->getRoomName();
+            string newItem = manager->getRoomManager().get(item->text().toInt())->getRoomName();
             item->setData(QString::fromStdString(newItem), Qt::DisplayRole);
         }
     }
@@ -170,7 +170,7 @@ void QuanLy::addBillCall()
     AddBillDialog addBillDialog(mainWindow);
     addBillDialog.setFixedSize(900, 800);
     if (manager->getRoomManager().getRoomSelected()) {
-        addBillDialog.setRoom(manager->getRoomManager().getRoomSelected()->getRoomId());
+        addBillDialog.setRoom(manager->getRoomManager().getRoomSelected()->getId());
         addBillDialog.exec();
         paymentsTableView->setModel(manager->getBillManager().getBillsAsModel());
     } else {
@@ -199,7 +199,7 @@ void QuanLy::removeTenantCall()
     if (confirm == QMessageBox::Yes)
     {
         cout << "Delete User: " << tenant->getFullName() << endl;
-        manager->getTenantManager().removeTenant(tenant->getTenantId());
+        manager->getTenantManager().remove(tenant->getId());
         loadTenantView();
     }
     else
@@ -220,7 +220,7 @@ void QuanLy::removeRoomCall()
     if (confirm == QMessageBox::Yes)
     {
         cout << "Delete Room: " << room->getRoomName() << endl;
-        manager->getRoomManager().removeRoom(room->getRoomId());
+        manager->getRoomManager().remove(room->getId());
         loadRoomView();
     }
     else

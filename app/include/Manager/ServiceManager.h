@@ -22,13 +22,14 @@ public:
     bool saveToDatabase() override;
     
     bool add(const Service& service) override;
+    bool addService(int serviceType, int billId, int quantity, double price);
     bool remove(int serviceId) override;
     bool update(int serviceId, const Service& updatedService) override;
     
     Service* get(int serviceId) override;
     bool exists(int serviceId) const override;
 
-    int getServiceCount() const;
+    int getCount() const override;
     int getServiceCountByBill(int billId) const;
     int getServiceCountByType(int serviceType) const;
     

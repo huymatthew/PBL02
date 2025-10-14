@@ -14,7 +14,7 @@ void RentManager::addRent(int contractId, int tenantId, bool isRepresentative) {
 }
 bool RentManager::removeRent(int contractId, int tenantId) {
     for (auto it = rents.begin(); it != rents.end(); ++it) {
-        if (it->getRoomId() == contractId && it->getTenantId() == tenantId) {
+        if (it->getId() == contractId && it->getTenantId() == tenantId) {
             rents.erase(it);
             return true;
         }
@@ -23,7 +23,7 @@ bool RentManager::removeRent(int contractId, int tenantId) {
 }
 int RentManager::getTenantIdByContract(int contractId) {
     for (const auto& rent : rents) {
-        if (rent.getRoomId() == contractId && rent.getIsRepresentative()) {
+        if (rent.getId() == contractId && rent.getIsRepresentative()) {
             return rent.getTenantId();
         }
     }
@@ -32,7 +32,7 @@ int RentManager::getTenantIdByContract(int contractId) {
 int RentManager::getRoomIdByTenant(int tenantId) {
     for (const auto& rent : rents) {
         if (rent.getTenantId() == tenantId) {
-            return rent.getRoomId();
+            return rent.getId();
         }
     }
     return -1; // Not found
@@ -66,10 +66,10 @@ void RentManager::saveToDatabase() {
         return;
     }
     for (const auto& rent : rents) {
-        file << rent.getRoomId() << " "
+        file << rent.getId() << " "
              << rent.getTenantId() << " "
              << (rent.getIsRepresentative() ? 1 : 0) << endl;
-        cout << "~ Saved rent: Room ID " << rent.getRoomId() << ", Tenant ID "
+        cout << "~ Saved rent: Room ID " << rent.getId() << ", Tenant ID "
              << rent.getTenantId() << ", Is Representative: "
              << (rent.getIsRepresentative() ? 1 : 0) << endl;
     }

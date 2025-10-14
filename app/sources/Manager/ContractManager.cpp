@@ -61,7 +61,12 @@ bool ContractManager::add(const Contract& contract) {
     cout << "+ Added contract ID: " << contract.getId() << endl;
     return true;
 }
-
+bool ContractManager::addContract(const int& roomId, const string& start, const string& end,
+                                  double rent, double deposit, int status, const string& notes) {
+    int newId = pk_manager.getNextKey();
+    Contract newContract(newId, roomId, start, end, rent, deposit, status, notes);
+    return add(newContract);
+}
 bool ContractManager::remove(int contractId) {
     auto it = this->findIterator(contractId);
     if (it != items.end()) {

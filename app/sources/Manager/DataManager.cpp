@@ -40,7 +40,7 @@ void DataManager::saveAllData() {
 Tenant* DataManager::getMainTenantFromContract(int contractId) {
     for (const auto &rent : rentM.rents) {
         if (rent.getIsRepresentative()) {
-            Tenant* tenant = tenantM.getTenant(rent.getTenantId());
+            Tenant* tenant = tenantM.get(rent.getTenantId());
             if (tenant) {
                 return tenant;
             } else {
@@ -56,7 +56,7 @@ Room* DataManager::getRoomFromTenant(int tenantId) {
     for (const auto &rent : rentM.rents) {
         if (rent.getTenantId() == tenantId) {
             int roomId = rentM.getRoomIdByTenant(tenantId);
-            Room* room = roomM.getRoom(roomId);
+            Room* room = roomM.get(roomId);
             if (room) {
                 return room;
             } else {

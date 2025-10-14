@@ -66,6 +66,12 @@ bool BillManager::add(const Bill& bill) {
     return true;
 }
 
+bool BillManager::addBill(int contractId, const string& month, double rent, double total, const string& due, int status) {
+    int newId = pk_manager.getNextKey();
+    Bill newBill(newId, contractId, month, rent, total, due, status);
+    return add(newBill);
+}
+
 bool BillManager::remove(int billId) {
     auto it = this->findIterator(billId);
     if (it != items.end()) {

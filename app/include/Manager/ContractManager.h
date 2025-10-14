@@ -25,7 +25,12 @@ public:
 
     bool loadFromDatabase() override;
     bool saveToDatabase() override;
+
     bool add(const Contract& contract) override;
+    bool addContract(const int& roomId,
+                    const string& start, const string& end,
+                    double rent, double deposit, int status,
+                    const string& notes);
     bool remove(int contractId) override;
     bool update(int contractId, const Contract& updatedContract) override;
     Contract* get(int contractId);

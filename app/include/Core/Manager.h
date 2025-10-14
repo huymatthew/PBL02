@@ -9,15 +9,15 @@
 template <typename T>
 class Manager {
 public:
-    virtual ~Manager();
-    virtual bool loadFromDatabase();
-    virtual bool saveToDatabase();
-    virtual bool add(const T& item);
-    virtual bool remove(int id);
-    virtual bool update(int id, const T& updatedItem);
-    virtual T* get(int id);
-    virtual bool exists(int id) const;
-    virtual int getCount() const;
+    virtual ~Manager() {};
+    virtual bool loadFromDatabase() = 0;
+    virtual bool saveToDatabase() = 0;
+    virtual bool add(const T& item) = 0;
+    virtual bool remove(int id) = 0;
+    virtual bool update(int id, const T& updatedItem) = 0;
+    virtual T* get(int id) = 0;
+    virtual bool exists(int id) const = 0;
+    virtual int getCount() const = 0;
 protected:
     vector<T> items;
     bool data_loaded;
