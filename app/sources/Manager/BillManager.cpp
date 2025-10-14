@@ -4,7 +4,7 @@
 
 using namespace std;
 
-BillManager::BillManager() : pk_manager(), data_loaded(false) {}
+BillManager::BillManager() : Manager<Bill>() {}
 BillManager::~BillManager() {}
 
 bool BillManager::loadFromDatabase() {
@@ -28,7 +28,7 @@ bool BillManager::loadFromDatabase() {
             cerr << "Duplicate bill ID found: " << id << endl;
             continue; 
         }
-        bills.emplace_back(id, contractId, month, rent, total, due, status);
+        items.emplace_back(id, contractId, month, rent, total, due, status);
         cout << "- Loaded bill ID: " << id << endl;
     }
     return true;
@@ -42,42 +42,35 @@ bool BillManager::saveToDatabase() {
         return false;
     }
     file.clear();
-    for (const auto& bill : bills) {
-        file << bill.getBillId() << " "
+    for (const auto& bill : items) {
+        file << bill.getId() << " "
              << bill.getContractId() << " "
              << bill.getBillingMonth() << " "
              << bill.getRoomRent() << " "
              << bill.getTotalAmount() << " "
              << bill.getDueDate() << " "
              << bill.getStatus() << endl;
-        cout << "~ Saved bill ID: " << bill.getBillId() << endl;
+        cout << "~ Saved bill ID: " << bill.getId() << endl;
     }
     return true;
 }
 
-
-bool BillManager::addBill(const Bill& bill) {
-    if (pk_manager.isKeyInUse(bill.getBillId())) {
-        cerr << "Bill ID already in use: " << bill.getBillId() << endl;
+bool BillManager::add(const Bill& bill) {
+    if (pk_manager.isKeyInUse(bill.getId())) {
+        cerr << "Bill ID already in use: " << bill.getId() << endl;
         return false;
     }
-    bills.push_back(bill);
-    pk_manager.addKey(bill.getBillId());
-    cout << "+ Added bill ID: " << bill.getBillId() << endl;
+    items.push_back(bill);
+    pk_manager.addKey(bill.getId());
+    cout << "+ Added bill ID: " << bill.getId() << endl;
     return true;
 }
 
-bool BillManager::addBill(int contractId, const string& month, double rent, double total, const string& due, int status) {
-    int newId = pk_manager.getNextKey();
-    Bill newBill(newId, contractId, month, rent, total, due, status);
-    return addBill(newBill);
-}
-
-bool BillManager::removeBill(int billId) {
-    auto it = findBillIterator(billId);
-    if (it != bills.end()) {
+bool BillManager::remove(int billId) {
+    auto it = this->findIterator(billId);
+    if (it != items.end()) {
         pk_manager.releaseKey(billId);
-        bills.erase(it);
+        items.erase(it);
         cout << "- Removed bill ID: " << billId << endl;
         return true;
     }
@@ -85,9 +78,9 @@ bool BillManager::removeBill(int billId) {
     return false;
 }
 
-bool BillManager::updateBill(int billId, const Bill& updatedBill) {
-    auto it = findBillIterator(billId);
-    if (it != bills.end()) {
+bool BillManager::update(int billId, const Bill& updatedBill) {
+    auto it = this->findIterator(billId);
+    if (it != items.end()) {
         *it = updatedBill;
         cout << "* Updated bill ID: " << billId << endl;
         return true;
@@ -97,26 +90,26 @@ bool BillManager::updateBill(int billId, const Bill& updatedBill) {
 }
 
 
-Bill* BillManager::getBill(int billId) {
-    auto it = findBillIterator(billId);
-    if (it != bills.end()) {
+Bill* BillManager::get(int billId) {
+    auto it = this->findIterator(billId);
+    if (it != items.end()) {
         return &(*it);
     }
     return nullptr;
 }
 
-bool BillManager::billExists(int billId) const {
+bool BillManager::exists(int billId) const {
     return pk_manager.isKeyInUse(billId);
 }
 
-int BillManager::getBillCount() const {
-    return bills.size();
+int BillManager::getCount() const {
+    return items.size();
 }
 
 
 bool BillManager::markBillAsPaid(int billId) {
-    auto it = findBillIterator(billId);
-    if (it != bills.end()) {
+    auto it = this->findIterator(billId);
+    if (it != items.end()) {
         it->setStatus(1);
         cout << "* Marked bill ID " << billId << " as paid." << endl;
         return true;
@@ -126,8 +119,8 @@ bool BillManager::markBillAsPaid(int billId) {
 }
 
 bool BillManager::markBillAsUnpaid(int billId) {
-    auto it = findBillIterator(billId);
-    if (it != bills.end()) {
+    auto it = this->findIterator(billId);
+    if (it != items.end()) {
         it->setStatus(0);
         cout << "* Marked bill ID " << billId << " as unpaid." << endl;
         return true;
@@ -149,9 +142,9 @@ QStandardItemModel* BillManager::getBillsAsModel() const {
         "Trạng Thái"
     });
 
-    for (const auto& bill : bills) {
+    for (const auto& bill : items) {
         QList<QStandardItem*> rowItems;
-        rowItems.append(new QStandardItem(QString::number(bill.getBillId())));
+        rowItems.append(new QStandardItem(QString::number(bill.getId())));
         rowItems.append(new QStandardItem(QString::number(bill.getContractId())));
         rowItems.append(new QStandardItem(monthFormat(bill.getBillingMonth())));
         rowItems.append(new QStandardItem(moneyFormat(bill.getRoomRent())));
@@ -161,13 +154,4 @@ QStandardItemModel* BillManager::getBillsAsModel() const {
         model->appendRow(rowItems);
     }
     return model;
-}
-
-vector<Bill>::iterator BillManager::findBillIterator(int billId) {
-    for (auto it = bills.begin(); it != bills.end(); ++it) {
-        if (it->getBillId() == billId) {
-            return it;
-        }
-    }
-    return bills.end();
 }

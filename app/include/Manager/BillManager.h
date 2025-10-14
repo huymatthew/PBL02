@@ -1,11 +1,8 @@
 #ifndef BILL_MANAGER_H
 #define BILL_MANAGER_H
 
-#include <QStandardItem>
-#include <QStandardItemModel>
-
 #include <Data/Bill.h>
-#include <Core/PrimaryKey.h>
+#include <Core/Manager.h>
 #include <vector>
 #include <string>
 #include <memory>
@@ -17,7 +14,7 @@ using namespace std;
 class DataManager;
 
 
-class BillManager {
+class BillManager : public Manager<Bill> {
 public:
     BillManager();
     ~BillManager();
@@ -25,30 +22,17 @@ public:
     bool loadFromDatabase();
     bool saveToDatabase();
     
-    bool addBill(const Bill& bill);
-    bool addBill(int contractId, const string& month,
-                 double rent, double total, const string& due, int status);
-    bool removeBill(int billId);
-    bool updateBill(int billId, const Bill& updatedBill);
-    
-    Bill* getBill(int billId);
-    
-    bool billExists(int billId) const;
-    int getBillCount() const;
-    
+    bool add(const Bill& bill) override;
+    bool remove(int billId) override;
+    bool update(int billId, const Bill& updatedBill) override;
+    Bill* get(int billId) override;
+    bool exists(int billId) const override;
+    int getCount() const override;
+
     bool markBillAsPaid(int billId);
     bool markBillAsUnpaid(int billId);
     
     QStandardItemModel* getBillsAsModel() const;
-
-    private:
-    vector<Bill> bills;
-    PrimaryKey pk_manager;
-    bool data_loaded;
-    
-    // Helper methods
-    vector<Bill>::iterator findBillIterator(int billId);
-    void sortBillsByDate();
     
     friend class DataManager;
 };

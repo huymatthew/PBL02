@@ -3,6 +3,7 @@
 
 #include <QStandardItem>
 #include <QStandardItemModel>
+#include <Core/Manager.h>
 
 #include <Data/Contract.h>
 #include <Core/PrimaryKey.h>
@@ -17,44 +18,29 @@ using namespace std;
 class DataManager;
 
 
-class ContractManager {
+class ContractManager : public Manager<Contract> {
 public:
     ContractManager();
     ~ContractManager();
 
-    bool loadFromDatabase();
-    bool saveToDatabase();
-    
-    bool addContract(const Contract& contract);
-    bool addContract(const int& roomId,
-                    const string& start, const string& end,
-                    double rent, double deposit, int status,
-                    const string& notes);
-    bool removeContract(int contractId);
-    bool updateContract(int contractId, const Contract& updatedContract);
-    
-    Contract* getContract(int contractId);
-    Contract* getActiveContractByRoom(const int& roomId);
-    
-    bool contractExists(int contractId) const;
-    bool roomHasActiveContract(const int& roomId) const;
-    int getContractCount() const;
-    
-    bool activateContract(int contractId);
-    bool deactivateContract(int contractId);
-    bool extendContract(int contractId, const string& newEndDate);
+    bool loadFromDatabase() override;
+    bool saveToDatabase() override;
+    bool add(const Contract& contract) override;
+    bool remove(int contractId) override;
+    bool update(int contractId, const Contract& updatedContract) override;
+    Contract* get(int contractId);
+    bool exists(int contractId) const override;
+    int getCount() const;
 
+    Contract* getActiveContractByRoom(const int& roomId);
+    bool roomHasActiveContract(const int& roomId) const;
+    bool activateContract(int contractId) const;
+    bool deactivateContract(int contractId) const;
+    bool extendContract(int contractId, const string& newEndDate) const;
     double getTotalMonthlyRent() const;
     double getTotalDeposits() const;
     
     QStandardItemModel* getContractsAsModel() const;
-private:
-    vector<Contract> contracts;
-    PrimaryKey pk_manager;
-    bool data_loaded;
-    
-    vector<Contract>::iterator findContractIterator(int contractId);
-
     friend class DataManager;
 };
 

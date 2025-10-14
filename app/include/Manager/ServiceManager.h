@@ -3,6 +3,7 @@
 
 #include <Data/Service.h>
 #include <Core/PrimaryKey.h>
+#include <Core/Manager.h>
 #include <vector>
 #include <string>
 #include <memory>
@@ -12,25 +13,21 @@
 using namespace std;
 class DataManager;
 
-class ServiceManager {
+class ServiceManager : public Manager<Service> {
 public:
     ServiceManager();
     ~ServiceManager();
 
-    bool loadFromDatabase();
-    bool saveToDatabase();
+    bool loadFromDatabase() override;
+    bool saveToDatabase() override;
     
-    bool addService(const Service& service);
-    bool addService(int serviceType, int billId, int quantity, double price);
-    bool removeService(int serviceId);
-    bool updateService(int serviceId, const Service& updatedService);
+    bool add(const Service& service) override;
+    bool remove(int serviceId) override;
+    bool update(int serviceId, const Service& updatedService) override;
     
-    Service* getService(int serviceId);
-    vector<Service> getServicesByBill(int billId) const;
-    vector<Service> getServicesByType(int serviceType) const;
-    vector<Service> getAllServices() const;
-    
-    bool serviceExists(int serviceId) const;
+    Service* get(int serviceId) override;
+    bool exists(int serviceId) const override;
+
     int getServiceCount() const;
     int getServiceCountByBill(int billId) const;
     int getServiceCountByType(int serviceType) const;
@@ -41,17 +38,7 @@ public:
     
     int getNextServiceId();
     
-    vector<pair<int, double>> getServiceCostByType() const;
-    vector<pair<int, int>> getServiceQuantityByType() const;
-    double getTotalRevenue() const;
-    
 private:
-    vector<Service> services;
-    bool data_loaded;
-    PrimaryKey pk_manager;
-    
-    vector<Service>::iterator findServiceIterator(int serviceId);
-    void sortServicesById();
     bool isValidServiceType(int serviceType) const;
     bool isValidQuantity(int quantity) const;
     bool isValidPrice(double price) const;

@@ -3,6 +3,7 @@
 
 #include <QStandardItem>
 #include <QStandardItemModel>
+#include <Core/Manager.h>
 
 #include <Data/Room.h>
 #include <Core/PrimaryKey.h>
@@ -15,26 +16,24 @@
 using namespace std;
 class DataManager;
 
-class RoomManager {
+class RoomManager : public Manager<Room> {
 public:
     RoomManager();
     ~RoomManager();
 
-    bool loadFromDatabase();
-    bool saveToDatabase();
+    bool loadFromDatabase() override;
+    bool saveToDatabase() override;
     
-    bool addRoom(const Room& room);
-    bool addRoom(const string& roomName, int roomType,
-                double monthlyRent, const string& description, int status);
-    bool removeRoom(int roomId);
-    bool updateRoom(int roomId, const Room& updatedRoom);
+    bool add(const Room& room) override;
+    bool remove(int roomId) override;
+    bool update(int roomId, const Room& updatedRoom) override;
     
-    Room* getRoom(int roomId);
+    Room* get(int roomId) override;
     vector<Room> getRoomsByType(int roomType);
     vector<Room> getRoomsByStatus(int status);
     vector<Room> getAllRooms() const;
     
-    bool roomExists(int roomId) const;
+    bool exists(int roomId) const override;
     int getRoomCount() const;
     int getAvailableRoomCount() const;
     int getOccupiedRoomCount() const;
@@ -51,13 +50,7 @@ public:
     void setRoomSelected(Room* room);
     
 private:
-    vector<Room> rooms;
-    bool data_loaded;
-    PrimaryKey pk_manager;
     Room* selected;
-    
-    vector<Room>::iterator findRoomIterator(int roomId);
-
     friend class DataManager;
 };
 

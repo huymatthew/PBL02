@@ -2,7 +2,7 @@
 #include <Core/ExtraFormat.h>
 using namespace std;
 
-ContractManager::ContractManager() : pk_manager(), data_loaded(false) {}
+ContractManager::ContractManager() : Manager<Contract>() {}
 ContractManager::~ContractManager() {}
 
 bool ContractManager::loadFromDatabase() {
@@ -26,7 +26,7 @@ bool ContractManager::loadFromDatabase() {
             cerr << "Duplicate contract ID found: " << id << endl;
             continue; 
         }
-        contracts.emplace_back(id, roomId, start, end, rent, deposit, status, notes);
+        items.emplace_back(id, roomId, start, end, rent, deposit, status, notes);
         cout << "- Loaded contract ID: " << id << endl;
     }
     return true;
@@ -38,8 +38,8 @@ bool ContractManager::saveToDatabase() {
         cerr << "Error opening file for writing." << endl;
         return false;
     }
-    for (const auto& contract : contracts) {
-        file << contract.getContractId() << " "
+    for (const auto& contract : items) {
+        file << contract.getId() << " "
              << contract.getRoomId() << " "
              << contract.getStartDate() << " "
              << contract.getEndDate() << " "
@@ -47,40 +47,35 @@ bool ContractManager::saveToDatabase() {
              << contract.getDeposit() << " "
              << contract.getStatus() << " "
              << contract.getNotes() << endl;
-        cout << "~ Saved contract ID: " << contract.getContractId() << endl;
+        cout << "~ Saved contract ID: " << contract.getId() << endl;
     }
     return true;
 }
-bool ContractManager::addContract(const Contract& contract) {
-    if (pk_manager.isKeyInUse(contract.getContractId())) {
-        cerr << "Contract ID already in use: " << contract.getContractId() << endl;
+bool ContractManager::add(const Contract& contract) {
+    if (pk_manager.isKeyInUse(contract.getId())) {
+        cerr << "Contract ID already in use: " << contract.getId() << endl;
         return false;
     }
-    contracts.push_back(contract);
-    pk_manager.addKey(contract.getContractId());
-    cout << "+ Added contract ID: " << contract.getContractId() << endl;
+    items.push_back(contract);
+    pk_manager.addKey(contract.getId());
+    cout << "+ Added contract ID: " << contract.getId() << endl;
     return true;
 }
-bool ContractManager::addContract(const int& roomId, const string& start, const string& end,
-                                  double rent, double deposit, int status, const string& notes) {
-    int newId = pk_manager.getNextKey();
-    Contract newContract(newId, roomId, start, end, rent, deposit, status, notes);
-    return addContract(newContract);
-}
-bool ContractManager::removeContract(int contractId) {
-    auto it = findContractIterator(contractId);
-    if (it != contracts.end()) {
+
+bool ContractManager::remove(int contractId) {
+    auto it = this->findIterator(contractId);
+    if (it != items.end()) {
         pk_manager.releaseKey(contractId);
-        contracts.erase(it);
+        items.erase(it);
         cout << "- Removed contract ID: " << contractId << endl;
         return true;
     }
     cerr << "Contract not found for removal: " << contractId << endl;
     return false;
 }
-bool ContractManager::updateContract(int contractId, const Contract& updatedContract) {
-    auto it = findContractIterator(contractId);
-    if (it != contracts.end()) {
+bool ContractManager::update(int contractId, const Contract& updatedContract) {
+    auto it = this->findIterator(contractId);
+    if (it != items.end()) {
         *it = updatedContract;
         cout << "* Updated contract ID: " << contractId << endl;
         return true;
@@ -89,15 +84,15 @@ bool ContractManager::updateContract(int contractId, const Contract& updatedCont
     return false;
 }
 
-Contract* ContractManager::getContract(int contractId) {
-    auto it = findContractIterator(contractId);
-    if (it != contracts.end()) {
+Contract* ContractManager::get(int contractId) {
+    auto it = this->findIterator(contractId);
+    if (it != items.end()) {
         return &(*it);
     }
     return nullptr;
 }
-Contract* ContractManager::getActiveContractByRoom(const int& roomId) {
-    for (auto it = contracts.begin(); it != contracts.end(); ++it) {
+Contract* ContractManager::getActiveContractByRoom(const int& roomId){
+    for (auto it = items.begin(); it != items.end(); ++it) {
         if (it->getRoomId() == roomId && it->getStatus() == 1) {
             return &(*it);
         }
@@ -105,63 +100,31 @@ Contract* ContractManager::getActiveContractByRoom(const int& roomId) {
     return nullptr;
 }
 
-bool ContractManager::contractExists(int contractId) const {
+bool ContractManager::exists(int contractId) const {
     return pk_manager.isKeyInUse(contractId);
 }
 
 bool ContractManager::roomHasActiveContract(const int& roomId) const {
-    for (const auto& contract : contracts) {
+    for (const auto& contract : items) {
         if (contract.getRoomId() == roomId && contract.getStatus() == 1) { // 1: active
             return true;
         }
     }
     return false;
 }
-int ContractManager::getContractCount() const {
-    return contracts.size();
+int ContractManager::getCount() const {
+    return items.size();
 }
-
-bool ContractManager::activateContract(int contractId) {
-    auto it = findContractIterator(contractId);
-    if (it != contracts.end()) {
-        it->setStatus(1); // 1: active
-        cout << "* Activated contract ID: " << contractId << endl;
-        return true;
-    }
-    cerr << "Contract not found to activate: " << contractId << endl;
-    return false;
-}
-bool ContractManager::deactivateContract(int contractId) {
-    auto it = findContractIterator(contractId);
-    if (it != contracts.end()) {
-        it->setStatus(0); // 0: inactive
-        cout << "* Deactivated contract ID: " << contractId << endl;
-        return true;
-    }
-    cerr << "Contract not found to deactivate: " << contractId << endl;
-    return false;
-}
-bool ContractManager::extendContract(int contractId, const string& newEndDate) {
-    auto it = findContractIterator(contractId);
-    if (it != contracts.end()) {
-        it->setEndDate(newEndDate);
-        cout << "* Extended contract ID " << contractId << " to new end date: " << newEndDate << endl;
-        return true;
-    }
-    cerr << "Contract not found to extend: " << contractId << endl;
-    return false;
-}
-
 double ContractManager::getTotalMonthlyRent() const {
     double total = 0.0;
-    for (const auto& contract : contracts) {
+    for (const auto& contract : items) {
         total += contract.getMonthlyRent();
     }
     return total;
 }
 double ContractManager::getTotalDeposits() const {
     double total = 0.0;
-    for (const auto& contract : contracts) {
+    for (const auto& contract : items) {
         total += contract.getDeposit();
     }
     return total;
@@ -175,9 +138,9 @@ QStandardItemModel* ContractManager::getContractsAsModel() const {
         "Giá Thuê Tháng", "Tiền Cọc", "Trạng Thái", "Ghi Chú"
     });
 
-    for (const auto& contract : contracts) {
+    for (const auto& contract : items) {
         QList<QStandardItem*> rowItems;
-        rowItems.append(new QStandardItem(QString::number(contract.getContractId())));
+        rowItems.append(new QStandardItem(QString::number(contract.getId())));
         rowItems.append(new QStandardItem(QString::number(contract.getRoomId())));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getStartDate())));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getEndDate())));
@@ -189,13 +152,4 @@ QStandardItemModel* ContractManager::getContractsAsModel() const {
         model->appendRow(rowItems);
     }
     return model;
-}
-
-vector<Contract>::iterator ContractManager::findContractIterator(int contractId) {
-    for (auto it = contracts.begin(); it != contracts.end(); ++it) {
-        if (it->getContractId() == contractId) {
-            return it;
-        }
-    }
-    return contracts.end();
 }
