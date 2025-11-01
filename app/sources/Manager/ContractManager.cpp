@@ -151,7 +151,7 @@ QStandardItemModel* ContractManager::getContractsAsModel() const {
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getEndDate())));
         rowItems.append(new QStandardItem(moneyFormat(contract.getMonthlyRent())));
         rowItems.append(new QStandardItem(moneyFormat(contract.getDeposit())));
-        rowItems.append(new QStandardItem(contract.getStatus() == 1 ? "Active" : "Inactive"));
+        rowItems.append(new QStandardItem(contract.getStatus() == 1 ? "Còn hiệu lực" : "Hết hiệu lực"));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getNotes())));
 
         model->appendRow(rowItems);

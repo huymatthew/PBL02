@@ -156,7 +156,7 @@ QStandardItemModel* BillManager::getBillsAsModel() const {
         rowItems.append(new QStandardItem(moneyFormat(bill.getRoomRent())));
         rowItems.append(new QStandardItem(moneyFormat(bill.getTotalAmount())));
         rowItems.append(new QStandardItem(dateFormat(bill.getDueDate())));
-        rowItems.append(new QStandardItem(bill.getStatus() == 1 ? "Paid" : "Unpaid"));
+        rowItems.append(new QStandardItem(bill.getStatus() == 1 ? "Đã thanh toán" : "Chưa thanh toán"));
         model->appendRow(rowItems);
     }
     return model;

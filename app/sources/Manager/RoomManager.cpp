@@ -229,7 +229,7 @@ QStandardItemModel *RoomManager::getRoomsAsModel() const
         rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomName())));
         rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomTypeString())));
         rowItems.append(new QStandardItem(moneyFormat(room.getMonthlyRent())));
-        rowItems.append(new QStandardItem(room.getStatus() == 0 ? "Available" : "Occupied"));
+        rowItems.append(new QStandardItem(room.getStatus() == 0 ? "Còn trống" : "Hết phòng"));
         rowItems.append(new QStandardItem(QString::fromStdString(room.getDescription())));
         model->appendRow(rowItems);
     }

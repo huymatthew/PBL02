@@ -1,6 +1,11 @@
 # Note by Huy
-! Khi tạo mới tenant thì contractID mặc định là 0
-
+! Thêm chức năng mã hóa dữ liệu
+! Thêm Custom Vector để lưu trữ dữ liệu
+! Thêm chức nangw tìm kiếm
+! Thêm chức năng thống kế
+! Hoàn thiện phần xóa dữ liệu
+! Hoàn thiện Database 
+! Thống nhất ngôn ngữ cho UI 
 x RoomType
     - 0 : Phòng đơn
     - 1 : Phòng đôi
