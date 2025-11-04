@@ -16,4 +16,6 @@ string formatDate(const string& date);
 string datetostring(const QDate& date);
 string monthtostring(string monthyear);
 string formatName(const string& name);
+
+QString idnumber(const int& id, int length);
 #endif // EXTRA_FORMAT_H

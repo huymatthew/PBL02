@@ -145,13 +145,22 @@ QStandardItemModel* ContractManager::getContractsAsModel() const {
 
     for (const auto& contract : items) {
         QList<QStandardItem*> rowItems;
-        rowItems.append(new QStandardItem(QString::number(contract.getId())));
-        rowItems.append(new QStandardItem(QString::number(contract.getRoomId())));
+        rowItems.append(new QStandardItem(idnumber(contract.getId(), 6)));
+        rowItems.append(new QStandardItem(idnumber(contract.getRoomId(), 6)));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getStartDate())));
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getEndDate())));
         rowItems.append(new QStandardItem(moneyFormat(contract.getMonthlyRent())));
         rowItems.append(new QStandardItem(moneyFormat(contract.getDeposit())));
-        rowItems.append(new QStandardItem(contract.getStatus() == 1 ? "Còn hiệu lực" : "Hết hiệu lực"));
+        QStandardItem* item = new QStandardItem();
+        if (contract.getStatus() == 1){
+            item->setText("Hết hiệu lực");
+            item->setForeground(QBrush(Qt::red));
+        }
+        else{
+            item->setText("Còn hiệu lực");
+            item->setForeground(QBrush(Qt::darkGreen));
+        }
+        rowItems.append(item);
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getNotes())));
 
         model->appendRow(rowItems);

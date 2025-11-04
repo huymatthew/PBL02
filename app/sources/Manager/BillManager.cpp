@@ -150,13 +150,22 @@ QStandardItemModel* BillManager::getBillsAsModel() const {
 
     for (const auto& bill : items) {
         QList<QStandardItem*> rowItems;
-        rowItems.append(new QStandardItem(QString::number(bill.getId())));
-        rowItems.append(new QStandardItem(QString::number(bill.getContractId())));
+        rowItems.append(new QStandardItem(idnumber(bill.getId(), 6)));
+        rowItems.append(new QStandardItem(idnumber(bill.getContractId(), 6)));
         rowItems.append(new QStandardItem(monthFormat(bill.getBillingMonth())));
         rowItems.append(new QStandardItem(moneyFormat(bill.getRoomRent())));
         rowItems.append(new QStandardItem(moneyFormat(bill.getTotalAmount())));
         rowItems.append(new QStandardItem(dateFormat(bill.getDueDate())));
-        rowItems.append(new QStandardItem(bill.getStatus() == 1 ? "Đã thanh toán" : "Chưa thanh toán"));
+        QStandardItem* item = new QStandardItem();
+        if (bill.getStatus() == 1){
+            item->setText("Chưa thanh toán");
+            item->setForeground(QBrush(Qt::red));
+        }
+        else{
+            item->setText("Đã thanh toán");
+            item->setForeground(QBrush(Qt::darkGreen));
+        }
+        rowItems.append(item);
         model->appendRow(rowItems);
     }
     return model;

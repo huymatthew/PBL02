@@ -64,3 +64,16 @@ string formatName(const string& name) {
     }
     return oss.str();
 }
+
+QString idnumber(const int& id, int length){
+    QString s = QString::number(id);
+    QString result = "";
+    int zeroCount = length - s.size();
+    for (int i = 0; i < length;i++){
+        if (i < zeroCount){
+            result += '0';
+        }
+    }
+    result += s;
+    return result;
+}

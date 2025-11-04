@@ -23,6 +23,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -140,18 +141,15 @@ public:
     QDateEdit *paymentMonthEdit;
     QLabel *rentAmountLabel;
     QDoubleSpinBox *rentAmountSpinBox;
-    QLabel *electricBillLabel;
-    QDoubleSpinBox *electricBillSpinBox;
-    QLabel *waterBillLabel;
-    QDoubleSpinBox *waterBillSpinBox;
     QLabel *internetBillLabel;
-    QDoubleSpinBox *internetBillSpinBox;
     QLabel *paymentStatusLabel;
     QComboBox *paymentStatusComboBox;
+    QListView *serviceListView;
+    QLabel *label_3;
+    QLineEdit *sumLineEdit;
     QSpacerItem *paymentVerticalSpacer;
     QVBoxLayout *paymentButtonsLayout;
-    QPushButton *addPaymentButton;
-    QPushButton *editPaymentButton;
+    QPushButton *payButton;
     QPushButton *printInvoiceButton;
     QWidget *reportsTab;
     QVBoxLayout *reportsMainLayout;
@@ -1071,6 +1069,7 @@ public:
         paymentControlsLayout->setObjectName(QString::fromUtf8("paymentControlsLayout"));
         paymentInfoGroup = new QGroupBox(paymentsTab);
         paymentInfoGroup->setObjectName(QString::fromUtf8("paymentInfoGroup"));
+        paymentInfoGroup->setEnabled(false);
         paymentFormLayout = new QFormLayout(paymentInfoGroup);
         paymentFormLayout->setObjectName(QString::fromUtf8("paymentFormLayout"));
         paymentRoomLabel = new QLabel(paymentInfoGroup);
@@ -1107,49 +1106,15 @@ public:
 
         paymentFormLayout->setWidget(2, QFormLayout::FieldRole, rentAmountSpinBox);
 
-        electricBillLabel = new QLabel(paymentInfoGroup);
-        electricBillLabel->setObjectName(QString::fromUtf8("electricBillLabel"));
-
-        paymentFormLayout->setWidget(3, QFormLayout::LabelRole, electricBillLabel);
-
-        electricBillSpinBox = new QDoubleSpinBox(paymentInfoGroup);
-        electricBillSpinBox->setObjectName(QString::fromUtf8("electricBillSpinBox"));
-        electricBillSpinBox->setDecimals(0);
-        electricBillSpinBox->setMaximum(99999999.000000000000000);
-        electricBillSpinBox->setSingleStep(10000.000000000000000);
-
-        paymentFormLayout->setWidget(3, QFormLayout::FieldRole, electricBillSpinBox);
-
-        waterBillLabel = new QLabel(paymentInfoGroup);
-        waterBillLabel->setObjectName(QString::fromUtf8("waterBillLabel"));
-
-        paymentFormLayout->setWidget(4, QFormLayout::LabelRole, waterBillLabel);
-
-        waterBillSpinBox = new QDoubleSpinBox(paymentInfoGroup);
-        waterBillSpinBox->setObjectName(QString::fromUtf8("waterBillSpinBox"));
-        waterBillSpinBox->setDecimals(0);
-        waterBillSpinBox->setMaximum(99999999.000000000000000);
-        waterBillSpinBox->setSingleStep(10000.000000000000000);
-
-        paymentFormLayout->setWidget(4, QFormLayout::FieldRole, waterBillSpinBox);
-
         internetBillLabel = new QLabel(paymentInfoGroup);
         internetBillLabel->setObjectName(QString::fromUtf8("internetBillLabel"));
 
-        paymentFormLayout->setWidget(5, QFormLayout::LabelRole, internetBillLabel);
-
-        internetBillSpinBox = new QDoubleSpinBox(paymentInfoGroup);
-        internetBillSpinBox->setObjectName(QString::fromUtf8("internetBillSpinBox"));
-        internetBillSpinBox->setDecimals(0);
-        internetBillSpinBox->setMaximum(99999999.000000000000000);
-        internetBillSpinBox->setSingleStep(10000.000000000000000);
-
-        paymentFormLayout->setWidget(5, QFormLayout::FieldRole, internetBillSpinBox);
+        paymentFormLayout->setWidget(3, QFormLayout::LabelRole, internetBillLabel);
 
         paymentStatusLabel = new QLabel(paymentInfoGroup);
         paymentStatusLabel->setObjectName(QString::fromUtf8("paymentStatusLabel"));
 
-        paymentFormLayout->setWidget(6, QFormLayout::LabelRole, paymentStatusLabel);
+        paymentFormLayout->setWidget(5, QFormLayout::LabelRole, paymentStatusLabel);
 
         paymentStatusComboBox = new QComboBox(paymentInfoGroup);
         paymentStatusComboBox->addItem(QString());
@@ -1158,7 +1123,22 @@ public:
         paymentStatusComboBox->addItem(QString());
         paymentStatusComboBox->setObjectName(QString::fromUtf8("paymentStatusComboBox"));
 
-        paymentFormLayout->setWidget(6, QFormLayout::FieldRole, paymentStatusComboBox);
+        paymentFormLayout->setWidget(5, QFormLayout::FieldRole, paymentStatusComboBox);
+
+        serviceListView = new QListView(paymentInfoGroup);
+        serviceListView->setObjectName(QString::fromUtf8("serviceListView"));
+
+        paymentFormLayout->setWidget(3, QFormLayout::FieldRole, serviceListView);
+
+        label_3 = new QLabel(paymentInfoGroup);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        paymentFormLayout->setWidget(4, QFormLayout::LabelRole, label_3);
+
+        sumLineEdit = new QLineEdit(paymentInfoGroup);
+        sumLineEdit->setObjectName(QString::fromUtf8("sumLineEdit"));
+
+        paymentFormLayout->setWidget(4, QFormLayout::FieldRole, sumLineEdit);
 
 
         paymentControlsLayout->addWidget(paymentInfoGroup);
@@ -1169,19 +1149,13 @@ public:
 
         paymentButtonsLayout = new QVBoxLayout();
         paymentButtonsLayout->setObjectName(QString::fromUtf8("paymentButtonsLayout"));
-        addPaymentButton = new QPushButton(paymentsTab);
-        addPaymentButton->setObjectName(QString::fromUtf8("addPaymentButton"));
+        payButton = new QPushButton(paymentsTab);
+        payButton->setObjectName(QString::fromUtf8("payButton"));
         QIcon icon26;
         icon26.addFile(QString::fromUtf8(":/icons/add.png"), QSize(), QIcon::Normal, QIcon::Off);
-        addPaymentButton->setIcon(icon26);
+        payButton->setIcon(icon26);
 
-        paymentButtonsLayout->addWidget(addPaymentButton);
-
-        editPaymentButton = new QPushButton(paymentsTab);
-        editPaymentButton->setObjectName(QString::fromUtf8("editPaymentButton"));
-        editPaymentButton->setIcon(icon24);
-
-        paymentButtonsLayout->addWidget(editPaymentButton);
+        paymentButtonsLayout->addWidget(payButton);
 
         printInvoiceButton = new QPushButton(paymentsTab);
         printInvoiceButton->setObjectName(QString::fromUtf8("printInvoiceButton"));
@@ -1399,7 +1373,7 @@ public:
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(0);
+        mainTabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);
@@ -1606,20 +1580,15 @@ public:
         paymentMonthEdit->setDisplayFormat(QCoreApplication::translate("AdminMainWindow", "MM/yyyy", nullptr));
         rentAmountLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ti\341\273\201n Ph\303\262ng:", nullptr));
         rentAmountSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
-        electricBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ti\341\273\201n \304\220i\341\273\207n:", nullptr));
-        electricBillSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
-        waterBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ti\341\273\201n N\306\260\341\273\233c:", nullptr));
-        waterBillSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
-        internetBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ti\341\273\201n Internet:", nullptr));
-        internetBillSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
+        internetBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "D\341\273\213ch V\341\273\245:", nullptr));
         paymentStatusLabel->setText(QCoreApplication::translate("AdminMainWindow", "Tr\341\272\241ng Th\303\241i:", nullptr));
         paymentStatusComboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "Ch\306\260a thanh to\303\241n", nullptr));
         paymentStatusComboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "\304\220\303\243 thanh to\303\241n", nullptr));
         paymentStatusComboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "Thanh to\303\241n m\341\273\231t ph\341\272\247n", nullptr));
         paymentStatusComboBox->setItemText(3, QCoreApplication::translate("AdminMainWindow", "Qu\303\241 h\341\272\241n", nullptr));
 
-        addPaymentButton->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m H\303\263a \304\220\306\241n", nullptr));
-        editPaymentButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a H\303\263a \304\220\306\241n", nullptr));
+        label_3->setText(QCoreApplication::translate("AdminMainWindow", "T\341\273\225ng:", nullptr));
+        payButton->setText(QCoreApplication::translate("AdminMainWindow", "Thanh to\303\241n", nullptr));
         printInvoiceButton->setText(QCoreApplication::translate("AdminMainWindow", "In H\303\263a \304\220\306\241n", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(paymentsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Thanh To\303\241n", nullptr));
         filterGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "B\341\273\231 L\341\273\215c B\303\241o C\303\241o", nullptr));

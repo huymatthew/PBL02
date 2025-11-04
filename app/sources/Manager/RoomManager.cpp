@@ -225,11 +225,22 @@ QStandardItemModel *RoomManager::getRoomsAsModel() const
     for (const auto &room : items)
     {
         QList<QStandardItem *> rowItems;
-        rowItems.append(new QStandardItem(QString::number(room.getId())));
+        rowItems.append(new QStandardItem(idnumber(room.getId(), 6)));
         rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomName())));
         rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomTypeString())));
         rowItems.append(new QStandardItem(moneyFormat(room.getMonthlyRent())));
-        rowItems.append(new QStandardItem(room.getStatus() == 0 ? "Còn trống" : "Hết phòng"));
+
+        QStandardItem* item = new QStandardItem();
+        if (room.getStatus() == 1){
+            item->setText("Đang thuê");
+            item->setForeground(QBrush(Qt::red));
+        }
+        else{
+            item->setText("Trống");
+            item->setForeground(QBrush(Qt::darkGreen));
+        }
+        rowItems.append(item);
+
         rowItems.append(new QStandardItem(QString::fromStdString(room.getDescription())));
         model->appendRow(rowItems);
     }

@@ -3,6 +3,7 @@
 
 #include <QStandardItem>
 #include <QStandardItemModel>
+#include <Core/ExtraFormat.h>
 
 #include <Core/Manager.h>
 #include <Data/Tenant.h>
