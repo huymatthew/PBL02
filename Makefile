@@ -24,7 +24,9 @@ SRCS = main.cpp \
        $(wildcard app/sources/Manager/*.cpp) \
        $(wildcard app/sources/Core/*.cpp) \
        $(wildcard app/sources/Dialogs/*.cpp) \
-       $(wildcard app/sources/Widgets/*.cpp)
+       $(wildcard app/sources/Widgets/*.cpp) \
+       $(wildcard app/sources/Secure/*.cpp) 
+
 
 OBJS = $(SRCS:.cpp=.o)
 
