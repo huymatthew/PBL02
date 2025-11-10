@@ -1,6 +1,100 @@
-1 A101 0 1.2e+06 1 16m2,có điều hòa, nóng lạnh.
-2 A102 0 1.1e+06 1 16m2,có điều hòa, không nóng lạnh.
-3 A103 1 1.6e+06 0 Đầy đủ
-4 P922 0 1e+06 0 190x
-5 F109 2 3e+06 0 Có đầy đủ tiện nghi chỉ cần chuyển vào ở ngay
-6 A112 0 1e+06 0 
+1 A101 0 1.2e+06 1 16m2,có điều hòa, nóng lạnh
+2 A102 0 1.1e+06 1 16m2,có điều hòa, không nóng lạnh
+3 A103 1 1.6e+06 1 25m2, đầy đủ nội thất
+4 A104 0 1e+06 0 15m2, phòng cơ bản
+5 A105 2 3e+06 1 45m2, phòng gia đình đầy đủ tiện nghi
+6 A106 0 1.25e+06 0 18m2, có ban công
+7 B201 1 1.8e+06 1 30m2, phòng VIP có bếp
+8 B202 0 1.15e+06 1 17m2, view đẹp
+9 B203 2 3.2e+06 0 50m2, phòng gia đình cao cấp
+10 B204 0 1.3e+06 1 20m2, có máy lạnh
+11 C301 1 1.7e+06 0 28m2, phòng đôi thoáng mát
+12 C302 0 1.08e+06 1 16m2, gần thang máy
+13 C303 2 2.8e+06 1 40m2, phòng gia đình view sông
+14 C304 0 1.35e+06 0 22m2, có tủ lạnh
+15 D401 1 1.9e+06 1 32m2, phòng penthouse mini
+16 D402 0 1.2e+06 1 19m2, có nóng lạnh
+17 D403 2 3.5e+06 0 55m2, phòng gia đình luxury
+18 D404 0 1.4e+06 1 24m2, phòng studio
+19 E501 1 2e+06 0 35m2, phòng cao cấp
+20 E502 0 1.15e+06 1 17m2, phòng tiêu chuẩn
+21 F101 0 1.18e+06 1 18m2, có bàn làm việc
+22 F102 1 1.65e+06 0 26m2, phòng đôi cao cấp
+23 F103 0 1.22e+06 1 19m2, có giường tầng
+24 F104 2 2.9e+06 1 42m2, phòng gia đình hiện đại
+25 F105 0 1.12e+06 0 16m2, phòng sinh viên
+26 G201 1 1.75e+06 1 29m2, phòng VIP view city
+27 G202 0 1.28e+06 1 21m2, có sofa
+28 G203 1 1.82e+06 0 31m2, phòng đôi luxury
+29 G204 2 3.1e+06 1 48m2, penthouse mini
+30 G205 0 1.14e+06 1 17m2, phòng cơ bản plus
+31 H301 1 1.68e+06 0 27m2, phòng đôi view garden
+32 H302 0 1.31e+06 1 22m2, có bếp nhỏ
+33 H303 2 2.75e+06 1 39m2, phòng gia đình comfort
+34 H304 0 1.38e+06 0 23m2, có ban công lớn
+35 H305 1 1.95e+06 1 34m2, suite cao cấp
+36 I401 0 1.24e+06 1 20m2, phòng modern
+37 I402 1 1.88e+06 0 33m2, phòng VIP deluxe
+38 I403 0 1.42e+06 1 25m2, có tủ quần áo lớn
+39 I404 2 3.3e+06 1 51m2, phòng gia đình premium
+40 I405 0 1.16e+06 0 18m2, phòng tiết kiệm
+41 J501 1 2.1e+06 1 36m2, penthouse view city
+42 J502 0 1.33e+06 1 23m2, có máy giặt riêng
+43 J503 1 1.92e+06 0 35m2, phòng đôi executive
+44 J504 2 3.6e+06 1 58m2, phòng gia đình vip
+45 J505 0 1.21e+06 1 19m2, phòng studio plus
+46 K101 0 1.17e+06 0 17m2, phòng cơ bản mới
+47 K102 1 1.63e+06 1 25m2, phòng đôi standard
+48 K103 0 1.26e+06 1 20m2, có góc học tập
+49 K104 2 2.85e+06 0 41m2, phòng gia đình cozy
+50 K105 0 1.19e+06 1 18m2, phòng sinh viên plus
+51 L201 1 1.73e+06 1 28m2, phòng VIP comfort
+52 L202 0 1.29e+06 0 21m2, có kệ sách
+53 L203 1 1.86e+06 1 32m2, phòng đôi premium
+54 L204 2 3.15e+06 1 49m2, phòng gia đình smart
+55 L205 0 1.13e+06 1 16m2, phòng compact
+56 M301 1 1.71e+06 0 27m2, phòng đôi view park
+57 M302 0 1.34e+06 1 24m2, có bếp đầy đủ
+58 M303 2 2.95e+06 1 44m2, phòng gia đình modern
+59 M304 0 1.41e+06 0 25m2, có phòng thay đồ
+60 M305 1 1.97e+06 1 35m2, suite deluxe
+61 N401 0 1.27e+06 1 21m2, phòng tech-friendly
+62 N402 1 1.89e+06 0 34m2, phòng VIP smart
+63 N403 0 1.45e+06 1 26m2, có góc thư giãn
+64 N404 2 3.4e+06 1 53m2, phòng gia đình luxury
+65 N405 0 1.15e+06 0 17m2, phòng budget
+66 O501 1 2.15e+06 1 37m2, penthouse premium
+67 O502 0 1.36e+06 1 24m2, có workspace
+68 O503 1 1.94e+06 0 36m2, phòng đôi ultimate
+69 O504 2 3.7e+06 1 60m2, phòng gia đình ultimate
+70 O505 0 1.23e+06 1 20m2, phòng studio modern
+71 P101 0 1.11e+06 0 16m2, phòng cơ bản eco
+72 P102 1 1.61e+06 1 24m2, phòng đôi eco
+73 P103 0 1.25e+06 1 19m2, có góc ăn
+74 P104 2 2.8e+06 0 40m2, phòng gia đình eco
+75 P105 0 1.18e+06 1 17m2, phòng sinh viên eco
+76 Q201 1 1.76e+06 1 29m2, phòng VIP eco-friendly
+77 Q202 0 1.32e+06 0 22m2, có khu vực thể dục
+78 Q203 1 1.84e+06 1 30m2, phòng đôi green
+79 Q204 2 3.05e+06 1 46m2, phòng gia đình green
+80 Q205 0 1.14e+06 1 16m2, phòng xanh
+81 R301 1 1.69e+06 0 26m2, phòng đôi sustainable
+82 R302 0 1.37e+06 1 23m2, có mini bar
+83 R303 2 2.88e+06 1 42m2, phòng gia đình sustainable
+84 R304 0 1.44e+06 0 25m2, có khu vực meditation
+85 R305 1 1.98e+06 1 35m2, suite sustainable
+86 S401 0 1.28e+06 1 21m2, phòng smart home
+87 S402 1 1.91e+06 0 34m2, phòng VIP IoT
+88 S403 0 1.47e+06 1 26m2, có hệ thống âm thanh
+89 S404 2 3.45e+06 1 54m2, phòng gia đình smart
+90 S405 0 1.17e+06 0 17m2, phòng AI-assisted
+91 T501 1 2.2e+06 1 38m2, penthouse IoT
+92 T502 0 1.39e+06 1 24m2, có robot dọn dẹp
+93 T503 1 1.96e+06 0 36m2, phòng đôi tech
+94 T504 2 3.8e+06 1 62m2, phòng gia đình tech
+95 T505 0 1.24e+06 1 20m2, phòng studio tech
+96 U101 0 1.13e+06 0 16m2, phòng minimalist
+97 U102 1 1.64e+06 1 25m2, phòng đôi minimalist
+98 U103 0 1.27e+06 1 20m2, có thiết kế tối giản
+99 U104 2 2.92e+06 0 43m2, phòng gia đình minimal
+100 U105 0 1.2e+06 1 18m2, phòng zen 

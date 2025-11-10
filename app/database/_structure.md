@@ -2,9 +2,9 @@
 
 ## Bill
 
-|Bill_ID|Contract_ID|Billing_Month|Room_Rent|Total_Amount|Due_Date|Status|
-|-------|-----------|-------------|---------|------------|--------|------|
-|int    |int        |string       |double   |double      |string  |int   |
+|Bill_ID|Contract_ID|Billing_Month|Room_Rent|Total_Amount|Status|
+|-------|-----------|-------------|---------|------------|------|
+|int    |int        |string       |double   |double      |int   |
 
 **Description:**
 
@@ -13,7 +13,6 @@
 - Billing_Month: Tháng tính tiền (format: MMYYYY)
 - Room_Rent: Tiền thuê phòng
 - Total_Amount: Tổng tiền phải trả
-- Due_Date: Hạn thanh toán
 - Status: Trạng thái (0: chưa thanh toán, 1: đã thanh toán)
 
 ---

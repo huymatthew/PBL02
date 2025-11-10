@@ -30,6 +30,7 @@ public:
     void loadTenantView();
     void loadRoomView();
     void loadContractView();
+    void loadChartView();
 
     void addTenantCall();
     void addRoomCall();
@@ -38,6 +39,8 @@ public:
 
     void removeTenantCall();
     void removeRoomCall();
+
+    void genChart();
 private:
     DataManager* manager;
     QMainWindow* mainWindow;

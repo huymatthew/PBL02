@@ -31,9 +31,11 @@ int runApp(int argc, char *argv[]){
 }
 
 int main(int argc, char *argv[]) {
+    /*
     Authentication oauth;
     if (oauth.Auth()){
         return runApp(argc, argv);
     }
-    return 0;
+    */
+    return runApp(argc, argv);
 }

@@ -18,9 +18,9 @@ bool BillManager::loadFromDatabase() {
     while (getline(file, line)) {
         istringstream iss(line);
         int id, contractId, status;
-        string month, due;
+        string month;
         double rent, total;
-        if (!(iss >> id >> contractId >> month >> rent >> total >> due >> status)) {
+        if (!(iss >> id >> contractId >> month >> rent >> total >> status)) {
             cerr << "Error reading line: " << line << endl;
             continue;
         }
@@ -28,7 +28,7 @@ bool BillManager::loadFromDatabase() {
             cerr << "Duplicate bill ID found: " << id << endl;
             continue; 
         }
-        items.emplace_back(id, contractId, month, rent, total, due, status);
+        items.emplace_back(id, contractId, month, rent, total, status);
         cout << "- Loaded bill ID: " << id << endl;
     }
     return true;
@@ -48,7 +48,6 @@ bool BillManager::saveToDatabase() {
              << bill.getBillingMonth() << " "
              << bill.getRoomRent() << " "
              << bill.getTotalAmount() << " "
-             << bill.getDueDate() << " "
              << bill.getStatus() << endl;
         cout << "~ Saved bill ID: " << bill.getId() << endl;
     }
@@ -66,9 +65,9 @@ bool BillManager::add(const Bill& bill) {
     return true;
 }
 
-bool BillManager::addBill(int contractId, const string& month, double rent, double total, const string& due, int status) {
+bool BillManager::addBill(int contractId, const string& month, double rent, double total, int status) {
     int newId = pk_manager.getNextKey();
-    Bill newBill(newId, contractId, month, rent, total, due, status);
+    Bill newBill(newId, contractId, month, rent, total, status);
     return add(newBill);
 }
 
@@ -135,15 +134,34 @@ bool BillManager::markBillAsUnpaid(int billId) {
     return false;
 }
 
+long BillManager::getTotalPaidBillInDay(QString date) const {
+    long total = 0;
+    for (const auto& bill : items) {
+        if (bill.getStatus() == 1 && QString::fromStdString(bill.getBillingMonth()) == date) {
+            total += static_cast<long>(bill.getTotalAmount());
+        }
+    }
+    return total;
+}
+
+long BillManager::getTotalUnpaidBillInDay(QString date) const {
+    long total = 0;
+    for (const auto& bill : items) {
+        if (bill.getStatus() == 0 && QString::fromStdString(bill.getBillingMonth()) == date) {
+            total += static_cast<long>(bill.getTotalAmount());
+        }
+    }
+    return total;
+}
+
 QStandardItemModel* BillManager::getBillsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
-    model->setColumnCount(7);
+    model->setColumnCount(6);
     model->setHorizontalHeaderLabels({
         "Mã Hóa Đơn",
         "Mã Hợp Đồng",
         "Tháng Thanh Toán",
         "Giá Thuê Phòng",
-        "Tổng Số Tiền",
         "Ngày Đến Hạn",
         "Trạng Thái"
     });
@@ -155,7 +173,6 @@ QStandardItemModel* BillManager::getBillsAsModel() const {
         rowItems.append(new QStandardItem(monthFormat(bill.getBillingMonth())));
         rowItems.append(new QStandardItem(moneyFormat(bill.getRoomRent())));
         rowItems.append(new QStandardItem(moneyFormat(bill.getTotalAmount())));
-        rowItems.append(new QStandardItem(dateFormat(bill.getDueDate())));
         QStandardItem* item = new QStandardItem();
         if (bill.getStatus() == 1){
             item->setText("Chưa thanh toán");

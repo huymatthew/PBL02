@@ -9,6 +9,7 @@
 #ifndef ADMIN_MAIN_H
 #define ADMIN_MAIN_H
 
+#include <QtCharts/QChartView>
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
@@ -157,9 +158,12 @@ public:
     QGroupBox *filterGroup;
     QHBoxLayout *filterLayout;
     QLabel *fromDateLabel;
-    QDateEdit *fromDateEdit;
-    QLabel *toDateLabel;
-    QDateEdit *toDateEdit;
+    QComboBox *fromMonthFilter;
+    QComboBox *fromYearFilter;
+    QLabel *label_6;
+    QLabel *label_5;
+    QComboBox *toMonthFilter;
+    QComboBox *toYearFilter;
     QPushButton *generateReportButton;
     QSpacerItem *filterHorizontalSpacer;
     QHBoxLayout *reportsContentLayout;
@@ -176,6 +180,7 @@ public:
     QLabel *unpaidBillsLabel;
     QLabel *unpaidBillsValue;
     QTableView *reportsTableView;
+    QtCharts::QChartView *chartView;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuManagement;
@@ -192,7 +197,7 @@ public:
             AdminMainWindow->setObjectName(QString::fromUtf8("AdminMainWindow"));
         AdminMainWindow->resize(1200, 862);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("logo.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("../../../../../../../.designer/backup/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         AdminMainWindow->setWindowIcon(icon);
         AdminMainWindow->setStyleSheet(QString::fromUtf8("/* Admin Window Styling */\n"
 "QMainWindow {\n"
@@ -1069,7 +1074,7 @@ public:
         paymentControlsLayout->setObjectName(QString::fromUtf8("paymentControlsLayout"));
         paymentInfoGroup = new QGroupBox(paymentsTab);
         paymentInfoGroup->setObjectName(QString::fromUtf8("paymentInfoGroup"));
-        paymentInfoGroup->setEnabled(false);
+        paymentInfoGroup->setEnabled(true);
         paymentFormLayout = new QFormLayout(paymentInfoGroup);
         paymentFormLayout->setObjectName(QString::fromUtf8("paymentFormLayout"));
         paymentRoomLabel = new QLabel(paymentInfoGroup);
@@ -1187,22 +1192,35 @@ public:
 
         filterLayout->addWidget(fromDateLabel);
 
-        fromDateEdit = new QDateEdit(filterGroup);
-        fromDateEdit->setObjectName(QString::fromUtf8("fromDateEdit"));
-        fromDateEdit->setCalendarPopup(true);
+        fromMonthFilter = new QComboBox(filterGroup);
+        fromMonthFilter->setObjectName(QString::fromUtf8("fromMonthFilter"));
 
-        filterLayout->addWidget(fromDateEdit);
+        filterLayout->addWidget(fromMonthFilter);
 
-        toDateLabel = new QLabel(filterGroup);
-        toDateLabel->setObjectName(QString::fromUtf8("toDateLabel"));
+        fromYearFilter = new QComboBox(filterGroup);
+        fromYearFilter->setObjectName(QString::fromUtf8("fromYearFilter"));
 
-        filterLayout->addWidget(toDateLabel);
+        filterLayout->addWidget(fromYearFilter);
 
-        toDateEdit = new QDateEdit(filterGroup);
-        toDateEdit->setObjectName(QString::fromUtf8("toDateEdit"));
-        toDateEdit->setCalendarPopup(true);
+        label_6 = new QLabel(filterGroup);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
 
-        filterLayout->addWidget(toDateEdit);
+        filterLayout->addWidget(label_6);
+
+        label_5 = new QLabel(filterGroup);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        filterLayout->addWidget(label_5);
+
+        toMonthFilter = new QComboBox(filterGroup);
+        toMonthFilter->setObjectName(QString::fromUtf8("toMonthFilter"));
+
+        filterLayout->addWidget(toMonthFilter);
+
+        toYearFilter = new QComboBox(filterGroup);
+        toYearFilter->setObjectName(QString::fromUtf8("toYearFilter"));
+
+        filterLayout->addWidget(toYearFilter);
 
         generateReportButton = new QPushButton(filterGroup);
         generateReportButton->setObjectName(QString::fromUtf8("generateReportButton"));
@@ -1294,6 +1312,11 @@ public:
 
         reportsContentLayout->addWidget(reportsTableView);
 
+        chartView = new QtCharts::QChartView(reportsTab);
+        chartView->setObjectName(QString::fromUtf8("chartView"));
+
+        reportsContentLayout->addWidget(chartView);
+
 
         reportsMainLayout->addLayout(reportsContentLayout);
 
@@ -1373,7 +1396,7 @@ public:
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(3);
+        mainTabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);
@@ -1592,8 +1615,13 @@ public:
         printInvoiceButton->setText(QCoreApplication::translate("AdminMainWindow", "In H\303\263a \304\220\306\241n", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(paymentsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Thanh To\303\241n", nullptr));
         filterGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "B\341\273\231 L\341\273\215c B\303\241o C\303\241o", nullptr));
-        fromDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\341\273\253 ng\303\240y:", nullptr));
-        toDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "\304\220\341\272\277n ng\303\240y:", nullptr));
+        fromDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\341\273\253", nullptr));
+        fromMonthFilter->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Th\303\241ng", nullptr));
+        fromYearFilter->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "N\304\203m", nullptr));
+        label_6->setText(QCoreApplication::translate("AdminMainWindow", "\304\220\341\272\277n", nullptr));
+        label_5->setText(QString());
+        toMonthFilter->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Th\303\241ng", nullptr));
+        toYearFilter->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "N\304\203m", nullptr));
         generateReportButton->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o B\303\241o C\303\241o", nullptr));
         summaryGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "T\303\263m T\341\272\257t T\303\240i Ch\303\255nh", nullptr));
         totalRoomsLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\341\273\225ng s\341\273\221 ph\303\262ng:", nullptr));

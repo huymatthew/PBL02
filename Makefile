@@ -3,8 +3,8 @@ CXX = g++
 CXXFLAGS = -Wall -std=c++17 -fPIC
 
 # Qt configuration
-QT_CFLAGS = $(shell pkg-config --cflags Qt5Core Qt5Widgets Qt5Gui)
-QT_LIBS = $(shell pkg-config --libs Qt5Core Qt5Widgets Qt5Gui)
+QT_CFLAGS = $(shell pkg-config --cflags Qt5Core Qt5Widgets Qt5Gui Qt5Charts)
+QT_LIBS = $(shell pkg-config --libs Qt5Core Qt5Widgets Qt5Gui Qt5Charts)
 
 # Include paths
 INCLUDES = -I app/include \

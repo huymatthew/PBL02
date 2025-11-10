@@ -6,15 +6,15 @@
 using namespace std;
 
 Bill::Bill() : bill_id(0), contract_id(0), billing_month(""), room_rent(0.0),
-               total_amount(0.0), due_date(""), status(0) {}
+               total_amount(0.0), status(0) {}
 Bill::Bill(const Bill& other)
     : bill_id(other.bill_id), contract_id(other.contract_id), billing_month(other.billing_month),
       room_rent(other.room_rent), total_amount(other.total_amount),
-      due_date(other.due_date), status(other.status) {}
+      status(other.status) {}
 Bill::Bill(int id, int contractId, const string& month,
-                double rent, double total, const string& due, int status)
+                double rent, double total, int status)
      : bill_id(id), contract_id(contractId), billing_month(month),
-        room_rent(rent), total_amount(total), due_date(due), status(status) {}
+        room_rent(rent), total_amount(total), status(status) {}
 Bill::~Bill() {}
 
 int Bill::getId() const {
@@ -50,13 +50,6 @@ double Bill::getTotalAmount() const {
 }
 void Bill::setTotalAmount(double total) {
     total_amount = total;
-}
-
-string Bill::getDueDate() const {
-    return due_date;
-}
-void Bill::setDueDate(const string& due) {
-    due_date = due;
 }
 
 int Bill::getStatus() const {

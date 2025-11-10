@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>logo.png</normaloff>logo.png</iconset>
+    <normaloff>../../../../../../../.designer/backup/logo.png</normaloff>../../../../../../../.designer/backup/logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">/* Admin Window Styling */
@@ -428,7 +428,7 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1015,7 +1015,7 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
           <item>
            <widget class="QGroupBox" name="paymentInfoGroup">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="title">
              <string>Thông Tin Thanh Toán</string>
@@ -1184,28 +1184,49 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
              <item>
               <widget class="QLabel" name="fromDateLabel">
                <property name="text">
-                <string>Từ ngày:</string>
+                <string>Từ</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="fromDateEdit">
-               <property name="calendarPopup">
-                <bool>true</bool>
+              <widget class="QComboBox" name="fromMonthFilter">
+               <property name="placeholderText">
+                <string>Tháng</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="toDateLabel">
+              <widget class="QComboBox" name="fromYearFilter">
+               <property name="placeholderText">
+                <string>Năm</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_6">
                <property name="text">
-                <string>Đến ngày:</string>
+                <string>Đến</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="toDateEdit">
-               <property name="calendarPopup">
-                <bool>true</bool>
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="toMonthFilter">
+               <property name="placeholderText">
+                <string>Tháng</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="toYearFilter">
+               <property name="placeholderText">
+                <string>Năm</string>
                </property>
               </widget>
              </item>
@@ -1346,6 +1367,9 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
              <bool>true</bool>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QChartView" name="chartView" native="true"/>
           </item>
          </layout>
         </item>
@@ -1846,6 +1870,14 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QWidget</extends>
+   <header location="global">QChartView</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

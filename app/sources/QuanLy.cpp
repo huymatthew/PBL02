@@ -12,6 +12,8 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QTimer>
+
+#include <Widgets/QChartBC.h>
 using namespace std;
 
 QuanLy::QuanLy(QMainWindow *mainWindow) : mainWindow(mainWindow)
@@ -23,13 +25,12 @@ QuanLy::QuanLy(QMainWindow *mainWindow) : mainWindow(mainWindow)
     manager = &DataManager::getInstance();
     manager->loadAllData();
     onChangedTabActive(0);
-
-    cout << "\033[1;31m++++++++++++++++++++++++++++++++++++++++++++++++++\033[0m" << endl;
+    cout << "\033[1;31m======================================================\033[0m" << endl;
 }
 
 QuanLy::~QuanLy()
 {
-    cout << "++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+    cout << "\033[1;31m======================================================\033[0m" << endl;
     manager->saveAllData();
     cout << "\033[1;31m=== QuanLy destroyed. ===\033[0m" << endl;
 }
@@ -65,6 +66,9 @@ void QuanLy::signalAndSlotConnect()
                      { removeTenantCall(); });
     QObject::connect(deleteRoomButton, &QPushButton::clicked, [this]()
                      { removeRoomCall(); });
+
+    QObject::connect(generateReportButton, &QPushButton::clicked, [this]()
+                     { genChart(); });
 }
 // TabWidget
 void QuanLy::onChangedTabActive(int index)
@@ -82,6 +86,9 @@ void QuanLy::onChangedTabActive(int index)
         break;
     case 3:
         paymentsTableView->setModel(manager->getBillManager().getBillsAsModel());
+        break;
+    case 4:
+        loadChartView();
         break;
     default:
         cerr << "Invalid tab index: " << index << endl;
@@ -151,7 +158,27 @@ void QuanLy::loadContractView()
     }
     contractsTableView->setModel(model);
 }
-
+void QuanLy::loadChartView()
+{
+    fromMonthFilter->clear();
+    toMonthFilter->clear();
+    for (int month = 1; month <= 12; ++month) {
+        QString monthStr = QString::number(month);
+        fromMonthFilter->addItem(monthStr);
+        toMonthFilter->addItem(monthStr);
+    }
+    int currentYear = QDate::currentDate().year();
+    for (int year = currentYear - 5; year <= currentYear; ++year
+    ) {
+        QString yearStr = QString::number(year);
+        fromYearFilter->addItem(yearStr);
+        toYearFilter->addItem(yearStr);
+    }
+    fromMonthFilter->setCurrentText("1");
+    toMonthFilter->setCurrentText(QString::number(QDate::currentDate().month()));
+    fromYearFilter->setCurrentText(QString::number(currentYear - 1));
+    toYearFilter->setCurrentText(QString::number(currentYear));
+}
 // Add
 void QuanLy::addTenantCall()
 {
@@ -207,7 +234,6 @@ void QuanLy::removeTenantCall()
         cout << "Cancel" << endl;
     }
 }
-
 void QuanLy::removeRoomCall()
 {
     Room *room = manager->getRoomManager().getRoomSelected();
@@ -227,4 +253,12 @@ void QuanLy::removeRoomCall()
     {
         cout << "Cancel" << endl;
     }
+}
+
+void QuanLy::genChart()
+{
+    QChartBC chartBC(chartView);
+    QDate startDate = QDate(fromYearFilter->currentText().toInt(), fromMonthFilter->currentText().toInt(), 1);
+    QDate endDate = QDate(toYearFilter->currentText().toInt(), toMonthFilter->currentText().toInt(), 1);
+    chartBC.updateChart(startDate, endDate);
 }

@@ -38,8 +38,6 @@ void AddBillDialog::on_saveButton_clicked() {
     bill.setBillingMonth(monthYear.toStdString());
     bill.setRoomRent(monthlyRentSpinBox->value());
     bill.setTotalAmount(sumSpinBox->value());
-    QDate dueDate = QDate::currentDate().addDays(30);
-    bill.setDueDate(dueDate.toString("yyyy-MM-dd").toStdString());
     bill.setStatus(statusComboBox->currentIndex());
     dataManager.getBillManager().add(bill);
 
