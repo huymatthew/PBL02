@@ -4,7 +4,7 @@
 #include <QStandardItem>
 #include <QStandardItemModel>
 #include <Core/PrimaryKey.h>
-#include <vector>
+#include <Core/cVector.h>
 
 template <typename T>
 class Manager {
@@ -19,12 +19,12 @@ public:
     virtual bool exists(int id) const = 0;
     virtual int getCount() const = 0;
 protected:
-    vector<T> items;
+    Vector<T> items;
     bool data_loaded;
     int item_count;
     PrimaryKey pk_manager;
 
-    typename vector<T>::iterator findIterator(int id){
+    typename Vector<T>::iterator findIterator(int id){
         for (auto it = items.begin(); it != items.end(); ++it) {
             if (it->getId() == id) {
                 return it;

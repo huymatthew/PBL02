@@ -4,7 +4,7 @@
 #include <Data/ServiceType.h>
 #include <Core/PrimaryKey.h>
 #include <QStringList>
-#include <vector>
+#include <Core/cVector.h>
 #include <string>
 #include <memory>
 #include <iostream>
@@ -22,7 +22,7 @@ public:
     
     ServiceType* getServiceType(int serviceType);
     ServiceType* getServiceTypeByName(const string& name);
-    vector<ServiceType> getAllServiceTypes() const;
+    Vector<ServiceType> getAllServiceTypes() const;
     
     bool serviceTypeExists(int serviceType) const;
     bool serviceTypeNameExists(const string& name) const;
@@ -33,9 +33,9 @@ public:
     QStringList getServiceTypeNamesForComboBox() const;
     
 private:
-    vector<ServiceType> serviceTypes;
+    Vector<ServiceType> serviceTypes;
     bool data_loaded;
-    vector<ServiceType>::iterator findServiceTypeIterator(int serviceType);
+    Vector<ServiceType>::iterator findServiceTypeIterator(int serviceType);
 };
 
 #endif // SERVICE_TYPE_MANAGER_H

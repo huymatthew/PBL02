@@ -2,7 +2,7 @@
 #define SERVICE_H
 
 #include <string>
-#include <vector>
+#include <Core/cVector.h>
 #include <Core/PrimaryKey.h>
 using namespace std;
 

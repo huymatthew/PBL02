@@ -7,7 +7,7 @@
 
 #include <Data/Contract.h>
 #include <Core/PrimaryKey.h>
-#include <vector>
+#include <Core/cVector.h>
 #include <string>
 #include <memory>
 #include <iostream>

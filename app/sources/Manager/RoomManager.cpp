@@ -117,9 +117,9 @@ Room *RoomManager::get(int roomId)
     }
     return nullptr;
 }
-vector<Room> RoomManager::getRoomsByType(int roomType)
+Vector<Room> RoomManager::getRoomsByType(int roomType)
 {
-    vector<Room> result;
+    Vector<Room> result;
     for (const auto &room : items)
     {
         if (room.getRoomType() == roomType)
@@ -129,9 +129,9 @@ vector<Room> RoomManager::getRoomsByType(int roomType)
     }
     return result;
 }
-vector<Room> RoomManager::getRoomsByStatus(int status)
+Vector<Room> RoomManager::getRoomsByStatus(int status)
 {
-    vector<Room> result;
+    Vector<Room> result;
     for (const auto &room : items)
     {
         if (room.getStatus() == status)
@@ -141,7 +141,7 @@ vector<Room> RoomManager::getRoomsByStatus(int status)
     }
     return result;
 }
-vector<Room> RoomManager::getAllRooms() const
+Vector<Room> RoomManager::getAllRooms() const
 {
     return items;
 }

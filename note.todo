@@ -1,11 +1,11 @@
 # Note by Huy
-! Thêm chức năng mã hóa dữ liệu
+! Thêm chức năng mã hóa dữ liệu - DONE
+! Thống nhất ngôn ngữ cho UI - DONE
 ! Thêm Custom Vector để lưu trữ dữ liệu
 ! Thêm chức nangw tìm kiếm
 ! Thêm chức năng thống kế
 ! Hoàn thiện phần xóa dữ liệu
 ! Hoàn thiện Database 
-! Thống nhất ngôn ngữ cho UI 
 x RoomType
     - 0 : Phòng đơn
     - 1 : Phòng đôi

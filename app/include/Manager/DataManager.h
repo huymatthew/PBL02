@@ -1,7 +1,7 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
 #include <iostream>
-#include <vector>
+#include <Core/cVector.h>
 #include <Data/Contract.h>
 #include <Data/Room.h>
 #include <Data/Tenant.h>

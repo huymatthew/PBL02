@@ -8,7 +8,7 @@
 #include <Core/Manager.h>
 #include <Data/Tenant.h>
 #include <Core/PrimaryKey.h>
-#include <vector>
+#include <Core/cVector.h>
 #include <string>
 #include <memory>
 #include <iostream>
@@ -34,7 +34,7 @@ public:
     Tenant* get(int tenantId) override;
     Tenant* getTenantByIdentityCard(const string& identityCard);
     Tenant* getTenantByPhone(const string& phone);
-    vector<Tenant> getAllTenants() const;
+    Vector<Tenant> getAllTenants() const;
     
     bool exists(int tenantId) const override;
     bool identityCardExists(const string& identityCard) const;

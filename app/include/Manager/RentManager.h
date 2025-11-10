@@ -21,7 +21,7 @@ public:
     void loadFromDatabase();
     void saveToDatabase();
 private:
-    vector<Rent> rents;
+    Vector<Rent> rents;
     bool data_loaded;
 
     friend class DataManager;

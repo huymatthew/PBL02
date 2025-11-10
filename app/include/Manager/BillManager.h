@@ -3,7 +3,7 @@
 
 #include <Data/Bill.h>
 #include <Core/Manager.h>
-#include <vector>
+#include <Core/cVector.h>
 #include <string>
 #include <memory>
 #include <iostream>

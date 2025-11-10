@@ -69,7 +69,7 @@ ServiceType* ServiceTypeManager::getServiceTypeByName(const string& name) {
     return nullptr;
 }
 
-vector<ServiceType> ServiceTypeManager::getAllServiceTypes() const {
+Vector<ServiceType> ServiceTypeManager::getAllServiceTypes() const {
     return serviceTypes;
 }
 
@@ -95,7 +95,7 @@ int ServiceTypeManager::getServiceTypeCount() const {
     return static_cast<int>(serviceTypes.size());
 }
 
-vector<ServiceType>::iterator ServiceTypeManager::findServiceTypeIterator(int serviceType) {
+Vector<ServiceType>::iterator ServiceTypeManager::findServiceTypeIterator(int serviceType) {
     for (auto it = serviceTypes.begin(); it != serviceTypes.end(); ++it) {
         if (it->getServiceType() == serviceType) {
             return it;

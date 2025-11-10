@@ -7,7 +7,7 @@
 
 #include <Data/Room.h>
 #include <Core/PrimaryKey.h>
-#include <vector>
+#include <Core/cVector.h>
 #include <string>
 #include <memory>
 #include <iostream>
@@ -31,9 +31,9 @@ public:
     bool update(int roomId, const Room& updatedRoom) override;
     
     Room* get(int roomId) override;
-    vector<Room> getRoomsByType(int roomType);
-    vector<Room> getRoomsByStatus(int status);
-    vector<Room> getAllRooms() const;
+    Vector<Room> getRoomsByType(int roomType);
+    Vector<Room> getRoomsByStatus(int status);
+    Vector<Room> getAllRooms() const;
     
     bool exists(int roomId) const override;
     int getCount() const override;

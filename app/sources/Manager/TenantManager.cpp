@@ -184,7 +184,7 @@ Tenant* TenantManager::getTenantByPhone(const string& phone) {
     }
     return nullptr;
 }
-vector<Tenant> TenantManager::getAllTenants() const {
+Vector<Tenant> TenantManager::getAllTenants() const {
     return items;
 }
 bool TenantManager::exists(int tenantId) const {
