@@ -26,6 +26,7 @@ bool ContractManager::loadFromDatabase() {
             cerr << "Duplicate contract ID found: " << id << endl;
             continue; 
         }
+        pk_manager.addKey(id);
         items.emplace_back(id, roomId, start, end, rent, deposit, status, notes);
         cout << "- Loaded contract ID: " << id << endl;
     }
@@ -152,7 +153,7 @@ QStandardItemModel* ContractManager::getContractsAsModel() const {
         rowItems.append(new QStandardItem(moneyFormat(contract.getMonthlyRent())));
         rowItems.append(new QStandardItem(moneyFormat(contract.getDeposit())));
         QStandardItem* item = new QStandardItem();
-        if (contract.getStatus() == 1){
+        if (contract.getStatus() == 0){
             item->setText("Hết hiệu lực");
             item->setForeground(QBrush(Qt::red));
         }

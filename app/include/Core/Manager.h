@@ -5,6 +5,8 @@
 #include <QStandardItemModel>
 #include <Core/PrimaryKey.h>
 #include <Core/cVector.h>
+#include <iostream>
+using namespace std;
 
 template <typename T>
 class Manager {
@@ -18,6 +20,9 @@ public:
     virtual T* get(int id) = 0;
     virtual bool exists(int id) const = 0;
     virtual int getCount() const = 0;
+    int getNextId() {
+        return pk_manager.getNextKey();
+    }
 protected:
     Vector<T> items;
     bool data_loaded;
@@ -32,6 +37,8 @@ protected:
         }
         return items.end();
     }
+
+    
 };
 
 #endif // MANAGER_H

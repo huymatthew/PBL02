@@ -20,3 +20,6 @@ x TenantGender:
 x ContractStatus:
     - 0 : Đang hoạt động
     - 1 : Đã kết thúc
+x PaymentStatus:
+    - 0 : Chưa thanh toán
+    - 1 : Đã thanh toán

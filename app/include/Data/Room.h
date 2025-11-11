@@ -40,6 +40,7 @@ public:
 
     int getStatus() const;
     void setStatus(int status);
+    string getStatusString() const;
 };
 
 #endif

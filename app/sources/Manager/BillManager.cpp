@@ -162,7 +162,7 @@ QStandardItemModel* BillManager::getBillsAsModel() const {
         "Mã Hợp Đồng",
         "Tháng Thanh Toán",
         "Giá Thuê Phòng",
-        "Ngày Đến Hạn",
+        "Tổng Tiền",
         "Trạng Thái"
     });
 
@@ -174,7 +174,7 @@ QStandardItemModel* BillManager::getBillsAsModel() const {
         rowItems.append(new QStandardItem(moneyFormat(bill.getRoomRent())));
         rowItems.append(new QStandardItem(moneyFormat(bill.getTotalAmount())));
         QStandardItem* item = new QStandardItem();
-        if (bill.getStatus() == 1){
+        if (bill.getStatus() == 0){
             item->setText("Chưa thanh toán");
             item->setForeground(QBrush(Qt::red));
         }

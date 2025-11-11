@@ -301,9 +301,9 @@ public:
         labelBirthDate->setText(QCoreApplication::translate("AddTenantDialog", "Ng\303\240y Sinh:", nullptr));
         dateEditBirthDate->setDisplayFormat(QCoreApplication::translate("AddTenantDialog", "dd/MM/yyyy", nullptr));
         labelGender->setText(QCoreApplication::translate("AddTenantDialog", "Gi\341\273\233i T\303\255nh:", nullptr));
-        comboBoxGender->setItemText(0, QCoreApplication::translate("AddTenantDialog", "Nam", nullptr));
-        comboBoxGender->setItemText(1, QCoreApplication::translate("AddTenantDialog", "N\341\273\257", nullptr));
-        comboBoxGender->setItemText(2, QCoreApplication::translate("AddTenantDialog", "Kh\303\241c", nullptr));
+        comboBoxGender->setItemText(0, QCoreApplication::translate("AddTenantDialog", "Kh\303\241c", nullptr));
+        comboBoxGender->setItemText(1, QCoreApplication::translate("AddTenantDialog", "Nam", nullptr));
+        comboBoxGender->setItemText(2, QCoreApplication::translate("AddTenantDialog", "N\341\273\257", nullptr));
 
     } // retranslateUi
 

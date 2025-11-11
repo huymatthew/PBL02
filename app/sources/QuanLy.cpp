@@ -98,25 +98,29 @@ void QuanLy::onChangedTabActive(int index)
 
 void QuanLy::onShowTenantDetails(int tenantId){
     Tenant *tenant = manager->getTenantManager().get(tenantId);
-    if (!tenant)
+    if (tenant == nullptr)
     {
         cerr << "Tenant ID " << tenantId << " not found." << endl;
         return;
     }
-    Room* tenant_room = manager->getRoomFromTenant(tenantId);
-    if(tenant_room){
-        cout << "Tenant " << tenant->getFullName() << " is in room " << tenant_room->getRoomName() << endl;
-        tenantRoom->setText(QString::fromStdString(tenant_room->getRoomName()));}
-    else
-        tenantRoom->setText("No Room");
-
+    cout << "QWDHIASDIABSIDBIJ" << endl;
+    Contract* tenant_contract = manager->getContractFromTenant(tenantId);
+    if(tenant_contract){
+        cerr << "Contract Not Found" << endl;
+        Room* tenant_room = manager->getRoomManager().get(tenant_contract->getRoomId());
+        if(tenant_room){
+            cout << "Tenant " << tenant->getFullName() << " is in room " << tenant_room->getRoomName() << endl;
+            tenantRoomText->setText(QString::fromStdString(tenant_room->getRoomName()));}
+        else
+            tenantRoomText->setText("No Room");
+    } else {tenantRoomText->setText("No Room");}
+    
     manager->getTenantManager().setTenantSelected(tenant);
-    tenantNameEdit->setText(QString::fromStdString(tenant->getFullName()));
-    tenantIdEdit->setText(QString::fromStdString(tenant->getIdentityCard()));
-    tenantPhoneEdit->setText(QString::fromStdString(tenant->getPhone()));
-    comboBox->setCurrentIndex(tenant->getGender());
-    dateOfBirth->setDate(QDate::fromString(QString::fromStdString(tenant->getDateOfBirth()), "ddMMyyyy"));
-}
+    tenantNameText->setText(QString::fromStdString(tenant->getFullName()));
+    tenantIdText->setText(QString::fromStdString(tenant->getIdentityCard()));
+    tenantPhoneText->setText(QString::fromStdString(tenant->getPhone()));
+    tenantGenderText->setText(QString::fromStdString(tenant->getGenderString()));
+    tenantBirthdayText->setText(QString::fromStdString(tenant->getDateOfBirth()));}
 void QuanLy::onShowRoomDetails(int roomId)
 {
     Room *room = manager->getRoomManager().get(roomId);
@@ -126,12 +130,12 @@ void QuanLy::onShowRoomDetails(int roomId)
         return;
     }
     manager->getRoomManager().setRoomSelected(room);
-    roomNumberEdit->setText(QString::fromStdString(room->getRoomName()));
-    roomDescEdit->setText(QString::fromStdString(room->getDescription()));
-    roomPriceSpinBox->setValue(room->getMonthlyRent());
+    roomNumberText->setText(QString::fromStdString(room->getRoomName()));
+    roomDescText->setText(QString::fromStdString(room->getDescription()));
+    roomPriceText->setText(QString::number(room->getMonthlyRent(), 'f', 0) + " VND");
 
-    roomTypeComboBox->setCurrentIndex(room->getRoomType());
-    roomStatusComboBox->setCurrentIndex(room->getStatus());
+    roomTypeText->setText(QString::fromStdString(room->getRoomTypeString()));
+    roomStatusText->setText(QString::fromStdString(room->getStatusString()));
 }
 // Load
 void QuanLy::loadTenantView()
@@ -213,6 +217,18 @@ void QuanLy::addContractCall()
     loadTenantView();
     loadRoomView();
 }
+// Edit
+void QuanLy::editTenantCall()
+{
+    Tenant *tenant = manager->getTenantManager().getTenantSelected();
+    if (tenant == nullptr)
+    {
+        QMessageBox::warning(mainWindow, "Edit Tenant", "Please select a tenant to edit.");
+        return;
+    }
+
+}
+
 // Remove
 void QuanLy::removeTenantCall()
 {

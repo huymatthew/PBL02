@@ -164,6 +164,7 @@ bool TenantManager::update(int tenantId, const Tenant& updatedTenant) {
 Tenant* TenantManager::get(int tenantId) {
     auto it = this->findIterator(tenantId);
     if (it != items.end()) {
+        cout << "Found tenant ID: " << it->getId() << endl;
         return &(*it);
     }
     return nullptr;

@@ -29,10 +29,10 @@ int RentManager::getTenantIdByContract(int contractId) {
     }
     return -1; // Not found
 }
-int RentManager::getRoomIdByTenant(int tenantId) {
+int RentManager::getContractIdByTenant(int tenantId) {
     for (const auto& rent : rents) {
         if (rent.getTenantId() == tenantId) {
-            return rent.getId();
+            return rent.getContractId();
         }
     }
     return -1; // Not found
@@ -47,13 +47,13 @@ void RentManager::loadFromDatabase() {
     string line;
     while (getline(file, line)) {
         istringstream iss(line);
-        int roomId, tenantId, isRep;
-        if (!(iss >> roomId >> tenantId >> isRep)) {
+        int contractId, tenantId, isRep;
+        if (!(iss >> contractId >> tenantId >> isRep)) {
             cerr << "Error reading line: " << line << endl;
             continue;
         }
-        rents.emplace_back(roomId, tenantId, isRep != 0);
-        cout << "- Loaded rent: Room ID " << roomId << ", Tenant ID " <<
+        rents.emplace_back(contractId, tenantId, isRep != 0);
+        cout << "- Loaded rent: Contract ID " << contractId << ", Tenant ID " <<
         tenantId << ", Is Representative: " << (isRep != 0) << endl;
     }
     data_loaded = true;
@@ -69,7 +69,7 @@ void RentManager::saveToDatabase() {
         file << rent.getId() << " "
              << rent.getTenantId() << " "
              << (rent.getIsRepresentative() ? 1 : 0) << endl;
-        cout << "~ Saved rent: Room ID " << rent.getId() << ", Tenant ID "
+        cout << "~ Saved rent: Contract ID " << rent.getId() << ", Tenant ID "
              << rent.getTenantId() << ", Is Representative: "
              << (rent.getIsRepresentative() ? 1 : 0) << endl;
     }

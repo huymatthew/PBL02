@@ -39,9 +39,6 @@ public:
 
     Contract* getActiveContractByRoom(const int& roomId);
     bool roomHasActiveContract(const int& roomId) const;
-    bool activateContract(int contractId) const;
-    bool deactivateContract(int contractId) const;
-    bool extendContract(int contractId, const string& newEndDate) const;
     double getTotalMonthlyRent() const;
     double getTotalDeposits() const;
     

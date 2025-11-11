@@ -42,8 +42,9 @@ public:
     ServiceTypeManager& getServiceTypeManager() { return serviceTypeM; }
     RentManager& getRentManager() { return rentM; }
     
-    Room* getRoomFromTenant(int tenantId);
+    Contract* getContractFromTenant(int tenantId);
     Tenant* getMainTenantFromContract(int contractId);
+    Vector<Tenant> getAllNoRoomTenants();
     
 private:
     DataManager();

@@ -15,15 +15,12 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
-#include <QtWidgets/QDateEdit>
-#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
@@ -77,15 +74,15 @@ public:
     QGroupBox *roomInfoGroup;
     QFormLayout *roomFormLayout;
     QLabel *roomNumberLabel;
-    QLineEdit *roomNumberEdit;
     QLabel *roomTypeLabel;
-    QComboBox *roomTypeComboBox;
     QLabel *roomPriceLabel;
-    QDoubleSpinBox *roomPriceSpinBox;
     QLabel *roomStatusLabel;
-    QComboBox *roomStatusComboBox;
     QLabel *roomDescLabel;
-    QLineEdit *roomDescEdit;
+    QLabel *roomNumberText;
+    QLabel *roomTypeText;
+    QLabel *roomPriceText;
+    QLabel *roomStatusText;
+    QLabel *roomDescText;
     QSpacerItem *roomVerticalSpacer;
     QVBoxLayout *roomButtonsLayout;
     QPushButton *editRoomButton;
@@ -97,18 +94,18 @@ public:
     QGroupBox *tenantInfoGroup;
     QFormLayout *tenantFormLayout;
     QLabel *tenantNameLabel;
-    QLineEdit *tenantNameEdit;
-    QLabel *label_2;
-    QComboBox *comboBox;
+    QLabel *tenantGenderLabel;
     QLabel *tenantIdLabel;
-    QLineEdit *tenantIdEdit;
     QLabel *tenantPhoneLabel;
-    QLineEdit *tenantPhoneEdit;
-    QLabel *label;
-    QDateEdit *dateOfBirth;
+    QLabel *tenantBirthdayLabel;
+    QFrame *seperator;
+    QLabel *tenantNameText;
+    QLabel *tenantGenderText;
+    QLabel *tenantIdText;
+    QLabel *tenantPhoneText;
+    QLabel *tenantBirthdayText;
+    QLabel *tenantRoomText;
     QLabel *tenantRoomLabel;
-    QLineEdit *tenantRoom;
-    QFrame *line;
     QSpacerItem *tenantVerticalSpacer;
     QVBoxLayout *tenantButtonsLayout;
     QPushButton *editTenantButton;
@@ -130,28 +127,29 @@ public:
     QWidget *widget_3;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_4;
-    QComboBox *comboBox_3;
+    QComboBox *roomBillSearchValue;
     QSpacerItem *horizontalSpacer;
     QTableView *paymentsTableView;
     QVBoxLayout *paymentControlsLayout;
     QGroupBox *paymentInfoGroup;
     QFormLayout *paymentFormLayout;
     QLabel *paymentRoomLabel;
-    QComboBox *paymentRoomComboBox;
     QLabel *paymentMonthLabel;
-    QDateEdit *paymentMonthEdit;
     QLabel *rentAmountLabel;
-    QDoubleSpinBox *rentAmountSpinBox;
     QLabel *internetBillLabel;
     QLabel *paymentStatusLabel;
-    QComboBox *paymentStatusComboBox;
-    QListView *serviceListView;
-    QLabel *label_3;
-    QLineEdit *sumLineEdit;
+    QLabel *paymentTotalLabel;
+    QLabel *paymentRoomText;
+    QLabel *paymentMonthText;
+    QLabel *rentAmountText;
+    QLabel *paymentStatusText;
+    QLabel *paymentTotalText;
+    QListView *paymentServiceList;
     QSpacerItem *paymentVerticalSpacer;
     QVBoxLayout *paymentButtonsLayout;
     QPushButton *payButton;
     QPushButton *printInvoiceButton;
+    QPushButton *paymentInactiveBtn;
     QWidget *reportsTab;
     QVBoxLayout *reportsMainLayout;
     QHBoxLayout *reportsFilterLayout;
@@ -197,7 +195,7 @@ public:
             AdminMainWindow->setObjectName(QString::fromUtf8("AdminMainWindow"));
         AdminMainWindow->resize(1200, 862);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("../../../../../../../.designer/backup/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("../../../../../../../../../../../../.designer/backup/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         AdminMainWindow->setWindowIcon(icon);
         AdminMainWindow->setStyleSheet(QString::fromUtf8("/* Admin Window Styling */\n"
 "QMainWindow {\n"
@@ -758,67 +756,87 @@ public:
 
         roomFormLayout->setWidget(0, QFormLayout::LabelRole, roomNumberLabel);
 
-        roomNumberEdit = new QLineEdit(roomInfoGroup);
-        roomNumberEdit->setObjectName(QString::fromUtf8("roomNumberEdit"));
-        roomNumberEdit->setReadOnly(false);
-
-        roomFormLayout->setWidget(0, QFormLayout::FieldRole, roomNumberEdit);
-
         roomTypeLabel = new QLabel(roomInfoGroup);
         roomTypeLabel->setObjectName(QString::fromUtf8("roomTypeLabel"));
 
         roomFormLayout->setWidget(1, QFormLayout::LabelRole, roomTypeLabel);
-
-        roomTypeComboBox = new QComboBox(roomInfoGroup);
-        roomTypeComboBox->addItem(QString());
-        roomTypeComboBox->addItem(QString());
-        roomTypeComboBox->addItem(QString());
-        roomTypeComboBox->addItem(QString());
-        roomTypeComboBox->setObjectName(QString::fromUtf8("roomTypeComboBox"));
-
-        roomFormLayout->setWidget(1, QFormLayout::FieldRole, roomTypeComboBox);
 
         roomPriceLabel = new QLabel(roomInfoGroup);
         roomPriceLabel->setObjectName(QString::fromUtf8("roomPriceLabel"));
 
         roomFormLayout->setWidget(2, QFormLayout::LabelRole, roomPriceLabel);
 
-        roomPriceSpinBox = new QDoubleSpinBox(roomInfoGroup);
-        roomPriceSpinBox->setObjectName(QString::fromUtf8("roomPriceSpinBox"));
-        roomPriceSpinBox->setDecimals(0);
-        roomPriceSpinBox->setMinimum(0.000000000000000);
-        roomPriceSpinBox->setMaximum(99999999.000000000000000);
-        roomPriceSpinBox->setSingleStep(100000.000000000000000);
-
-        roomFormLayout->setWidget(2, QFormLayout::FieldRole, roomPriceSpinBox);
-
         roomStatusLabel = new QLabel(roomInfoGroup);
         roomStatusLabel->setObjectName(QString::fromUtf8("roomStatusLabel"));
 
         roomFormLayout->setWidget(3, QFormLayout::LabelRole, roomStatusLabel);
-
-        roomStatusComboBox = new QComboBox(roomInfoGroup);
-        roomStatusComboBox->addItem(QString());
-        roomStatusComboBox->addItem(QString());
-        roomStatusComboBox->setObjectName(QString::fromUtf8("roomStatusComboBox"));
-
-        roomFormLayout->setWidget(3, QFormLayout::FieldRole, roomStatusComboBox);
 
         roomDescLabel = new QLabel(roomInfoGroup);
         roomDescLabel->setObjectName(QString::fromUtf8("roomDescLabel"));
 
         roomFormLayout->setWidget(4, QFormLayout::LabelRole, roomDescLabel);
 
-        roomDescEdit = new QLineEdit(roomInfoGroup);
-        roomDescEdit->setObjectName(QString::fromUtf8("roomDescEdit"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(roomDescEdit->sizePolicy().hasHeightForWidth());
-        roomDescEdit->setSizePolicy(sizePolicy1);
-        roomDescEdit->setMinimumSize(QSize(0, 42));
+        roomNumberText = new QLabel(roomInfoGroup);
+        roomNumberText->setObjectName(QString::fromUtf8("roomNumberText"));
+        roomNumberText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+        roomNumberText->setFrameShape(QFrame::NoFrame);
 
-        roomFormLayout->setWidget(4, QFormLayout::FieldRole, roomDescEdit);
+        roomFormLayout->setWidget(0, QFormLayout::FieldRole, roomNumberText);
+
+        roomTypeText = new QLabel(roomInfoGroup);
+        roomTypeText->setObjectName(QString::fromUtf8("roomTypeText"));
+        roomTypeText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        roomFormLayout->setWidget(1, QFormLayout::FieldRole, roomTypeText);
+
+        roomPriceText = new QLabel(roomInfoGroup);
+        roomPriceText->setObjectName(QString::fromUtf8("roomPriceText"));
+        roomPriceText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        roomFormLayout->setWidget(2, QFormLayout::FieldRole, roomPriceText);
+
+        roomStatusText = new QLabel(roomInfoGroup);
+        roomStatusText->setObjectName(QString::fromUtf8("roomStatusText"));
+        roomStatusText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        roomFormLayout->setWidget(3, QFormLayout::FieldRole, roomStatusText);
+
+        roomDescText = new QLabel(roomInfoGroup);
+        roomDescText->setObjectName(QString::fromUtf8("roomDescText"));
+        roomDescText->setMinimumSize(QSize(300, 0));
+        roomDescText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        roomFormLayout->setWidget(4, QFormLayout::FieldRole, roomDescText);
 
 
         roomControlsLayout->addWidget(roomInfoGroup);
@@ -881,23 +899,10 @@ public:
 
         tenantFormLayout->setWidget(1, QFormLayout::LabelRole, tenantNameLabel);
 
-        tenantNameEdit = new QLineEdit(tenantInfoGroup);
-        tenantNameEdit->setObjectName(QString::fromUtf8("tenantNameEdit"));
+        tenantGenderLabel = new QLabel(tenantInfoGroup);
+        tenantGenderLabel->setObjectName(QString::fromUtf8("tenantGenderLabel"));
 
-        tenantFormLayout->setWidget(1, QFormLayout::FieldRole, tenantNameEdit);
-
-        label_2 = new QLabel(tenantInfoGroup);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        tenantFormLayout->setWidget(2, QFormLayout::LabelRole, label_2);
-
-        comboBox = new QComboBox(tenantInfoGroup);
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-
-        tenantFormLayout->setWidget(2, QFormLayout::FieldRole, comboBox);
+        tenantFormLayout->setWidget(2, QFormLayout::LabelRole, tenantGenderLabel);
 
         tenantIdLabel = new QLabel(tenantInfoGroup);
         tenantIdLabel->setObjectName(QString::fromUtf8("tenantIdLabel"));
@@ -905,51 +910,102 @@ public:
 
         tenantFormLayout->setWidget(3, QFormLayout::LabelRole, tenantIdLabel);
 
-        tenantIdEdit = new QLineEdit(tenantInfoGroup);
-        tenantIdEdit->setObjectName(QString::fromUtf8("tenantIdEdit"));
-
-        tenantFormLayout->setWidget(3, QFormLayout::FieldRole, tenantIdEdit);
-
         tenantPhoneLabel = new QLabel(tenantInfoGroup);
         tenantPhoneLabel->setObjectName(QString::fromUtf8("tenantPhoneLabel"));
 
         tenantFormLayout->setWidget(5, QFormLayout::LabelRole, tenantPhoneLabel);
 
-        tenantPhoneEdit = new QLineEdit(tenantInfoGroup);
-        tenantPhoneEdit->setObjectName(QString::fromUtf8("tenantPhoneEdit"));
+        tenantBirthdayLabel = new QLabel(tenantInfoGroup);
+        tenantBirthdayLabel->setObjectName(QString::fromUtf8("tenantBirthdayLabel"));
 
-        tenantFormLayout->setWidget(5, QFormLayout::FieldRole, tenantPhoneEdit);
+        tenantFormLayout->setWidget(8, QFormLayout::LabelRole, tenantBirthdayLabel);
 
-        label = new QLabel(tenantInfoGroup);
-        label->setObjectName(QString::fromUtf8("label"));
+        seperator = new QFrame(tenantInfoGroup);
+        seperator->setObjectName(QString::fromUtf8("seperator"));
+        seperator->setFrameShadow(QFrame::Raised);
+        seperator->setLineWidth(3);
+        seperator->setMidLineWidth(0);
+        seperator->setFrameShape(QFrame::HLine);
 
-        tenantFormLayout->setWidget(8, QFormLayout::LabelRole, label);
+        tenantFormLayout->setWidget(9, QFormLayout::SpanningRole, seperator);
 
-        dateOfBirth = new QDateEdit(tenantInfoGroup);
-        dateOfBirth->setObjectName(QString::fromUtf8("dateOfBirth"));
-        dateOfBirth->setEnabled(true);
+        tenantNameText = new QLabel(tenantInfoGroup);
+        tenantNameText->setObjectName(QString::fromUtf8("tenantNameText"));
+        tenantNameText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
 
-        tenantFormLayout->setWidget(8, QFormLayout::FieldRole, dateOfBirth);
+        tenantFormLayout->setWidget(1, QFormLayout::FieldRole, tenantNameText);
+
+        tenantGenderText = new QLabel(tenantInfoGroup);
+        tenantGenderText->setObjectName(QString::fromUtf8("tenantGenderText"));
+        tenantGenderText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        tenantFormLayout->setWidget(2, QFormLayout::FieldRole, tenantGenderText);
+
+        tenantIdText = new QLabel(tenantInfoGroup);
+        tenantIdText->setObjectName(QString::fromUtf8("tenantIdText"));
+        tenantIdText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        tenantFormLayout->setWidget(3, QFormLayout::FieldRole, tenantIdText);
+
+        tenantPhoneText = new QLabel(tenantInfoGroup);
+        tenantPhoneText->setObjectName(QString::fromUtf8("tenantPhoneText"));
+        tenantPhoneText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        tenantFormLayout->setWidget(5, QFormLayout::FieldRole, tenantPhoneText);
+
+        tenantBirthdayText = new QLabel(tenantInfoGroup);
+        tenantBirthdayText->setObjectName(QString::fromUtf8("tenantBirthdayText"));
+        tenantBirthdayText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        tenantFormLayout->setWidget(8, QFormLayout::FieldRole, tenantBirthdayText);
+
+        tenantRoomText = new QLabel(tenantInfoGroup);
+        tenantRoomText->setObjectName(QString::fromUtf8("tenantRoomText"));
+        tenantRoomText->setMinimumSize(QSize(300, 0));
+        tenantRoomText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        tenantFormLayout->setWidget(10, QFormLayout::FieldRole, tenantRoomText);
 
         tenantRoomLabel = new QLabel(tenantInfoGroup);
         tenantRoomLabel->setObjectName(QString::fromUtf8("tenantRoomLabel"));
 
         tenantFormLayout->setWidget(10, QFormLayout::LabelRole, tenantRoomLabel);
-
-        tenantRoom = new QLineEdit(tenantInfoGroup);
-        tenantRoom->setObjectName(QString::fromUtf8("tenantRoom"));
-        tenantRoom->setEnabled(false);
-
-        tenantFormLayout->setWidget(10, QFormLayout::FieldRole, tenantRoom);
-
-        line = new QFrame(tenantInfoGroup);
-        line->setObjectName(QString::fromUtf8("line"));
-        line->setFrameShadow(QFrame::Raised);
-        line->setLineWidth(3);
-        line->setMidLineWidth(0);
-        line->setFrameShape(QFrame::HLine);
-
-        tenantFormLayout->setWidget(9, QFormLayout::SpanningRole, line);
 
 
         tenantControlsLayout->addWidget(tenantInfoGroup);
@@ -1040,10 +1096,10 @@ public:
 
         verticalLayout_3->addWidget(label_4);
 
-        comboBox_3 = new QComboBox(widget_3);
-        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
+        roomBillSearchValue = new QComboBox(widget_3);
+        roomBillSearchValue->setObjectName(QString::fromUtf8("roomBillSearchValue"));
 
-        verticalLayout_3->addWidget(comboBox_3);
+        verticalLayout_3->addWidget(roomBillSearchValue);
 
 
         horizontalLayout->addWidget(widget_3);
@@ -1082,34 +1138,15 @@ public:
 
         paymentFormLayout->setWidget(0, QFormLayout::LabelRole, paymentRoomLabel);
 
-        paymentRoomComboBox = new QComboBox(paymentInfoGroup);
-        paymentRoomComboBox->setObjectName(QString::fromUtf8("paymentRoomComboBox"));
-
-        paymentFormLayout->setWidget(0, QFormLayout::FieldRole, paymentRoomComboBox);
-
         paymentMonthLabel = new QLabel(paymentInfoGroup);
         paymentMonthLabel->setObjectName(QString::fromUtf8("paymentMonthLabel"));
 
         paymentFormLayout->setWidget(1, QFormLayout::LabelRole, paymentMonthLabel);
 
-        paymentMonthEdit = new QDateEdit(paymentInfoGroup);
-        paymentMonthEdit->setObjectName(QString::fromUtf8("paymentMonthEdit"));
-        paymentMonthEdit->setCalendarPopup(true);
-
-        paymentFormLayout->setWidget(1, QFormLayout::FieldRole, paymentMonthEdit);
-
         rentAmountLabel = new QLabel(paymentInfoGroup);
         rentAmountLabel->setObjectName(QString::fromUtf8("rentAmountLabel"));
 
         paymentFormLayout->setWidget(2, QFormLayout::LabelRole, rentAmountLabel);
-
-        rentAmountSpinBox = new QDoubleSpinBox(paymentInfoGroup);
-        rentAmountSpinBox->setObjectName(QString::fromUtf8("rentAmountSpinBox"));
-        rentAmountSpinBox->setDecimals(0);
-        rentAmountSpinBox->setMaximum(99999999.000000000000000);
-        rentAmountSpinBox->setSingleStep(100000.000000000000000);
-
-        paymentFormLayout->setWidget(2, QFormLayout::FieldRole, rentAmountSpinBox);
 
         internetBillLabel = new QLabel(paymentInfoGroup);
         internetBillLabel->setObjectName(QString::fromUtf8("internetBillLabel"));
@@ -1121,29 +1158,76 @@ public:
 
         paymentFormLayout->setWidget(5, QFormLayout::LabelRole, paymentStatusLabel);
 
-        paymentStatusComboBox = new QComboBox(paymentInfoGroup);
-        paymentStatusComboBox->addItem(QString());
-        paymentStatusComboBox->addItem(QString());
-        paymentStatusComboBox->addItem(QString());
-        paymentStatusComboBox->addItem(QString());
-        paymentStatusComboBox->setObjectName(QString::fromUtf8("paymentStatusComboBox"));
+        paymentTotalLabel = new QLabel(paymentInfoGroup);
+        paymentTotalLabel->setObjectName(QString::fromUtf8("paymentTotalLabel"));
 
-        paymentFormLayout->setWidget(5, QFormLayout::FieldRole, paymentStatusComboBox);
+        paymentFormLayout->setWidget(4, QFormLayout::LabelRole, paymentTotalLabel);
 
-        serviceListView = new QListView(paymentInfoGroup);
-        serviceListView->setObjectName(QString::fromUtf8("serviceListView"));
+        paymentRoomText = new QLabel(paymentInfoGroup);
+        paymentRoomText->setObjectName(QString::fromUtf8("paymentRoomText"));
+        paymentRoomText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
 
-        paymentFormLayout->setWidget(3, QFormLayout::FieldRole, serviceListView);
+        paymentFormLayout->setWidget(0, QFormLayout::FieldRole, paymentRoomText);
 
-        label_3 = new QLabel(paymentInfoGroup);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        paymentMonthText = new QLabel(paymentInfoGroup);
+        paymentMonthText->setObjectName(QString::fromUtf8("paymentMonthText"));
+        paymentMonthText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
 
-        paymentFormLayout->setWidget(4, QFormLayout::LabelRole, label_3);
+        paymentFormLayout->setWidget(1, QFormLayout::FieldRole, paymentMonthText);
 
-        sumLineEdit = new QLineEdit(paymentInfoGroup);
-        sumLineEdit->setObjectName(QString::fromUtf8("sumLineEdit"));
+        rentAmountText = new QLabel(paymentInfoGroup);
+        rentAmountText->setObjectName(QString::fromUtf8("rentAmountText"));
+        rentAmountText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
 
-        paymentFormLayout->setWidget(4, QFormLayout::FieldRole, sumLineEdit);
+        paymentFormLayout->setWidget(2, QFormLayout::FieldRole, rentAmountText);
+
+        paymentStatusText = new QLabel(paymentInfoGroup);
+        paymentStatusText->setObjectName(QString::fromUtf8("paymentStatusText"));
+        paymentStatusText->setMinimumSize(QSize(300, 0));
+        paymentStatusText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        paymentFormLayout->setWidget(5, QFormLayout::FieldRole, paymentStatusText);
+
+        paymentTotalText = new QLabel(paymentInfoGroup);
+        paymentTotalText->setObjectName(QString::fromUtf8("paymentTotalText"));
+        paymentTotalText->setStyleSheet(QString::fromUtf8("QLabel {\n"
+"border: 1px solid rgb(154, 153, 150);\n"
+"padding: 10px;\n"
+"border-radius:10px;\n"
+"font-weight:normal;\n"
+"color: black;\n"
+"}"));
+
+        paymentFormLayout->setWidget(4, QFormLayout::FieldRole, paymentTotalText);
+
+        paymentServiceList = new QListView(paymentInfoGroup);
+        paymentServiceList->setObjectName(QString::fromUtf8("paymentServiceList"));
+
+        paymentFormLayout->setWidget(3, QFormLayout::FieldRole, paymentServiceList);
 
 
         paymentControlsLayout->addWidget(paymentInfoGroup);
@@ -1169,6 +1253,12 @@ public:
         printInvoiceButton->setIcon(icon27);
 
         paymentButtonsLayout->addWidget(printInvoiceButton);
+
+        paymentInactiveBtn = new QPushButton(paymentsTab);
+        paymentInactiveBtn->setObjectName(QString::fromUtf8("paymentInactiveBtn"));
+        paymentInactiveBtn->setStyleSheet(QString::fromUtf8("background-color:red;"));
+
+        paymentButtonsLayout->addWidget(paymentInactiveBtn);
 
 
         paymentControlsLayout->addLayout(paymentButtonsLayout);
@@ -1396,7 +1486,7 @@ public:
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(0);
+        mainTabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);
@@ -1558,61 +1648,53 @@ public:
 #endif // QT_CONFIG(shortcut)
         roomInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Ph\303\262ng", nullptr));
         roomNumberLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\303\252n Ph\303\262ng", nullptr));
-        roomNumberEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p s\341\273\221 ph\303\262ng...", nullptr));
         roomTypeLabel->setText(QCoreApplication::translate("AdminMainWindow", "Lo\341\272\241i Ph\303\262ng:", nullptr));
-        roomTypeComboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng \304\221\306\241n", nullptr));
-        roomTypeComboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng \304\221\303\264i", nullptr));
-        roomTypeComboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng gia \304\221\303\254nh", nullptr));
-        roomTypeComboBox->setItemText(3, QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng VIP", nullptr));
-
         roomPriceLabel->setText(QCoreApplication::translate("AdminMainWindow", "Gi\303\241 Ph\303\262ng G\341\273\221c:", nullptr));
-        roomPriceSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
         roomStatusLabel->setText(QCoreApplication::translate("AdminMainWindow", "Tr\341\272\241ng Th\303\241i:", nullptr));
-        roomStatusComboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "Tr\341\273\221ng", nullptr));
-        roomStatusComboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "\304\220\303\243 thu\303\252", nullptr));
-
         roomDescLabel->setText(QCoreApplication::translate("AdminMainWindow", "M\303\264 T\341\272\243:", nullptr));
-        roomDescEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "M\303\264 t\341\272\243 ph\303\262ng...", nullptr));
+        roomNumberText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        roomTypeText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        roomPriceText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        roomStatusText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        roomDescText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
         editRoomButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Ph\303\262ng", nullptr));
         deleteRoomButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Ph\303\262ng", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(roomsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Ph\303\262ng", nullptr));
         tenantInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Kh\303\241ch Thu\303\252", nullptr));
         tenantNameLabel->setText(QCoreApplication::translate("AdminMainWindow", "H\341\273\215 T\303\252n:", nullptr));
-        tenantNameEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p h\341\273\215 t\303\252n...", nullptr));
-        label_2->setText(QCoreApplication::translate("AdminMainWindow", "Gi\341\273\233i T\303\255nh", nullptr));
-        comboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "\341\272\250n", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "Nam", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "N\341\273\257", nullptr));
-
+        tenantGenderLabel->setText(QCoreApplication::translate("AdminMainWindow", "Gi\341\273\233i T\303\255nh", nullptr));
         tenantIdLabel->setText(QCoreApplication::translate("AdminMainWindow", "CMND/CCCD:", nullptr));
-        tenantIdEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p CCCD...", nullptr));
         tenantPhoneLabel->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\221 \304\220i\341\273\207n Tho\341\272\241i:", nullptr));
-        tenantPhoneEdit->setPlaceholderText(QCoreApplication::translate("AdminMainWindow", "Nh\341\272\255p s\341\273\221 \304\221i\341\273\207n tho\341\272\241i...", nullptr));
-        label->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y Sinh", nullptr));
-        tenantRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "\304\220ang \341\273\237 Ph\303\262ng:", nullptr));
+        tenantBirthdayLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ng\303\240y Sinh", nullptr));
+        tenantNameText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        tenantGenderText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        tenantIdText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        tenantPhoneText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        tenantBirthdayText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        tenantRoomText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        tenantRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng \341\273\237 g\341\272\247n nh\341\272\245t", nullptr));
         editTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Th\303\264ng Tin", nullptr));
         deleteTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Kh\303\241ch", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tenantsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Kh\303\241ch Thu\303\252", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(contractsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 H\341\273\243p \304\220\341\273\223ng Thu\303\252", nullptr));
-        searchGroupBox->setTitle(QCoreApplication::translate("AdminMainWindow", "Search", nullptr));
-        roomBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "Room", nullptr));
-        label_4->setText(QCoreApplication::translate("AdminMainWindow", "TextLabel", nullptr));
+        searchGroupBox->setTitle(QCoreApplication::translate("AdminMainWindow", "Filter", nullptr));
+        roomBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "Thu\341\273\231c t\303\255nh", nullptr));
+        label_4->setText(QCoreApplication::translate("AdminMainWindow", "Gi\303\241 tr\341\273\213", nullptr));
         paymentInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Thanh To\303\241n", nullptr));
         paymentRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
         paymentMonthLabel->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\241ng:", nullptr));
-        paymentMonthEdit->setDisplayFormat(QCoreApplication::translate("AdminMainWindow", "MM/yyyy", nullptr));
         rentAmountLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ti\341\273\201n Ph\303\262ng:", nullptr));
-        rentAmountSpinBox->setSuffix(QCoreApplication::translate("AdminMainWindow", " VND", nullptr));
         internetBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "D\341\273\213ch V\341\273\245:", nullptr));
         paymentStatusLabel->setText(QCoreApplication::translate("AdminMainWindow", "Tr\341\272\241ng Th\303\241i:", nullptr));
-        paymentStatusComboBox->setItemText(0, QCoreApplication::translate("AdminMainWindow", "Ch\306\260a thanh to\303\241n", nullptr));
-        paymentStatusComboBox->setItemText(1, QCoreApplication::translate("AdminMainWindow", "\304\220\303\243 thanh to\303\241n", nullptr));
-        paymentStatusComboBox->setItemText(2, QCoreApplication::translate("AdminMainWindow", "Thanh to\303\241n m\341\273\231t ph\341\272\247n", nullptr));
-        paymentStatusComboBox->setItemText(3, QCoreApplication::translate("AdminMainWindow", "Qu\303\241 h\341\272\241n", nullptr));
-
-        label_3->setText(QCoreApplication::translate("AdminMainWindow", "T\341\273\225ng:", nullptr));
+        paymentTotalLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\341\273\225ng:", nullptr));
+        paymentRoomText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        paymentMonthText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        rentAmountText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        paymentStatusText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        paymentTotalText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
         payButton->setText(QCoreApplication::translate("AdminMainWindow", "Thanh to\303\241n", nullptr));
         printInvoiceButton->setText(QCoreApplication::translate("AdminMainWindow", "In H\303\263a \304\220\306\241n", nullptr));
+        paymentInactiveBtn->setText(QCoreApplication::translate("AdminMainWindow", "V\303\264 Hi\341\273\207u H\303\263a", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(paymentsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Thanh To\303\241n", nullptr));
         filterGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "B\341\273\231 L\341\273\215c B\303\241o C\303\241o", nullptr));
         fromDateLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\341\273\253", nullptr));

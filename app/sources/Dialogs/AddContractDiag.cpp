@@ -5,7 +5,7 @@ using namespace std;
 
 AddContractDialog::AddContractDialog(QWidget *parent) : QDialog(parent), Ui_AddContractDialog() {
     setupUi(this);
-    contractIdSpinBox->setValue(1);
+    contractIdSpinBox->setValue(DataManager::getInstance().getContractManager().getNextId());
     for (const auto& room : DataManager::getInstance().getRoomManager().getAllRooms()) {
         roomIdComboBox->addItem(QString::fromStdString(room.getRoomName() + " - " + (room.getStatus() ? "Occupied" : "Available")), QVariant::fromValue(room.getId()));
     }
@@ -89,7 +89,7 @@ void AddContractDialog::on_tenant_addButton_clicked() {
     tenantComboBox->setEditable(false);
     tenantComboBox->setStyleSheet("QComboBox::drop-down{subcontrol-origin:padding;subcontrol-position:top right;width:25px;border-left:1px solid #ced4da;border-top-right-radius:8px;border-bottom-right-radius:8px;background-color:#f8f9fa;color:#212529;}QComboBox::down-arrow{width:15px;height:15px;background-color:#6c757d;}QComboBox QAbstractItemView{background-color:white;border:2px solid #ced4da;border-radius:8px;selection-background-color:#007bff;selection-color:black;}");
 
-    for (const auto& tenant : tenantManager->getAllTenants()) {
+    for (const auto& tenant : DataManager::getInstance().getAllNoRoomTenants()) {
         tenantComboBox->addItem(QString::fromStdString(tenant.getFullName() + " - " + std::to_string(tenant.getId())), QVariant::fromValue(tenant.getId()));
     }
     QListWidgetItem* item = new QListWidgetItem();

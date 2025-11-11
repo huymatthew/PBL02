@@ -7,17 +7,20 @@
 using namespace std;
 
 class Rent {
-    int room_id;
+    int contract_id;
     int tenant_id;
     bool is_representative;
     public:
     Rent();
     Rent(const Rent& other);
-    Rent(int roomId, int tenantId, bool isRepresentative);
+    Rent(int contractId, int tenantId, bool isRepresentative);
     ~Rent();
 
     int getId() const;
     void setId(int id);
+
+    int getContractId() const;
+    void setContractId(int contractId);
 
     int getTenantId() const;
     void setTenantId(int tenantId);

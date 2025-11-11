@@ -41,3 +41,10 @@ void Room::setDescription(const string& desc) { description = desc; }
 
 int Room::getStatus() const { return status; }
 void Room::setStatus(int status) { this->status = status; }
+string Room::getStatusString() const {
+    switch (status) {
+        case 0: return "Trống";
+        case 1: return "Đang Thuê";
+        default: return "Không Xác Định";
+    }
+}

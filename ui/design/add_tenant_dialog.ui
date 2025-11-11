@@ -290,17 +290,17 @@ QLabel[required=&quot;true&quot;]:after {
        <widget class="QComboBox" name="comboBoxGender">
         <item>
          <property name="text">
+          <string>Khác</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Nam</string>
          </property>
         </item>
         <item>
          <property name="text">
           <string>Nữ</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Khác</string>
          </property>
         </item>
        </widget>

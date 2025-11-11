@@ -37,6 +37,9 @@ public:
     void addBillCall();
     void addContractCall();
 
+    void editTenantCall();
+    void editRoomCall();
+
     void removeTenantCall();
     void removeRoomCall();
 

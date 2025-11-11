@@ -1,4 +1,5 @@
 #include <Manager/DataManager.h>
+#include <set>
 using namespace std;
 
 
@@ -52,13 +53,13 @@ Tenant* DataManager::getMainTenantFromContract(int contractId) {
     return nullptr;
 }
 
-Room* DataManager::getRoomFromTenant(int tenantId) {
+Contract* DataManager::getContractFromTenant(int tenantId) {
     for (const auto &rent : rentM.rents) {
         if (rent.getTenantId() == tenantId) {
-            int roomId = rentM.getRoomIdByTenant(tenantId);
-            Room* room = roomM.get(roomId);
-            if (room) {
-                return room;
+            int contractId = rentM.getContractIdByTenant(tenantId);
+            Contract* contract = contractM.get(contractId);
+            if (contract) {
+                return contract;
             } else {
                 cerr << "Room not found for tenant ID: " << tenantId << endl;
                 return nullptr;
@@ -66,4 +67,25 @@ Room* DataManager::getRoomFromTenant(int tenantId) {
         }
     }
     return nullptr;
+}
+
+Vector<Tenant> DataManager::getAllNoRoomTenants() {
+    Vector<Tenant> noRoomTenants;
+    
+    std::set<int> tenantsWithActiveRooms;
+    
+    for (const auto& rent : rentM.rents) {
+        Contract* contract = contractM.get(rent.getContractId());
+        if (contract && contract->getStatus() == 1) { 
+            tenantsWithActiveRooms.insert(rent.getTenantId());
+        }
+    }
+    
+    for (const auto& tenant : tenantM.items) {
+        if (tenantsWithActiveRooms.find(tenant.getId()) == tenantsWithActiveRooms.end()) {
+            noRoomTenants.push_back(tenant);
+        }
+    }
+    
+    return noRoomTenants;
 }
