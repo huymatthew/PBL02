@@ -73,6 +73,10 @@ void QuanLy::signalAndSlotConnect()
 
     QObject::connect(generateReportButton, &QPushButton::clicked, [this]()
                      { genChart(); });
+    QObject::connect(editTenantButton, &QPushButton::clicked, [this]()
+                     { editTenantCall(); });
+    QObject::connect(editRoomButton, &QPushButton::clicked, [this]()
+                     { editRoomCall(); });
 }
 // TabWidget
 void QuanLy::onChangedTabActive(int index)
@@ -252,7 +256,21 @@ void QuanLy::editTenantCall()
         QMessageBox::warning(mainWindow, "Edit Tenant", "Please select a tenant to edit.");
         return;
     }
-
+    AddTenantDiag editTenantDialog(tenant, mainWindow);
+    editTenantDialog.exec();
+    loadTenantView();
+}
+void QuanLy::editRoomCall()
+{
+    Room *room = manager->getRoomManager().getRoomSelected();
+    if (room == nullptr)
+    {
+        QMessageBox::warning(mainWindow, "Edit Room", "Please select a room to edit.");
+        return;
+    }
+    AddRoomDiag editRoomDialog(room, mainWindow);
+    editRoomDialog.exec();
+    loadRoomView();
 }
 
 // Remove
@@ -262,6 +280,11 @@ void QuanLy::removeTenantCall()
     if (tenant == nullptr)
     {
         QMessageBox::warning(mainWindow, "Remove Tenant", "Please select a tenant to remove.");
+        return;
+    }
+    if (manager->getRentManager().tenantRented(tenant->getId()))
+    {
+        QMessageBox::warning(mainWindow, "Remove Tenant", "Cannot delete tenant that is currently renting a room.");
         return;
     }
     int confirm = QMessageBox::question(mainWindow, "Remove Tenant", "Do you want to delete this tenant?");
@@ -282,6 +305,11 @@ void QuanLy::removeRoomCall()
     if (room == nullptr)
     {
         QMessageBox::warning(mainWindow, "Remove Room", "Please select a room to remove.");
+        return;
+    }
+    if (manager->getContractManager().roomUsed(room->getId()))
+    {
+        QMessageBox::warning(mainWindow, "Remove Room", "Cannot delete room that is currently rented.");
         return;
     }
     int confirm = QMessageBox::question(mainWindow, "Remove Room", "Do you want to delete this room?");

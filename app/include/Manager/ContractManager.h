@@ -41,6 +41,8 @@ public:
     bool roomHasActiveContract(const int& roomId) const;
     double getTotalMonthlyRent() const;
     double getTotalDeposits() const;
+
+    bool roomUsed(int roomId) const;
     
     QStandardItemModel* getContractsAsModel() const;
     friend class DataManager;

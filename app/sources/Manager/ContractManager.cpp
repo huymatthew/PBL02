@@ -136,6 +136,15 @@ double ContractManager::getTotalDeposits() const {
     return total;
 }
 
+bool ContractManager::roomUsed(int roomId) const {
+    for (const auto& contract : items) {
+        if (contract.getRoomId() == roomId) {
+            return true;
+        }
+    }
+    return false;
+}
+
 QStandardItemModel* ContractManager::getContractsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
     model->setColumnCount(8);

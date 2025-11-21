@@ -74,3 +74,12 @@ void RentManager::saveToDatabase() {
              << (rent.getIsRepresentative() ? 1 : 0) << endl;
     }
 }
+
+bool RentManager::tenantRented(int tenantId) {
+    for (const auto& rent : rents) {
+        if (rent.getTenantId() == tenantId) {
+            return true;
+        }
+    }   
+    return false;
+}

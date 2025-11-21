@@ -10,6 +10,19 @@ AddRoomDiag::AddRoomDiag(QWidget* parent) : QDialog(parent), Ui_AddRoomDialog() 
     signalConnect();
 }
 
+AddRoomDiag::AddRoomDiag(Room* room, QWidget* parent) : QDialog(parent), Ui_AddRoomDialog(), editingRoom(room) {
+    setupUi(this);
+    signalConnect();
+
+    if (editingRoom != nullptr) {
+        lineEditRoomNumber->setText(QString::fromStdString(editingRoom->getRoomName()));
+        comboBoxRoomType->setCurrentIndex(editingRoom->getRoomType());
+        doubleSpinBoxRentPrice->setValue(editingRoom->getMonthlyRent());
+        plainTextEditDescription->setPlainText(QString::fromStdString(editingRoom->getDescription()));
+        comboBoxStatus->setCurrentIndex(editingRoom->getStatus());
+    }
+}
+
 AddRoomDiag::~AddRoomDiag() {}
 
 void AddRoomDiag::on_buttonBox_accepted() {
@@ -23,7 +36,12 @@ void AddRoomDiag::on_buttonBox_accepted() {
         QMessageBox::warning(this, "Input Error", "Room Number is required.");
         return;
     }
-    DataManager::getInstance().getRoomManager().addRoom(roomName, roomType, monthlyRent, " " + description, status);
+
+    if (editingRoom != nullptr) {
+        Room newRoom(editingRoom->getId(), roomName, roomType, monthlyRent, description, status);
+        DataManager::getInstance().getRoomManager().update(editingRoom->getId(), newRoom);
+    }
+    else DataManager::getInstance().getRoomManager().addRoom(roomName, roomType, monthlyRent, " " + description, status);
     accept();
 }
 

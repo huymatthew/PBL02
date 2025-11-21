@@ -20,6 +20,8 @@ public:
     int getContractIdByTenant(int tenantId);
     void loadFromDatabase();
     void saveToDatabase();
+
+    bool tenantRented(int tenantId);
 private:
     Vector<Rent> rents;
     bool data_loaded;

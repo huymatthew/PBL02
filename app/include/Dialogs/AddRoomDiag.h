@@ -9,13 +9,16 @@
 #include <add_room_dialog.h>
 using namespace std;
 class AddRoomDiag: public QDialog, public Ui_AddRoomDialog {
-    public:
+public:
     AddRoomDiag(QWidget* parent);
+    AddRoomDiag(Room* room, QWidget* parent);
     ~AddRoomDiag();
 
     void on_buttonBox_accepted();
     void on_buttonBox_rejected();
     void signalConnect();
+private:
+    Room* editingRoom = nullptr;
 };
 
 #endif // ADD_ROOM_DIAG_H

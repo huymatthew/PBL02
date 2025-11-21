@@ -1,4 +1,5 @@
 #include <Dialogs/AddTenantDiag.h>
+#include <Core/ExtraFormat.h>
 #include <iostream>
 
 using namespace std;
@@ -8,7 +9,21 @@ AddTenantDiag::AddTenantDiag(QWidget *parent) : QDialog(parent), Ui_AddTenantDia
     signalConnect();
 }
 
+AddTenantDiag::AddTenantDiag(Tenant* tenant, QWidget* parent) : QDialog(parent), Ui_AddTenantDialog(), editingTenant(tenant) {
+    setupUi(this);
+    signalConnect();
+
+    if (editingTenant != nullptr) {
+        lineEditFullName->setText(QString::fromStdString(editingTenant->getFullName()));
+        lineEditPhone->setText(QString::fromStdString(editingTenant->getPhone()));
+        lineEditCCCD->setText(QString::fromStdString(editingTenant->getIdentityCard()));
+        dateEditBirthDate->setDate(QDate::fromString(QString::fromStdString(editingTenant->getDateOfBirth()), "yyyy-MM-dd"));
+        comboBoxGender->setCurrentIndex(editingTenant->getGender());
+    }
+}
+
 AddTenantDiag::~AddTenantDiag() {
+        
 }
 
 void AddTenantDiag::on_buttonBox_accepted() {
@@ -25,7 +40,13 @@ void AddTenantDiag::on_buttonBox_accepted() {
     }
     fullName = formatName(fullName);
 
-    DataManager::getInstance().getTenantManager().addTenant(fullName, phone, identityCard, dateOfBirth, gender);
+    if (editingTenant != nullptr) {
+        Tenant newTenant(editingTenant->getId(), fullName, phone, identityCard, dateOfBirth, gender);
+        DataManager::getInstance().getTenantManager().update(editingTenant->getId(), newTenant);
+    }
+    else {
+        DataManager::getInstance().getTenantManager().addTenant(fullName, phone, identityCard, dateOfBirth, gender);
+    }
     accept();
 }
 
