@@ -69,6 +69,38 @@ Contract* DataManager::getContractFromTenant(int tenantId) {
     return nullptr;
 }
 
+Room* DataManager::getRoomFromContract(int contractId){
+    Contract* contract = DataManager::getInstance().getContractManager().get(contractId);
+    if (!contract){
+        cerr << "Get Room From Contract: Contract Not Found" << endl;
+        return nullptr;
+    }
+    Room* room = DataManager::getInstance().getRoomManager().get(contract->getRoomId());
+    if (!room){
+        cerr << "Get Room From Contract: Room Not Found" << endl;
+        return nullptr;
+    }
+    return room;
+    
+}
+
+QStringList DataManager::getAllServices(int billId){
+    QStringList serviceList;
+    for (auto it = serviceM.items.begin(); it != serviceM.items.end(); ++it)
+    {
+        if (it->getBillId() == billId){
+            ServiceType* detail = serviceTypeM.getServiceType(it->getServiceType());
+            if (!detail) {
+                cerr << "Get Service Error" << endl;;
+                return serviceList;
+            }
+            QString d = QString::fromStdString(detail->getName()) + ": " + moneyFormat(it->getPrice());
+            serviceList << d;
+        }
+    }
+    return serviceList;
+}
+
 Vector<Tenant> DataManager::getAllNoRoomTenants() {
     Vector<Tenant> noRoomTenants;
     
@@ -86,6 +118,5 @@ Vector<Tenant> DataManager::getAllNoRoomTenants() {
             noRoomTenants.push_back(tenant);
         }
     }
-    
     return noRoomTenants;
 }

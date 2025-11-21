@@ -37,7 +37,13 @@ public:
     long getTotalUnpaidBillInDay(QString date) const;
     
     QStandardItemModel* getBillsAsModel() const;
-    
+
+    void setSelected(Bill* bill) {selected = bill;}
+    Bill* getSelected() {return selected;}
+
+private:
+    Bill* selected;
+
     friend class DataManager;
 };
 

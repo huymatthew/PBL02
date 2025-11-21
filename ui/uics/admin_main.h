@@ -195,7 +195,7 @@ public:
             AdminMainWindow->setObjectName(QString::fromUtf8("AdminMainWindow"));
         AdminMainWindow->resize(1200, 862);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("../../../../../../../../../../../../.designer/backup/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("../../../../../../../../../../../../../../../../../../../../../../.designer/backup/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         AdminMainWindow->setWindowIcon(icon);
         AdminMainWindow->setStyleSheet(QString::fromUtf8("/* Admin Window Styling */\n"
 "QMainWindow {\n"
@@ -1226,6 +1226,7 @@ public:
 
         paymentServiceList = new QListView(paymentInfoGroup);
         paymentServiceList->setObjectName(QString::fromUtf8("paymentServiceList"));
+        paymentServiceList->setStyleSheet(QString::fromUtf8("font-size:15px"));
 
         paymentFormLayout->setWidget(3, QFormLayout::FieldRole, paymentServiceList);
 
@@ -1453,10 +1454,6 @@ public:
         menubar->addAction(menuManagement->menuAction());
         menubar->addAction(menuReports->menuAction());
         menubar->addAction(menuHelp->menuAction());
-        menuFile->addAction(actionNewProject);
-        menuFile->addAction(actionOpenProject);
-        menuFile->addAction(actionSaveProject);
-        menuFile->addSeparator();
         menuFile->addAction(actionBackupData);
         menuFile->addAction(actionRestoreData);
         menuFile->addSeparator();
@@ -1486,7 +1483,7 @@ public:
 
         retranslateUi(AdminMainWindow);
 
-        mainTabWidget->setCurrentIndex(1);
+        mainTabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(AdminMainWindow);

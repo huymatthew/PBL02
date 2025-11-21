@@ -8,6 +8,7 @@
 
 #include <QStandardItem>
 #include <QStandardItemModel>
+#include <QStringListModel>
 #include <QDebug>
 #include <QMainWindow>
 #include <QMessageBox>
@@ -53,6 +54,9 @@ void QuanLy::signalAndSlotConnect()
                      { onShowTenantDetails(index.siblingAtColumn(0).data().toInt()); });
     QObject::connect(roomsTableView, &QTableView::doubleClicked, [this](const QModelIndex &index)
                      { onShowRoomDetails(index.siblingAtColumn(0).data().toInt()); });
+    QObject::connect(paymentsTableView, &QTableView::doubleClicked, [this](const QModelIndex &index)
+                     { onShowBillDetails(index.siblingAtColumn(0).data().toInt()); });
+
     QObject::connect(actionQuickAddTenant, &QAction::triggered, [this]()
                      { addTenantCall(); });
     QObject::connect(actionQuickAddRoom, &QAction::triggered, [this]()
@@ -137,6 +141,28 @@ void QuanLy::onShowRoomDetails(int roomId)
     roomTypeText->setText(QString::fromStdString(room->getRoomTypeString()));
     roomStatusText->setText(QString::fromStdString(room->getStatusString()));
 }
+void QuanLy::onShowBillDetails(int billId){
+    Bill *bill = manager->getBillManager().get(billId);
+    if (!bill){
+        cerr << "Bill Id" << billId << " Not Found" << endl;
+        return;
+    }
+    manager->getBillManager().setSelected(bill);
+    paymentRoomText->setText(QString::fromStdString(manager->getRoomFromContract(bill->getContractId())->getRoomName()));
+    paymentMonthText->setText(QString::fromStdString(bill->getBillingMonth()));
+    rentAmountText->setText(moneyFormat(bill->getRoomRent()));
+
+
+    QStringList allServices = manager->getAllServices(billId);
+    QStringListModel *model = new QStringListModel(allServices, paymentServiceList);
+    paymentServiceList->setModel(model);
+
+    paymentTotalText->setText(moneyFormat(bill->getTotalAmount()));
+    paymentStatusText->setText(bill->getStatus() ? "Đã thanh toán" : "Chưa thanh toán");
+    paymentStatusText->setStyleSheet("color:" + bill->getStatus() ? "green" : "red");
+}
+
+
 // Load
 void QuanLy::loadTenantView()
 {

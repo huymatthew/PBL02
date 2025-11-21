@@ -266,3 +266,13 @@ void RoomManager::setRoomSelected(Room *room)
 {
     selected = room;
 }
+
+Vector<Room*> RoomManager::getAllAvailableRooms(){
+    Vector<Room*> aRooms;
+    for (auto r = items.begin(); r != items.end(); ++r) {
+        if (r->getStatus() == 0){
+            aRooms.push_back(r);
+        }
+    }
+    return aRooms;
+}

@@ -50,6 +50,8 @@ public:
 
     Room* getRoomSelected();
     void setRoomSelected(Room* room);
+
+    Vector<Room*> getAllAvailableRooms();
     
 private:
     Room* selected;

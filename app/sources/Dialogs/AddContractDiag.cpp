@@ -6,8 +6,8 @@ using namespace std;
 AddContractDialog::AddContractDialog(QWidget *parent) : QDialog(parent), Ui_AddContractDialog() {
     setupUi(this);
     contractIdSpinBox->setValue(DataManager::getInstance().getContractManager().getNextId());
-    for (const auto& room : DataManager::getInstance().getRoomManager().getAllRooms()) {
-        roomIdComboBox->addItem(QString::fromStdString(room.getRoomName() + " - " + (room.getStatus() ? "Occupied" : "Available")), QVariant::fromValue(room.getId()));
+    for (const auto& room : DataManager::getInstance().getRoomManager().getAllAvailableRooms()) {
+        roomIdComboBox->addItem(QString::fromStdString(room->getRoomName()), QVariant::fromValue(room->getId()));
     }
     signalConnections();
 }
@@ -83,7 +83,6 @@ void AddContractDialog::on_tenant_addButton_clicked() {
         qWarning("tenantList is not initialized!");
         return;
     }
-    TenantManager* tenantManager = &DataManager::getInstance().getTenantManager();
     QComboBox* tenantComboBox = new QComboBox(this);
     tenantComboBox->setFixedWidth(tenantList->width() - 50);
     tenantComboBox->setEditable(false);
@@ -104,9 +103,20 @@ void AddContractDialog::on_tenant_removeButton_clicked() {
     }
 }
 
+void AddContractDialog::on_room_change(){
+    Room* room = DataManager::getInstance().getRoomManager().get(roomIdComboBox->currentData().toInt());
+    if (room) {
+        monthlyRentSpinBox->setValue(room->getMonthlyRent());
+    }
+    else{
+        QMessageBox::warning(this, "Room Not Found", "The selected room could not be found.");
+    }
+}
+
 void AddContractDialog::signalConnections() {
     connect(saveButton, &QPushButton::clicked, this, &AddContractDialog::on_saveButton_clicked);
     connect(cancelButton, &QPushButton::clicked, this, &AddContractDialog::on_cancelButton_clicked);
     connect(addTenant, &QPushButton::clicked, this, &AddContractDialog::on_tenant_addButton_clicked);
     connect(removeTenant, &QPushButton::clicked, this, &AddContractDialog::on_tenant_removeButton_clicked);
+    connect(roomIdComboBox, &QComboBox::currentTextChanged, this, &AddContractDialog::on_room_change);
 }

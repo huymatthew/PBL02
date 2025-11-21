@@ -24,8 +24,10 @@ public:
     void timeUpdate();
 
     void onChangedTabActive(int index);
+
     void onShowTenantDetails(int tenantId);
     void onShowRoomDetails(int roomId);
+    void onShowBillDetails(int billId);
 
     void loadTenantView();
     void loadRoomView();

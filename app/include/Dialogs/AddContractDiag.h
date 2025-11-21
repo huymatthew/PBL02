@@ -25,6 +25,8 @@ public:
     void on_tenant_addButton_clicked();
     void on_tenant_removeButton_clicked();
 
+    void on_room_change();
+
 private:
     void signalConnections();
 };

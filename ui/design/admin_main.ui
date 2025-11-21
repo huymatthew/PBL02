@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../../../../../../../../../.designer/backup/logo.png</normaloff>../../../../../../../../../../../../.designer/backup/logo.png</iconset>
+    <normaloff>../../../../../../../../../../../../../../../../../../../../../../.designer/backup/logo.png</normaloff>../../../../../../../../../../../../../../../../../../../../../../.designer/backup/logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">/* Admin Window Styling */
@@ -428,7 +428,7 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -1201,7 +1201,11 @@ color: black;
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QListView" name="paymentServiceList"/>
+              <widget class="QListView" name="paymentServiceList">
+               <property name="styleSheet">
+                <string notr="true">font-size:15px</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -1495,10 +1499,6 @@ color: black;
     <property name="title">
      <string>&amp;Tệp</string>
     </property>
-    <addaction name="actionNewProject"/>
-    <addaction name="actionOpenProject"/>
-    <addaction name="actionSaveProject"/>
-    <addaction name="separator"/>
     <addaction name="actionBackupData"/>
     <addaction name="actionRestoreData"/>
     <addaction name="separator"/>

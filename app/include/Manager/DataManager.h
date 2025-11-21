@@ -44,6 +44,8 @@ public:
     
     Contract* getContractFromTenant(int tenantId);
     Tenant* getMainTenantFromContract(int contractId);
+    Room* getRoomFromContract(int contractId);
+    QStringList getAllServices(int billId);
     Vector<Tenant> getAllNoRoomTenants();
     
 private:
