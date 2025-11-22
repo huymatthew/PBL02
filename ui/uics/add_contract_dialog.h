@@ -26,7 +26,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -43,8 +42,6 @@ public:
     QVBoxLayout *scrollLayout;
     QGroupBox *contractInfoGroup;
     QFormLayout *contractInfoLayout;
-    QLabel *contractIdLabel;
-    QSpinBox *contractIdSpinBox;
     QLabel *roomIdLabel;
     QComboBox *roomIdComboBox;
     QLabel *startDateLabel;
@@ -67,8 +64,6 @@ public:
     QDoubleSpinBox *depositSpinBox;
     QGroupBox *statusNotesGroup;
     QFormLayout *statusNotesLayout;
-    QLabel *statusLabel;
-    QComboBox *statusComboBox;
     QLabel *notesLabel;
     QTextEdit *description;
     QSpacerItem *verticalSpacer;
@@ -279,7 +274,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 646, 1006));
+        scrollAreaWidgetContents->setGeometry(QRect(0, -258, 646, 892));
         scrollLayout = new QVBoxLayout(scrollAreaWidgetContents);
         scrollLayout->setSpacing(15);
         scrollLayout->setObjectName(QString::fromUtf8("scrollLayout"));
@@ -290,53 +285,40 @@ public:
         contractInfoLayout->setHorizontalSpacing(15);
         contractInfoLayout->setVerticalSpacing(15);
         contractInfoLayout->setContentsMargins(20, 25, 20, 20);
-        contractIdLabel = new QLabel(contractInfoGroup);
-        contractIdLabel->setObjectName(QString::fromUtf8("contractIdLabel"));
-
-        contractInfoLayout->setWidget(0, QFormLayout::LabelRole, contractIdLabel);
-
-        contractIdSpinBox = new QSpinBox(contractInfoGroup);
-        contractIdSpinBox->setObjectName(QString::fromUtf8("contractIdSpinBox"));
-        contractIdSpinBox->setMinimum(1);
-        contractIdSpinBox->setMaximum(999999);
-        contractIdSpinBox->setValue(1);
-
-        contractInfoLayout->setWidget(0, QFormLayout::FieldRole, contractIdSpinBox);
-
         roomIdLabel = new QLabel(contractInfoGroup);
         roomIdLabel->setObjectName(QString::fromUtf8("roomIdLabel"));
 
-        contractInfoLayout->setWidget(1, QFormLayout::LabelRole, roomIdLabel);
+        contractInfoLayout->setWidget(0, QFormLayout::LabelRole, roomIdLabel);
 
         roomIdComboBox = new QComboBox(contractInfoGroup);
         roomIdComboBox->setObjectName(QString::fromUtf8("roomIdComboBox"));
         roomIdComboBox->setEditable(true);
 
-        contractInfoLayout->setWidget(1, QFormLayout::FieldRole, roomIdComboBox);
+        contractInfoLayout->setWidget(0, QFormLayout::FieldRole, roomIdComboBox);
 
         startDateLabel = new QLabel(contractInfoGroup);
         startDateLabel->setObjectName(QString::fromUtf8("startDateLabel"));
 
-        contractInfoLayout->setWidget(2, QFormLayout::LabelRole, startDateLabel);
+        contractInfoLayout->setWidget(1, QFormLayout::LabelRole, startDateLabel);
 
         startDateEdit = new QDateEdit(contractInfoGroup);
         startDateEdit->setObjectName(QString::fromUtf8("startDateEdit"));
         startDateEdit->setCalendarPopup(true);
         startDateEdit->setDate(QDate(2025, 9, 13));
 
-        contractInfoLayout->setWidget(2, QFormLayout::FieldRole, startDateEdit);
+        contractInfoLayout->setWidget(1, QFormLayout::FieldRole, startDateEdit);
 
         endDateLabel = new QLabel(contractInfoGroup);
         endDateLabel->setObjectName(QString::fromUtf8("endDateLabel"));
 
-        contractInfoLayout->setWidget(3, QFormLayout::LabelRole, endDateLabel);
+        contractInfoLayout->setWidget(2, QFormLayout::LabelRole, endDateLabel);
 
         endDateEdit = new QDateEdit(contractInfoGroup);
         endDateEdit->setObjectName(QString::fromUtf8("endDateEdit"));
         endDateEdit->setCalendarPopup(true);
         endDateEdit->setDate(QDate(2026, 9, 13));
 
-        contractInfoLayout->setWidget(3, QFormLayout::FieldRole, endDateEdit);
+        contractInfoLayout->setWidget(2, QFormLayout::FieldRole, endDateEdit);
 
 
         scrollLayout->addWidget(contractInfoGroup);
@@ -361,7 +343,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(addTenant->sizePolicy().hasHeightForWidth());
         addTenant->setSizePolicy(sizePolicy);
-        addTenant->setMinimumSize(QSize(96, 32));
+        addTenant->setMinimumSize(QSize(150, 32));
         addTenant->setIconSize(QSize(0, 0));
         addTenant->setCheckable(false);
 
@@ -369,7 +351,7 @@ public:
 
         removeTenant = new QPushButton(widget);
         removeTenant->setObjectName(QString::fromUtf8("removeTenant"));
-        removeTenant->setMinimumSize(QSize(96, 0));
+        removeTenant->setMinimumSize(QSize(150, 0));
         removeTenant->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "background-color: red;\n"
 "}\n"
@@ -443,46 +425,10 @@ public:
         statusNotesLayout->setHorizontalSpacing(15);
         statusNotesLayout->setVerticalSpacing(15);
         statusNotesLayout->setContentsMargins(20, 25, 20, 20);
-        statusLabel = new QLabel(statusNotesGroup);
-        statusLabel->setObjectName(QString::fromUtf8("statusLabel"));
-
-        statusNotesLayout->setWidget(0, QFormLayout::LabelRole, statusLabel);
-
-        statusComboBox = new QComboBox(statusNotesGroup);
-        statusComboBox->addItem(QString());
-        statusComboBox->addItem(QString());
-        statusComboBox->setObjectName(QString::fromUtf8("statusComboBox"));
-        statusComboBox->setStyleSheet(QString::fromUtf8("QComboBox::drop-down {\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"    width: 25px;\n"
-"    border-left: 1px solid #ced4da;\n"
-"    border-top-right-radius: 8px;\n"
-"    border-bottom-right-radius: 8px;\n"
-"    background-color: #f8f9fa;\n"
-"	color: #212529;\n"
-"}\n"
-"\n"
-"QComboBox::down-arrow {\n"
-"    width: 15px;\n"
-"    height: 15px;\n"
-"    background-color: #6c757d;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView {\n"
-"    background-color: white;\n"
-"    border: 2px solid #ced4da;\n"
-"    border-radius: 8px;\n"
-"    selection-background-color: #007bff;\n"
-"    selection-color: black;\n"
-"}"));
-
-        statusNotesLayout->setWidget(0, QFormLayout::FieldRole, statusComboBox);
-
         notesLabel = new QLabel(statusNotesGroup);
         notesLabel->setObjectName(QString::fromUtf8("notesLabel"));
 
-        statusNotesLayout->setWidget(1, QFormLayout::LabelRole, notesLabel);
+        statusNotesLayout->setWidget(0, QFormLayout::LabelRole, notesLabel);
 
         description = new QTextEdit(statusNotesGroup);
         description->setObjectName(QString::fromUtf8("description"));
@@ -493,7 +439,7 @@ public:
         description->setSizePolicy(sizePolicy1);
         description->setMinimumSize(QSize(0, 42));
 
-        statusNotesLayout->setWidget(1, QFormLayout::FieldRole, description);
+        statusNotesLayout->setWidget(0, QFormLayout::FieldRole, description);
 
 
         scrollLayout->addWidget(statusNotesGroup);
@@ -536,15 +482,13 @@ public:
 
         mainVerticalLayout->addWidget(buttonFrame);
 
-        QWidget::setTabOrder(scrollArea, contractIdSpinBox);
-        QWidget::setTabOrder(contractIdSpinBox, roomIdComboBox);
+        QWidget::setTabOrder(scrollArea, roomIdComboBox);
         QWidget::setTabOrder(roomIdComboBox, startDateEdit);
         QWidget::setTabOrder(startDateEdit, endDateEdit);
         QWidget::setTabOrder(endDateEdit, tenantList);
         QWidget::setTabOrder(tenantList, monthlyRentSpinBox);
         QWidget::setTabOrder(monthlyRentSpinBox, depositSpinBox);
-        QWidget::setTabOrder(depositSpinBox, statusComboBox);
-        QWidget::setTabOrder(statusComboBox, cancelButton);
+        QWidget::setTabOrder(depositSpinBox, cancelButton);
         QWidget::setTabOrder(cancelButton, saveButton);
 
         retranslateUi(AddContractDialog);
@@ -560,7 +504,6 @@ public:
         AddContractDialog->setWindowTitle(QCoreApplication::translate("AddContractDialog", "Th\303\252m H\341\273\243p \304\220\341\273\223ng M\341\273\233i", nullptr));
         titleLabel->setText(QCoreApplication::translate("AddContractDialog", "TH\303\212M H\341\273\242P \304\220\341\273\222NG M\341\273\232I", nullptr));
         contractInfoGroup->setTitle(QCoreApplication::translate("AddContractDialog", "Th\303\264ng Tin H\341\273\243p \304\220\341\273\223ng", nullptr));
-        contractIdLabel->setText(QCoreApplication::translate("AddContractDialog", "M\303\243 H\341\273\243p \304\220\341\273\223ng:", nullptr));
         roomIdLabel->setText(QCoreApplication::translate("AddContractDialog", "M\303\243 Ph\303\262ng:", nullptr));
         startDateLabel->setText(QCoreApplication::translate("AddContractDialog", "Ng\303\240y B\341\272\257t \304\220\341\272\247u:", nullptr));
         endDateLabel->setText(QCoreApplication::translate("AddContractDialog", "Ng\303\240y K\341\272\277t Th\303\272c:", nullptr));
@@ -572,11 +515,7 @@ public:
         monthlyRentSpinBox->setSuffix(QCoreApplication::translate("AddContractDialog", " VN\304\220", nullptr));
         depositLabel->setText(QCoreApplication::translate("AddContractDialog", "Ti\341\273\201n \304\220\341\272\267t C\341\273\215c (VN\304\220):", nullptr));
         depositSpinBox->setSuffix(QCoreApplication::translate("AddContractDialog", " VN\304\220", nullptr));
-        statusNotesGroup->setTitle(QCoreApplication::translate("AddContractDialog", "Tr\341\272\241ng Th\303\241i v\303\240 Ghi Ch\303\272", nullptr));
-        statusLabel->setText(QCoreApplication::translate("AddContractDialog", "Tr\341\272\241ng Th\303\241i:", nullptr));
-        statusComboBox->setItemText(0, QCoreApplication::translate("AddContractDialog", "Kh\303\264ng ho\341\272\241t \304\221\341\273\231ng", nullptr));
-        statusComboBox->setItemText(1, QCoreApplication::translate("AddContractDialog", "\304\220ang ho\341\272\241t \304\221\341\273\231ng", nullptr));
-
+        statusNotesGroup->setTitle(QCoreApplication::translate("AddContractDialog", "Th\303\252m", nullptr));
         notesLabel->setText(QCoreApplication::translate("AddContractDialog", "Ghi Ch\303\272:", nullptr));
         cancelButton->setText(QCoreApplication::translate("AddContractDialog", "H\341\273\247y", nullptr));
         saveButton->setText(QCoreApplication::translate("AddContractDialog", "L\306\260u H\341\273\243p \304\220\341\273\223ng", nullptr));

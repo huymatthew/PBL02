@@ -235,9 +235,9 @@ QDateEdit::drop-down {
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-258</y>
         <width>646</width>
-        <height>1006</height>
+        <height>892</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="scrollLayout">
@@ -269,47 +269,27 @@ QDateEdit::drop-down {
            <number>20</number>
           </property>
           <item row="0" column="0">
-           <widget class="QLabel" name="contractIdLabel">
-            <property name="text">
-             <string>Mã Hợp Đồng:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="contractIdSpinBox">
-            <property name="minimum">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <number>999999</number>
-            </property>
-            <property name="value">
-             <number>1</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
            <widget class="QLabel" name="roomIdLabel">
             <property name="text">
              <string>Mã Phòng:</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="0" column="1">
            <widget class="QComboBox" name="roomIdComboBox">
             <property name="editable">
              <bool>true</bool>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="1" column="0">
            <widget class="QLabel" name="startDateLabel">
             <property name="text">
              <string>Ngày Bắt Đầu:</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QDateEdit" name="startDateEdit">
             <property name="calendarPopup">
              <bool>true</bool>
@@ -323,14 +303,14 @@ QDateEdit::drop-down {
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="endDateLabel">
             <property name="text">
              <string>Ngày Kết Thúc:</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="2" column="1">
            <widget class="QDateEdit" name="endDateEdit">
             <property name="calendarPopup">
              <bool>true</bool>
@@ -382,7 +362,7 @@ QDateEdit::drop-down {
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>96</width>
+                 <width>150</width>
                  <height>32</height>
                 </size>
                </property>
@@ -404,7 +384,7 @@ QDateEdit::drop-down {
               <widget class="QPushButton" name="removeTenant">
                <property name="minimumSize">
                 <size>
-                 <width>96</width>
+                 <width>150</width>
                  <height>0</height>
                 </size>
                </property>
@@ -534,7 +514,7 @@ background-color: rgb(165, 29, 45);
        <item>
         <widget class="QGroupBox" name="statusNotesGroup">
          <property name="title">
-          <string>Trạng Thái và Ghi Chú</string>
+          <string>Thêm</string>
          </property>
          <layout class="QFormLayout" name="statusNotesLayout">
           <property name="horizontalSpacing">
@@ -556,60 +536,13 @@ background-color: rgb(165, 29, 45);
            <number>20</number>
           </property>
           <item row="0" column="0">
-           <widget class="QLabel" name="statusLabel">
-            <property name="text">
-             <string>Trạng Thái:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="statusComboBox">
-            <property name="styleSheet">
-             <string notr="true">QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 25px;
-    border-left: 1px solid #ced4da;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    background-color: #f8f9fa;
-	color: #212529;
-}
-
-QComboBox::down-arrow {
-    width: 15px;
-    height: 15px;
-    background-color: #6c757d;
-}
-
-QComboBox QAbstractItemView {
-    background-color: white;
-    border: 2px solid #ced4da;
-    border-radius: 8px;
-    selection-background-color: #007bff;
-    selection-color: black;
-}</string>
-            </property>
-            <item>
-             <property name="text">
-              <string>Không hoạt động</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Đang hoạt động</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="0">
            <widget class="QLabel" name="notesLabel">
             <property name="text">
              <string>Ghi Chú:</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="0" column="1">
            <widget class="QTextEdit" name="description">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -702,14 +635,12 @@ QComboBox QAbstractItemView {
  </widget>
  <tabstops>
   <tabstop>scrollArea</tabstop>
-  <tabstop>contractIdSpinBox</tabstop>
   <tabstop>roomIdComboBox</tabstop>
   <tabstop>startDateEdit</tabstop>
   <tabstop>endDateEdit</tabstop>
   <tabstop>tenantList</tabstop>
   <tabstop>monthlyRentSpinBox</tabstop>
   <tabstop>depositSpinBox</tabstop>
-  <tabstop>statusComboBox</tabstop>
   <tabstop>cancelButton</tabstop>
   <tabstop>saveButton</tabstop>
  </tabstops>

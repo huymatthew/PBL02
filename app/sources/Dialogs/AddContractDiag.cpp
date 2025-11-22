@@ -5,7 +5,6 @@ using namespace std;
 
 AddContractDialog::AddContractDialog(QWidget *parent) : QDialog(parent), Ui_AddContractDialog() {
     setupUi(this);
-    contractIdSpinBox->setValue(DataManager::getInstance().getContractManager().getNextId());
     for (const auto& room : DataManager::getInstance().getRoomManager().getAllAvailableRooms()) {
         roomIdComboBox->addItem(QString::fromStdString(room->getRoomName()), QVariant::fromValue(room->getId()));
     }
@@ -14,13 +13,12 @@ AddContractDialog::AddContractDialog(QWidget *parent) : QDialog(parent), Ui_AddC
 AddContractDialog::~AddContractDialog() {}
 
 void AddContractDialog::on_saveButton_clicked() {
-    int contractId = contractIdSpinBox->value();
     int roomId = roomIdComboBox->currentData().toInt();
     QDate startDate = startDateEdit->date();
     QDate endDate = endDateEdit->date();
     double monthlyRent = monthlyRentSpinBox->value();
     double deposit = depositSpinBox->value();
-    int status = statusComboBox->currentData().toInt();
+    int status = 1;
     QString notes = description->toPlainText();
 
     // Input validation
@@ -49,6 +47,18 @@ void AddContractDialog::on_saveButton_clicked() {
         return;
     }
 
+    DataManager::getInstance().getRoomManager().setRoomOccupied(roomId);
+    ContractManager* contractManager = &DataManager::getInstance().getContractManager();
+    
+    
+    if (!contractManager->addContract(roomId, startDate.toString("yyyy-MM-dd").toStdString(),
+    endDate.toString("yyyy-MM-dd").toStdString(), monthlyRent,
+    deposit, status, notes.toStdString())) {
+        QMessageBox::critical(this, "Error", "Failed to add contract. Please check the details and try again.");
+        return;
+    }
+    Contract newContract = *contractManager->getActiveContractByRoom(roomId);
+
     bool checkOverlap[10000] = {false};
     for (int i = 0; i < tenantList->count(); ++i) {
         QListWidgetItem* item = tenantList->item(i);
@@ -60,18 +70,10 @@ void AddContractDialog::on_saveButton_clicked() {
                 return;
             }
             checkOverlap[tenantId] = true;
-            DataManager::getInstance().getRentManager().addRent(contractId, tenantId, i == 0);
+            DataManager::getInstance().getRentManager().addRent(newContract.getId(), tenantId, i == 0);
         }
     }
-    DataManager::getInstance().getRoomManager().setRoomOccupied(roomId);
-    ContractManager* contractManager = &DataManager::getInstance().getContractManager();
-    Contract newContract(contractId, roomId, startDate.toString("yyyy-MM-dd").toStdString(),
-                         endDate.toString("yyyy-MM-dd").toStdString(), monthlyRent, deposit,
-                         status, notes.toStdString());
-    if (!contractManager->add(newContract)) {
-        QMessageBox::critical(this, "Error", "Failed to add contract. Please check the details and try again.");
-        return;
-    }
+    
     accept();
 }
 
