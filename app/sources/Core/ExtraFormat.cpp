@@ -44,7 +44,7 @@ string datetostring(const QDate& date) {
     return date.toString("yyyy-MM-dd").toStdString();
 }
 
-// from "yyyy-MM" to "MM/yyyy"
+// from "yyyy-MM" to "MM/yyyy" 
 string monthtostring(string monthYear) {
     if (monthYear.length() != 7 || monthYear[4] != '-') {
         return "";

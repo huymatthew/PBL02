@@ -15,9 +15,27 @@
 
 using namespace std;
 
+int runApp(int argc, char *argv[]);
+
+
+int main(int argc, char *argv[]) {
+    /*
+    Authentication oauth;
+    if (oauth.Auth()){
+        return runApp(argc, argv);
+    }
+    */
+    return runApp(argc, argv);
+}
+
+
+
+
+
+
+
 int runApp(int argc, char *argv[]){
     qputenv("QT_LOGGING_RULES", "qt.qpa.*=false");
-    //QLoggingCategory::setFilterRules("*.debug=true\n*.info=true\nqt.*=true");
     QLocale locale(QLocale::Vietnamese, QLocale::Vietnam);
     QLocale::setDefault(locale);
     
@@ -28,14 +46,4 @@ int runApp(int argc, char *argv[]){
     nw.showMaximized();
     nw.setFocus();
     return app.exec();
-}
-
-int main(int argc, char *argv[]) {
-    /*
-    Authentication oauth;
-    if (oauth.Auth()){
-        return runApp(argc, argv);
-    }
-    */
-    return runApp(argc, argv);
 }

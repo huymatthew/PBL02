@@ -2,7 +2,20 @@
 #define QUAN_LY_H
 
 #include <iostream>
+
 #include <QMainWindow>
+#include <QStandardItem>
+#include <QStandardItemModel>
+#include <QStringListModel>
+#include <QDebug>
+#include <QMessageBox>
+#include <QTimer>
+
+
+#include <Dialogs/AddTenantDiag.h>
+#include <Dialogs/AddRoomDiag.h>
+#include <Dialogs/AddContractDiag.h>
+#include <Dialogs/AddBillDiag.h>
 
 #include <Data/Bill.h>
 #include <Data/Contract.h>

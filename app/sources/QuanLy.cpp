@@ -1,19 +1,4 @@
 #include <QuanLy.h>
-#include <iostream>
-
-#include <Dialogs/AddTenantDiag.h>
-#include <Dialogs/AddRoomDiag.h>
-#include <Dialogs/AddContractDiag.h>
-#include <Dialogs/AddBillDiag.h>
-
-#include <QStandardItem>
-#include <QStandardItemModel>
-#include <QStringListModel>
-#include <QDebug>
-#include <QMainWindow>
-#include <QMessageBox>
-#include <QTimer>
-
 #include <Widgets/QChartBC.h>
 using namespace std;
 

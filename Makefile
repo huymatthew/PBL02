@@ -30,18 +30,14 @@ SRCS = main.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
-# Luật build chính
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
-# Luật build từng .o
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-# Dọn dẹp
 clean:
 	rm -f $(OBJS) $(TARGET)
 
-# Chạy chương trình (sau khi build)
 run: $(TARGET)
 	./$(TARGET)

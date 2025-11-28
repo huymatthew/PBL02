@@ -17,8 +17,6 @@
 #include <QLabel>
 using namespace std;
 
-
-
 AddBillDialog::AddBillDialog(QWidget *parent) : QDialog(parent){
     setupUi(this);
     signalConnections();
