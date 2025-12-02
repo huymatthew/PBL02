@@ -53,10 +53,10 @@ bool ContractManager::saveToDatabase() {
     return true;
 }
 bool ContractManager::add(const Contract& contract) {
-    if (pk_manager.isKeyInUse(contract.getId())) {
-        cerr << "Contract ID already in use: " << contract.getId() << endl;
-        return false;
-    }
+    // if (pk_manager.isKeyInUse(contract.getId())) {
+    //     cerr << "Contract ID already in use: " << contract.getId() << endl;
+    //     return false;
+    // }
     items.push_back(contract);
     pk_manager.addKey(contract.getId());
     cout << "+ Added contract ID: " << contract.getId() << endl;

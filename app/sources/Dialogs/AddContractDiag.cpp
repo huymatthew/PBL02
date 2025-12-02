@@ -1,5 +1,6 @@
 #include <Dialogs/AddContractDiag.h>
 #include <QMessageBox>
+#include <algorithm>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ AddContractDialog::AddContractDialog(QWidget *parent) : QDialog(parent), Ui_AddC
     for (const auto& room : DataManager::getInstance().getRoomManager().getAllAvailableRooms()) {
         roomIdComboBox->addItem(QString::fromStdString(room->getRoomName()), QVariant::fromValue(room->getId()));
     }
+    on_room_change();
     signalConnections();
 }
 AddContractDialog::~AddContractDialog() {}
@@ -50,10 +52,11 @@ void AddContractDialog::on_saveButton_clicked() {
     DataManager::getInstance().getRoomManager().setRoomOccupied(roomId);
     ContractManager* contractManager = &DataManager::getInstance().getContractManager();
     
-    
+    string note = notes.toStdString();
+    std::replace(note.begin(), note.end(),' ', '_');
     if (!contractManager->addContract(roomId, startDate.toString("yyyy-MM-dd").toStdString(),
     endDate.toString("yyyy-MM-dd").toStdString(), monthlyRent,
-    deposit, status, notes.toStdString())) {
+    deposit, status, note)) {
         QMessageBox::critical(this, "Error", "Failed to add contract. Please check the details and try again.");
         return;
     }

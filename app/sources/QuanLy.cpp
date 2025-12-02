@@ -216,11 +216,14 @@ void QuanLy::addBillCall()
     AddBillDialog addBillDialog(mainWindow);
     addBillDialog.setFixedSize(900, 800);
     if (manager->getRoomManager().getRoomSelected()) {
+        if (manager->getRoomManager().getRoomSelected()->getStatus() != 1){
+            QMessageBox::warning(mainWindow, "Lỗi", "Phòng này chưa có khách");
+        }
         addBillDialog.setRoom(manager->getRoomManager().getRoomSelected()->getId());
         addBillDialog.exec();
         paymentsTableView->setModel(manager->getBillManager().getBillsAsModel());
     } else {
-        QMessageBox::warning(mainWindow, "Add Bill", "Please select a room to add a bill.");
+        QMessageBox::warning(mainWindow, "Add Bill", "Vui lòng chọn phòng để thêm hóa đơn");
     }
     
 }

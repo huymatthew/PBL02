@@ -351,21 +351,6 @@ QLabel[required=&quot;true&quot;]:after {
             <string>Trống</string>
            </property>
           </item>
-          <item>
-           <property name="text">
-            <string>Đã thuê</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Đang sửa chữa</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Tạm ngưng</string>
-           </property>
-          </item>
          </widget>
         </item>
        </layout>

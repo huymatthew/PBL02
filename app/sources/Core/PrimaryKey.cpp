@@ -9,6 +9,7 @@ bool PrimaryKey::addKey(int key) {
         return false;
     }
     used_keys.insert(key);
+    currentKey = max(currentKey, key);
     return true;
 }
 int PrimaryKey::getNextKey() {

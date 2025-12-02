@@ -295,9 +295,6 @@ public:
 
         comboBoxStatus = new QComboBox(groupBoxStatus);
         comboBoxStatus->addItem(QString());
-        comboBoxStatus->addItem(QString());
-        comboBoxStatus->addItem(QString());
-        comboBoxStatus->addItem(QString());
         comboBoxStatus->setObjectName(QString::fromUtf8("comboBoxStatus"));
 
         formLayout_3->setWidget(0, QFormLayout::FieldRole, comboBoxStatus);
@@ -353,9 +350,6 @@ public:
         groupBoxStatus->setTitle(QCoreApplication::translate("AddRoomDialog", "Tr\341\272\241ng Th\303\241i - M\303\264 T\341\272\243", nullptr));
         labelStatus->setText(QCoreApplication::translate("AddRoomDialog", "Tr\341\272\241ng Th\303\241i:", nullptr));
         comboBoxStatus->setItemText(0, QCoreApplication::translate("AddRoomDialog", "Tr\341\273\221ng", nullptr));
-        comboBoxStatus->setItemText(1, QCoreApplication::translate("AddRoomDialog", "\304\220\303\243 thu\303\252", nullptr));
-        comboBoxStatus->setItemText(2, QCoreApplication::translate("AddRoomDialog", "\304\220ang s\341\273\255a ch\341\273\257a", nullptr));
-        comboBoxStatus->setItemText(3, QCoreApplication::translate("AddRoomDialog", "T\341\272\241m ng\306\260ng", nullptr));
 
         labelDescription->setText(QCoreApplication::translate("AddRoomDialog", "M\303\264 T\341\272\243:", nullptr));
         plainTextEditDescription->setPlaceholderText(QCoreApplication::translate("AddRoomDialog", "Nh\341\272\255p m\303\264 t\341\272\243 v\341\273\201 ph\303\262ng: n\341\273\231i th\341\272\245t, ti\341\273\207n nghi, ghi ch\303\272...", nullptr));
