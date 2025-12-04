@@ -30,7 +30,6 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -66,6 +65,14 @@ public:
     QAction *actionQuickAddBill;
     QWidget *centralwidget;
     QVBoxLayout *mainVerticalLayout;
+    QGroupBox *groupBox;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *addTenantButtonB;
+    QPushButton *addContractButtonB;
+    QPushButton *addBillButtonB;
+    QPushButton *pushButton_2;
+    QPushButton *shutdownButton;
+    QSpacerItem *horizontalSpacer_2;
     QTabWidget *mainTabWidget;
     QWidget *roomsTab;
     QHBoxLayout *roomsLayout;
@@ -84,6 +91,7 @@ public:
     QLabel *roomStatusText;
     QLabel *roomDescText;
     QSpacerItem *roomVerticalSpacer;
+    QPushButton *addRoomButton;
     QVBoxLayout *roomButtonsLayout;
     QPushButton *editRoomButton;
     QPushButton *deleteRoomButton;
@@ -107,12 +115,19 @@ public:
     QLabel *tenantRoomText;
     QLabel *tenantRoomLabel;
     QSpacerItem *tenantVerticalSpacer;
+    QPushButton *addTenantButton;
     QVBoxLayout *tenantButtonsLayout;
     QPushButton *editTenantButton;
     QPushButton *deleteTenantButton;
     QWidget *contractsTab;
     QHBoxLayout *contractsLayout;
     QTableView *contractsTableView;
+    QWidget *widget_4;
+    QVBoxLayout *verticalLayout_4;
+    QSpacerItem *verticalSpacer;
+    QPushButton *addContractButton;
+    QPushButton *endContractButton;
+    QPushButton *unableContractButton;
     QVBoxLayout *contractControlsLayout;
     QWidget *paymentsTab;
     QHBoxLayout *paymentsLayout;
@@ -187,13 +202,13 @@ public:
     QStatusBar *statusbar;
     QLabel *statusInfoLabel;
     QLabel *dateTimeLabel;
-    QToolBar *toolBar;
 
     void setupUi(QMainWindow *AdminMainWindow)
     {
         if (AdminMainWindow->objectName().isEmpty())
             AdminMainWindow->setObjectName(QString::fromUtf8("AdminMainWindow"));
         AdminMainWindow->resize(1200, 862);
+        AdminMainWindow->setMinimumSize(QSize(0, 64));
         QIcon icon;
         icon.addFile(QString::fromUtf8("../../../../../../../../../../../../../../../../../../../../../../.designer/backup/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         AdminMainWindow->setWindowIcon(icon);
@@ -708,6 +723,44 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         mainVerticalLayout = new QVBoxLayout(centralwidget);
         mainVerticalLayout->setObjectName(QString::fromUtf8("mainVerticalLayout"));
+        groupBox = new QGroupBox(centralwidget);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setMinimumSize(QSize(0, 90));
+        horizontalLayout_2 = new QHBoxLayout(groupBox);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        addTenantButtonB = new QPushButton(groupBox);
+        addTenantButtonB->setObjectName(QString::fromUtf8("addTenantButtonB"));
+
+        horizontalLayout_2->addWidget(addTenantButtonB);
+
+        addContractButtonB = new QPushButton(groupBox);
+        addContractButtonB->setObjectName(QString::fromUtf8("addContractButtonB"));
+
+        horizontalLayout_2->addWidget(addContractButtonB);
+
+        addBillButtonB = new QPushButton(groupBox);
+        addBillButtonB->setObjectName(QString::fromUtf8("addBillButtonB"));
+
+        horizontalLayout_2->addWidget(addBillButtonB);
+
+        pushButton_2 = new QPushButton(groupBox);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        horizontalLayout_2->addWidget(pushButton_2);
+
+        shutdownButton = new QPushButton(groupBox);
+        shutdownButton->setObjectName(QString::fromUtf8("shutdownButton"));
+        shutdownButton->setStyleSheet(QString::fromUtf8("background-color:red;"));
+
+        horizontalLayout_2->addWidget(shutdownButton);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_2);
+
+
+        mainVerticalLayout->addWidget(groupBox);
+
         mainTabWidget = new QTabWidget(centralwidget);
         mainTabWidget->setObjectName(QString::fromUtf8("mainTabWidget"));
         mainTabWidget->setEnabled(true);
@@ -844,6 +897,11 @@ public:
         roomVerticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         roomControlsLayout->addItem(roomVerticalSpacer);
+
+        addRoomButton = new QPushButton(roomsTab);
+        addRoomButton->setObjectName(QString::fromUtf8("addRoomButton"));
+
+        roomControlsLayout->addWidget(addRoomButton);
 
         roomButtonsLayout = new QVBoxLayout();
         roomButtonsLayout->setObjectName(QString::fromUtf8("roomButtonsLayout"));
@@ -1014,6 +1072,11 @@ public:
 
         tenantControlsLayout->addItem(tenantVerticalSpacer);
 
+        addTenantButton = new QPushButton(tenantsTab);
+        addTenantButton->setObjectName(QString::fromUtf8("addTenantButton"));
+
+        tenantControlsLayout->addWidget(addTenantButton);
+
         tenantButtonsLayout = new QVBoxLayout();
         tenantButtonsLayout->setObjectName(QString::fromUtf8("tenantButtonsLayout"));
         editTenantButton = new QPushButton(tenantsTab);
@@ -1051,6 +1114,34 @@ public:
         contractsTableView->horizontalHeader()->setDefaultSectionSize(125);
 
         contractsLayout->addWidget(contractsTableView);
+
+        widget_4 = new QWidget(contractsTab);
+        widget_4->setObjectName(QString::fromUtf8("widget_4"));
+        widget_4->setMinimumSize(QSize(300, 0));
+        verticalLayout_4 = new QVBoxLayout(widget_4);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_4->addItem(verticalSpacer);
+
+        addContractButton = new QPushButton(widget_4);
+        addContractButton->setObjectName(QString::fromUtf8("addContractButton"));
+
+        verticalLayout_4->addWidget(addContractButton);
+
+        endContractButton = new QPushButton(widget_4);
+        endContractButton->setObjectName(QString::fromUtf8("endContractButton"));
+
+        verticalLayout_4->addWidget(endContractButton);
+
+        unableContractButton = new QPushButton(widget_4);
+        unableContractButton->setObjectName(QString::fromUtf8("unableContractButton"));
+        unableContractButton->setStyleSheet(QString::fromUtf8("background-color:red;"));
+
+        verticalLayout_4->addWidget(unableContractButton);
+
+
+        contractsLayout->addWidget(widget_4);
 
         contractControlsLayout = new QVBoxLayout();
         contractControlsLayout->setObjectName(QString::fromUtf8("contractControlsLayout"));
@@ -1442,13 +1533,6 @@ public:
         dateTimeLabel->setGeometry(QRect(900, 0, 200, 30));
         dateTimeLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         AdminMainWindow->setStatusBar(statusbar);
-        toolBar = new QToolBar(AdminMainWindow);
-        toolBar->setObjectName(QString::fromUtf8("toolBar"));
-        toolBar->setMaximumSize(QSize(16777215, 80));
-        toolBar->setMovable(false);
-        toolBar->setIconSize(QSize(16, 16));
-        toolBar->setToolButtonStyle(Qt::ToolButtonTextOnly);
-        AdminMainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuManagement->menuAction());
@@ -1473,13 +1557,6 @@ public:
         menuHelp->addAction(actionContactSupport);
         menuHelp->addSeparator();
         menuHelp->addAction(actionAbout);
-        toolBar->addAction(actionQuickAddRoom);
-        toolBar->addAction(actionQuickAddTenant);
-        toolBar->addAction(actionQuickAddContract);
-        toolBar->addAction(actionQuickAddBill);
-        toolBar->addSeparator();
-        toolBar->addAction(actionRefresh);
-        toolBar->addAction(actionBackup);
 
         retranslateUi(AdminMainWindow);
 
@@ -1643,6 +1720,12 @@ public:
 #if QT_CONFIG(shortcut)
         actionQuickAddBill->setShortcut(QCoreApplication::translate("AdminMainWindow", "Ctrl+Shift+B", nullptr));
 #endif // QT_CONFIG(shortcut)
+        groupBox->setTitle(QCoreApplication::translate("AdminMainWindow", "Giao D\341\273\213ch \304\220\341\272\267t Ph\303\262ng", nullptr));
+        addTenantButtonB->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m Kh\303\241ch", nullptr));
+        addContractButtonB->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\341\273\243p \304\220\341\273\223ng", nullptr));
+        addBillButtonB->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\303\263a \304\220\306\241n", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("AdminMainWindow", "Thanh to\303\241n", nullptr));
+        shutdownButton->setText(QCoreApplication::translate("AdminMainWindow", "K\341\272\277t th\303\272c", nullptr));
         roomInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Ph\303\262ng", nullptr));
         roomNumberLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\303\252n Ph\303\262ng", nullptr));
         roomTypeLabel->setText(QCoreApplication::translate("AdminMainWindow", "Lo\341\272\241i Ph\303\262ng:", nullptr));
@@ -1654,6 +1737,7 @@ public:
         roomPriceText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
         roomStatusText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
         roomDescText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
+        addRoomButton->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m Ph\303\262ng", nullptr));
         editRoomButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Ph\303\262ng", nullptr));
         deleteRoomButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Ph\303\262ng", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(roomsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Ph\303\262ng", nullptr));
@@ -1670,9 +1754,13 @@ public:
         tenantBirthdayText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
         tenantRoomText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
         tenantRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng \341\273\237 g\341\272\247n nh\341\272\245t", nullptr));
+        addTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m Kh\303\241ch", nullptr));
         editTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "S\341\273\255a Th\303\264ng Tin", nullptr));
         deleteTenantButton->setText(QCoreApplication::translate("AdminMainWindow", "X\303\263a Kh\303\241ch", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(tenantsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Kh\303\241ch Thu\303\252", nullptr));
+        addContractButton->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\341\273\243p \304\220\341\273\223ng", nullptr));
+        endContractButton->setText(QCoreApplication::translate("AdminMainWindow", "Ch\341\272\245m D\341\273\251t H\341\273\243p \304\220\341\273\223ng", nullptr));
+        unableContractButton->setText(QCoreApplication::translate("AdminMainWindow", "V\303\264 Hi\341\273\207u H\303\263a H\341\273\243p \304\220\341\273\223ng", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(contractsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 H\341\273\243p \304\220\341\273\223ng Thu\303\252", nullptr));
         searchGroupBox->setTitle(QCoreApplication::translate("AdminMainWindow", "Filter", nullptr));
         roomBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "Thu\341\273\231c t\303\255nh", nullptr));
@@ -1720,7 +1808,6 @@ public:
         menuHelp->setTitle(QCoreApplication::translate("AdminMainWindow", "&Tr\341\273\243 Gi\303\272p", nullptr));
         statusInfoLabel->setText(QCoreApplication::translate("AdminMainWindow", "S\341\272\265n s\303\240ng", nullptr));
         dateTimeLabel->setText(QCoreApplication::translate("AdminMainWindow", "20/08/2025 - 10:30", nullptr));
-        toolBar->setWindowTitle(QCoreApplication::translate("AdminMainWindow", "Thanh C\303\264ng C\341\273\245", nullptr));
     } // retranslateUi
 
 };

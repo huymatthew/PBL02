@@ -680,11 +680,6 @@ QComboBox QAbstractItemView {
               <string>Hoạt Động</string>
              </property>
             </item>
-            <item>
-             <property name="text">
-              <string>Ngừng Hoạt Động</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>

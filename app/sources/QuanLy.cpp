@@ -42,14 +42,8 @@ void QuanLy::signalAndSlotConnect()
     QObject::connect(paymentsTableView, &QTableView::doubleClicked, [this](const QModelIndex &index)
                      { onShowBillDetails(index.siblingAtColumn(0).data().toInt()); });
 
-    QObject::connect(actionQuickAddTenant, &QAction::triggered, [this]()
+    QObject::connect(addTenantButtonB, &QPushButton::clicked, [this]()
                      { addTenantCall(); });
-    QObject::connect(actionQuickAddRoom, &QAction::triggered, [this]()
-                     { addRoomCall(); });
-    QObject::connect(actionQuickAddContract, &QAction::triggered, [this]()
-                     { addContractCall(); });
-    QObject::connect(actionQuickAddBill, &QAction::triggered, [this]()
-                     { addBillCall(); });
 
     QObject::connect(deleteTenantButton, &QPushButton::clicked, [this]()
                      { removeTenantCall(); });
@@ -62,6 +56,15 @@ void QuanLy::signalAndSlotConnect()
                      { editTenantCall(); });
     QObject::connect(editRoomButton, &QPushButton::clicked, [this]()
                      { editRoomCall(); });
+
+    QObject::connect(addRoomButton, &QPushButton::clicked, [this](){ addRoomCall(); });
+    QObject::connect(addTenantButton, &QPushButton::clicked, [this](){ addTenantCall(); });
+    QObject::connect(addContractButton, &QPushButton::clicked, [this](){ addContractCall(); });
+
+    QObject::connect(addBillButtonB, &QPushButton::clicked, [this](){ addBillCall(); });
+    QObject::connect(addTenantButtonB, &QPushButton::clicked, [this](){ addTenantCall(); });
+    QObject::connect(addContractButtonB, &QPushButton::clicked, [this](){ addContractCall(); });
+
 }
 // TabWidget
 void QuanLy::onChangedTabActive(int index)
@@ -218,6 +221,7 @@ void QuanLy::addBillCall()
     if (manager->getRoomManager().getRoomSelected()) {
         if (manager->getRoomManager().getRoomSelected()->getStatus() != 1){
             QMessageBox::warning(mainWindow, "Lỗi", "Phòng này chưa có khách");
+            return;
         }
         addBillDialog.setRoom(manager->getRoomManager().getRoomSelected()->getId());
         addBillDialog.exec();

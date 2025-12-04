@@ -486,7 +486,6 @@ public:
 
         statusComboBox = new QComboBox(statusNotesGroup);
         statusComboBox->addItem(QString());
-        statusComboBox->addItem(QString());
         statusComboBox->setObjectName(QString::fromUtf8("statusComboBox"));
         statusComboBox->setStyleSheet(QString::fromUtf8("QComboBox::drop-down {\n"
 "    subcontrol-origin: padding;\n"
@@ -610,7 +609,6 @@ public:
         statusNotesGroup->setTitle(QCoreApplication::translate("AddBillDialog", "Tr\341\272\241ng Th\303\241i v\303\240 Ghi Ch\303\272", nullptr));
         statusLabel->setText(QCoreApplication::translate("AddBillDialog", "Tr\341\272\241ng Th\303\241i:", nullptr));
         statusComboBox->setItemText(0, QCoreApplication::translate("AddBillDialog", "Ho\341\272\241t \304\220\341\273\231ng", nullptr));
-        statusComboBox->setItemText(1, QCoreApplication::translate("AddBillDialog", "Ng\341\273\253ng Ho\341\272\241t \304\220\341\273\231ng", nullptr));
 
         cancelButton->setText(QCoreApplication::translate("AddBillDialog", "H\341\273\247y", nullptr));
         saveButton->setText(QCoreApplication::translate("AddBillDialog", "T\341\272\241o H\303\263a \304\220\306\241n", nullptr));
