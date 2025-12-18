@@ -64,7 +64,7 @@ void Authentication::ChangePassword(){
 }
 
 void Authentication::loadinfo(){
-    ifstream f("./x.x");
+    ifstream f("./.env");
     if (!f.is_open()){
         cout << "Can't load data" << endl;
         return;
@@ -75,7 +75,7 @@ void Authentication::loadinfo(){
 }
 
 void Authentication::saveinfo(){
-    ofstream f("./x.x");
+    ofstream f("./.env");
     if (!f.is_open()){
         cout << "Can't save data" << endl;
         return;

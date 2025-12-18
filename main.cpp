@@ -19,20 +19,15 @@ int runApp(int argc, char *argv[]);
 
 
 int main(int argc, char *argv[]) {
-    /*
     Authentication oauth;
     if (oauth.Auth()){
         return runApp(argc, argv);
     }
-    */
-    return runApp(argc, argv);
+    else{
+        cout << "Exiting application..." << endl;
+        return 0;
+    }
 }
-
-
-
-
-
-
 
 int runApp(int argc, char *argv[]){
     qputenv("QT_LOGGING_RULES", "qt.qpa.*=false");
