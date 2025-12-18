@@ -16,6 +16,7 @@
 #include <Dialogs/AddRoomDiag.h>
 #include <Dialogs/AddContractDiag.h>
 #include <Dialogs/AddBillDiag.h>
+#include <Dialogs/SearchFilterDiag.h>
 
 #include <Data/Bill.h>
 #include <Data/Contract.h>

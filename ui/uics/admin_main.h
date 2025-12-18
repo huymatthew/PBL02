@@ -71,6 +71,10 @@ public:
     QPushButton *addContractButtonB;
     QPushButton *addBillButtonB;
     QPushButton *pushButton_2;
+    QFrame *line;
+    QPushButton *searchBtn;
+    QPushButton *filterBtn;
+    QFrame *line_2;
     QPushButton *shutdownButton;
     QSpacerItem *horizontalSpacer_2;
     QTabWidget *mainTabWidget;
@@ -747,6 +751,30 @@ public:
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
 
         horizontalLayout_2->addWidget(pushButton_2);
+
+        line = new QFrame(groupBox);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setFrameShape(QFrame::VLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        horizontalLayout_2->addWidget(line);
+
+        searchBtn = new QPushButton(groupBox);
+        searchBtn->setObjectName(QString::fromUtf8("searchBtn"));
+
+        horizontalLayout_2->addWidget(searchBtn);
+
+        filterBtn = new QPushButton(groupBox);
+        filterBtn->setObjectName(QString::fromUtf8("filterBtn"));
+
+        horizontalLayout_2->addWidget(filterBtn);
+
+        line_2 = new QFrame(groupBox);
+        line_2->setObjectName(QString::fromUtf8("line_2"));
+        line_2->setFrameShape(QFrame::VLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+
+        horizontalLayout_2->addWidget(line_2);
 
         shutdownButton = new QPushButton(groupBox);
         shutdownButton->setObjectName(QString::fromUtf8("shutdownButton"));
@@ -1725,6 +1753,8 @@ public:
         addContractButtonB->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\341\273\243p \304\220\341\273\223ng", nullptr));
         addBillButtonB->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\303\263a \304\220\306\241n", nullptr));
         pushButton_2->setText(QCoreApplication::translate("AdminMainWindow", "Thanh to\303\241n", nullptr));
+        searchBtn->setText(QCoreApplication::translate("AdminMainWindow", "T\303\254m Ki\341\272\277m", nullptr));
+        filterBtn->setText(QCoreApplication::translate("AdminMainWindow", "B\341\273\231 L\341\273\215c", nullptr));
         shutdownButton->setText(QCoreApplication::translate("AdminMainWindow", "K\341\272\277t th\303\272c", nullptr));
         roomInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Ph\303\262ng", nullptr));
         roomNumberLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\303\252n Ph\303\262ng", nullptr));

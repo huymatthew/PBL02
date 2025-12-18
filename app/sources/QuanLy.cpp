@@ -65,6 +65,16 @@ void QuanLy::signalAndSlotConnect()
     QObject::connect(addTenantButtonB, &QPushButton::clicked, [this](){ addTenantCall(); });
     QObject::connect(addContractButtonB, &QPushButton::clicked, [this](){ addContractCall(); });
 
+    QObject::connect(searchBtn, &QPushButton::clicked, [this]()
+                     {
+                         SearchFilterDialog searchDialog(mainWindow);
+                         searchDialog.exec();
+                         loadTenantView();
+                     });
+    QObject::connect(shutdownButton, &QPushButton::clicked, [this]()
+                     { mainWindow->close(); });
+        
+
 }
 // TabWidget
 void QuanLy::onChangedTabActive(int index)
