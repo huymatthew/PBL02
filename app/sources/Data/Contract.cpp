@@ -42,7 +42,11 @@ double Contract::getDeposit() const { return deposit; }
 void Contract::setDeposit(double deposit) { this->deposit = deposit; }
 
 int Contract::getStatus() const { return status; }
-void Contract::setStatus(int status) { this->status = status; }
+void Contract::setStatus(int status) { 
+	if (status != 2) {
+		this->status = status; 
+	}
+}
 
 string Contract::getNotes() const { return notes; }
 void Contract::setNotes(const string& notes) { this->notes = notes; }

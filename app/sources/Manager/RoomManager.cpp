@@ -227,8 +227,14 @@ QStandardItemModel *RoomManager::getRoomsAsModel() const
         QList<QStandardItem *> rowItems;
         rowItems.append(new QStandardItem(idnumber(room.getId(), 6)));
         rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomName())));
-        rowItems.append(new QStandardItem(QString::fromStdString(room.getRoomTypeString())));
-        rowItems.append(new QStandardItem(moneyFormat(room.getMonthlyRent())));
+
+        QStandardItem* typeItem = new QStandardItem(QString::fromStdString(room.getRoomTypeString()));
+        typeItem->setData(room.getRoomType(), Qt::UserRole);
+        rowItems.append(typeItem);
+
+        QStandardItem* rentItem = new QStandardItem(moneyFormat(room.getMonthlyRent()));
+        rentItem->setData(room.getMonthlyRent(), Qt::UserRole);
+        rowItems.append(rentItem);
 
         QStandardItem* item = new QStandardItem();
         if (room.getStatus() == 1){
@@ -239,6 +245,7 @@ QStandardItemModel *RoomManager::getRoomsAsModel() const
             item->setText("Trống");
             item->setForeground(QBrush(Qt::darkGreen));
         }
+        item->setData(room.getStatus(), Qt::UserRole);
         rowItems.append(item);
 
         rowItems.append(new QStandardItem(QString::fromStdString(room.getDescription())));

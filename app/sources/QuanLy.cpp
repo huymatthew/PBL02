@@ -67,9 +67,8 @@ void QuanLy::signalAndSlotConnect()
 
     QObject::connect(searchBtn, &QPushButton::clicked, [this]()
                      {
-                         SearchFilterDialog searchDialog(mainWindow);
+                         SearchFilterDialog searchDialog(mainWindow, getCurrentView(), mainTabWidget->currentIndex());
                          searchDialog.exec();
-                         loadTenantView();
                      });
     QObject::connect(shutdownButton, &QPushButton::clicked, [this]()
                      { mainWindow->close(); });
@@ -161,7 +160,8 @@ void QuanLy::onShowBillDetails(int billId){
 
     paymentTotalText->setText(moneyFormat(bill->getTotalAmount()));
     paymentStatusText->setText(bill->getStatus() ? "Đã thanh toán" : "Chưa thanh toán");
-    paymentStatusText->setStyleSheet("color:" + bill->getStatus() ? "green" : "red");
+
+    paymentStatusText->setStyleSheet("color:" + (bill->getStatus() ? QString("green") : QString("red")));
 }
 
 
@@ -333,4 +333,22 @@ void QuanLy::genChart()
     QDate startDate = QDate(fromYearFilter->currentText().toInt(), fromMonthFilter->currentText().toInt(), 1);
     QDate endDate = QDate(toYearFilter->currentText().toInt(), toMonthFilter->currentText().toInt(), 1);
     chartBC.updateChart(startDate, endDate);
+}
+
+QTableView* QuanLy::getCurrentView()
+{
+    int currentIndex = mainTabWidget->currentIndex();
+    switch (currentIndex)
+    {
+    case 0:
+        return roomsTableView; 
+    case 1:
+        return tenantsTableView;
+    case 2:
+        return contractsTableView;
+    case 3:
+        return paymentsTableView;
+    default:
+        return nullptr;
+    }
 }

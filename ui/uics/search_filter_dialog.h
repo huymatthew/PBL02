@@ -16,13 +16,16 @@
 #include <QtWidgets/QDateEdit>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QFormLayout>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
+#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -46,49 +49,97 @@ public:
     QComboBox *searchFieldComboBox;
     QSpacerItem *horizontalSpacer;
     QCheckBox *caseSensitiveCheckBox;
-    QCheckBox *exactMatchCheckBox;
     QHBoxLayout *horizontalLayout_3;
-    QSpacerItem *horizontalSpacer_2;
-    QPushButton *searchButton;
-    QPushButton *clearSearchButton;
     QSpacerItem *verticalSpacer;
     QWidget *filterTab;
     QVBoxLayout *verticalLayout_4;
-    QGroupBox *filterGroupBox;
-    QVBoxLayout *verticalLayout_5;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *statusLabel;
-    QComboBox *statusComboBox;
+    QStackedWidget *stackedWidget;
+    QWidget *roomFilterView;
     QHBoxLayout *horizontalLayout_5;
-    QLabel *typeLabel;
-    QComboBox *typeComboBox;
-    QGroupBox *dateRangeGroupBox;
-    QVBoxLayout *verticalLayout_6;
-    QHBoxLayout *horizontalLayout_6;
-    QLabel *fromDateLabel;
-    QDateEdit *fromDateEdit;
-    QHBoxLayout *horizontalLayout_7;
-    QLabel *toDateLabel;
-    QDateEdit *toDateEdit;
-    QGroupBox *priceRangeGroupBox;
-    QVBoxLayout *verticalLayout_7;
-    QHBoxLayout *horizontalLayout_8;
-    QLabel *minPriceLabel;
-    QSpinBox *minPriceSpinBox;
-    QLabel *maxPriceLabel;
-    QSpinBox *maxPriceSpinBox;
-    QHBoxLayout *horizontalLayout_9;
-    QSpacerItem *horizontalSpacer_3;
-    QPushButton *applyFilterButton;
-    QPushButton *resetFilterButton;
+    QGroupBox *roomFilterBox;
+    QFormLayout *formLayout;
+    QLabel *filterRoomTypeLabel;
+    QComboBox *filterRoomType;
+    QLabel *filterRoomStatusLabel;
+    QComboBox *filterRoomStatus;
+    QLabel *filterRoomPriceLabel;
+    QFrame *filterRoomPrice;
+    QFormLayout *formLayout_2;
+    QLabel *filterRoomPriceFromLabel;
+    QSpinBox *filterRoomPriceFrom;
+    QLabel *filterRoomPriceToLabel;
+    QSpinBox *filterRoomPriceTo;
+    QWidget *tenantFilterView;
+    QHBoxLayout *horizontalLayout_4;
+    QGroupBox *tenantFilterBox;
+    QGridLayout *gridLayout;
+    QComboBox *tenantFilterStatus;
+    QLabel *tenantFilterRoleLabel;
+    QLabel *tenantFilterStatusLabel;
+    QComboBox *tenantFilterRole;
     QSpacerItem *verticalSpacer_2;
+    QWidget *contracFilterView;
+    QHBoxLayout *horizontalLayout_6;
+    QGroupBox *contractFilterBox;
+    QFormLayout *formLayout_10;
+    QLabel *contractFilterStatusLabel;
+    QComboBox *contractFilterStatus;
+    QLabel *contractFilterRoomRentLabel;
+    QFrame *contractFilterRoomRentBox;
+    QFormLayout *formLayout_3;
+    QLabel *contractFilterRoomRentFromLabel;
+    QSpinBox *contractFilterRoomRentFrom;
+    QLabel *contractFilterRoomRentToLabel;
+    QSpinBox *contractFilterRoomRentTo;
+    QLabel *label_13;
+    QFrame *contractFilterDepositBox;
+    QFormLayout *formLayout_5;
+    QLabel *contractFilterDepositFromLabel;
+    QSpinBox *contractFilterDepositFrom;
+    QLabel *contractFilterDepositToLabel;
+    QSpinBox *contractFilterDepositTo;
+    QLabel *label_12;
+    QFrame *contractFilterStartDate;
+    QFormLayout *formLayout_4;
+    QLabel *contractFilterStartDateToLabel;
+    QLabel *contractFilterStartDateFromLabel;
+    QDateEdit *contractFilterStartDateFrom;
+    QDateEdit *contractFilterStartDateTo;
+    QSpacerItem *verticalSpacer_3;
+    QFrame *contractFilterEndDate;
+    QFormLayout *formLayout_6;
+    QLabel *contractFilterEndDateToLabel;
+    QLabel *contractFilterEndDateFromLabel;
+    QDateEdit *contractFilterEndDateFrom;
+    QDateEdit *contractFilterEndDateTo;
+    QLabel *label;
+    QWidget *billFilterView;
+    QHBoxLayout *horizontalLayout_7;
+    QGroupBox *billFilterBox;
+    QFormLayout *formLayout_7;
+    QLabel *billFilterStatusLabel;
+    QComboBox *billFilterStatus;
+    QLabel *label_19;
+    QFrame *billFilterPriceBox;
+    QFormLayout *formLayout_9;
+    QLabel *billFilterPriceFromLabel;
+    QSpinBox *billFilterPriceFrom;
+    QLabel *billFilterPriceToLabel;
+    QSpinBox *billFilterPriceTo;
+    QLabel *label_16;
+    QFrame *billFilterMonth;
+    QFormLayout *formLayout_8;
+    QLabel *billFilterMonthFromLabel;
+    QDateEdit *billFilterMonthFrom;
+    QDateEdit *billFilterMonthTo;
+    QLabel *billFilterMonthToLabel;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *SearchFilterDialog)
     {
         if (SearchFilterDialog->objectName().isEmpty())
             SearchFilterDialog->setObjectName(QString::fromUtf8("SearchFilterDialog"));
-        SearchFilterDialog->resize(600, 458);
+        SearchFilterDialog->resize(600, 656);
         verticalLayout = new QVBoxLayout(SearchFilterDialog);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         tabWidget = new QTabWidget(SearchFilterDialog);
@@ -124,11 +175,6 @@ public:
         horizontalLayout_2->addWidget(searchFieldLabel);
 
         searchFieldComboBox = new QComboBox(searchGroupBox);
-        searchFieldComboBox->addItem(QString());
-        searchFieldComboBox->addItem(QString());
-        searchFieldComboBox->addItem(QString());
-        searchFieldComboBox->addItem(QString());
-        searchFieldComboBox->addItem(QString());
         searchFieldComboBox->setObjectName(QString::fromUtf8("searchFieldComboBox"));
 
         horizontalLayout_2->addWidget(searchFieldComboBox);
@@ -145,27 +191,8 @@ public:
 
         verticalLayout_3->addWidget(caseSensitiveCheckBox);
 
-        exactMatchCheckBox = new QCheckBox(searchGroupBox);
-        exactMatchCheckBox->setObjectName(QString::fromUtf8("exactMatchCheckBox"));
-
-        verticalLayout_3->addWidget(exactMatchCheckBox);
-
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_3->addItem(horizontalSpacer_2);
-
-        searchButton = new QPushButton(searchGroupBox);
-        searchButton->setObjectName(QString::fromUtf8("searchButton"));
-
-        horizontalLayout_3->addWidget(searchButton);
-
-        clearSearchButton = new QPushButton(searchGroupBox);
-        clearSearchButton->setObjectName(QString::fromUtf8("clearSearchButton"));
-
-        horizontalLayout_3->addWidget(clearSearchButton);
-
 
         verticalLayout_3->addLayout(horizontalLayout_3);
 
@@ -181,145 +208,402 @@ public:
         filterTab->setObjectName(QString::fromUtf8("filterTab"));
         verticalLayout_4 = new QVBoxLayout(filterTab);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        filterGroupBox = new QGroupBox(filterTab);
-        filterGroupBox->setObjectName(QString::fromUtf8("filterGroupBox"));
-        verticalLayout_5 = new QVBoxLayout(filterGroupBox);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        statusLabel = new QLabel(filterGroupBox);
-        statusLabel->setObjectName(QString::fromUtf8("statusLabel"));
-
-        horizontalLayout_4->addWidget(statusLabel);
-
-        statusComboBox = new QComboBox(filterGroupBox);
-        statusComboBox->addItem(QString());
-        statusComboBox->addItem(QString());
-        statusComboBox->addItem(QString());
-        statusComboBox->setObjectName(QString::fromUtf8("statusComboBox"));
-
-        horizontalLayout_4->addWidget(statusComboBox);
-
-
-        verticalLayout_5->addLayout(horizontalLayout_4);
-
-        horizontalLayout_5 = new QHBoxLayout();
+        stackedWidget = new QStackedWidget(filterTab);
+        stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
+        roomFilterView = new QWidget();
+        roomFilterView->setObjectName(QString::fromUtf8("roomFilterView"));
+        horizontalLayout_5 = new QHBoxLayout(roomFilterView);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        typeLabel = new QLabel(filterGroupBox);
-        typeLabel->setObjectName(QString::fromUtf8("typeLabel"));
+        roomFilterBox = new QGroupBox(roomFilterView);
+        roomFilterBox->setObjectName(QString::fromUtf8("roomFilterBox"));
+        formLayout = new QFormLayout(roomFilterBox);
+        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        filterRoomTypeLabel = new QLabel(roomFilterBox);
+        filterRoomTypeLabel->setObjectName(QString::fromUtf8("filterRoomTypeLabel"));
 
-        horizontalLayout_5->addWidget(typeLabel);
+        formLayout->setWidget(0, QFormLayout::LabelRole, filterRoomTypeLabel);
 
-        typeComboBox = new QComboBox(filterGroupBox);
-        typeComboBox->addItem(QString());
-        typeComboBox->addItem(QString());
-        typeComboBox->addItem(QString());
-        typeComboBox->addItem(QString());
-        typeComboBox->setObjectName(QString::fromUtf8("typeComboBox"));
+        filterRoomType = new QComboBox(roomFilterBox);
+        filterRoomType->addItem(QString());
+        filterRoomType->addItem(QString());
+        filterRoomType->addItem(QString());
+        filterRoomType->addItem(QString());
+        filterRoomType->setObjectName(QString::fromUtf8("filterRoomType"));
 
-        horizontalLayout_5->addWidget(typeComboBox);
+        formLayout->setWidget(0, QFormLayout::FieldRole, filterRoomType);
 
+        filterRoomStatusLabel = new QLabel(roomFilterBox);
+        filterRoomStatusLabel->setObjectName(QString::fromUtf8("filterRoomStatusLabel"));
 
-        verticalLayout_5->addLayout(horizontalLayout_5);
+        formLayout->setWidget(1, QFormLayout::LabelRole, filterRoomStatusLabel);
 
-        dateRangeGroupBox = new QGroupBox(filterGroupBox);
-        dateRangeGroupBox->setObjectName(QString::fromUtf8("dateRangeGroupBox"));
-        verticalLayout_6 = new QVBoxLayout(dateRangeGroupBox);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        fromDateLabel = new QLabel(dateRangeGroupBox);
-        fromDateLabel->setObjectName(QString::fromUtf8("fromDateLabel"));
+        filterRoomStatus = new QComboBox(roomFilterBox);
+        filterRoomStatus->addItem(QString());
+        filterRoomStatus->addItem(QString());
+        filterRoomStatus->addItem(QString());
+        filterRoomStatus->setObjectName(QString::fromUtf8("filterRoomStatus"));
 
-        horizontalLayout_6->addWidget(fromDateLabel);
+        formLayout->setWidget(1, QFormLayout::FieldRole, filterRoomStatus);
 
-        fromDateEdit = new QDateEdit(dateRangeGroupBox);
-        fromDateEdit->setObjectName(QString::fromUtf8("fromDateEdit"));
-        fromDateEdit->setCalendarPopup(true);
+        filterRoomPriceLabel = new QLabel(roomFilterBox);
+        filterRoomPriceLabel->setObjectName(QString::fromUtf8("filterRoomPriceLabel"));
 
-        horizontalLayout_6->addWidget(fromDateEdit);
+        formLayout->setWidget(2, QFormLayout::LabelRole, filterRoomPriceLabel);
 
+        filterRoomPrice = new QFrame(roomFilterBox);
+        filterRoomPrice->setObjectName(QString::fromUtf8("filterRoomPrice"));
+        filterRoomPrice->setFrameShape(QFrame::StyledPanel);
+        filterRoomPrice->setFrameShadow(QFrame::Plain);
+        formLayout_2 = new QFormLayout(filterRoomPrice);
+        formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
+        filterRoomPriceFromLabel = new QLabel(filterRoomPrice);
+        filterRoomPriceFromLabel->setObjectName(QString::fromUtf8("filterRoomPriceFromLabel"));
 
-        verticalLayout_6->addLayout(horizontalLayout_6);
+        formLayout_2->setWidget(0, QFormLayout::LabelRole, filterRoomPriceFromLabel);
 
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        toDateLabel = new QLabel(dateRangeGroupBox);
-        toDateLabel->setObjectName(QString::fromUtf8("toDateLabel"));
+        filterRoomPriceFrom = new QSpinBox(filterRoomPrice);
+        filterRoomPriceFrom->setObjectName(QString::fromUtf8("filterRoomPriceFrom"));
+        filterRoomPriceFrom->setMaximum(999999999);
+        filterRoomPriceFrom->setSingleStep(100000);
 
-        horizontalLayout_7->addWidget(toDateLabel);
+        formLayout_2->setWidget(0, QFormLayout::FieldRole, filterRoomPriceFrom);
 
-        toDateEdit = new QDateEdit(dateRangeGroupBox);
-        toDateEdit->setObjectName(QString::fromUtf8("toDateEdit"));
-        toDateEdit->setCalendarPopup(true);
+        filterRoomPriceToLabel = new QLabel(filterRoomPrice);
+        filterRoomPriceToLabel->setObjectName(QString::fromUtf8("filterRoomPriceToLabel"));
 
-        horizontalLayout_7->addWidget(toDateEdit);
+        formLayout_2->setWidget(1, QFormLayout::LabelRole, filterRoomPriceToLabel);
 
+        filterRoomPriceTo = new QSpinBox(filterRoomPrice);
+        filterRoomPriceTo->setObjectName(QString::fromUtf8("filterRoomPriceTo"));
+        filterRoomPriceTo->setMaximum(999999999);
+        filterRoomPriceTo->setSingleStep(100000);
+        filterRoomPriceTo->setValue(10000000);
 
-        verticalLayout_6->addLayout(horizontalLayout_7);
-
-
-        verticalLayout_5->addWidget(dateRangeGroupBox);
-
-        priceRangeGroupBox = new QGroupBox(filterGroupBox);
-        priceRangeGroupBox->setObjectName(QString::fromUtf8("priceRangeGroupBox"));
-        verticalLayout_7 = new QVBoxLayout(priceRangeGroupBox);
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        minPriceLabel = new QLabel(priceRangeGroupBox);
-        minPriceLabel->setObjectName(QString::fromUtf8("minPriceLabel"));
-
-        horizontalLayout_8->addWidget(minPriceLabel);
-
-        minPriceSpinBox = new QSpinBox(priceRangeGroupBox);
-        minPriceSpinBox->setObjectName(QString::fromUtf8("minPriceSpinBox"));
-        minPriceSpinBox->setMaximum(999999999);
-
-        horizontalLayout_8->addWidget(minPriceSpinBox);
-
-        maxPriceLabel = new QLabel(priceRangeGroupBox);
-        maxPriceLabel->setObjectName(QString::fromUtf8("maxPriceLabel"));
-
-        horizontalLayout_8->addWidget(maxPriceLabel);
-
-        maxPriceSpinBox = new QSpinBox(priceRangeGroupBox);
-        maxPriceSpinBox->setObjectName(QString::fromUtf8("maxPriceSpinBox"));
-        maxPriceSpinBox->setMaximum(999999999);
-
-        horizontalLayout_8->addWidget(maxPriceSpinBox);
+        formLayout_2->setWidget(1, QFormLayout::FieldRole, filterRoomPriceTo);
 
 
-        verticalLayout_7->addLayout(horizontalLayout_8);
+        formLayout->setWidget(2, QFormLayout::FieldRole, filterRoomPrice);
 
 
-        verticalLayout_5->addWidget(priceRangeGroupBox);
+        horizontalLayout_5->addWidget(roomFilterBox);
 
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        stackedWidget->addWidget(roomFilterView);
+        tenantFilterView = new QWidget();
+        tenantFilterView->setObjectName(QString::fromUtf8("tenantFilterView"));
+        horizontalLayout_4 = new QHBoxLayout(tenantFilterView);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        tenantFilterBox = new QGroupBox(tenantFilterView);
+        tenantFilterBox->setObjectName(QString::fromUtf8("tenantFilterBox"));
+        gridLayout = new QGridLayout(tenantFilterBox);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        tenantFilterStatus = new QComboBox(tenantFilterBox);
+        tenantFilterStatus->addItem(QString());
+        tenantFilterStatus->addItem(QString());
+        tenantFilterStatus->addItem(QString());
+        tenantFilterStatus->setObjectName(QString::fromUtf8("tenantFilterStatus"));
 
-        horizontalLayout_9->addItem(horizontalSpacer_3);
+        gridLayout->addWidget(tenantFilterStatus, 0, 2, 1, 1);
 
-        applyFilterButton = new QPushButton(filterGroupBox);
-        applyFilterButton->setObjectName(QString::fromUtf8("applyFilterButton"));
+        tenantFilterRoleLabel = new QLabel(tenantFilterBox);
+        tenantFilterRoleLabel->setObjectName(QString::fromUtf8("tenantFilterRoleLabel"));
 
-        horizontalLayout_9->addWidget(applyFilterButton);
+        gridLayout->addWidget(tenantFilterRoleLabel, 1, 1, 1, 1);
 
-        resetFilterButton = new QPushButton(filterGroupBox);
-        resetFilterButton->setObjectName(QString::fromUtf8("resetFilterButton"));
+        tenantFilterStatusLabel = new QLabel(tenantFilterBox);
+        tenantFilterStatusLabel->setObjectName(QString::fromUtf8("tenantFilterStatusLabel"));
 
-        horizontalLayout_9->addWidget(resetFilterButton);
+        gridLayout->addWidget(tenantFilterStatusLabel, 0, 1, 1, 1);
 
+        tenantFilterRole = new QComboBox(tenantFilterBox);
+        tenantFilterRole->addItem(QString());
+        tenantFilterRole->addItem(QString());
+        tenantFilterRole->addItem(QString());
+        tenantFilterRole->setObjectName(QString::fromUtf8("tenantFilterRole"));
 
-        verticalLayout_5->addLayout(horizontalLayout_9);
+        gridLayout->addWidget(tenantFilterRole, 1, 2, 1, 1);
 
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_5->addItem(verticalSpacer_2);
+        gridLayout->addItem(verticalSpacer_2, 2, 2, 1, 1);
 
 
-        verticalLayout_4->addWidget(filterGroupBox);
+        horizontalLayout_4->addWidget(tenantFilterBox);
+
+        stackedWidget->addWidget(tenantFilterView);
+        contracFilterView = new QWidget();
+        contracFilterView->setObjectName(QString::fromUtf8("contracFilterView"));
+        horizontalLayout_6 = new QHBoxLayout(contracFilterView);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        contractFilterBox = new QGroupBox(contracFilterView);
+        contractFilterBox->setObjectName(QString::fromUtf8("contractFilterBox"));
+        formLayout_10 = new QFormLayout(contractFilterBox);
+        formLayout_10->setObjectName(QString::fromUtf8("formLayout_10"));
+        contractFilterStatusLabel = new QLabel(contractFilterBox);
+        contractFilterStatusLabel->setObjectName(QString::fromUtf8("contractFilterStatusLabel"));
+
+        formLayout_10->setWidget(0, QFormLayout::LabelRole, contractFilterStatusLabel);
+
+        contractFilterStatus = new QComboBox(contractFilterBox);
+        contractFilterStatus->addItem(QString());
+        contractFilterStatus->addItem(QString());
+        contractFilterStatus->addItem(QString());
+        contractFilterStatus->addItem(QString());
+        contractFilterStatus->setObjectName(QString::fromUtf8("contractFilterStatus"));
+
+        formLayout_10->setWidget(0, QFormLayout::FieldRole, contractFilterStatus);
+
+        contractFilterRoomRentLabel = new QLabel(contractFilterBox);
+        contractFilterRoomRentLabel->setObjectName(QString::fromUtf8("contractFilterRoomRentLabel"));
+
+        formLayout_10->setWidget(2, QFormLayout::LabelRole, contractFilterRoomRentLabel);
+
+        contractFilterRoomRentBox = new QFrame(contractFilterBox);
+        contractFilterRoomRentBox->setObjectName(QString::fromUtf8("contractFilterRoomRentBox"));
+        contractFilterRoomRentBox->setFrameShape(QFrame::StyledPanel);
+        contractFilterRoomRentBox->setFrameShadow(QFrame::Plain);
+        formLayout_3 = new QFormLayout(contractFilterRoomRentBox);
+        formLayout_3->setObjectName(QString::fromUtf8("formLayout_3"));
+        contractFilterRoomRentFromLabel = new QLabel(contractFilterRoomRentBox);
+        contractFilterRoomRentFromLabel->setObjectName(QString::fromUtf8("contractFilterRoomRentFromLabel"));
+
+        formLayout_3->setWidget(0, QFormLayout::LabelRole, contractFilterRoomRentFromLabel);
+
+        contractFilterRoomRentFrom = new QSpinBox(contractFilterRoomRentBox);
+        contractFilterRoomRentFrom->setObjectName(QString::fromUtf8("contractFilterRoomRentFrom"));
+        contractFilterRoomRentFrom->setMaximum(999999999);
+        contractFilterRoomRentFrom->setSingleStep(100000);
+
+        formLayout_3->setWidget(0, QFormLayout::FieldRole, contractFilterRoomRentFrom);
+
+        contractFilterRoomRentToLabel = new QLabel(contractFilterRoomRentBox);
+        contractFilterRoomRentToLabel->setObjectName(QString::fromUtf8("contractFilterRoomRentToLabel"));
+
+        formLayout_3->setWidget(1, QFormLayout::LabelRole, contractFilterRoomRentToLabel);
+
+        contractFilterRoomRentTo = new QSpinBox(contractFilterRoomRentBox);
+        contractFilterRoomRentTo->setObjectName(QString::fromUtf8("contractFilterRoomRentTo"));
+        contractFilterRoomRentTo->setMaximum(999999999);
+        contractFilterRoomRentTo->setSingleStep(100000);
+        contractFilterRoomRentTo->setValue(10000000);
+
+        formLayout_3->setWidget(1, QFormLayout::FieldRole, contractFilterRoomRentTo);
+
+
+        formLayout_10->setWidget(2, QFormLayout::FieldRole, contractFilterRoomRentBox);
+
+        label_13 = new QLabel(contractFilterBox);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+
+        formLayout_10->setWidget(4, QFormLayout::LabelRole, label_13);
+
+        contractFilterDepositBox = new QFrame(contractFilterBox);
+        contractFilterDepositBox->setObjectName(QString::fromUtf8("contractFilterDepositBox"));
+        contractFilterDepositBox->setFrameShape(QFrame::StyledPanel);
+        contractFilterDepositBox->setFrameShadow(QFrame::Plain);
+        formLayout_5 = new QFormLayout(contractFilterDepositBox);
+        formLayout_5->setObjectName(QString::fromUtf8("formLayout_5"));
+        contractFilterDepositFromLabel = new QLabel(contractFilterDepositBox);
+        contractFilterDepositFromLabel->setObjectName(QString::fromUtf8("contractFilterDepositFromLabel"));
+
+        formLayout_5->setWidget(0, QFormLayout::LabelRole, contractFilterDepositFromLabel);
+
+        contractFilterDepositFrom = new QSpinBox(contractFilterDepositBox);
+        contractFilterDepositFrom->setObjectName(QString::fromUtf8("contractFilterDepositFrom"));
+        contractFilterDepositFrom->setMaximum(999999999);
+        contractFilterDepositFrom->setSingleStep(100000);
+
+        formLayout_5->setWidget(0, QFormLayout::FieldRole, contractFilterDepositFrom);
+
+        contractFilterDepositToLabel = new QLabel(contractFilterDepositBox);
+        contractFilterDepositToLabel->setObjectName(QString::fromUtf8("contractFilterDepositToLabel"));
+
+        formLayout_5->setWidget(1, QFormLayout::LabelRole, contractFilterDepositToLabel);
+
+        contractFilterDepositTo = new QSpinBox(contractFilterDepositBox);
+        contractFilterDepositTo->setObjectName(QString::fromUtf8("contractFilterDepositTo"));
+        contractFilterDepositTo->setMaximum(999999999);
+        contractFilterDepositTo->setSingleStep(100000);
+        contractFilterDepositTo->setValue(10000000);
+
+        formLayout_5->setWidget(1, QFormLayout::FieldRole, contractFilterDepositTo);
+
+
+        formLayout_10->setWidget(4, QFormLayout::FieldRole, contractFilterDepositBox);
+
+        label_12 = new QLabel(contractFilterBox);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        formLayout_10->setWidget(6, QFormLayout::LabelRole, label_12);
+
+        contractFilterStartDate = new QFrame(contractFilterBox);
+        contractFilterStartDate->setObjectName(QString::fromUtf8("contractFilterStartDate"));
+        contractFilterStartDate->setFrameShape(QFrame::StyledPanel);
+        contractFilterStartDate->setFrameShadow(QFrame::Plain);
+        formLayout_4 = new QFormLayout(contractFilterStartDate);
+        formLayout_4->setObjectName(QString::fromUtf8("formLayout_4"));
+        contractFilterStartDateToLabel = new QLabel(contractFilterStartDate);
+        contractFilterStartDateToLabel->setObjectName(QString::fromUtf8("contractFilterStartDateToLabel"));
+
+        formLayout_4->setWidget(1, QFormLayout::LabelRole, contractFilterStartDateToLabel);
+
+        contractFilterStartDateFromLabel = new QLabel(contractFilterStartDate);
+        contractFilterStartDateFromLabel->setObjectName(QString::fromUtf8("contractFilterStartDateFromLabel"));
+
+        formLayout_4->setWidget(0, QFormLayout::LabelRole, contractFilterStartDateFromLabel);
+
+        contractFilterStartDateFrom = new QDateEdit(contractFilterStartDate);
+        contractFilterStartDateFrom->setObjectName(QString::fromUtf8("contractFilterStartDateFrom"));
+
+        formLayout_4->setWidget(0, QFormLayout::FieldRole, contractFilterStartDateFrom);
+
+        contractFilterStartDateTo = new QDateEdit(contractFilterStartDate);
+        contractFilterStartDateTo->setObjectName(QString::fromUtf8("contractFilterStartDateTo"));
+
+        formLayout_4->setWidget(1, QFormLayout::FieldRole, contractFilterStartDateTo);
+
+
+        formLayout_10->setWidget(6, QFormLayout::FieldRole, contractFilterStartDate);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        formLayout_10->setItem(9, QFormLayout::FieldRole, verticalSpacer_3);
+
+        contractFilterEndDate = new QFrame(contractFilterBox);
+        contractFilterEndDate->setObjectName(QString::fromUtf8("contractFilterEndDate"));
+        contractFilterEndDate->setFrameShape(QFrame::StyledPanel);
+        contractFilterEndDate->setFrameShadow(QFrame::Plain);
+        formLayout_6 = new QFormLayout(contractFilterEndDate);
+        formLayout_6->setObjectName(QString::fromUtf8("formLayout_6"));
+        contractFilterEndDateToLabel = new QLabel(contractFilterEndDate);
+        contractFilterEndDateToLabel->setObjectName(QString::fromUtf8("contractFilterEndDateToLabel"));
+
+        formLayout_6->setWidget(1, QFormLayout::LabelRole, contractFilterEndDateToLabel);
+
+        contractFilterEndDateFromLabel = new QLabel(contractFilterEndDate);
+        contractFilterEndDateFromLabel->setObjectName(QString::fromUtf8("contractFilterEndDateFromLabel"));
+
+        formLayout_6->setWidget(0, QFormLayout::LabelRole, contractFilterEndDateFromLabel);
+
+        contractFilterEndDateFrom = new QDateEdit(contractFilterEndDate);
+        contractFilterEndDateFrom->setObjectName(QString::fromUtf8("contractFilterEndDateFrom"));
+
+        formLayout_6->setWidget(0, QFormLayout::FieldRole, contractFilterEndDateFrom);
+
+        contractFilterEndDateTo = new QDateEdit(contractFilterEndDate);
+        contractFilterEndDateTo->setObjectName(QString::fromUtf8("contractFilterEndDateTo"));
+
+        formLayout_6->setWidget(1, QFormLayout::FieldRole, contractFilterEndDateTo);
+
+
+        formLayout_10->setWidget(7, QFormLayout::FieldRole, contractFilterEndDate);
+
+        label = new QLabel(contractFilterBox);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        formLayout_10->setWidget(7, QFormLayout::LabelRole, label);
+
+
+        horizontalLayout_6->addWidget(contractFilterBox);
+
+        stackedWidget->addWidget(contracFilterView);
+        billFilterView = new QWidget();
+        billFilterView->setObjectName(QString::fromUtf8("billFilterView"));
+        horizontalLayout_7 = new QHBoxLayout(billFilterView);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        billFilterBox = new QGroupBox(billFilterView);
+        billFilterBox->setObjectName(QString::fromUtf8("billFilterBox"));
+        formLayout_7 = new QFormLayout(billFilterBox);
+        formLayout_7->setObjectName(QString::fromUtf8("formLayout_7"));
+        billFilterStatusLabel = new QLabel(billFilterBox);
+        billFilterStatusLabel->setObjectName(QString::fromUtf8("billFilterStatusLabel"));
+
+        formLayout_7->setWidget(0, QFormLayout::LabelRole, billFilterStatusLabel);
+
+        billFilterStatus = new QComboBox(billFilterBox);
+        billFilterStatus->setObjectName(QString::fromUtf8("billFilterStatus"));
+
+        formLayout_7->setWidget(0, QFormLayout::FieldRole, billFilterStatus);
+
+        label_19 = new QLabel(billFilterBox);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
+
+        formLayout_7->setWidget(1, QFormLayout::LabelRole, label_19);
+
+        billFilterPriceBox = new QFrame(billFilterBox);
+        billFilterPriceBox->setObjectName(QString::fromUtf8("billFilterPriceBox"));
+        billFilterPriceBox->setFrameShape(QFrame::StyledPanel);
+        billFilterPriceBox->setFrameShadow(QFrame::Plain);
+        formLayout_9 = new QFormLayout(billFilterPriceBox);
+        formLayout_9->setObjectName(QString::fromUtf8("formLayout_9"));
+        billFilterPriceFromLabel = new QLabel(billFilterPriceBox);
+        billFilterPriceFromLabel->setObjectName(QString::fromUtf8("billFilterPriceFromLabel"));
+
+        formLayout_9->setWidget(0, QFormLayout::LabelRole, billFilterPriceFromLabel);
+
+        billFilterPriceFrom = new QSpinBox(billFilterPriceBox);
+        billFilterPriceFrom->setObjectName(QString::fromUtf8("billFilterPriceFrom"));
+        billFilterPriceFrom->setMaximum(999999999);
+        billFilterPriceFrom->setSingleStep(100000);
+
+        formLayout_9->setWidget(0, QFormLayout::FieldRole, billFilterPriceFrom);
+
+        billFilterPriceToLabel = new QLabel(billFilterPriceBox);
+        billFilterPriceToLabel->setObjectName(QString::fromUtf8("billFilterPriceToLabel"));
+
+        formLayout_9->setWidget(1, QFormLayout::LabelRole, billFilterPriceToLabel);
+
+        billFilterPriceTo = new QSpinBox(billFilterPriceBox);
+        billFilterPriceTo->setObjectName(QString::fromUtf8("billFilterPriceTo"));
+        billFilterPriceTo->setMaximum(999999999);
+        billFilterPriceTo->setSingleStep(100000);
+        billFilterPriceTo->setValue(10000000);
+
+        formLayout_9->setWidget(1, QFormLayout::FieldRole, billFilterPriceTo);
+
+
+        formLayout_7->setWidget(1, QFormLayout::FieldRole, billFilterPriceBox);
+
+        label_16 = new QLabel(billFilterBox);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+
+        formLayout_7->setWidget(2, QFormLayout::LabelRole, label_16);
+
+        billFilterMonth = new QFrame(billFilterBox);
+        billFilterMonth->setObjectName(QString::fromUtf8("billFilterMonth"));
+        billFilterMonth->setFrameShape(QFrame::StyledPanel);
+        billFilterMonth->setFrameShadow(QFrame::Plain);
+        formLayout_8 = new QFormLayout(billFilterMonth);
+        formLayout_8->setObjectName(QString::fromUtf8("formLayout_8"));
+        billFilterMonthFromLabel = new QLabel(billFilterMonth);
+        billFilterMonthFromLabel->setObjectName(QString::fromUtf8("billFilterMonthFromLabel"));
+
+        formLayout_8->setWidget(1, QFormLayout::LabelRole, billFilterMonthFromLabel);
+
+        billFilterMonthFrom = new QDateEdit(billFilterMonth);
+        billFilterMonthFrom->setObjectName(QString::fromUtf8("billFilterMonthFrom"));
+        billFilterMonthFrom->setCurrentSection(QDateTimeEdit::MonthSection);
+
+        formLayout_8->setWidget(0, QFormLayout::FieldRole, billFilterMonthFrom);
+
+        billFilterMonthTo = new QDateEdit(billFilterMonth);
+        billFilterMonthTo->setObjectName(QString::fromUtf8("billFilterMonthTo"));
+
+        formLayout_8->setWidget(1, QFormLayout::FieldRole, billFilterMonthTo);
+
+        billFilterMonthToLabel = new QLabel(billFilterMonth);
+        billFilterMonthToLabel->setObjectName(QString::fromUtf8("billFilterMonthToLabel"));
+
+        formLayout_8->setWidget(0, QFormLayout::LabelRole, billFilterMonthToLabel);
+
+
+        formLayout_7->setWidget(2, QFormLayout::FieldRole, billFilterMonth);
+
+
+        horizontalLayout_7->addWidget(billFilterBox);
+
+        stackedWidget->addWidget(billFilterView);
+
+        verticalLayout_4->addWidget(stackedWidget);
 
         tabWidget->addTab(filterTab, QString());
 
@@ -336,7 +620,8 @@ public:
         QObject::connect(buttonBox, SIGNAL(accepted()), SearchFilterDialog, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), SearchFilterDialog, SLOT(reject()));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(SearchFilterDialog);
@@ -349,37 +634,83 @@ public:
         searchLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253 kh\303\263a:", nullptr));
         searchLineEdit->setPlaceholderText(QCoreApplication::translate("SearchFilterDialog", "Nh\341\272\255p t\341\273\253 kh\303\263a t\303\254m ki\341\272\277m...", nullptr));
         searchFieldLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\303\254m theo:", nullptr));
-        searchFieldComboBox->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "T\341\272\245t c\341\272\243", nullptr));
-        searchFieldComboBox->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "M\303\243", nullptr));
-        searchFieldComboBox->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "T\303\252n", nullptr));
-        searchFieldComboBox->setItemText(3, QCoreApplication::translate("SearchFilterDialog", "S\341\273\221 \304\221i\341\273\207n tho\341\272\241i", nullptr));
-        searchFieldComboBox->setItemText(4, QCoreApplication::translate("SearchFilterDialog", "Email", nullptr));
-
         caseSensitiveCheckBox->setText(QCoreApplication::translate("SearchFilterDialog", "Ph\303\242n bi\341\273\207t ch\341\273\257 hoa/th\306\260\341\273\235ng", nullptr));
-        exactMatchCheckBox->setText(QCoreApplication::translate("SearchFilterDialog", "T\303\254m ki\341\272\277m ch\303\255nh x\303\241c", nullptr));
-        searchButton->setText(QCoreApplication::translate("SearchFilterDialog", "T\303\254m ki\341\272\277m", nullptr));
-        clearSearchButton->setText(QCoreApplication::translate("SearchFilterDialog", "X\303\263a", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(searchTab), QCoreApplication::translate("SearchFilterDialog", "T\303\254m ki\341\272\277m", nullptr));
-        filterGroupBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "B\341\273\231 l\341\273\215c", nullptr));
-        statusLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Tr\341\272\241ng th\303\241i:", nullptr));
-        statusComboBox->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "T\341\272\245t c\341\272\243", nullptr));
-        statusComboBox->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "\304\220ang ho\341\272\241t \304\221\341\273\231ng", nullptr));
-        statusComboBox->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "Kh\303\264ng ho\341\272\241t \304\221\341\273\231ng", nullptr));
+        roomFilterBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "Ph\303\262ng", nullptr));
+        filterRoomTypeLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Lo\341\272\241i Ph\303\262ng", nullptr));
+        filterRoomType->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
+        filterRoomType->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "Ph\303\262ng \304\220\306\241n", nullptr));
+        filterRoomType->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "Ph\303\262ng \304\220\303\264i", nullptr));
+        filterRoomType->setItemText(3, QCoreApplication::translate("SearchFilterDialog", "Ph\303\262ng Gia \304\220\303\254nh", nullptr));
 
-        typeLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Lo\341\272\241i:", nullptr));
-        typeComboBox->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "T\341\272\245t c\341\272\243", nullptr));
-        typeComboBox->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "Lo\341\272\241i 1", nullptr));
-        typeComboBox->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "Lo\341\272\241i 2", nullptr));
-        typeComboBox->setItemText(3, QCoreApplication::translate("SearchFilterDialog", "Lo\341\272\241i 3", nullptr));
+        filterRoomStatusLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Tr\341\272\241ng Th\303\241i", nullptr));
+        filterRoomStatus->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
+        filterRoomStatus->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "Tr\341\273\221ng", nullptr));
+        filterRoomStatus->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "\304\220\303\243 Thu\303\252", nullptr));
 
-        dateRangeGroupBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "Kho\341\272\243ng th\341\273\235i gian", nullptr));
-        fromDateLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253 ng\303\240y:", nullptr));
-        toDateLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n ng\303\240y:", nullptr));
-        priceRangeGroupBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "Kho\341\272\243ng gi\303\241", nullptr));
-        minPriceLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253:", nullptr));
-        maxPriceLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n:", nullptr));
-        applyFilterButton->setText(QCoreApplication::translate("SearchFilterDialog", "\303\201p d\341\273\245ng", nullptr));
-        resetFilterButton->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\267t l\341\272\241i", nullptr));
+        filterRoomPriceLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Gi\303\241 Thu\303\252", nullptr));
+        filterRoomPriceFromLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253", nullptr));
+        filterRoomPriceFrom->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));
+        filterRoomPriceFrom->setPrefix(QString());
+        filterRoomPriceToLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n", nullptr));
+        filterRoomPriceTo->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));
+        filterRoomPriceTo->setPrefix(QString());
+        tenantFilterBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "Kh\303\241ch H\303\240ng", nullptr));
+        tenantFilterStatus->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
+        tenantFilterStatus->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "\304\220ang Thu\303\252", nullptr));
+        tenantFilterStatus->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "Ch\306\260a c\303\263 ph\303\262ng", nullptr));
+
+        tenantFilterRoleLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Vai tr\303\262", nullptr));
+        tenantFilterStatusLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Tr\341\272\241ng Th\303\241i", nullptr));
+        tenantFilterRole->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
+        tenantFilterRole->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "Ch\341\273\247 H\341\273\243p \304\220\341\273\223ng", nullptr));
+        tenantFilterRole->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "Kh\303\241ch Thu\303\252", nullptr));
+
+        contractFilterBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "H\341\273\243p \304\220\341\273\223ng", nullptr));
+        contractFilterStatusLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Tr\341\272\241ng Th\303\241i", nullptr));
+        contractFilterStatus->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
+        contractFilterStatus->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "\304\220ang Ho\341\272\241t \304\220\341\273\231ng", nullptr));
+        contractFilterStatus->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "\304\220\303\243 K\341\272\277t Th\303\272c", nullptr));
+        contractFilterStatus->setItemText(3, QCoreApplication::translate("SearchFilterDialog", "V\303\264 Hi\341\273\207u", nullptr));
+
+        contractFilterRoomRentLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Ti\341\273\201n Thu\303\252", nullptr));
+        contractFilterRoomRentFromLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253", nullptr));
+        contractFilterRoomRentFrom->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));
+        contractFilterRoomRentFrom->setPrefix(QString());
+        contractFilterRoomRentToLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n", nullptr));
+        contractFilterRoomRentTo->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));
+        contractFilterRoomRentTo->setPrefix(QString());
+        label_13->setText(QCoreApplication::translate("SearchFilterDialog", "Ti\341\273\201n C\341\273\215c", nullptr));
+        contractFilterDepositFromLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253", nullptr));
+        contractFilterDepositFrom->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));
+        contractFilterDepositFrom->setPrefix(QString());
+        contractFilterDepositToLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n", nullptr));
+        contractFilterDepositTo->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));
+        contractFilterDepositTo->setPrefix(QString());
+        label_12->setText(QCoreApplication::translate("SearchFilterDialog", "Ng\303\240y B\341\272\257t \304\220\341\272\247u", nullptr));
+        contractFilterStartDateToLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n", nullptr));
+        contractFilterStartDateFromLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253", nullptr));
+        contractFilterStartDateFrom->setDisplayFormat(QCoreApplication::translate("SearchFilterDialog", "dd/MM/yyyy", nullptr));
+        contractFilterStartDateTo->setDisplayFormat(QCoreApplication::translate("SearchFilterDialog", "dd/MM/yyyy", nullptr));
+        contractFilterEndDateToLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n", nullptr));
+        contractFilterEndDateFromLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253", nullptr));
+        contractFilterEndDateFrom->setDisplayFormat(QCoreApplication::translate("SearchFilterDialog", "dd/MM/yyyy", nullptr));
+        contractFilterEndDateTo->setDisplayFormat(QCoreApplication::translate("SearchFilterDialog", "dd/MM/yyyy", nullptr));
+        label->setText(QCoreApplication::translate("SearchFilterDialog", "Ng\303\240y H\341\272\277t H\341\272\241n", nullptr));
+        billFilterBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "H\303\263a \304\220\306\241n", nullptr));
+        billFilterStatusLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Tr\341\272\241ng Th\303\241i", nullptr));
+        label_19->setText(QCoreApplication::translate("SearchFilterDialog", "S\341\273\221 Ti\341\273\201n", nullptr));
+        billFilterPriceFromLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253", nullptr));
+        billFilterPriceFrom->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));
+        billFilterPriceFrom->setPrefix(QString());
+        billFilterPriceToLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n", nullptr));
+        billFilterPriceTo->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));
+        billFilterPriceTo->setPrefix(QString());
+        label_16->setText(QCoreApplication::translate("SearchFilterDialog", "Th\303\241ng Thanh To\303\241n", nullptr));
+        billFilterMonthFromLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n", nullptr));
+        billFilterMonthFrom->setDisplayFormat(QCoreApplication::translate("SearchFilterDialog", "MM/yyyy", nullptr));
+        billFilterMonthTo->setDisplayFormat(QCoreApplication::translate("SearchFilterDialog", "MM/yyyy", nullptr));
+        billFilterMonthToLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(filterTab), QCoreApplication::translate("SearchFilterDialog", "L\341\273\215c", nullptr));
     } // retranslateUi
 

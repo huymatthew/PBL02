@@ -47,6 +47,8 @@ public:
     Room* getRoomFromContract(int contractId);
     QStringList getAllServices(int billId);
     Vector<Tenant> getAllNoRoomTenants();
+
+    int isTenantRenting(int tenantId); // 0: not 1: main tenant 2: co-tenant
     
 private:
     DataManager();

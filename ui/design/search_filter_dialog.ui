@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>458</height>
+    <height>656</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="searchTab">
       <attribute name="title">
@@ -58,33 +58,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="searchFieldComboBox">
-              <item>
-               <property name="text">
-                <string>Tất cả</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Mã</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Tên</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Số điện thoại</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Email</string>
-               </property>
-              </item>
-             </widget>
+             <widget class="QComboBox" name="searchFieldComboBox"/>
             </item>
             <item>
              <spacer name="horizontalSpacer">
@@ -109,42 +83,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="exactMatchCheckBox">
-            <property name="text">
-             <string>Tìm kiếm chính xác</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QPushButton" name="searchButton">
-              <property name="text">
-               <string>Tìm kiếm</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="clearSearchButton">
-              <property name="text">
-               <string>Xóa</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <layout class="QHBoxLayout" name="horizontalLayout_3"/>
           </item>
           <item>
            <spacer name="verticalSpacer">
@@ -170,207 +109,654 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QGroupBox" name="filterGroupBox">
-         <property name="title">
-          <string>Bộ lọc</string>
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="currentIndex">
+          <number>2</number>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QLabel" name="statusLabel">
-              <property name="text">
-               <string>Trạng thái:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="statusComboBox">
-              <item>
-               <property name="text">
-                <string>Tất cả</string>
-               </property>
+         <widget class="QWidget" name="roomFilterView">
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QGroupBox" name="roomFilterBox">
+             <property name="title">
+              <string>Phòng</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="filterRoomTypeLabel">
+                <property name="text">
+                 <string>Loại Phòng</string>
+                </property>
+               </widget>
               </item>
-              <item>
-               <property name="text">
-                <string>Đang hoạt động</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Không hoạt động</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <item>
-             <widget class="QLabel" name="typeLabel">
-              <property name="text">
-               <string>Loại:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="typeComboBox">
-              <item>
-               <property name="text">
-                <string>Tất cả</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Loại 1</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Loại 2</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Loại 3</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="dateRangeGroupBox">
-            <property name="title">
-             <string>Khoảng thời gian</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
-               <item>
-                <widget class="QLabel" name="fromDateLabel">
+              <item row="0" column="1">
+               <widget class="QComboBox" name="filterRoomType">
+                <item>
                  <property name="text">
-                  <string>Từ ngày:</string>
+                  <string>...</string>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateEdit" name="fromDateEdit">
-                 <property name="calendarPopup">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_7">
-               <item>
-                <widget class="QLabel" name="toDateLabel">
+                </item>
+                <item>
                  <property name="text">
-                  <string>Đến ngày:</string>
+                  <string>Phòng Đơn</string>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateEdit" name="toDateEdit">
-                 <property name="calendarPopup">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="priceRangeGroupBox">
-            <property name="title">
-             <string>Khoảng giá</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_7">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_8">
-               <item>
-                <widget class="QLabel" name="minPriceLabel">
+                </item>
+                <item>
                  <property name="text">
-                  <string>Từ:</string>
+                  <string>Phòng Đôi</string>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="minPriceSpinBox">
-                 <property name="maximum">
-                  <number>999999999</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="maxPriceLabel">
+                </item>
+                <item>
                  <property name="text">
-                  <string>Đến:</string>
+                  <string>Phòng Gia Đình</string>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="maxPriceSpinBox">
-                 <property name="maximum">
-                  <number>999999999</number>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="filterRoomStatusLabel">
+                <property name="text">
+                 <string>Trạng Thái</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="filterRoomStatus">
+                <item>
+                 <property name="text">
+                  <string>...</string>
                  </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_9">
-            <item>
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QPushButton" name="applyFilterButton">
-              <property name="text">
-               <string>Áp dụng</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="resetFilterButton">
-              <property name="text">
-               <string>Đặt lại</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Trống</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Đã Thuê</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="filterRoomPriceLabel">
+                <property name="text">
+                 <string>Giá Thuê</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QFrame" name="filterRoomPrice">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <layout class="QFormLayout" name="formLayout_2">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="filterRoomPriceFromLabel">
+                   <property name="text">
+                    <string>Từ</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QSpinBox" name="filterRoomPriceFrom">
+                   <property name="suffix">
+                    <string> VNĐ</string>
+                   </property>
+                   <property name="prefix">
+                    <string/>
+                   </property>
+                   <property name="maximum">
+                    <number>999999999</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="filterRoomPriceToLabel">
+                   <property name="text">
+                    <string>Đến</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSpinBox" name="filterRoomPriceTo">
+                   <property name="suffix">
+                    <string> VNĐ</string>
+                   </property>
+                   <property name="prefix">
+                    <string/>
+                   </property>
+                   <property name="maximum">
+                    <number>999999999</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100000</number>
+                   </property>
+                   <property name="value">
+                    <number>10000000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tenantFilterView">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QGroupBox" name="tenantFilterBox">
+             <property name="title">
+              <string>Khách Hàng</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="0" column="2">
+               <widget class="QComboBox" name="tenantFilterStatus">
+                <item>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Đang Thuê</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Chưa có phòng</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="tenantFilterRoleLabel">
+                <property name="text">
+                 <string>Vai trò</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="tenantFilterStatusLabel">
+                <property name="text">
+                 <string>Trạng Thái</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QComboBox" name="tenantFilterRole">
+                <item>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Chủ Hợp Đồng</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Khách Thuê</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="contracFilterView">
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QGroupBox" name="contractFilterBox">
+             <property name="title">
+              <string>Hợp Đồng</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout_10">
+              <item row="0" column="0">
+               <widget class="QLabel" name="contractFilterStatusLabel">
+                <property name="text">
+                 <string>Trạng Thái</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="contractFilterStatus">
+                <item>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Đang Hoạt Động</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Đã Kết Thúc</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Vô Hiệu</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="contractFilterRoomRentLabel">
+                <property name="text">
+                 <string>Tiền Thuê</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QFrame" name="contractFilterRoomRentBox">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <layout class="QFormLayout" name="formLayout_3">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="contractFilterRoomRentFromLabel">
+                   <property name="text">
+                    <string>Từ</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QSpinBox" name="contractFilterRoomRentFrom">
+                   <property name="suffix">
+                    <string> VNĐ</string>
+                   </property>
+                   <property name="prefix">
+                    <string/>
+                   </property>
+                   <property name="maximum">
+                    <number>999999999</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="contractFilterRoomRentToLabel">
+                   <property name="text">
+                    <string>Đến</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSpinBox" name="contractFilterRoomRentTo">
+                   <property name="suffix">
+                    <string> VNĐ</string>
+                   </property>
+                   <property name="prefix">
+                    <string/>
+                   </property>
+                   <property name="maximum">
+                    <number>999999999</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100000</number>
+                   </property>
+                   <property name="value">
+                    <number>10000000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_13">
+                <property name="text">
+                 <string>Tiền Cọc</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QFrame" name="contractFilterDepositBox">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <layout class="QFormLayout" name="formLayout_5">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="contractFilterDepositFromLabel">
+                   <property name="text">
+                    <string>Từ</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QSpinBox" name="contractFilterDepositFrom">
+                   <property name="suffix">
+                    <string> VNĐ</string>
+                   </property>
+                   <property name="prefix">
+                    <string/>
+                   </property>
+                   <property name="maximum">
+                    <number>999999999</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="contractFilterDepositToLabel">
+                   <property name="text">
+                    <string>Đến</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSpinBox" name="contractFilterDepositTo">
+                   <property name="suffix">
+                    <string> VNĐ</string>
+                   </property>
+                   <property name="prefix">
+                    <string/>
+                   </property>
+                   <property name="maximum">
+                    <number>999999999</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100000</number>
+                   </property>
+                   <property name="value">
+                    <number>10000000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>Ngày Bắt Đầu</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QFrame" name="contractFilterStartDate">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <layout class="QFormLayout" name="formLayout_4">
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="contractFilterStartDateToLabel">
+                   <property name="text">
+                    <string>Đến</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="contractFilterStartDateFromLabel">
+                   <property name="text">
+                    <string>Từ</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QDateEdit" name="contractFilterStartDateFrom">
+                   <property name="displayFormat">
+                    <string>dd/MM/yyyy</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QDateEdit" name="contractFilterStartDateTo">
+                   <property name="displayFormat">
+                    <string>dd/MM/yyyy</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="7" column="1">
+               <widget class="QFrame" name="contractFilterEndDate">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <layout class="QFormLayout" name="formLayout_6">
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="contractFilterEndDateToLabel">
+                   <property name="text">
+                    <string>Đến</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="contractFilterEndDateFromLabel">
+                   <property name="text">
+                    <string>Từ</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QDateEdit" name="contractFilterEndDateFrom">
+                   <property name="displayFormat">
+                    <string>dd/MM/yyyy</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QDateEdit" name="contractFilterEndDateTo">
+                   <property name="displayFormat">
+                    <string>dd/MM/yyyy</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Ngày Hết Hạn</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="billFilterView">
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QGroupBox" name="billFilterBox">
+             <property name="title">
+              <string>Hóa Đơn</string>
+             </property>
+             <layout class="QFormLayout" name="formLayout_7">
+              <item row="0" column="0">
+               <widget class="QLabel" name="billFilterStatusLabel">
+                <property name="text">
+                 <string>Trạng Thái</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="billFilterStatus"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_19">
+                <property name="text">
+                 <string>Số Tiền</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QFrame" name="billFilterPriceBox">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <layout class="QFormLayout" name="formLayout_9">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="billFilterPriceFromLabel">
+                   <property name="text">
+                    <string>Từ</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QSpinBox" name="billFilterPriceFrom">
+                   <property name="suffix">
+                    <string> VNĐ</string>
+                   </property>
+                   <property name="prefix">
+                    <string/>
+                   </property>
+                   <property name="maximum">
+                    <number>999999999</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100000</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="billFilterPriceToLabel">
+                   <property name="text">
+                    <string>Đến</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSpinBox" name="billFilterPriceTo">
+                   <property name="suffix">
+                    <string> VNĐ</string>
+                   </property>
+                   <property name="prefix">
+                    <string/>
+                   </property>
+                   <property name="maximum">
+                    <number>999999999</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100000</number>
+                   </property>
+                   <property name="value">
+                    <number>10000000</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_16">
+                <property name="text">
+                 <string>Tháng Thanh Toán</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QFrame" name="billFilterMonth">
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <layout class="QFormLayout" name="formLayout_8">
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="billFilterMonthFromLabel">
+                   <property name="text">
+                    <string>Đến</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QDateEdit" name="billFilterMonthFrom">
+                   <property name="currentSection">
+                    <enum>QDateTimeEdit::MonthSection</enum>
+                   </property>
+                   <property name="displayFormat">
+                    <string>MM/yyyy</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QDateEdit" name="billFilterMonthTo">
+                   <property name="displayFormat">
+                    <string>MM/yyyy</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="billFilterMonthToLabel">
+                   <property name="text">
+                    <string>Từ</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
       </layout>

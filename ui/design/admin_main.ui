@@ -454,14 +454,7 @@ QCalendarWidget QAbstractItemView::item:enabled:hover {
        <item>
         <widget class="QPushButton" name="searchBtn">
          <property name="text">
-          <string>Tìm Kiếm</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="filterBtn">
-         <property name="text">
-          <string>Bộ Lọc</string>
+          <string>Tìm Kiếm / Lọc</string>
          </property>
         </widget>
        </item>
@@ -1139,60 +1132,6 @@ color: black;
         <item>
          <widget class="QWidget" name="widget" native="true">
           <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QGroupBox" name="searchGroupBox">
-             <property name="title">
-              <string>Filter</string>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-               <widget class="QWidget" name="widget_2" native="true">
-                <layout class="QVBoxLayout" name="verticalLayout_2">
-                 <item>
-                  <widget class="QLabel" name="roomBillLabel">
-                   <property name="text">
-                    <string>Thuộc tính</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="roomBillSearch"/>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QWidget" name="widget_3" native="true">
-                <layout class="QVBoxLayout" name="verticalLayout_3">
-                 <item>
-                  <widget class="QLabel" name="label_4">
-                   <property name="text">
-                    <string>Giá trị</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="roomBillSearchValue"/>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </widget>
-           </item>
            <item>
             <widget class="QTableView" name="paymentsTableView">
              <property name="minimumSize">

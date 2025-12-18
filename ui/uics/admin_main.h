@@ -73,7 +73,6 @@ public:
     QPushButton *pushButton_2;
     QFrame *line;
     QPushButton *searchBtn;
-    QPushButton *filterBtn;
     QFrame *line_2;
     QPushButton *shutdownButton;
     QSpacerItem *horizontalSpacer_2;
@@ -137,17 +136,6 @@ public:
     QHBoxLayout *paymentsLayout;
     QWidget *widget;
     QVBoxLayout *verticalLayout;
-    QGroupBox *searchGroupBox;
-    QHBoxLayout *horizontalLayout;
-    QWidget *widget_2;
-    QVBoxLayout *verticalLayout_2;
-    QLabel *roomBillLabel;
-    QComboBox *roomBillSearch;
-    QWidget *widget_3;
-    QVBoxLayout *verticalLayout_3;
-    QLabel *label_4;
-    QComboBox *roomBillSearchValue;
-    QSpacerItem *horizontalSpacer;
     QTableView *paymentsTableView;
     QVBoxLayout *paymentControlsLayout;
     QGroupBox *paymentInfoGroup;
@@ -764,11 +752,6 @@ public:
 
         horizontalLayout_2->addWidget(searchBtn);
 
-        filterBtn = new QPushButton(groupBox);
-        filterBtn->setObjectName(QString::fromUtf8("filterBtn"));
-
-        horizontalLayout_2->addWidget(filterBtn);
-
         line_2 = new QFrame(groupBox);
         line_2->setObjectName(QString::fromUtf8("line_2"));
         line_2->setFrameShape(QFrame::VLine);
@@ -1185,51 +1168,6 @@ public:
         widget->setObjectName(QString::fromUtf8("widget"));
         verticalLayout = new QVBoxLayout(widget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        searchGroupBox = new QGroupBox(widget);
-        searchGroupBox->setObjectName(QString::fromUtf8("searchGroupBox"));
-        horizontalLayout = new QHBoxLayout(searchGroupBox);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        widget_2 = new QWidget(searchGroupBox);
-        widget_2->setObjectName(QString::fromUtf8("widget_2"));
-        verticalLayout_2 = new QVBoxLayout(widget_2);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        roomBillLabel = new QLabel(widget_2);
-        roomBillLabel->setObjectName(QString::fromUtf8("roomBillLabel"));
-
-        verticalLayout_2->addWidget(roomBillLabel);
-
-        roomBillSearch = new QComboBox(widget_2);
-        roomBillSearch->setObjectName(QString::fromUtf8("roomBillSearch"));
-
-        verticalLayout_2->addWidget(roomBillSearch);
-
-
-        horizontalLayout->addWidget(widget_2);
-
-        widget_3 = new QWidget(searchGroupBox);
-        widget_3->setObjectName(QString::fromUtf8("widget_3"));
-        verticalLayout_3 = new QVBoxLayout(widget_3);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        label_4 = new QLabel(widget_3);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        verticalLayout_3->addWidget(label_4);
-
-        roomBillSearchValue = new QComboBox(widget_3);
-        roomBillSearchValue->setObjectName(QString::fromUtf8("roomBillSearchValue"));
-
-        verticalLayout_3->addWidget(roomBillSearchValue);
-
-
-        horizontalLayout->addWidget(widget_3);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
-
-        verticalLayout->addWidget(searchGroupBox);
-
         paymentsTableView = new QTableView(widget);
         paymentsTableView->setObjectName(QString::fromUtf8("paymentsTableView"));
         paymentsTableView->setMinimumSize(QSize(600, 0));
@@ -1753,8 +1691,7 @@ public:
         addContractButtonB->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\341\273\243p \304\220\341\273\223ng", nullptr));
         addBillButtonB->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\303\263a \304\220\306\241n", nullptr));
         pushButton_2->setText(QCoreApplication::translate("AdminMainWindow", "Thanh to\303\241n", nullptr));
-        searchBtn->setText(QCoreApplication::translate("AdminMainWindow", "T\303\254m Ki\341\272\277m", nullptr));
-        filterBtn->setText(QCoreApplication::translate("AdminMainWindow", "B\341\273\231 L\341\273\215c", nullptr));
+        searchBtn->setText(QCoreApplication::translate("AdminMainWindow", "T\303\254m Ki\341\272\277m / L\341\273\215c", nullptr));
         shutdownButton->setText(QCoreApplication::translate("AdminMainWindow", "K\341\272\277t th\303\272c", nullptr));
         roomInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Ph\303\262ng", nullptr));
         roomNumberLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\303\252n Ph\303\262ng", nullptr));
@@ -1792,9 +1729,6 @@ public:
         endContractButton->setText(QCoreApplication::translate("AdminMainWindow", "Ch\341\272\245m D\341\273\251t H\341\273\243p \304\220\341\273\223ng", nullptr));
         unableContractButton->setText(QCoreApplication::translate("AdminMainWindow", "V\303\264 Hi\341\273\207u H\303\263a H\341\273\243p \304\220\341\273\223ng", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(contractsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 H\341\273\243p \304\220\341\273\223ng Thu\303\252", nullptr));
-        searchGroupBox->setTitle(QCoreApplication::translate("AdminMainWindow", "Filter", nullptr));
-        roomBillLabel->setText(QCoreApplication::translate("AdminMainWindow", "Thu\341\273\231c t\303\255nh", nullptr));
-        label_4->setText(QCoreApplication::translate("AdminMainWindow", "Gi\303\241 tr\341\273\213", nullptr));
         paymentInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Thanh To\303\241n", nullptr));
         paymentRoomLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng:", nullptr));
         paymentMonthLabel->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\241ng:", nullptr));

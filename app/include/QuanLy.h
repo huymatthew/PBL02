@@ -58,8 +58,9 @@ public:
 
     void removeTenantCall();
     void removeRoomCall();
-
+    
     void genChart();
+    QTableView* getCurrentView();
 private:
     DataManager* manager;
     QMainWindow* mainWindow;

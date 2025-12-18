@@ -120,3 +120,16 @@ Vector<Tenant> DataManager::getAllNoRoomTenants() {
     }
     return noRoomTenants;
 }
+
+int DataManager::isTenantRenting(int tenantId) {
+    for (const auto &rent : rentM.rents) {
+        if (rent.getTenantId() == tenantId) {
+            if (rent.getIsRepresentative()) {
+                return 1; // main tenant
+            } else {
+                return 2; // co-tenant
+            }
+        }
+    }
+    return 0; // not renting
+}
