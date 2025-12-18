@@ -18,9 +18,12 @@ x TenantGender:
     - 1 : Nam
     - 2 : Nữ
 x ContractStatus:
-    - 0 : Đang hoạt động
-    - 1 : Đã kết thúc
+    - 0 : Đã kết thúc
+    - 1 : Đang hoạt động
     - 2 : Vô hiệu hóa
 x PaymentStatus:
     - 0 : Chưa thanh toán
     - 1 : Đã thanh toán
+
+
+! bỏ vhh khi hđ đang thuê

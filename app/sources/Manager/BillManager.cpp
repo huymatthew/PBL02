@@ -111,6 +111,15 @@ int BillManager::getCount() const {
     return items.size();
 }
 
+int BillManager::getUnpaidBillCount() const {
+    int count = 0;
+    for (const auto& bill : items) {
+        if (bill.getStatus() == 0) {
+            ++count;
+        }
+    }
+    return count;
+}
 
 bool BillManager::markBillAsPaid(int billId) {
     auto it = this->findIterator(billId);
@@ -154,6 +163,18 @@ long BillManager::getTotalUnpaidBillInDay(QString date) const {
     return total;
 }
 
+long BillManager::getTotalRevenue(QDate fromDate,  QDate toDate) const {
+    long totalRevenue = 0;
+    for (const auto& bill : items) {
+        QDate billingMonth = QDate::fromString(QString::fromStdString(bill.getBillingMonth() + "-01"), "yyyy-MM-dd");
+        if (bill.getStatus() == 1 && billingMonth >= fromDate && billingMonth <= toDate) {
+            totalRevenue += static_cast<long>(bill.getTotalAmount());
+        }
+    }
+    return totalRevenue;
+}
+
+
 QStandardItemModel* BillManager::getBillsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
     model->setColumnCount(6);
@@ -170,18 +191,34 @@ QStandardItemModel* BillManager::getBillsAsModel() const {
         QList<QStandardItem*> rowItems;
         rowItems.append(new QStandardItem(idnumber(bill.getId(), 6)));
         rowItems.append(new QStandardItem(idnumber(bill.getContractId(), 6)));
-        rowItems.append(new QStandardItem(monthFormat(bill.getBillingMonth())));
-        rowItems.append(new QStandardItem(moneyFormat(bill.getRoomRent())));
-        rowItems.append(new QStandardItem(moneyFormat(bill.getTotalAmount())));
+
+        QStandardItem* billingMonthItem = new QStandardItem(monthFormat(bill.getBillingMonth())); // str: yyyy-MM
+        QDate billingMonth = QDate::fromString(QString::fromStdString(bill.getBillingMonth() + "-01"), "yyyy-MM-dd");
+        billingMonthItem->setData(billingMonth.toJulianDay(), Qt::UserRole);
+        rowItems.append(billingMonthItem);
+        
+        QStandardItem* roomRentItem = new QStandardItem(moneyFormat(bill.getRoomRent()));
+        roomRentItem->setData(bill.getRoomRent(), Qt::UserRole);
+        rowItems.append(roomRentItem);
+        
+        QStandardItem* totalAmountItem = new QStandardItem(moneyFormat(bill.getTotalAmount()));
+        totalAmountItem->setData(bill.getTotalAmount(), Qt::UserRole);
+        rowItems.append(totalAmountItem);
+        
         QStandardItem* item = new QStandardItem();
         if (bill.getStatus() == 0){
             item->setText("Chưa thanh toán");
             item->setForeground(QBrush(Qt::red));
         }
-        else{
+        else if (bill.getStatus() == 1){
             item->setText("Đã thanh toán");
             item->setForeground(QBrush(Qt::darkGreen));
         }
+        else{
+            item->setText("Vô hiệu hóa");
+            item->setForeground(QBrush(Qt::gray));
+        }
+        item->setData(bill.getStatus(), Qt::UserRole);
         rowItems.append(item);
         model->appendRow(rowItems);
     }

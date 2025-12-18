@@ -98,6 +98,7 @@
 ### **Bill Status Enum:**
 - `0`: Chưa thanh toán
 - `1`: Đã thanh toán
+- `2`: Vô Hiệu Hóa
 
 **File format:** `bill_id contract_id billing_month room_rent total_amount status`
 

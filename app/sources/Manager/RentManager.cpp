@@ -1,5 +1,6 @@
 #include <Data/Rent.h>
 #include <Manager/RentManager.h>
+#include <Manager/DataManager.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -21,18 +22,10 @@ bool RentManager::removeRent(int contractId, int tenantId) {
     }
     return false;
 }
-int RentManager::getTenantIdByContract(int contractId) {
+int RentManager::getTenantIdByContract(int contractId) { // main tenant only
     for (const auto& rent : rents) {
         if (rent.getId() == contractId && rent.getIsRepresentative()) {
             return rent.getTenantId();
-        }
-    }
-    return -1; // Not found
-}
-int RentManager::getContractIdByTenant(int tenantId) {
-    for (const auto& rent : rents) {
-        if (rent.getTenantId() == tenantId) {
-            return rent.getContractId();
         }
     }
     return -1; // Not found

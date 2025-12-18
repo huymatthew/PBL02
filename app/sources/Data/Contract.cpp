@@ -43,8 +43,9 @@ void Contract::setDeposit(double deposit) { this->deposit = deposit; }
 
 int Contract::getStatus() const { return status; }
 void Contract::setStatus(int status) { 
-	if (status != 2) {
+	if (this->status != 2) {
 		this->status = status; 
+		cout << "Contract ID " << contract_id << " status set to " << status << endl;
 	}
 }
 

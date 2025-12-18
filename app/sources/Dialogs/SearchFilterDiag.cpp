@@ -1,14 +1,9 @@
 #include <Dialogs/SearchFilterDiag.h>
 
-SearchFilterDialog::SearchFilterDialog(QWidget* parent, QTableView* view, int filterIn) : QDialog(parent), view(view), Ui_SearchFilterDialog() {
+SearchFilterDialog::SearchFilterDialog(QWidget* parent, QTableView* view, int filterIn) : QDialog(parent), Ui_SearchFilterDialog(), view(view) {
     setupUi(this);
     signalConnect();
-    if (filterIn == -1) {
-        tabWidget->setCurrentIndex(0);
-    }
-    else {
-        tabWidget->setCurrentIndex(1);
-    }
+    tabWidget->setCurrentIndex(0);
     stackedWidget->setCurrentIndex(filterIn);
 
 
@@ -114,11 +109,11 @@ bool SearchFilterDialog::shouldShowIt(int rowIndex){ // Filter
             int contractEndDateFrom = contractFilterEndDateFrom->date().toJulianDay();
             int contractEndDateTo = contractFilterEndDateTo->date().toJulianDay();
 
-            QModelIndex statusIndex = view->model()->index(rowIndex, 4);
+            QModelIndex statusIndex = view->model()->index(rowIndex, 6);
             QModelIndex roomRentIndex = view->model()->index(rowIndex, 5);
-            QModelIndex depositIndex = view->model()->index(rowIndex, 6);
-            QModelIndex startDateIndex = view->model()->index(rowIndex, 7);
-            QModelIndex endDateIndex = view->model()->index(rowIndex, 8);
+            QModelIndex depositIndex = view->model()->index(rowIndex, 4);
+            QModelIndex startDateIndex = view->model()->index(rowIndex, 2);
+            QModelIndex endDateIndex = view->model()->index(rowIndex, 3);
             bool statusMatch = (contractStatus == 0) || (view->model()->data(statusIndex, Qt::UserRole).toInt() == contractStatus - 1);
             bool roomRentMatch = (view->model()->data(roomRentIndex, Qt::UserRole).toInt() >= contractRoomRentFrom) && (view->model()->data(roomRentIndex, Qt::UserRole).toInt() <= contractRoomRentTo);
             bool depositMatch = (view->model()->data(depositIndex, Qt::UserRole).toInt() >= contractDepositFrom) && (view->model()->data(depositIndex, Qt::UserRole).toInt() <= contractDepositTo);
@@ -137,9 +132,9 @@ bool SearchFilterDialog::shouldShowIt(int rowIndex){ // Filter
             int billMonthFrom = billFilterMonthFrom->date().toJulianDay();
             int billMonthTo = billFilterMonthTo->date().toJulianDay();
 
-            QModelIndex statusIndex = view->model()->index(rowIndex, 3);
+            QModelIndex statusIndex = view->model()->index(rowIndex, 5);
             QModelIndex priceIndex = view->model()->index(rowIndex, 4);
-            QModelIndex monthIndex = view->model()->index(rowIndex, 5);
+            QModelIndex monthIndex = view->model()->index(rowIndex, 2);
 
             bool statusMatch = (billStatus == 0) || (view->model()->data(statusIndex, Qt::UserRole).toInt() == billStatus - 1);
             bool priceMatch = (view->model()->data(priceIndex, Qt::UserRole).toInt() >= billPriceFrom) && (view->model()->data(priceIndex, Qt::UserRole).toInt() <= billPriceTo);

@@ -30,11 +30,15 @@ public:
     Bill* get(int billId) override;
     bool exists(int billId) const override;
     int getCount() const override;
+    int getUnpaidBillCount() const;
 
     bool markBillAsPaid(int billId);
     bool markBillAsUnpaid(int billId);
     long getTotalPaidBillInDay(QString date) const;
     long getTotalUnpaidBillInDay(QString date) const;
+
+    long getTotalRevenue(QDate fromDate,  QDate toDate) const;
+    
     
     QStandardItemModel* getBillsAsModel() const;
 

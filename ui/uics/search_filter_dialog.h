@@ -69,15 +69,19 @@ public:
     QSpinBox *filterRoomPriceFrom;
     QLabel *filterRoomPriceToLabel;
     QSpinBox *filterRoomPriceTo;
+    QCheckBox *billInMonth;
+    QSpacerItem *verticalSpacer_4;
     QWidget *tenantFilterView;
     QHBoxLayout *horizontalLayout_4;
     QGroupBox *tenantFilterBox;
     QGridLayout *gridLayout;
-    QComboBox *tenantFilterStatus;
-    QLabel *tenantFilterRoleLabel;
-    QLabel *tenantFilterStatusLabel;
     QComboBox *tenantFilterRole;
+    QLabel *tenantFilterStatusLabel;
     QSpacerItem *verticalSpacer_2;
+    QLabel *tenantFilterRoleLabel;
+    QComboBox *tenantFilterStatus;
+    QLabel *tenantFilterGenderLabel;
+    QComboBox *tenantFilterGender;
     QWidget *contracFilterView;
     QHBoxLayout *horizontalLayout_6;
     QGroupBox *contractFilterBox;
@@ -284,6 +288,15 @@ public:
 
         formLayout->setWidget(2, QFormLayout::FieldRole, filterRoomPrice);
 
+        billInMonth = new QCheckBox(roomFilterBox);
+        billInMonth->setObjectName(QString::fromUtf8("billInMonth"));
+
+        formLayout->setWidget(3, QFormLayout::FieldRole, billInMonth);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        formLayout->setItem(4, QFormLayout::FieldRole, verticalSpacer_4);
+
 
         horizontalLayout_5->addWidget(roomFilterBox);
 
@@ -296,24 +309,6 @@ public:
         tenantFilterBox->setObjectName(QString::fromUtf8("tenantFilterBox"));
         gridLayout = new QGridLayout(tenantFilterBox);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        tenantFilterStatus = new QComboBox(tenantFilterBox);
-        tenantFilterStatus->addItem(QString());
-        tenantFilterStatus->addItem(QString());
-        tenantFilterStatus->addItem(QString());
-        tenantFilterStatus->setObjectName(QString::fromUtf8("tenantFilterStatus"));
-
-        gridLayout->addWidget(tenantFilterStatus, 0, 2, 1, 1);
-
-        tenantFilterRoleLabel = new QLabel(tenantFilterBox);
-        tenantFilterRoleLabel->setObjectName(QString::fromUtf8("tenantFilterRoleLabel"));
-
-        gridLayout->addWidget(tenantFilterRoleLabel, 1, 1, 1, 1);
-
-        tenantFilterStatusLabel = new QLabel(tenantFilterBox);
-        tenantFilterStatusLabel->setObjectName(QString::fromUtf8("tenantFilterStatusLabel"));
-
-        gridLayout->addWidget(tenantFilterStatusLabel, 0, 1, 1, 1);
-
         tenantFilterRole = new QComboBox(tenantFilterBox);
         tenantFilterRole->addItem(QString());
         tenantFilterRole->addItem(QString());
@@ -322,9 +317,41 @@ public:
 
         gridLayout->addWidget(tenantFilterRole, 1, 2, 1, 1);
 
+        tenantFilterStatusLabel = new QLabel(tenantFilterBox);
+        tenantFilterStatusLabel->setObjectName(QString::fromUtf8("tenantFilterStatusLabel"));
+
+        gridLayout->addWidget(tenantFilterStatusLabel, 0, 1, 1, 1);
+
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout->addItem(verticalSpacer_2, 2, 2, 1, 1);
+        gridLayout->addItem(verticalSpacer_2, 3, 2, 1, 1);
+
+        tenantFilterRoleLabel = new QLabel(tenantFilterBox);
+        tenantFilterRoleLabel->setObjectName(QString::fromUtf8("tenantFilterRoleLabel"));
+
+        gridLayout->addWidget(tenantFilterRoleLabel, 1, 1, 1, 1);
+
+        tenantFilterStatus = new QComboBox(tenantFilterBox);
+        tenantFilterStatus->addItem(QString());
+        tenantFilterStatus->addItem(QString());
+        tenantFilterStatus->addItem(QString());
+        tenantFilterStatus->setObjectName(QString::fromUtf8("tenantFilterStatus"));
+
+        gridLayout->addWidget(tenantFilterStatus, 0, 2, 1, 1);
+
+        tenantFilterGenderLabel = new QLabel(tenantFilterBox);
+        tenantFilterGenderLabel->setObjectName(QString::fromUtf8("tenantFilterGenderLabel"));
+
+        gridLayout->addWidget(tenantFilterGenderLabel, 2, 1, 1, 1);
+
+        tenantFilterGender = new QComboBox(tenantFilterBox);
+        tenantFilterGender->addItem(QString());
+        tenantFilterGender->addItem(QString());
+        tenantFilterGender->addItem(QString());
+        tenantFilterGender->addItem(QString());
+        tenantFilterGender->setObjectName(QString::fromUtf8("tenantFilterGender"));
+
+        gridLayout->addWidget(tenantFilterGender, 2, 2, 1, 1);
 
 
         horizontalLayout_4->addWidget(tenantFilterBox);
@@ -458,6 +485,7 @@ public:
 
         contractFilterStartDateTo = new QDateEdit(contractFilterStartDate);
         contractFilterStartDateTo->setObjectName(QString::fromUtf8("contractFilterStartDateTo"));
+        contractFilterStartDateTo->setDateTime(QDateTime(QDate(2050, 1, 1), QTime(0, 0, 0)));
 
         formLayout_4->setWidget(1, QFormLayout::FieldRole, contractFilterStartDateTo);
 
@@ -491,6 +519,7 @@ public:
 
         contractFilterEndDateTo = new QDateEdit(contractFilterEndDate);
         contractFilterEndDateTo->setObjectName(QString::fromUtf8("contractFilterEndDateTo"));
+        contractFilterEndDateTo->setDateTime(QDateTime(QDate(2050, 1, 1), QTime(0, 0, 0)));
 
         formLayout_6->setWidget(1, QFormLayout::FieldRole, contractFilterEndDateTo);
 
@@ -520,6 +549,10 @@ public:
         formLayout_7->setWidget(0, QFormLayout::LabelRole, billFilterStatusLabel);
 
         billFilterStatus = new QComboBox(billFilterBox);
+        billFilterStatus->addItem(QString());
+        billFilterStatus->addItem(QString());
+        billFilterStatus->addItem(QString());
+        billFilterStatus->addItem(QString());
         billFilterStatus->setObjectName(QString::fromUtf8("billFilterStatus"));
 
         formLayout_7->setWidget(0, QFormLayout::FieldRole, billFilterStatus);
@@ -587,6 +620,7 @@ public:
 
         billFilterMonthTo = new QDateEdit(billFilterMonth);
         billFilterMonthTo->setObjectName(QString::fromUtf8("billFilterMonthTo"));
+        billFilterMonthTo->setDateTime(QDateTime(QDate(2050, 1, 1), QTime(0, 0, 0)));
 
         formLayout_8->setWidget(1, QFormLayout::FieldRole, billFilterMonthTo);
 
@@ -621,7 +655,7 @@ public:
         QObject::connect(buttonBox, SIGNAL(rejected()), SearchFilterDialog, SLOT(reject()));
 
         tabWidget->setCurrentIndex(1);
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(SearchFilterDialog);
@@ -655,22 +689,29 @@ public:
         filterRoomPriceToLabel->setText(QCoreApplication::translate("SearchFilterDialog", "\304\220\341\272\277n", nullptr));
         filterRoomPriceTo->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));
         filterRoomPriceTo->setPrefix(QString());
+        billInMonth->setText(QCoreApplication::translate("SearchFilterDialog", "H\303\263a \304\221\306\241n th\303\241ng n\303\240y", nullptr));
         tenantFilterBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "Kh\303\241ch H\303\240ng", nullptr));
-        tenantFilterStatus->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
-        tenantFilterStatus->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "\304\220ang Thu\303\252", nullptr));
-        tenantFilterStatus->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "Ch\306\260a c\303\263 ph\303\262ng", nullptr));
-
-        tenantFilterRoleLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Vai tr\303\262", nullptr));
-        tenantFilterStatusLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Tr\341\272\241ng Th\303\241i", nullptr));
         tenantFilterRole->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
         tenantFilterRole->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "Ch\341\273\247 H\341\273\243p \304\220\341\273\223ng", nullptr));
         tenantFilterRole->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "Kh\303\241ch Thu\303\252", nullptr));
 
+        tenantFilterStatusLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Tr\341\272\241ng Th\303\241i", nullptr));
+        tenantFilterRoleLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Vai tr\303\262", nullptr));
+        tenantFilterStatus->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
+        tenantFilterStatus->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "\304\220ang Thu\303\252", nullptr));
+        tenantFilterStatus->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "Ch\306\260a c\303\263 ph\303\262ng", nullptr));
+
+        tenantFilterGenderLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Gi\341\273\233i T\303\255nh", nullptr));
+        tenantFilterGender->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
+        tenantFilterGender->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "Nam", nullptr));
+        tenantFilterGender->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "N\341\273\257", nullptr));
+        tenantFilterGender->setItemText(3, QCoreApplication::translate("SearchFilterDialog", "Kh\303\241c", nullptr));
+
         contractFilterBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "H\341\273\243p \304\220\341\273\223ng", nullptr));
         contractFilterStatusLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Tr\341\272\241ng Th\303\241i", nullptr));
         contractFilterStatus->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
-        contractFilterStatus->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "\304\220ang Ho\341\272\241t \304\220\341\273\231ng", nullptr));
-        contractFilterStatus->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "\304\220\303\243 K\341\272\277t Th\303\272c", nullptr));
+        contractFilterStatus->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "\304\220\303\243 K\341\272\277t Th\303\272c", nullptr));
+        contractFilterStatus->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "\304\220ang Ho\341\272\241t \304\220\341\273\231ng", nullptr));
         contractFilterStatus->setItemText(3, QCoreApplication::translate("SearchFilterDialog", "V\303\264 Hi\341\273\207u", nullptr));
 
         contractFilterRoomRentLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Ti\341\273\201n Thu\303\252", nullptr));
@@ -699,6 +740,11 @@ public:
         label->setText(QCoreApplication::translate("SearchFilterDialog", "Ng\303\240y H\341\272\277t H\341\272\241n", nullptr));
         billFilterBox->setTitle(QCoreApplication::translate("SearchFilterDialog", "H\303\263a \304\220\306\241n", nullptr));
         billFilterStatusLabel->setText(QCoreApplication::translate("SearchFilterDialog", "Tr\341\272\241ng Th\303\241i", nullptr));
+        billFilterStatus->setItemText(0, QCoreApplication::translate("SearchFilterDialog", "...", nullptr));
+        billFilterStatus->setItemText(1, QCoreApplication::translate("SearchFilterDialog", "Ch\306\260a thanh to\303\241n", nullptr));
+        billFilterStatus->setItemText(2, QCoreApplication::translate("SearchFilterDialog", "\304\220\303\243 thanh to\303\241n", nullptr));
+        billFilterStatus->setItemText(3, QCoreApplication::translate("SearchFilterDialog", "V\303\264 hi\341\273\207u h\303\263a", nullptr));
+
         label_19->setText(QCoreApplication::translate("SearchFilterDialog", "S\341\273\221 Ti\341\273\201n", nullptr));
         billFilterPriceFromLabel->setText(QCoreApplication::translate("SearchFilterDialog", "T\341\273\253", nullptr));
         billFilterPriceFrom->setSuffix(QCoreApplication::translate("SearchFilterDialog", " VN\304\220", nullptr));

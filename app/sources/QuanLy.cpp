@@ -1,5 +1,6 @@
 #include <QuanLy.h>
 #include <Widgets/QChartBC.h>
+#include <Widgets/QChartPie.h>
 using namespace std;
 
 QuanLy::QuanLy(QMainWindow *mainWindow) : mainWindow(mainWindow)
@@ -41,9 +42,10 @@ void QuanLy::signalAndSlotConnect()
                      { onShowRoomDetails(index.siblingAtColumn(0).data().toInt()); });
     QObject::connect(paymentsTableView, &QTableView::doubleClicked, [this](const QModelIndex &index)
                      { onShowBillDetails(index.siblingAtColumn(0).data().toInt()); });
-
-    QObject::connect(addTenantButtonB, &QPushButton::clicked, [this]()
-                     { addTenantCall(); });
+    QObject::connect(contractsTableView, &QTableView::doubleClicked, [this](const QModelIndex &index)
+                        {
+                            manager->getContractManager().setSelected(manager->getContractManager().get(index.siblingAtColumn(0).data().toInt()));
+                        });
 
     QObject::connect(deleteTenantButton, &QPushButton::clicked, [this]()
                      { removeTenantCall(); });
@@ -65,11 +67,36 @@ void QuanLy::signalAndSlotConnect()
     QObject::connect(addTenantButtonB, &QPushButton::clicked, [this](){ addTenantCall(); });
     QObject::connect(addContractButtonB, &QPushButton::clicked, [this](){ addContractCall(); });
 
+    QObject::connect(endContractButton, &QPushButton::clicked, [this]()
+                     {
+                         Contract* selectedContract = manager->getContractManager().getSelected();
+                         if (!selectedContract) {
+                             QMessageBox::warning(mainWindow, "Chưa chọn hợp đồng", "Vui lòng chọn hợp đồng để kết thúc.");
+                             return;
+                         }
+                         manager->getContractManager().terminateContract(selectedContract->getId());
+                         loadContractView();
+                     });
+    
+    QObject::connect(unableContractButton, &QPushButton::clicked, [this]()
+                     {
+                         Contract* selectedContract = manager->getContractManager().getSelected();
+                         if (!selectedContract) {
+                             QMessageBox::warning(mainWindow, "Chưa chọn hợp đồng", "Vui lòng chọn hợp đồng để vô hiệu hóa.");
+                             return;
+                         }
+                         manager->getContractManager().deactivateContract(selectedContract->getId());
+                         loadContractView();
+                     });
+
     QObject::connect(searchBtn, &QPushButton::clicked, [this]()
                      {
                          SearchFilterDialog searchDialog(mainWindow, getCurrentView(), mainTabWidget->currentIndex());
                          searchDialog.exec();
                      });
+
+    QObject::connect(refreshBtn, &QPushButton::clicked, [this]()
+                     {refreshCurrentView();});
     QObject::connect(shutdownButton, &QPushButton::clicked, [this]()
                      { mainWindow->close(); });
         
@@ -78,6 +105,9 @@ void QuanLy::signalAndSlotConnect()
 // TabWidget
 void QuanLy::onChangedTabActive(int index)
 {
+    if (index == 4) this->searchBtn->setEnabled(false);
+    else this->searchBtn->setEnabled(true);
+
     switch (index)
     {
     case 0:
@@ -90,7 +120,7 @@ void QuanLy::onChangedTabActive(int index)
         loadContractView();
         break;
     case 3:
-        paymentsTableView->setModel(manager->getBillManager().getBillsAsModel());
+        loadBillView();
         break;
     case 4:
         loadChartView();
@@ -99,6 +129,12 @@ void QuanLy::onChangedTabActive(int index)
         cerr << "Invalid tab index: " << index << endl;
         break;
     }
+}
+
+void QuanLy::refreshCurrentView()
+{
+    int index = mainTabWidget->currentIndex();
+    onChangedTabActive(index);
 }
 
 void QuanLy::onShowTenantDetails(int tenantId){
@@ -170,11 +206,17 @@ void QuanLy::loadTenantView()
 {
     manager->getTenantManager().setTenantSelected(nullptr);
     tenantsTableView->setModel(manager->getTenantManager().getTenantsAsModel());
+    for (int row = 0; row < tenantsTableView->model()->rowCount(); ++row) {
+        tenantsTableView->setRowHidden(row, false);
+    }
 }
 void QuanLy::loadRoomView()
 {
     manager->getRoomManager().setRoomSelected(nullptr);
     roomsTableView->setModel(manager->getRoomManager().getRoomsAsModel());
+    for (int row = 0; row < roomsTableView->model()->rowCount(); ++row) {
+        roomsTableView->setRowHidden(row, false);
+    }
 }
 void QuanLy::loadContractView()
 {
@@ -189,7 +231,19 @@ void QuanLy::loadContractView()
         }
     }
     contractsTableView->setModel(model);
+    for (int row = 0; row < contractsTableView->model()->rowCount(); ++row) {
+        contractsTableView->setRowHidden(row, false);
+    }
 }
+void QuanLy::loadBillView()
+{
+    manager->getBillManager().setSelected(nullptr);
+    paymentsTableView->setModel(manager->getBillManager().getBillsAsModel());
+    for (int row = 0; row < paymentsTableView->model()->rowCount(); ++row) {
+        paymentsTableView->setRowHidden(row, false);
+    }
+}
+
 void QuanLy::loadChartView()
 {
     fromMonthFilter->clear();
@@ -330,9 +384,32 @@ void QuanLy::removeRoomCall()
 void QuanLy::genChart()
 {
     QChartBC chartBC(chartView);
-    QDate startDate = QDate(fromYearFilter->currentText().toInt(), fromMonthFilter->currentText().toInt(), 1);
-    QDate endDate = QDate(toYearFilter->currentText().toInt(), toMonthFilter->currentText().toInt(), 1);
-    chartBC.updateChart(startDate, endDate);
+    QDate fromDate = QDate(fromYearFilter->currentText().toInt(), fromMonthFilter->currentText().toInt(), 1);
+    QDate toDate = QDate(toYearFilter->currentText().toInt(), toMonthFilter->currentText().toInt(), 1);
+    if (fromDate > toDate)
+    {
+        QMessageBox::warning(mainWindow, "Lỗi khoảng thời gian", "Ngày bắt đầu phải trước ngày kết thúc.");
+        return;
+    }
+    chartBC.updateChart(fromDate, toDate);
+    QChartPie* pieChart = new QChartPie(piechart);
+    pieChart->updateChart(fromDate, toDate);
+    // Tong so phong
+    int totalRooms = manager->getRoomManager().getCount();
+    totalRoomsValue->setText(QString::number(totalRooms));
+    // So phong dang thue
+    int rentedRooms = manager->getRoomManager().getOccupiedRoomCount();
+    occupiedRoomsValue->setText(QString::number(rentedRooms));
+    // So phong trong
+    int availableRooms = totalRooms - rentedRooms;
+    emptyRoomsValue->setText(QString::number(availableRooms));
+
+    // Tong doanh thu (toan bo)
+    double totalRevenue = manager->getBillManager().getTotalRevenue(fromDate, toDate);
+    totalRevenueValue->setText(moneyFormat(totalRevenue));
+    // So hoa don chua thanh toan
+    int unpaidBills = manager->getBillManager().getUnpaidBillCount();
+    unpaidBillsValue->setText(QString::number(unpaidBills));
 }
 
 QTableView* QuanLy::getCurrentView()

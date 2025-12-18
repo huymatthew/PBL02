@@ -38,6 +38,7 @@ public:
     void timeUpdate();
 
     void onChangedTabActive(int index);
+    void refreshCurrentView();
 
     void onShowTenantDetails(int tenantId);
     void onShowRoomDetails(int roomId);
@@ -46,6 +47,7 @@ public:
     void loadTenantView();
     void loadRoomView();
     void loadContractView();
+    void loadBillView();
     void loadChartView();
 
     void addTenantCall();

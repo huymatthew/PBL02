@@ -48,6 +48,7 @@ public:
     QStringList getAllServices(int billId);
     Vector<Tenant> getAllNoRoomTenants();
 
+    bool isContractDisabled(int contractId);
     int isTenantRenting(int tenantId); // 0: not 1: main tenant 2: co-tenant
     
 private:

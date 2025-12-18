@@ -39,6 +39,10 @@ void DataManager::saveAllData() {
     }
 }
 Tenant* DataManager::getMainTenantFromContract(int contractId) {
+    if (isContractDisabled(contractId)) {
+        cerr << "Get Main Tenant From Contract: Contract is disabled" << endl;
+        return nullptr;
+    }
     for (const auto &rent : rentM.rents) {
         if (rent.getIsRepresentative()) {
             Tenant* tenant = tenantM.get(rent.getTenantId());
@@ -54,19 +58,31 @@ Tenant* DataManager::getMainTenantFromContract(int contractId) {
 }
 
 Contract* DataManager::getContractFromTenant(int tenantId) {
+    Contract* selectedContract = nullptr;
+    string latestEndDate = "";
+    
     for (const auto &rent : rentM.rents) {
         if (rent.getTenantId() == tenantId) {
-            int contractId = rentM.getContractIdByTenant(tenantId);
+            int contractId = rent.getContractId();
             Contract* contract = contractM.get(contractId);
-            if (contract) {
-                return contract;
-            } else {
-                cerr << "Room not found for tenant ID: " << tenantId << endl;
-                return nullptr;
+            
+            if (contract != nullptr) {
+                if (contract->getStatus() != 2) {
+                    string endDate = contract->getEndDate();
+                    if (latestEndDate.empty() || endDate > latestEndDate) {
+                        latestEndDate = endDate;
+                        selectedContract = contract;
+                    }
+                }
             }
         }
     }
-    return nullptr;
+    
+    if (!selectedContract) {
+        cerr << "No active contract found for tenant ID: " << tenantId << endl;
+    }
+    
+    return selectedContract;
 }
 
 Room* DataManager::getRoomFromContract(int contractId){
@@ -132,4 +148,13 @@ int DataManager::isTenantRenting(int tenantId) {
         }
     }
     return 0; // not renting
+}
+
+bool DataManager::isContractDisabled(int contractId) {
+    Contract* contract = contractM.get(contractId);
+    if (contract) {
+        return contract->getStatus() == 2; // 2: disabled
+    }
+    cerr << "Contract not found for ID: " << contractId << endl;
+    return false;
 }

@@ -13,7 +13,7 @@ private:
     string billing_month;
     double room_rent;
     double total_amount;
-    int status; // 0: chưa thanh toán, 1: đã thanh toán
+    int status; // 0: chưa thanh toán, 1: đã thanh toán, 2: vô hiệu hóa
 public:
     Bill();
     Bill(const Bill& other);
@@ -40,4 +40,4 @@ public:
     void setStatus(int status);
 };
 
-#endif
+#endif // BILL_H

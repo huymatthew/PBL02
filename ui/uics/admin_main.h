@@ -70,9 +70,9 @@ public:
     QPushButton *addTenantButtonB;
     QPushButton *addContractButtonB;
     QPushButton *addBillButtonB;
-    QPushButton *pushButton_2;
     QFrame *line;
     QPushButton *searchBtn;
+    QPushButton *refreshBtn;
     QFrame *line_2;
     QPushButton *shutdownButton;
     QSpacerItem *horizontalSpacer_2;
@@ -155,7 +155,6 @@ public:
     QSpacerItem *paymentVerticalSpacer;
     QVBoxLayout *paymentButtonsLayout;
     QPushButton *payButton;
-    QPushButton *printInvoiceButton;
     QPushButton *paymentInactiveBtn;
     QWidget *reportsTab;
     QVBoxLayout *reportsMainLayout;
@@ -184,7 +183,7 @@ public:
     QLabel *totalRevenueValue;
     QLabel *unpaidBillsLabel;
     QLabel *unpaidBillsValue;
-    QTableView *reportsTableView;
+    QtCharts::QChartView *piechart;
     QtCharts::QChartView *chartView;
     QMenuBar *menubar;
     QMenu *menuFile;
@@ -735,11 +734,6 @@ public:
 
         horizontalLayout_2->addWidget(addBillButtonB);
 
-        pushButton_2 = new QPushButton(groupBox);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-
-        horizontalLayout_2->addWidget(pushButton_2);
-
         line = new QFrame(groupBox);
         line->setObjectName(QString::fromUtf8("line"));
         line->setFrameShape(QFrame::VLine);
@@ -752,6 +746,11 @@ public:
 
         horizontalLayout_2->addWidget(searchBtn);
 
+        refreshBtn = new QPushButton(groupBox);
+        refreshBtn->setObjectName(QString::fromUtf8("refreshBtn"));
+
+        horizontalLayout_2->addWidget(refreshBtn);
+
         line_2 = new QFrame(groupBox);
         line_2->setObjectName(QString::fromUtf8("line_2"));
         line_2->setFrameShape(QFrame::VLine);
@@ -761,7 +760,12 @@ public:
 
         shutdownButton = new QPushButton(groupBox);
         shutdownButton->setObjectName(QString::fromUtf8("shutdownButton"));
-        shutdownButton->setStyleSheet(QString::fromUtf8("background-color:red;"));
+        shutdownButton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"	background-color: red;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	background-color: darkred;\n"
+"}"));
 
         horizontalLayout_2->addWidget(shutdownButton);
 
@@ -926,6 +930,12 @@ public:
 
         deleteRoomButton = new QPushButton(roomsTab);
         deleteRoomButton->setObjectName(QString::fromUtf8("deleteRoomButton"));
+        deleteRoomButton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"	background-color: red;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	background-color: darkred;\n"
+"}"));
         QIcon icon25;
         icon25.addFile(QString::fromUtf8(":/icons/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
         deleteRoomButton->setIcon(icon25);
@@ -1098,6 +1108,12 @@ public:
 
         deleteTenantButton = new QPushButton(tenantsTab);
         deleteTenantButton->setObjectName(QString::fromUtf8("deleteTenantButton"));
+        deleteTenantButton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"	background-color: red;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	background-color: darkred;\n"
+"}"));
         deleteTenantButton->setIcon(icon25);
 
         tenantButtonsLayout->addWidget(deleteTenantButton);
@@ -1147,7 +1163,12 @@ public:
 
         unableContractButton = new QPushButton(widget_4);
         unableContractButton->setObjectName(QString::fromUtf8("unableContractButton"));
-        unableContractButton->setStyleSheet(QString::fromUtf8("background-color:red;"));
+        unableContractButton->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"	background-color: red;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	background-color: darkred;\n"
+"}"));
 
         verticalLayout_4->addWidget(unableContractButton);
 
@@ -1304,17 +1325,14 @@ public:
 
         paymentButtonsLayout->addWidget(payButton);
 
-        printInvoiceButton = new QPushButton(paymentsTab);
-        printInvoiceButton->setObjectName(QString::fromUtf8("printInvoiceButton"));
-        QIcon icon27;
-        icon27.addFile(QString::fromUtf8(":/icons/print.png"), QSize(), QIcon::Normal, QIcon::Off);
-        printInvoiceButton->setIcon(icon27);
-
-        paymentButtonsLayout->addWidget(printInvoiceButton);
-
         paymentInactiveBtn = new QPushButton(paymentsTab);
         paymentInactiveBtn->setObjectName(QString::fromUtf8("paymentInactiveBtn"));
-        paymentInactiveBtn->setStyleSheet(QString::fromUtf8("background-color:red;"));
+        paymentInactiveBtn->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"	background-color: red;\n"
+"}\n"
+"QPushButton::hover{\n"
+"	background-color: darkred;\n"
+"}"));
 
         paymentButtonsLayout->addWidget(paymentInactiveBtn);
 
@@ -1372,9 +1390,9 @@ public:
 
         generateReportButton = new QPushButton(filterGroup);
         generateReportButton->setObjectName(QString::fromUtf8("generateReportButton"));
-        QIcon icon28;
-        icon28.addFile(QString::fromUtf8(":/icons/report.png"), QSize(), QIcon::Normal, QIcon::Off);
-        generateReportButton->setIcon(icon28);
+        QIcon icon27;
+        icon27.addFile(QString::fromUtf8(":/icons/report.png"), QSize(), QIcon::Normal, QIcon::Off);
+        generateReportButton->setIcon(icon27);
 
         filterLayout->addWidget(generateReportButton);
 
@@ -1452,16 +1470,20 @@ public:
 
         reportsContentLayout->addWidget(summaryGroup);
 
-        reportsTableView = new QTableView(reportsTab);
-        reportsTableView->setObjectName(QString::fromUtf8("reportsTableView"));
-        reportsTableView->setAlternatingRowColors(true);
-        reportsTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-        reportsTableView->setSortingEnabled(true);
+        piechart = new QtCharts::QChartView(reportsTab);
+        piechart->setObjectName(QString::fromUtf8("piechart"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(piechart->sizePolicy().hasHeightForWidth());
+        piechart->setSizePolicy(sizePolicy1);
 
-        reportsContentLayout->addWidget(reportsTableView);
+        reportsContentLayout->addWidget(piechart);
 
         chartView = new QtCharts::QChartView(reportsTab);
         chartView->setObjectName(QString::fromUtf8("chartView"));
+        sizePolicy1.setHeightForWidth(chartView->sizePolicy().hasHeightForWidth());
+        chartView->setSizePolicy(sizePolicy1);
 
         reportsContentLayout->addWidget(chartView);
 
@@ -1690,8 +1712,8 @@ public:
         addTenantButtonB->setText(QCoreApplication::translate("AdminMainWindow", "Th\303\252m Kh\303\241ch", nullptr));
         addContractButtonB->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\341\273\243p \304\220\341\273\223ng", nullptr));
         addBillButtonB->setText(QCoreApplication::translate("AdminMainWindow", "T\341\272\241o H\303\263a \304\220\306\241n", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("AdminMainWindow", "Thanh to\303\241n", nullptr));
         searchBtn->setText(QCoreApplication::translate("AdminMainWindow", "T\303\254m Ki\341\272\277m / L\341\273\215c", nullptr));
+        refreshBtn->setText(QCoreApplication::translate("AdminMainWindow", "B\341\273\217 b\341\273\231 l\341\273\215c", nullptr));
         shutdownButton->setText(QCoreApplication::translate("AdminMainWindow", "K\341\272\277t th\303\272c", nullptr));
         roomInfoGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "Th\303\264ng Tin Ph\303\262ng", nullptr));
         roomNumberLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\303\252n Ph\303\262ng", nullptr));
@@ -1742,7 +1764,6 @@ public:
         paymentStatusText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
         paymentTotalText->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
         payButton->setText(QCoreApplication::translate("AdminMainWindow", "Thanh to\303\241n", nullptr));
-        printInvoiceButton->setText(QCoreApplication::translate("AdminMainWindow", "In H\303\263a \304\220\306\241n", nullptr));
         paymentInactiveBtn->setText(QCoreApplication::translate("AdminMainWindow", "V\303\264 Hi\341\273\207u H\303\263a", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(paymentsTab), QCoreApplication::translate("AdminMainWindow", "Qu\341\272\243n L\303\275 Thanh To\303\241n", nullptr));
         filterGroup->setTitle(QCoreApplication::translate("AdminMainWindow", "B\341\273\231 L\341\273\215c B\303\241o C\303\241o", nullptr));
@@ -1762,7 +1783,7 @@ public:
         emptyRoomsLabel->setText(QCoreApplication::translate("AdminMainWindow", "Ph\303\262ng tr\341\273\221ng:", nullptr));
         emptyRoomsValue->setText(QCoreApplication::translate("AdminMainWindow", "0", nullptr));
         totalRevenueLabel->setText(QCoreApplication::translate("AdminMainWindow", "T\341\273\225ng doanh thu:", nullptr));
-        totalRevenueValue->setText(QCoreApplication::translate("AdminMainWindow", "0 VND", nullptr));
+        totalRevenueValue->setText(QCoreApplication::translate("AdminMainWindow", "-", nullptr));
         unpaidBillsLabel->setText(QCoreApplication::translate("AdminMainWindow", "H\303\263a \304\221\306\241n ch\306\260a thanh to\303\241n:", nullptr));
         unpaidBillsValue->setText(QCoreApplication::translate("AdminMainWindow", "0", nullptr));
         mainTabWidget->setTabText(mainTabWidget->indexOf(reportsTab), QCoreApplication::translate("AdminMainWindow", "B\303\241o C\303\241o - Th\341\273\221ng K\303\252", nullptr));

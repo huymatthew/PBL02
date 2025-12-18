@@ -8,12 +8,6 @@
 #include <QtCharts/QValueAxis>
 #include <iostream>
 
-using namespace QtCharts;
-
-QChartBC::QChartBC(QChartView* chartView) : chartView(chartView) {}
-
-QChartBC::~QChartBC() {}
-
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
 #include <QtCharts/QChart>
@@ -23,6 +17,13 @@ QChartBC::~QChartBC() {}
 #include <QDate>
 #include <iostream>
 #include <QtMath>
+
+using namespace QtCharts;
+
+QChartBC::QChartBC(QChartView* chartView) : chartView(chartView) {}
+
+QChartBC::~QChartBC() {}
+
 
 void QChartBC::updateChart(QDate startMonth, QDate endMonth) {
     QBarSeries* series = new QBarSeries();

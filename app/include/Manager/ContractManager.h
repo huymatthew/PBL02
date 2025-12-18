@@ -16,7 +16,7 @@
 
 using namespace std;
 class DataManager;
-
+class QChartPie;
 
 class ContractManager : public Manager<Contract> {
 public:
@@ -37,15 +37,25 @@ public:
     bool exists(int contractId) const override;
     int getCount() const;
 
+    Contract* getSelected() const;
+    void setSelected(Contract* contract);
+
+    void setStatusWhenDue();
+
     Contract* getActiveContractByRoom(const int& roomId);
     bool roomHasActiveContract(const int& roomId) const;
     double getTotalMonthlyRent() const;
     double getTotalDeposits() const;
 
     bool roomUsed(int roomId) const;
+    void deactivateContract(int contractId);
+    void terminateContract(int contractId);
     
     QStandardItemModel* getContractsAsModel() const;
     friend class DataManager;
+    friend class QChartPie;
+private:
+    Contract* selectedContract;
 };
 
 #endif // CONTRACT_MANAGER_H

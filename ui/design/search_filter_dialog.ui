@@ -111,7 +111,7 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="roomFilterView">
           <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -246,6 +246,26 @@
                 </layout>
                </widget>
               </item>
+              <item row="3" column="1">
+               <widget class="QCheckBox" name="billInMonth">
+                <property name="text">
+                 <string>Hóa đơn tháng này</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <spacer name="verticalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
              </layout>
             </widget>
            </item>
@@ -259,39 +279,6 @@
               <string>Khách Hàng</string>
              </property>
              <layout class="QGridLayout" name="gridLayout">
-              <item row="0" column="2">
-               <widget class="QComboBox" name="tenantFilterStatus">
-                <item>
-                 <property name="text">
-                  <string>...</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Đang Thuê</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Chưa có phòng</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLabel" name="tenantFilterRoleLabel">
-                <property name="text">
-                 <string>Vai trò</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="tenantFilterStatusLabel">
-                <property name="text">
-                 <string>Trạng Thái</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="2">
                <widget class="QComboBox" name="tenantFilterRole">
                 <item>
@@ -311,7 +298,14 @@
                 </item>
                </widget>
               </item>
-              <item row="2" column="2">
+              <item row="0" column="1">
+               <widget class="QLabel" name="tenantFilterStatusLabel">
+                <property name="text">
+                 <string>Trạng Thái</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
                <spacer name="verticalSpacer_2">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -323,6 +317,63 @@
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="tenantFilterRoleLabel">
+                <property name="text">
+                 <string>Vai trò</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QComboBox" name="tenantFilterStatus">
+                <item>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Đang Thuê</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Chưa có phòng</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="tenantFilterGenderLabel">
+                <property name="text">
+                 <string>Giới Tính</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QComboBox" name="tenantFilterGender">
+                <item>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nam</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nữ</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Khác</string>
+                 </property>
+                </item>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -353,12 +404,12 @@
                 </item>
                 <item>
                  <property name="text">
-                  <string>Đang Hoạt Động</string>
+                  <string>Đã Kết Thúc</string>
                  </property>
                 </item>
                 <item>
                  <property name="text">
-                  <string>Đã Kết Thúc</string>
+                  <string>Đang Hoạt Động</string>
                  </property>
                 </item>
                 <item>
@@ -543,6 +594,16 @@
                  </item>
                  <item row="1" column="1">
                   <widget class="QDateEdit" name="contractFilterStartDateTo">
+                   <property name="dateTime">
+                    <datetime>
+                     <hour>0</hour>
+                     <minute>0</minute>
+                     <second>0</second>
+                     <year>2050</year>
+                     <month>1</month>
+                     <day>1</day>
+                    </datetime>
+                   </property>
                    <property name="displayFormat">
                     <string>dd/MM/yyyy</string>
                    </property>
@@ -596,6 +657,16 @@
                  </item>
                  <item row="1" column="1">
                   <widget class="QDateEdit" name="contractFilterEndDateTo">
+                   <property name="dateTime">
+                    <datetime>
+                     <hour>0</hour>
+                     <minute>0</minute>
+                     <second>0</second>
+                     <year>2050</year>
+                     <month>1</month>
+                     <day>1</day>
+                    </datetime>
+                   </property>
                    <property name="displayFormat">
                     <string>dd/MM/yyyy</string>
                    </property>
@@ -632,7 +703,28 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QComboBox" name="billFilterStatus"/>
+               <widget class="QComboBox" name="billFilterStatus">
+                <item>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Chưa thanh toán</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Đã thanh toán</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Vô hiệu hóa</string>
+                 </property>
+                </item>
+               </widget>
               </item>
               <item row="1" column="0">
                <widget class="QLabel" name="label_19">
@@ -737,6 +829,16 @@
                  </item>
                  <item row="1" column="1">
                   <widget class="QDateEdit" name="billFilterMonthTo">
+                   <property name="dateTime">
+                    <datetime>
+                     <hour>0</hour>
+                     <minute>0</minute>
+                     <second>0</second>
+                     <year>2050</year>
+                     <month>1</month>
+                     <day>1</day>
+                    </datetime>
+                   </property>
                    <property name="displayFormat">
                     <string>MM/yyyy</string>
                    </property>

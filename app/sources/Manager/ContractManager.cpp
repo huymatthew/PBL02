@@ -1,5 +1,6 @@
 #include <Manager/ContractManager.h>
 #include <Core/ExtraFormat.h>
+#include <QMessageBox>
 using namespace std;
 
 ContractManager::ContractManager() : Manager<Contract>() {}
@@ -30,6 +31,10 @@ bool ContractManager::loadFromDatabase() {
         items.emplace_back(id, roomId, start, end, rent, deposit, status, notes);
         cout << "- Loaded contract ID: " << id << endl;
     }
+
+    // Update
+    setStatusWhenDue();
+
     return true;
 }
 bool ContractManager::saveToDatabase() {
@@ -97,6 +102,21 @@ Contract* ContractManager::get(int contractId) {
     }
     return nullptr;
 }
+
+void ContractManager::setStatusWhenDue(){
+    for (auto it = items.begin(); it != items.end(); ++it) {
+        string endDate = it->getEndDate();
+        string currentDate = QDateTime::currentDateTime().toString("yyyy-MM-dd").toStdString();
+        if (currentDate > endDate && it->getStatus() == 1) { // if current date is past end date and contract is active
+            it->setStatus(0); // set to inactive
+            cout << "! Contract ID " << it->getId() << " has been set to inactive." << endl;
+        }
+    }
+}
+
+
+
+
 Contract* ContractManager::getActiveContractByRoom(const int& roomId){
     for (auto it = items.begin(); it != items.end(); ++it) {
         if (it->getRoomId() == roomId && it->getStatus() == 1) {
@@ -145,6 +165,52 @@ bool ContractManager::roomUsed(int roomId) const {
     return false;
 }
 
+Contract* ContractManager::getSelected() const {
+    return selectedContract;
+}
+
+void ContractManager::setSelected(Contract* contract){
+    selectedContract = contract;
+}
+
+void ContractManager::deactivateContract(int contractId){
+    QMessageBox::StandardButton reply = QMessageBox::question(nullptr, "Xác nhận vô hiệu hóa",
+        "Bạn có chắc chắn muốn vô hiệu hóa hợp đồng này không?\n"
+        "Hành động này không thể hoàn tác.",
+        QMessageBox::Yes | QMessageBox::No);
+    
+    if (reply != QMessageBox::Yes) {
+        return; 
+    }
+
+    auto it = this->findIterator(contractId);
+    if (it != items.end()) {
+        it->setStatus(2);
+    }
+}
+
+void ContractManager::terminateContract(int contractId){
+    QMessageBox::StandardButton reply = QMessageBox::question(nullptr, "Xác nhận chấm dứt",
+        "Bạn có chắc chắn muốn chấm dứt hợp đồng này không?\n"
+        "Hành động này không thể hoàn tác.",
+        QMessageBox::Yes | QMessageBox::No,
+        QMessageBox::No);
+    
+    if (reply != QMessageBox::Yes) {
+        return; 
+    }
+    
+    auto it = this->findIterator(contractId);
+    if (it != items.end()) {
+        if (it->getStatus() != 1) {
+            QMessageBox::warning(nullptr, "Chấm dứt thất bại",
+                "Chỉ hợp đồng đang hoạt động mới có thể chấm dứt.");
+            return;
+        }
+        it->setStatus(0);
+    }
+}
+
 QStandardItemModel* ContractManager::getContractsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();
     model->setColumnCount(8);
@@ -157,19 +223,41 @@ QStandardItemModel* ContractManager::getContractsAsModel() const {
         QList<QStandardItem*> rowItems;
         rowItems.append(new QStandardItem(idnumber(contract.getId(), 6)));
         rowItems.append(new QStandardItem(idnumber(contract.getRoomId(), 6)));
-        rowItems.append(new QStandardItem(QString::fromStdString(contract.getStartDate())));
-        rowItems.append(new QStandardItem(QString::fromStdString(contract.getEndDate())));
-        rowItems.append(new QStandardItem(moneyFormat(contract.getMonthlyRent())));
-        rowItems.append(new QStandardItem(moneyFormat(contract.getDeposit())));
+
+
+        QStandardItem* startDateItem = new QStandardItem(QString::fromStdString(contract.getStartDate()));
+        QDate startDate = QDate::fromString(QString::fromStdString(contract.getStartDate()), "yyyy-MM-dd");
+        startDateItem->setData(startDate.toJulianDay(), Qt::UserRole);
+        rowItems.append(startDateItem);
+
+        QStandardItem* endDateItem = new QStandardItem(QString::fromStdString(contract.getEndDate()));
+        QDate endDate = QDate::fromString(QString::fromStdString(contract.getEndDate()), "yyyy-MM-dd");
+        endDateItem->setData(endDate.toJulianDay(), Qt::UserRole);
+        rowItems.append(endDateItem);
+
+        QStandardItem* monthlyRentItem = new QStandardItem(moneyFormat(contract.getMonthlyRent()));
+        monthlyRentItem->setData(contract.getMonthlyRent(), Qt::UserRole);
+        rowItems.append(monthlyRentItem);
+
+        QStandardItem* depositItem = new QStandardItem(moneyFormat(contract.getDeposit()));
+        depositItem->setData(contract.getDeposit(), Qt::UserRole);
+        rowItems.append(depositItem);
+
         QStandardItem* item = new QStandardItem();
         if (contract.getStatus() == 0){
             item->setText("Hết hiệu lực");
             item->setForeground(QBrush(Qt::red));
         }
-        else{
+        else if(contract.getStatus() == 1){
             item->setText("Còn hiệu lực");
             item->setForeground(QBrush(Qt::darkGreen));
         }
+        else if(contract.getStatus() == 2){
+            item->setText("Vô hiệu hóa");
+            item->setForeground(QBrush(Qt::gray));
+        }
+
+        item->setData(contract.getStatus(), Qt::UserRole);
         rowItems.append(item);
         rowItems.append(new QStandardItem(QString::fromStdString(contract.getNotes())));
 
@@ -177,3 +265,4 @@ QStandardItemModel* ContractManager::getContractsAsModel() const {
     }
     return model;
 }
+

@@ -17,7 +17,6 @@ public:
     bool removeRent(int contractId, int tenantId);
 
     int getTenantIdByContract(int contractId);
-    int getContractIdByTenant(int tenantId);
     void loadFromDatabase();
     void saveToDatabase();
 
