@@ -30,6 +30,7 @@ public:
 
     bool markBillAsPaid(int billId);
     bool markBillAsUnpaid(int billId);
+    bool markBillAsDisabled(int billId);
     long getTotalPaidBillInDay(QString date) const;
     long getTotalUnpaidBillInDay(QString date) const;
 

@@ -50,7 +50,7 @@ Tenant* DataManager::getMainTenantFromContract(int contractId) {
         return nullptr;
     }
     for (const auto &rent : rentM.rents) {
-        if (rent.getIsRepresentative()) {
+        if (rent.getIsRepresentative() && rent.getContractId() == contractId) {
             Tenant* tenant = tenantM.get(rent.getTenantId());
             if (tenant) {
                 return tenant;

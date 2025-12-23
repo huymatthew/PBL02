@@ -85,6 +85,7 @@ bool BillManager::markBillAsPaid(int billId) {
         return true;
     }
     cerr << "Bill not found to mark as paid: " << billId << endl;
+    quicksave();
     return false;
 }
 
@@ -96,6 +97,22 @@ bool BillManager::markBillAsUnpaid(int billId) {
         return true;
     }
     cerr << "Bill not found to mark as unpaid: " << billId << endl;
+    return false;
+}
+
+bool BillManager::markBillAsDisabled(int billId) {
+    auto it = this->findIterator(billId);
+    if (it != items.end()) {
+        if (it->getStatus() == 1){
+            cerr << "Cannot disable a paid bill: " << billId << endl;
+            return false;
+        }
+        it->setStatus(2);
+        cout << "* Marked bill ID " << billId << " as disabled." << endl;
+        quicksave();
+        return true;
+    }
+    cerr << "Bill not found to mark as disabled: " << billId << endl;
     return false;
 }
 

@@ -29,15 +29,18 @@ AddBillDialog::~AddBillDialog() {}
 void AddBillDialog::on_saveButton_clicked() {
     DataManager& dataManager = DataManager::getInstance();
 
-    Bill bill = Bill();
-    int contractId = contractID->text().toInt();
-    bill.setContractId(contractId);
-    QString monthYear = yearEdit->text() + "-" + monthComboBox->currentText();
-    bill.setBillingMonth(monthYear.toStdString());
-    bill.setRoomRent(monthlyRentSpinBox->value());
-    bill.setTotalAmount(sumSpinBox->value());
-    bill.setStatus(statusComboBox->currentIndex());
-    dataManager.getBillManager().add(bill);
+    int contractid = contractID->text().toInt();
+    string monthYearStr = yearEdit->text().toStdString() + "-" + monthComboBox->currentText().toStdString();
+    double roomRent = monthlyRentSpinBox->value();
+    double totalAmount = sumSpinBox->value();
+    int status = statusComboBox->currentIndex();
+
+    if (dataManager.getBillManager().addBill(contractid, monthYearStr, roomRent, totalAmount, status) == false) {
+        QMessageBox::warning(this, "Error", "Failed to add bill. Please try again.");
+        return;
+    }
+
+    int billId = dataManager.getBillManager().getNextId() - 1;
 
     for (int i = 0; i < service->count(); ++i) {
         cout << "Adding service " << i << endl;
@@ -45,13 +48,13 @@ void AddBillDialog::on_saveButton_clicked() {
         QServiceWidget* serviceWidget = static_cast<QServiceWidget*>(service->itemWidget(item));
         if (serviceWidget) {
             dataManager.getServiceManager().addService(serviceWidget->getType(),
-                            bill.getId(),
+                            billId,
                             serviceWidget->getQuantity(), 
                             serviceWidget->getPricePerUnit() * serviceWidget->getQuantity());
 
         }
     }
-    QMessageBox::information(this, "Bill Saved", "The bill has been saved successfully. \n Bill ID: " + QString::number(bill.getId()));
+    QMessageBox::information(this, "Bill Saved", "The bill has been saved successfully. \n Bill ID: " + QString::number(billId));
     accept();
 }
 
@@ -78,7 +81,7 @@ void AddBillDialog::setRoom(int roomId) {
         }
         Tenant* tenant = dataManager.getMainTenantFromContract(contract->getId());
         if (tenant) {
-            resName->setText(QString::fromStdString(tenant->getFullName()));
+            resName->setText(QString::fromStdString(formatSpace(tenant->getFullName())));
         }
         monthlyRentSpinBox->setValue(contract->getMonthlyRent());
         monthComboBox->setCurrentIndex(QDate::currentDate().month() - 1);

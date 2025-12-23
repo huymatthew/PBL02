@@ -60,6 +60,8 @@ public:
 
     void removeTenantCall();
     void removeRoomCall();
+
+    void paymentBillCall();
     
     void genChart();
     QTableView* getCurrentView();

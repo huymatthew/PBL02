@@ -111,7 +111,7 @@
        <item>
         <widget class="QStackedWidget" name="stackedWidget">
          <property name="currentIndex">
-          <number>3</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="roomFilterView">
           <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -422,7 +422,7 @@
               <item row="2" column="0">
                <widget class="QLabel" name="contractFilterRoomRentLabel">
                 <property name="text">
-                 <string>Tiền Thuê</string>
+                 <string>Tiền Cọc</string>
                 </property>
                </widget>
               </item>
@@ -490,7 +490,7 @@
               <item row="4" column="0">
                <widget class="QLabel" name="label_13">
                 <property name="text">
-                 <string>Tiền Cọc</string>
+                 <string>Tiền Thuê</string>
                 </property>
                </widget>
               </item>

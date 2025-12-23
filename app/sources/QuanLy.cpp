@@ -94,6 +94,23 @@ void QuanLy::signalAndSlotConnect()
                          SearchFilterDialog searchDialog(mainWindow, getCurrentView(), mainTabWidget->currentIndex());
                          searchDialog.exec();
                      });
+    
+    QObject::connect(payButton, &QPushButton::clicked, [this](){paymentBillCall();});
+    QObject::connect(paymentInactiveBtn, &QPushButton::clicked, [this]()
+                     {
+                         Bill* selectedBill = manager->getBillManager().getSelectedItem();
+                         if (!selectedBill) {
+                             QMessageBox::warning(mainWindow, "Chưa chọn hóa đơn", "Vui lòng chọn hóa đơn để hủy thanh toán.");
+                             return;
+                         }
+                         if (!selectedBill->getStatus()) {
+                             QMessageBox::information(mainWindow, "Hóa đơn chưa thanh toán", "Hóa đơn này chưa được thanh toán.");
+                             return;
+                         }
+                         selectedBill->setStatus(false);
+                         manager->getBillManager().markBillAsDisabled(selectedBill->getId());
+                         loadBillView();
+                     });
 
     QObject::connect(refreshBtn, &QPushButton::clicked, [this]()
                      {refreshCurrentView();});
@@ -380,6 +397,31 @@ void QuanLy::removeRoomCall()
         cout << "Cancel" << endl;
     }
 }
+
+void QuanLy::paymentBillCall(){
+    Bill* selectedBill = manager->getBillManager().getSelectedItem();
+    if (!selectedBill) {
+        QMessageBox::warning(mainWindow, "Chưa chọn hóa đơn", "Vui lòng chọn hóa đơn để thanh toán.");
+        return;
+    }
+    if (selectedBill->getStatus() == 1) {
+        QMessageBox::information(mainWindow, "Hóa đơn đã thanh toán", "Hóa đơn này đã được thanh toán trước đó.");
+        return;
+    }
+    if (selectedBill->getStatus() == 2) {
+        QMessageBox::information(mainWindow, "Hóa đơn đã vô hiệu hóa", "Hóa đơn này đã được vô hiệu hóa trước đó.");
+        return;
+    }
+    QMessageBox::StandardButton reply = QMessageBox::question(mainWindow, "Xác nhận thanh toán",
+        "Bạn có chắc chắn muốn đánh dấu hóa đơn này là đã thanh toán?",
+        QMessageBox::Yes | QMessageBox::No);
+    if (reply != QMessageBox::Yes) {
+        return;
+    }
+    manager->getBillManager().markBillAsPaid(selectedBill->getId());
+    loadBillView();
+}
+
 
 void QuanLy::genChart()
 {

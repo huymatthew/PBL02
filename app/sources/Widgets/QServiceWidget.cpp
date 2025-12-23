@@ -20,9 +20,15 @@ void QServiceWidget::setupUi() {
     priceLabel = new QLabel("Price: 0", this);
     layout()->addWidget(priceLabel);
 
+    
     serviceTypeComboBox->addItems(dataManager.getServiceTypeManager().getServiceTypeNamesForComboBox());
-    setType(1);
-
+    
+    ServiceType* serviceType = DataManager::getInstance().getServiceTypeManager().getServiceTypeByName(serviceTypeComboBox->currentText().toStdString());
+    if (serviceType) {
+        setType(serviceType->getServiceType());
+    }
+    p->updateTotal();
+    
     connect(quantitySpinBox, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int value) {
         priceLabel->setText(QString::number(pricePerUnit * quantitySpinBox->value() / 1000, 'f', 1) + "K VND");
         p->updateTotal();
