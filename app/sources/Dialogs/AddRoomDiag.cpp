@@ -33,7 +33,7 @@ void AddRoomDiag::on_buttonBox_accepted() {
     int status = comboBoxStatus->currentIndex();
 
     if (roomName.empty()){
-        QMessageBox::warning(this, "Input Error", "Room Number is required.");
+        QMessageBox::warning(this, "Lỗi nhập liệu", "Số phòng là bắt buộc.");
         return;
     }
 

@@ -189,7 +189,7 @@ bool ContractManager::validateItem(const Contract& item) const {
         err << "Start date must be before end date for contract ID: " << item.getId() << endl;
     }
     if (err.str().length() > 0) {
-        QMessageBox::warning(nullptr, "Invalid Contract Data", QString::fromStdString(err.str()));
+        QMessageBox::warning(nullptr, "Dữ liệu hợp đồng không hợp lệ", QString::fromStdString(err.str()));
         return false;
     }
     return true;

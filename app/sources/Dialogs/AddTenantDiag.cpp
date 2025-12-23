@@ -36,7 +36,7 @@ void AddTenantDiag::on_buttonBox_accepted() {
     int gender = comboBoxGender->currentIndex();
 
     if (fullName.empty() || phone.empty() || identityCard.empty() || dateOfBirth.empty()) {
-        QMessageBox::warning(this, "Input Error", "Please fill in all required fields.");
+        QMessageBox::warning(this, "Lỗi nhập liệu", "Vui lòng điền đầy đủ các trường bắt buộc.");
         return;
     }
     fullName = formatName(fullName);

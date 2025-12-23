@@ -168,7 +168,7 @@ bool BillManager::validateItem(const Bill& item) const {
         err << "Invalid billing month format for bill ID: " << item.getId() << endl;
     }
     if (err.str().length() > 0) {
-        QMessageBox::warning(nullptr, "Invalid Bill Data", QString::fromStdString(err.str()));
+        QMessageBox::warning(nullptr, "Dữ liệu hóa đơn không hợp lệ", QString::fromStdString(err.str()));
         return false;
     }
     return true;

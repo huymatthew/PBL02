@@ -217,7 +217,7 @@ bool TenantManager::validateItem(const Tenant& item) const {
         err << "Invalid gender for tenant ID: " << item.getId() << endl;
     }
     if (err.str().length() > 0) {
-        QMessageBox::warning(nullptr, "Invalid Tenant Data", QString::fromStdString(err.str()));
+        QMessageBox::warning(nullptr, "Dữ liệu khách thuê không hợp lệ", QString::fromStdString(err.str()));
         return false;
     }
     return true;

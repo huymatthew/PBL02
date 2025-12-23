@@ -245,7 +245,7 @@ bool RoomManager::validateItem(const Room& item) const {
         err << "Room name cannot contain spaces for room ID: " << item.getId() << endl;
     }
     if (err.str().length() > 0) {
-        QMessageBox::warning(nullptr, "Invalid Room Data", QString::fromStdString(err.str()));
+        QMessageBox::warning(nullptr, "Dữ liệu phòng không hợp lệ", QString::fromStdString(err.str()));
         return false;
     }
     return true;

@@ -36,7 +36,7 @@ void AddBillDialog::on_saveButton_clicked() {
     int status = statusComboBox->currentIndex();
 
     if (dataManager.getBillManager().addBill(contractid, monthYearStr, roomRent, totalAmount, status) == false) {
-        QMessageBox::warning(this, "Error", "Failed to add bill. Please try again.");
+        QMessageBox::warning(this, "Lỗi", "Thêm hóa đơn thất bại. Vui lòng thử lại.");
         return;
     }
 
@@ -54,7 +54,7 @@ void AddBillDialog::on_saveButton_clicked() {
 
         }
     }
-    QMessageBox::information(this, "Bill Saved", "The bill has been saved successfully. \n Bill ID: " + QString::number(billId));
+    QMessageBox::information(this, "Lưu hóa đơn", "Hóa đơn đã được lưu thành công. \n Mã hóa đơn: " + QString::number(billId));
     accept();
 }
 
@@ -87,7 +87,7 @@ void AddBillDialog::setRoom(int roomId) {
         monthComboBox->setCurrentIndex(QDate::currentDate().month() - 1);
         yearEdit->setText(QString::number(QDate::currentDate().year()));
     } else {
-        QMessageBox::warning(this, "No Active Contract", "The selected room does not have an active contract.");
+        QMessageBox::warning(this, "Không có hợp đồng", "Phòng đã chọn không có hợp đồng đang hoạt động.");
     }
 }
 
@@ -96,7 +96,7 @@ void AddBillDialog::on_service_removeButton_clicked() {
     if (item) {
         delete service->takeItem(service->row(item));
     } else {
-        QMessageBox::warning(this, "Remove Service", "Please select a service to remove.");
+        QMessageBox::warning(this, "Xóa dịch vụ", "Vui lòng chọn dịch vụ để xóa.");
     }
 }
 

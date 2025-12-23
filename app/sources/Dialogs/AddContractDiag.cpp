@@ -65,7 +65,7 @@ void AddContractDialog::on_saveButton_clicked() {
 
 
     if (!errorlog.empty()) {
-        QMessageBox::warning(this, "Input Error", QString::fromStdString(errorlog));
+        QMessageBox::warning(this, "Lỗi nhập liệu", QString::fromStdString(errorlog));
         return;
     }
 
@@ -77,7 +77,7 @@ void AddContractDialog::on_saveButton_clicked() {
     if (!contractManager->addContract(roomId, startDate.toString("yyyy-MM-dd").toStdString(),
     endDate.toString("yyyy-MM-dd").toStdString(), monthlyRent,
     deposit, status, note)) {
-        QMessageBox::critical(this, "Error", "Failed to add contract. Please check the details and try again.");
+        QMessageBox::critical(this, "Lỗi", "Thêm hợp đồng thất bại. Vui lòng kiểm tra thông tin và thử lại.");
         return;
     }
     Contract newContract = *contractManager->getActiveContractByRoom(roomId);
@@ -128,7 +128,7 @@ void AddContractDialog::on_room_change(){
         monthlyRentSpinBox->setValue(room->getMonthlyRent());
     }
     else{
-        QMessageBox::warning(this, "Room Not Found", "The selected room could not be found.");
+        QMessageBox::warning(this, "Không tìm thấy phòng", "Không thể tìm thấy phòng đã chọn.");
     }
 }
 

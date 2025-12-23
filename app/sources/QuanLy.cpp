@@ -326,7 +326,7 @@ void QuanLy::editTenantCall()
     Tenant *tenant = manager->getTenantManager().getSelectedItem();
     if (tenant == nullptr)
     {
-        QMessageBox::warning(mainWindow, "Edit Tenant", "Please select a tenant to edit.");
+        QMessageBox::warning(mainWindow, "Chỉnh sửa khách thuê", "Vui lòng chọn khách thuê để chỉnh sửa.");
         return;
     }
     AddTenantDiag editTenantDialog(tenant, mainWindow);
@@ -338,7 +338,7 @@ void QuanLy::editRoomCall()
     Room *room = manager->getRoomManager().getSelectedItem();
     if (room == nullptr)
     {
-        QMessageBox::warning(mainWindow, "Edit Room", "Please select a room to edit.");
+        QMessageBox::warning(mainWindow, "Chỉnh sửa phòng", "Vui lòng chọn phòng để chỉnh sửa.");
         return;
     }
     AddRoomDiag editRoomDialog(room, mainWindow);
@@ -352,15 +352,15 @@ void QuanLy::removeTenantCall()
     Tenant *tenant = manager->getTenantManager().getSelectedItem();
     if (tenant == nullptr)
     {
-        QMessageBox::warning(mainWindow, "Remove Tenant", "Please select a tenant to remove.");
+        QMessageBox::warning(mainWindow, "Xóa khách thuê", "Vui lòng chọn khách thuê để xóa.");
         return;
     }
     if (manager->getRentManager().tenantRented(tenant->getId()))
     {
-        QMessageBox::warning(mainWindow, "Remove Tenant", "Cannot delete tenant that is currently renting a room.");
+        QMessageBox::warning(mainWindow, "Xóa khách thu��", "Không thể xóa khách thuê đang thuê phòng.");
         return;
     }
-    int confirm = QMessageBox::question(mainWindow, "Remove Tenant", "Do you want to delete this tenant?");
+    int confirm = QMessageBox::question(mainWindow, "Xóa khách thuê", "Bạn có muốn xóa khách thuê này không?");
     if (confirm == QMessageBox::Yes)
     {
         cout << "Delete User: " << tenant->getFullName() << endl;
@@ -377,15 +377,15 @@ void QuanLy::removeRoomCall()
     Room *room = manager->getRoomManager().getSelectedItem();
     if (room == nullptr)
     {
-        QMessageBox::warning(mainWindow, "Remove Room", "Please select a room to remove.");
+        QMessageBox::warning(mainWindow, "Xóa phòng", "Vui lòng chọn phòng để xóa.");
         return;
     }
     if (manager->getContractManager().roomUsed(room->getId()))
     {
-        QMessageBox::warning(mainWindow, "Remove Room", "Cannot delete room that is currently rented.");
+        QMessageBox::warning(mainWindow, "Xóa phòng", "Không thể xóa phòng đang được thuê.");
         return;
     }
-    int confirm = QMessageBox::question(mainWindow, "Remove Room", "Do you want to delete this room?");
+    int confirm = QMessageBox::question(mainWindow, "Xóa phòng", "Bạn có muốn xóa phòng này không?");
     if (confirm == QMessageBox::Yes)
     {
         cout << "Delete Room: " << room->getRoomName() << endl;
