@@ -24,19 +24,13 @@ public:
     bool loadFromDatabase(bool showLog = false) override;
     bool saveToDatabase(bool showLog = false) override;
     
-    bool add(const Room& room) override;
     bool addRoom(const string& roomName, int roomType,
                 double monthlyRent, const string& description, int status);
-    bool remove(int roomId) override;
-    bool update(int roomId, const Room& updatedRoom) override;
-    
-    Room* get(int roomId) override;
+
     Vector<Room> getRoomsByType(int roomType);
     Vector<Room> getRoomsByStatus(int status);
     Vector<Room> getAllRooms() const;
-    
-    bool exists(int roomId) const override;
-    int getCount() const override;
+
     int getAvailableRoomCount() const;
     int getOccupiedRoomCount() const;
     

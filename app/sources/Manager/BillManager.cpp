@@ -54,61 +54,10 @@ bool BillManager::saveToDatabase(bool showLog) {
     return true;
 }
 
-bool BillManager::add(const Bill& bill) {
-    if (pk_manager.isKeyInUse(bill.getId())) {
-        cerr << "Bill ID already in use: " << bill.getId() << endl;
-        return false;
-    }
-    items.push_back(bill);
-    pk_manager.addKey(bill.getId());
-    cout << "+ Added bill ID: " << bill.getId() << endl;
-    return true;
-}
-
 bool BillManager::addBill(int contractId, const string& month, double rent, double total, int status) {
     int newId = pk_manager.getNextKey();
     Bill newBill(newId, contractId, month, rent, total, status);
     return add(newBill);
-}
-
-bool BillManager::remove(int billId) {
-    auto it = this->findIterator(billId);
-    if (it != items.end()) {
-        pk_manager.releaseKey(billId);
-        items.erase(it);
-        cout << "- Removed bill ID: " << billId << endl;
-        return true;
-    }
-    cerr << "Bill not found for removal: " << billId << endl;
-    return false;
-}
-
-bool BillManager::update(int billId, const Bill& updatedBill) {
-    auto it = this->findIterator(billId);
-    if (it != items.end()) {
-        *it = updatedBill;
-        cout << "* Updated bill ID: " << billId << endl;
-        return true;
-    }
-    cerr << "Bill not found for update: " << billId << endl;
-    return false;
-}
-
-
-Bill* BillManager::get(int billId) {
-    auto it = this->findIterator(billId);
-    if (it != items.end()) {
-        return &(*it);
-    }
-    return nullptr;
-}
-
-bool BillManager::exists(int billId) const {
-    return pk_manager.isKeyInUse(billId);
-}
-
-int BillManager::getCount() const {
-    return items.size();
 }
 
 int BillManager::getUnpaidBillCount() const {

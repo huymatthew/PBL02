@@ -26,16 +26,10 @@ public:
     bool loadFromDatabase(bool showLog = false) override;
     bool saveToDatabase(bool showLog = false) override;
 
-    bool add(const Contract& contract) override;
     bool addContract(const int& roomId,
                     const string& start, const string& end,
                     double rent, double deposit, int status,
                     const string& notes);
-    bool remove(int contractId) override;
-    bool update(int contractId, const Contract& updatedContract) override;
-    Contract* get(int contractId);
-    bool exists(int contractId) const override;
-    int getCount() const;
 
     Contract* getSelected() const;
     void setSelected(Contract* contract);

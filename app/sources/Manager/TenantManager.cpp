@@ -52,36 +52,6 @@ bool TenantManager::saveToDatabase(bool showLog) {
     return true;
 }
 
-bool TenantManager::add(const Tenant& tenant) {
-    if (exists(tenant.getId())) {
-        cerr << "Tenant ID already exists: " << tenant.getId() << endl;
-        return false;
-    }
-    if (identityCardExists(tenant.getIdentityCard())) {
-        cerr << "Identity card already exists: " << tenant.getIdentityCard() << endl;
-        return false;
-    }
-    if (phoneExists(tenant.getPhone())) {
-        cerr << "Phone number already exists: " << tenant.getPhone() << endl;
-        return false;
-    }
-    if (!isValidIdentityCard(tenant.getIdentityCard())) {
-        cerr << "Invalid identity card: " << tenant.getIdentityCard() << endl;
-        return false;
-    }
-    if (!isValidPhone(tenant.getPhone())) {
-        cerr << "Invalid phone number: " << tenant.getPhone() << endl;
-        return false;
-    }
-    if (!isValidDateOfBirth(tenant.getDateOfBirth())) {
-        cerr << "Invalid date of birth: " << tenant.getDateOfBirth() << endl;
-        return false;
-    }
-    items.push_back(tenant);
-    pk_manager.addKey(tenant.getId());
-    cout << "+ Added tenant ID: " << tenant.getId() << endl;
-    return true;
-}
 bool TenantManager::addTenant(const string& fullName, const string& phone, const string& identityCard, const string& dateOfBirth, int gender) {
     int newTenantId = pk_manager.getNextKey();
     if (identityCardExists(identityCard)) {
@@ -111,64 +81,6 @@ bool TenantManager::addTenant(const string& fullName, const string& phone, const
     return true;
 }
 
-bool TenantManager::remove(int tenantId) {
-    auto it = this->findIterator(tenantId);
-    if (it != items.end()) {
-        pk_manager.releaseKey(tenantId);
-        items.erase(it);
-        cout << "- Removed tenant ID: " << tenantId << endl;
-        return true;
-    }
-    cerr << "Tenant not found for removal: " << tenantId << endl;
-    return false;
-}
-bool TenantManager::update(int tenantId, const Tenant& updatedTenant) {
-    auto it = this->findIterator(tenantId);
-    if (it == items.end()) {
-        cerr << "Tenant ID not found: " << tenantId << endl;
-        return false;
-    }
-    if (updatedTenant.getId() != tenantId && exists(updatedTenant.getId())) {
-        cerr << "Updated tenant ID already exists: " << updatedTenant.getId() << endl;
-        return false;
-    }
-    if (updatedTenant.getIdentityCard() != it->getIdentityCard() && identityCardExists(updatedTenant.getIdentityCard())) {
-        cerr << "Updated identity card already exists: " << updatedTenant.getIdentityCard() << endl;
-        return false;
-    }
-    if (updatedTenant.getPhone() != it->getPhone() && phoneExists(updatedTenant.getPhone())) {
-        cerr << "Updated phone number already exists: " << updatedTenant.getPhone() << endl;
-        return false;
-    }
-    if (!isValidIdentityCard(updatedTenant.getIdentityCard())) {
-        cerr << "Invalid identity card: " << updatedTenant.getIdentityCard() << endl;
-        return false;
-    }
-    if (!isValidPhone(updatedTenant.getPhone())) {
-        cerr << "Invalid phone number: " << updatedTenant.getPhone() << endl;
-        return false;
-    }
-    if (!isValidDateOfBirth(updatedTenant.getDateOfBirth())) {
-        cerr << "Invalid date of birth: " << updatedTenant.getDateOfBirth() << endl;
-        return false;
-    }
-    if (updatedTenant.getId() != tenantId) {
-        pk_manager.releaseKey(it->getId());
-        pk_manager.addKey(updatedTenant.getId());
-    }
-    *it = updatedTenant;
-    cout << "* Updated tenant ID: " << tenantId << endl;
-    return true;
-}
-
-Tenant* TenantManager::get(int tenantId) {
-    auto it = this->findIterator(tenantId);
-    if (it != items.end()) {
-        cout << "Found tenant ID: " << it->getId() << endl;
-        return &(*it);
-    }
-    return nullptr;
-}
 Tenant* TenantManager::getTenantByIdentityCard(const string& identityCard) {
     for (auto& tenant : items) {
         if (tenant.getIdentityCard() == identityCard) {
@@ -188,9 +100,7 @@ Tenant* TenantManager::getTenantByPhone(const string& phone) {
 Vector<Tenant> TenantManager::getAllTenants() const {
     return items;
 }
-bool TenantManager::exists(int tenantId) const {
-    return pk_manager.isKeyInUse(tenantId);
-}
+
 bool TenantManager::identityCardExists(const string& identityCard) const {
     for (const auto& tenant : items) {
         if (tenant.getIdentityCard() == identityCard) {
@@ -206,9 +116,6 @@ bool TenantManager::phoneExists(const string& phone) const {
         }
     }
     return false;
-}
-int TenantManager::getCount() const {
-    return items.size();
 }
 
 bool TenantManager::isValidIdentityCard(const string& identityCard) const {

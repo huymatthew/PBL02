@@ -49,15 +49,7 @@ bool ServiceManager::saveToDatabase(bool showLog) {
     file.close();
     return true;
 }
-bool ServiceManager::add(const Service& service) {
-    if (pk_manager.isKeyInUse(service.getId())) {
-        cerr << "Service ID already in use: " << service.getId() << endl;
-        return false;
-    }
-    items.push_back(service);
-    pk_manager.addKey(service.getId());
-    return true;
-}
+
 bool ServiceManager::addService(int serviceType, int billId, int quantity, double price) {
     if (!isValidServiceType(serviceType) || !isValidQuantity(quantity) || !isValidPrice(price)) {
         cerr << "Invalid service parameters." << endl;
@@ -68,48 +60,11 @@ bool ServiceManager::addService(int serviceType, int billId, int quantity, doubl
     items.push_back(newService);
     return true;
 }
-bool ServiceManager::remove(int serviceId) {
-    auto it = findIterator(serviceId);
-    if (it != items.end()) {
-        items.erase(it);
-        pk_manager.releaseKey(serviceId);
-        return true;
-    }
-    cerr << "Service ID not found: " << serviceId << endl;
-    return false;
-}
-bool ServiceManager::update(int serviceId, const Service& updatedService) {
-    auto it = findIterator(serviceId);
-    if (it != items.end()) {
-        if (serviceId != updatedService.getId() && pk_manager.isKeyInUse(updatedService.getId())) {
-            cerr << "Updated service ID already in use: " << updatedService.getId() << endl;
-            return false;
-        }
-        *it = updatedService;
-        return true;
-    }
-    cerr << "Service ID not found: " << serviceId << endl;
-    return false;
-}
-
-Service* ServiceManager::get(int serviceId) {
-    auto it = findIterator(serviceId);
-    if (it != items.end()) {
-        return &(*it);
-    }
-    return nullptr;
-}
 
 int ServiceManager::getNextServiceId() {
     return pk_manager.getNextKey();
 }
 
-bool ServiceManager::exists(int serviceId) const {
-    return pk_manager.isKeyInUse(serviceId);
-}
-int ServiceManager::getCount() const {
-    return items.size();
-}
 int ServiceManager::getServiceCountByBill(int billId) const {
     for (const auto& service : items) {
         if (service.getBillId() == billId) {

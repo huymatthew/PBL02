@@ -61,18 +61,6 @@ bool RoomManager::saveToDatabase(bool showLog)
     return true;
 }
 
-bool RoomManager::add(const Room &room)
-{
-    if (pk_manager.isKeyInUse(room.getId()))
-    {
-        cerr << "Room ID already in use: " << room.getId() << endl;
-        return false;
-    }
-    items.push_back(room);
-    pk_manager.addKey(room.getId());
-    cout << "+ Added room ID: " << room.getId() << endl;
-    return true;
-}
 bool RoomManager::addRoom(const string &roomName, int roomType, double monthlyRent, const string &description, int status)
 {
     int roomId = pk_manager.getNextKey();
@@ -82,41 +70,7 @@ bool RoomManager::addRoom(const string &roomName, int roomType, double monthlyRe
     cout << "+ Added room ID: " << roomId << endl;
     return true;
 }
-bool RoomManager::remove(int roomId)
-{
-    auto it = this->findIterator(roomId);
-    if (it != items.end())
-    {
-        pk_manager.releaseKey(roomId);
-        items.erase(it);
-        cout << "- Removed room ID: " << roomId << endl;
-        return true;
-    }
-    cerr << "Room not found for removal: " << roomId << endl;
-    return false;
-}
-bool RoomManager::update(int roomId, const Room &updatedRoom)
-{
-    auto it = this->findIterator(roomId);
-    if (it != items.end())
-    {
-        *it = updatedRoom;
-        cout << "* Updated room ID: " << roomId << endl;
-        return true;
-    }
-    cerr << "Room not found for update: " << roomId << endl;
-    return false;
-}
 
-Room *RoomManager::get(int roomId)
-{
-    auto it = this->findIterator(roomId);
-    if (it != items.end())
-    {
-        return &(*it);
-    }
-    return nullptr;
-}
 Vector<Room> RoomManager::getRoomsByType(int roomType)
 {
     Vector<Room> result;
@@ -145,14 +99,7 @@ Vector<Room> RoomManager::getAllRooms() const
 {
     return items;
 }
-bool RoomManager::exists(int roomId) const
-{
-    return pk_manager.isKeyInUse(roomId);
-}
-int RoomManager::getCount() const
-{
-    return items.size();
-}
+
 int RoomManager::getAvailableRoomCount() const
 {
     int count = 0;

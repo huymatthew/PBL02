@@ -25,6 +25,7 @@ public:
     int getNextId() {
         return pk_manager.getNextKey();
     }
+    
 protected:
     Vector<T> items;
     bool data_loaded;
@@ -51,6 +52,58 @@ bool Manager<T>::add(const T& item) {
     pk_manager.addKey(item.getId());
     cout << "+ Added item ID: " << item.getId() << endl;
     return true;
+}
+
+template <typename T>
+bool Manager<T>::remove(int id) {
+    auto it = this->findIterator(id);
+    if (it != items.end()) {
+        pk_manager.releaseKey(id);
+        items.erase(it);
+        cout << "- Removed item ID: " << id << endl;
+        return true;
+    }
+    cerr << "Item not found for removal: " << id << endl;
+    return false;
+}
+
+template <typename T>
+bool Manager<T>::update(int id, const T& updatedItem) {
+    auto it = this->findIterator(id);
+    if (it == items.end()) {
+        cerr << "Item ID not found: " << id << endl;
+        return false;
+    }
+    if (updatedItem.getId() != id && exists(updatedItem.getId())) {
+        cerr << "Updated item ID already exists: " << updatedItem.getId() << endl;
+        return false;
+    }
+    if (updatedItem.getId() != id) {
+        pk_manager.releaseKey(it->getId());
+        pk_manager.addKey(updatedItem.getId());
+    }
+    *it = updatedItem;
+    cout << "* Updated item ID: " << id << endl;
+    return true;
+}
+
+template <typename T>
+T* Manager<T>::get(int id) {
+    auto it = this->findIterator(id);
+    if (it != items.end()) {
+        return &(*it);
+    }
+    return nullptr;
+}
+
+template <typename T>
+bool Manager<T>::exists(int id) const {
+    return pk_manager.isKeyInUse(id);
+}
+
+template <typename T>
+int Manager<T>::getCount() const {
+    return items.size();
 }
 
 #endif // MANAGER_H

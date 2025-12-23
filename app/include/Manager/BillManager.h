@@ -22,14 +22,9 @@ public:
     bool loadFromDatabase(bool showLog = false) override;
     bool saveToDatabase(bool showLog = false) override;
     
-    bool add(const Bill& bill) override;
     bool addBill(int contractId, const string& month,
              double rent, double total, int status);
-    bool remove(int billId) override;
-    bool update(int billId, const Bill& updatedBill) override;
-    Bill* get(int billId) override;
-    bool exists(int billId) const override;
-    int getCount() const override;
+
     int getUnpaidBillCount() const;
 
     bool markBillAsPaid(int billId);

@@ -57,50 +57,12 @@ bool ContractManager::saveToDatabase(bool showLog) {
     }
     return true;
 }
-bool ContractManager::add(const Contract& contract) {
-    // if (pk_manager.isKeyInUse(contract.getId())) {
-    //     cerr << "Contract ID already in use: " << contract.getId() << endl;
-    //     return false;
-    // }
-    items.push_back(contract);
-    pk_manager.addKey(contract.getId());
-    cout << "+ Added contract ID: " << contract.getId() << endl;
-    return true;
-}
+
 bool ContractManager::addContract(const int& roomId, const string& start, const string& end,
                                   double rent, double deposit, int status, const string& notes) {
     int newId = pk_manager.getNextKey();
     Contract newContract(newId, roomId, start, end, rent, deposit, status, notes);
     return add(newContract);
-}
-bool ContractManager::remove(int contractId) {
-    auto it = this->findIterator(contractId);
-    if (it != items.end()) {
-        pk_manager.releaseKey(contractId);
-        items.erase(it);
-        cout << "- Removed contract ID: " << contractId << endl;
-        return true;
-    }
-    cerr << "Contract not found for removal: " << contractId << endl;
-    return false;
-}
-bool ContractManager::update(int contractId, const Contract& updatedContract) {
-    auto it = this->findIterator(contractId);
-    if (it != items.end()) {
-        *it = updatedContract;
-        cout << "* Updated contract ID: " << contractId << endl;
-        return true;
-    }
-    cerr << "Contract not found for update: " << contractId << endl;
-    return false;
-}
-
-Contract* ContractManager::get(int contractId) {
-    auto it = this->findIterator(contractId);
-    if (it != items.end()) {
-        return &(*it);
-    }
-    return nullptr;
 }
 
 void ContractManager::setStatusWhenDue(){
@@ -126,10 +88,6 @@ Contract* ContractManager::getActiveContractByRoom(const int& roomId){
     return nullptr;
 }
 
-bool ContractManager::exists(int contractId) const {
-    return pk_manager.isKeyInUse(contractId);
-}
-
 bool ContractManager::roomHasActiveContract(const int& roomId) const {
     for (const auto& contract : items) {
         if (contract.getRoomId() == roomId && contract.getStatus() == 1) { // 1: active
@@ -138,9 +96,7 @@ bool ContractManager::roomHasActiveContract(const int& roomId) const {
     }
     return false;
 }
-int ContractManager::getCount() const {
-    return items.size();
-}
+
 double ContractManager::getTotalMonthlyRent() const {
     double total = 0.0;
     for (const auto& contract : items) {
