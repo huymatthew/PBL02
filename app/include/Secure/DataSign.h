@@ -13,8 +13,6 @@ public:
 private:
     static long long hashFile(const string& filePath);
     static long long hashString(const string& str);
-    static string x,y;
 };
-
 
 #endif // DATASIGN_H

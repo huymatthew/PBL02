@@ -1,7 +1,5 @@
 #include <Secure/DataSign.h>
-
-string DataSign::x = "NONE";
-string DataSign::y = "NONE";
+#include <Secure/SecretManager.h>
 
 long long DataSign::hashDataSign() {
     long long combined_hash = 0;
@@ -50,32 +48,14 @@ long long DataSign::hashString(const string& str) {
 
 bool DataSign::saveDataSign() {
     long long current_hash = hashDataSign();
-    cout << "Data signature hash saved: " << current_hash << endl;
-    ofstream f("./.env", ios::out | ios::trunc);
-    if (!f.is_open()){
-        cout << "Can't save data" << endl;
-        return false;
-    } else {
-        if (x == "NONE" || y == "NONE"){
-            cerr << "DataSign variables not initialized." << endl;
-            return false;
-        }
-        f << x << " " << y << " " << current_hash << endl;
-        f.flush();
-        cout << "Data signature saved successfully." << endl;
-        return true;
-    }
+    SecretManager::filesign = current_hash;
+    SecretManager::saveSecrets();
+    return true;
 }
 
 bool DataSign::checkModified() {
-    ifstream f("./.env");
-    long long sign;
-    if (!f.is_open()){
-        cout << "Can't load data" << endl;
-        return true;
-    } else {
-        f >> x >> y >> sign;
-        long long current_hash = hashDataSign();
-        return current_hash != sign;
-    }
+    SecretManager::loadSecrets();
+    long long stored_hash = SecretManager::filesign;
+    long long current_hash = hashDataSign();
+    return stored_hash != current_hash;
 }

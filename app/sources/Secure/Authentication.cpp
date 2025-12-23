@@ -1,5 +1,5 @@
 #include <Secure/Authentication.h>
-
+#include <Secure/SecretManager.h>
 
 Authentication::Authentication() : password(738912838912), salt("126737"){
     if (!loaded) loadinfo();
@@ -64,24 +64,16 @@ void Authentication::ChangePassword(){
 }
 
 void Authentication::loadinfo(){
-    ifstream f("./.env");
-    if (!f.is_open()){
-        cout << "Can't load data" << endl;
-        return;
-    } else {
-        f >> password >> salt;
-        loaded = true;
-    }
+    SecretManager::loadSecrets();
+    password = SecretManager::passhashed;
+    salt = SecretManager::salt;
+    loaded = true;
 }
 
 void Authentication::saveinfo(){
-    ofstream f("./.env");
-    if (!f.is_open()){
-        cout << "Can't save data" << endl;
-        return;
-    } else {
-        f << password << " " << salt << endl;
-    }
+    SecretManager::passhashed = password;
+    SecretManager::salt = salt;
+    SecretManager::saveSecrets();
 }
 
 bool Authentication::Auth(){
