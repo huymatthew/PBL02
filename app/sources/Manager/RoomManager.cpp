@@ -227,22 +227,22 @@ Vector<Room*> RoomManager::getAllAvailableRooms(){
 bool RoomManager::validateItem(const Room& item) const {
     ostringstream err;
     if (item.getId() <= 0) {
-        err << "Invalid room ID: " << item.getId() << endl;
+        err << "ID phòng không hợp lệ: " << item.getId() << endl;
     }
     if (item.getRoomName().empty()) {
-        err << "Room name cannot be empty for room ID: " << item.getId() << endl;
+        err << "Tên phòng không được để trống cho phòng ID: " << item.getId() << endl;
     }
     if (item.getRoomType() < 0 || item.getRoomType() > 2) {
-        err << "Invalid room type for room ID: " << item.getId() << endl;
+        err << "Loại phòng không hợp lệ cho phòng ID: " << item.getId() << endl;
     }
     if (item.getMonthlyRent() < 0) {
-        err << "Monthly rent cannot be negative for room ID: " << item.getId() << endl;
+        err << "Giá thuê tháng không được âm cho phòng ID: " << item.getId() << endl;
     }
     if (item.getStatus() < 0 || item.getStatus() > 1) {
-        err << "Invalid status for room ID: " << item.getId() << endl;
+        err << "Trạng thái không hợp lệ cho phòng ID: " << item.getId() << endl;
     }
     if (item.getRoomName().find(' ') != string::npos) {
-        err << "Room name cannot contain spaces for room ID: " << item.getId() << endl;
+        err << "Tên phòng không được chứa khoảng trắng cho phòng ID: " << item.getId() << endl;
     }
     if (err.str().length() > 0) {
         QMessageBox::warning(nullptr, "Dữ liệu phòng không hợp lệ", QString::fromStdString(err.str()));

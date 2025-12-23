@@ -199,22 +199,22 @@ QStandardItemModel* TenantManager::getTenantsAsModel() const {
 bool TenantManager::validateItem(const Tenant& item) const {
     ostringstream err;
     if (item.getId() <= 0) {
-        err << "Invalid tenant ID: " << item.getId() << endl;
+        err << "Mã khách thuê không hợp lệ: " << item.getId() << endl;
     }
     if (item.getFullName().empty()) {
-        err << "Tenant name cannot be empty for tenant ID: " << item.getId() << endl;
+        err << "Tên khách thuê không được để trống cho mã: " << item.getId() << endl;
     }
     if (!isValidPhone(item.getPhone())) {
-        err << "Invalid phone number for tenant ID: " << item.getId() << endl;
+        err << "Số điện thoại không hợp lệ cho mã khách: " << item.getId() << endl;
     }
     if (!isValidIdentityCard(item.getIdentityCard())) {
-        err << "Invalid identity card for tenant ID: " << item.getId() << endl;
+        err << "CMND/CCCD không hợp lệ cho mã khách: " << item.getId() << endl;
     }
     if (!isValidDateOfBirth(item.getDateOfBirth())) {
-        err << "Invalid date of birth for tenant ID: " << item.getId() << endl;
+        err << "Ngày sinh không hợp lệ cho mã khách: " << item.getId() << endl;
     }
     if (item.getGender() != 1 && item.getGender() != 2) {
-        err << "Invalid gender for tenant ID: " << item.getId() << endl;
+        err << "Giới tính không hợp lệ cho mã khách: " << item.getId() << endl;
     }
     if (err.str().length() > 0) {
         QMessageBox::warning(nullptr, "Dữ liệu khách thuê không hợp lệ", QString::fromStdString(err.str()));

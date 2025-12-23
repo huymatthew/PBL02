@@ -26,22 +26,22 @@ void AddContractDialog::on_saveButton_clicked() {
     // Input validation
     string errorlog = "";
     if (roomIdComboBox->currentIndex() == -1) {
-        errorlog += "- Please select a valid Room ID.\n";
+        errorlog += "- Vui lòng chọn phòng hợp lệ.\n";
     }
     if (startDate > endDate) {
-        errorlog += "- Start Date cannot be after End Date.\n";
+        errorlog += "- Ngày bắt đầu không được sau ngày kết thúc.\n";
     }
     if (monthlyRent <= 0) {
-        errorlog += "- Monthly Rent must be greater than zero.\n";
+        errorlog += "- Tiền thuê hàng tháng phải lớn hơn 0.\n";
     }
     if (deposit < 0) {
-        errorlog += "- Deposit cannot be negative.\n";
+        errorlog += "- Tiền đặt cọc không được âm.\n";
     }
     if (tenantList->count() == 0) {
-        errorlog += "- Please add at least one tenant.\n";
+        errorlog += "- Vui lòng thêm ít nhất một khách thuê.\n";
     }
     if (roomIdComboBox->currentText().contains("Occupied")) {
-        errorlog += "- Selected room is already occupied. Please choose another room.\n";
+        errorlog += "- Phòng đã chọn đã được thuê. Vui lòng chọn phòng khác.\n";
     }
 
     // check overlap tenants
@@ -60,8 +60,9 @@ void AddContractDialog::on_saveButton_clicked() {
         }
     }
     if (tenantOverlap) {
-        errorlog += "- Duplicate tenants detected. Please ensure each tenant is added only once.\n";
+        errorlog += "- Phát hiện khách thuê trùng lặp. Vui lòng đảm bảo mỗi khách thuê chỉ được thêm một lần.\n";
     }
+
 
 
     if (!errorlog.empty()) {

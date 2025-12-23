@@ -165,28 +165,28 @@ void ContractManager::terminateContract(int contractId){
 bool ContractManager::validateItem(const Contract& item) const {
     ostringstream err;
     if (item.getId() <= 0) {
-        err << "Invalid contract ID: " << item.getId() << endl;
+        err << "Mã hợp đồng không hợp lệ: " << item.getId() << endl;
     }
     if (item.getRoomId() <= 0) {
-        err << "Invalid room ID for contract ID: " << item.getId() << endl;
+        err << "Mã phòng không hợp lệ cho hợp đồng ID: " << item.getId() << endl;
     }
     if (item.getMonthlyRent() < 0) {
-        err << "Invalid monthly rent for contract ID: " << item.getId() << endl;
+        err << "Giá thuê tháng không hợp lệ cho hợp đồng ID: " << item.getId() << endl;
     }
     if (item.getDeposit() < 0) {
-        err << "Invalid deposit for contract ID: " << item.getId() << endl;
+        err << "Tiền cọc không hợp lệ cho hợp đồng ID: " << item.getId() << endl;
     }
     if (item.getStatus() < 0 || item.getStatus() > 2) {
-        err << "Invalid status for contract ID: " << item.getId() << endl;
+        err << "Trạng thái không hợp lệ cho hợp đồng ID: " << item.getId() << endl;
     }
     if (item.getStartDate().length() != 10 || item.getStartDate()[4] != '-' || item.getStartDate()[7] != '-') {
-        err << "Invalid start date format for contract ID: " << item.getId() << endl;
+        err << "Định dạng ngày bắt đầu không hợp lệ cho hợp đồng ID: " << item.getId() << endl;
     }
     if (item.getEndDate().length() != 10 || item.getEndDate()[4] != '-' || item.getEndDate()[7] != '-') {
-        err << "Invalid end date format for contract ID: " << item.getId() << endl;
+        err << "Định dạng ngày kết thúc không hợp lệ cho hợp đồng ID: " << item.getId() << endl;
     }
     if (item.getStartDate() >= item.getEndDate()) {
-        err << "Start date must be before end date for contract ID: " << item.getId() << endl;
+        err << "Ngày bắt đầu phải trước ngày kết thúc cho hợp đồng ID: " << item.getId() << endl;
     }
     if (err.str().length() > 0) {
         QMessageBox::warning(nullptr, "Dữ liệu hợp đồng không hợp lệ", QString::fromStdString(err.str()));

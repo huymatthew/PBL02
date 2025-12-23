@@ -150,22 +150,22 @@ long BillManager::getTotalRevenue(QDate fromDate,  QDate toDate) const {
 bool BillManager::validateItem(const Bill& item) const {
     ostringstream err;
     if (item.getId() <= 0) {
-        err << "Invalid bill ID: " << item.getId() << endl;
+        err << "Mã hóa đơn không hợp lệ: " << item.getId() << endl;
     }
     if (item.getContractId() <= 0) {
-        err << "Invalid contract ID for bill ID: " << item.getId() << endl;
+        err << "Mã hợp đồng không hợp lệ cho hóa đơn ID: " << item.getId() << endl;
     }
     if (item.getRoomRent() < 0) {
-        err << "Invalid room rent for bill ID: " << item.getId() << endl;
+        err << "Giá thuê phòng không hợp lệ cho hóa đơn ID: " << item.getId() << endl;
     }
     if (item.getTotalAmount() < 0) {
-        err << "Invalid total amount for bill ID: " << item.getId() << endl;
+        err << "Tổng tiền không hợp lệ cho hóa đơn ID: " << item.getId() << endl;
     }
     if (item.getStatus() < 0 || item.getStatus() > 2) {
-        err << "Invalid status for bill ID: " << item.getId() << endl;
+        err << "Trạng thái không hợp lệ cho hóa đơn ID: " << item.getId() << endl;
     }
     if (item.getBillingMonth().length() != 7 || item.getBillingMonth()[4] != '-') {
-        err << "Invalid billing month format for bill ID: " << item.getId() << endl;
+        err << "Định dạng tháng thanh toán không hợp lệ cho hóa đơn ID: " << item.getId() << endl;
     }
     if (err.str().length() > 0) {
         QMessageBox::warning(nullptr, "Dữ liệu hóa đơn không hợp lệ", QString::fromStdString(err.str()));
