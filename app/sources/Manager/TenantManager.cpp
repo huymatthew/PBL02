@@ -51,6 +51,10 @@ bool TenantManager::saveToDatabase(bool showLog) {
     }
     return true;
 }
+void TenantManager::quicksave() {
+    saveToDatabase(false);
+    DataSign::saveDataSign();
+}
 
 bool TenantManager::addTenant(const string& fullName, const string& phone, const string& identityCard, const string& dateOfBirth, int gender) {
     int newTenantId = pk_manager.getNextKey();
@@ -75,10 +79,7 @@ bool TenantManager::addTenant(const string& fullName, const string& phone, const
         return false;
     }
     Tenant newTenant(newTenantId, fullName, phone, identityCard, dateOfBirth, gender);
-    items.push_back(newTenant);
-    pk_manager.addKey(newTenantId);
-    cout << "+ Added tenant ID: " << newTenantId << endl;
-    return true;
+    return add(newTenant);
 }
 
 Tenant* TenantManager::getTenantByIdentityCard(const string& identityCard) {
@@ -192,12 +193,4 @@ QStandardItemModel* TenantManager::getTenantsAsModel() const {
         model->appendRow(row);
     }
     return model;
-}
-
-Tenant* TenantManager::getTenantSelected() {
-    return selected;
-}
-
-void TenantManager::setTenantSelected(Tenant* tenant) {
-    selected = tenant;
 }

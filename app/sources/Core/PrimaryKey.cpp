@@ -17,7 +17,6 @@ int PrimaryKey::getNextKey() {
     while (used_keys.find(new_key) != used_keys.end()) {
         new_key = generateKey();
     }
-    used_keys.insert(new_key);
     return new_key;
 }
 void PrimaryKey::releaseKey(int key) {

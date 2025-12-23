@@ -1,5 +1,6 @@
 #include <Manager/RoomManager.h>
 #include <Core/ExtraFormat.h>
+#include <Secure/DataSign.h>
 
 using namespace std;
 
@@ -60,15 +61,17 @@ bool RoomManager::saveToDatabase(bool showLog)
     }
     return true;
 }
+void RoomManager::quicksave()
+{
+    saveToDatabase(false);
+    DataSign::saveDataSign();
+}
 
 bool RoomManager::addRoom(const string &roomName, int roomType, double monthlyRent, const string &description, int status)
 {
     int roomId = pk_manager.getNextKey();
     Room newRoom(roomId, roomName, roomType, monthlyRent, description, status);
-    items.push_back(newRoom);
-    pk_manager.addKey(roomId);
-    cout << "+ Added room ID: " << roomId << endl;
-    return true;
+    return add(newRoom);
 }
 
 Vector<Room> RoomManager::getRoomsByType(int roomType)
@@ -208,17 +211,6 @@ QStringList RoomManager::getRoomListForComboBox(int filter) const { // 0: all, 1
         }
     }
     return list;
-}
-
-
-Room *RoomManager::getRoomSelected()
-{
-    return selected;
-}
-
-void RoomManager::setRoomSelected(Room *room)
-{
-    selected = room;
 }
 
 Vector<Room*> RoomManager::getAllAvailableRooms(){

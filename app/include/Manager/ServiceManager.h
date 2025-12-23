@@ -20,6 +20,7 @@ public:
 
     bool loadFromDatabase(bool showLog = false) override;
     bool saveToDatabase(bool showLog = false) override;
+    void quicksave() override;
     
     bool addService(int serviceType, int billId, int quantity, double price);
 

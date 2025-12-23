@@ -44,7 +44,7 @@ void QuanLy::signalAndSlotConnect()
                      { onShowBillDetails(index.siblingAtColumn(0).data().toInt()); });
     QObject::connect(contractsTableView, &QTableView::doubleClicked, [this](const QModelIndex &index)
                         {
-                            manager->getContractManager().setSelected(manager->getContractManager().get(index.siblingAtColumn(0).data().toInt()));
+                            manager->getContractManager().setSelectedItem(manager->getContractManager().get(index.siblingAtColumn(0).data().toInt()));
                         });
 
     QObject::connect(deleteTenantButton, &QPushButton::clicked, [this]()
@@ -69,7 +69,7 @@ void QuanLy::signalAndSlotConnect()
 
     QObject::connect(endContractButton, &QPushButton::clicked, [this]()
                      {
-                         Contract* selectedContract = manager->getContractManager().getSelected();
+                         Contract* selectedContract = manager->getContractManager().getSelectedItem();
                          if (!selectedContract) {
                              QMessageBox::warning(mainWindow, "Chưa chọn hợp đồng", "Vui lòng chọn hợp đồng để kết thúc.");
                              return;
@@ -80,7 +80,7 @@ void QuanLy::signalAndSlotConnect()
     
     QObject::connect(unableContractButton, &QPushButton::clicked, [this]()
                      {
-                         Contract* selectedContract = manager->getContractManager().getSelected();
+                         Contract* selectedContract = manager->getContractManager().getSelectedItem();
                          if (!selectedContract) {
                              QMessageBox::warning(mainWindow, "Chưa chọn hợp đồng", "Vui lòng chọn hợp đồng để vô hiệu hóa.");
                              return;
@@ -156,7 +156,7 @@ void QuanLy::onShowTenantDetails(int tenantId){
             tenantRoomText->setText("No Room");
     } else {tenantRoomText->setText("No Room");}
     
-    manager->getTenantManager().setTenantSelected(tenant);
+    manager->getTenantManager().setSelectedItem(tenant);
     tenantNameText->setText(QString::fromStdString(formatSpace(tenant->getFullName())));
     tenantIdText->setText(QString::fromStdString(tenant->getIdentityCard()));
     tenantPhoneText->setText(QString::fromStdString(tenant->getPhone()));
@@ -170,7 +170,7 @@ void QuanLy::onShowRoomDetails(int roomId)
         cerr << "Room ID " << roomId << " not found." << endl;
         return;
     }
-    manager->getRoomManager().setRoomSelected(room);
+    manager->getRoomManager().setSelectedItem(room);
     roomNumberText->setText(QString::fromStdString(room->getRoomName()));
     roomDescText->setText(QString::fromStdString(formatSpace(room->getDescription())));
     roomPriceText->setText(QString::number(room->getMonthlyRent(), 'f', 0) + " VND");
@@ -184,7 +184,7 @@ void QuanLy::onShowBillDetails(int billId){
         cerr << "Bill Id" << billId << " Not Found" << endl;
         return;
     }
-    manager->getBillManager().setSelected(bill);
+    manager->getBillManager().setSelectedItem(bill);
     paymentRoomText->setText(QString::fromStdString(manager->getRoomFromContract(bill->getContractId())->getRoomName()));
     paymentMonthText->setText(QString::fromStdString(bill->getBillingMonth()));
     rentAmountText->setText(moneyFormat(bill->getRoomRent()));
@@ -204,7 +204,7 @@ void QuanLy::onShowBillDetails(int billId){
 // Load
 void QuanLy::loadTenantView()
 {
-    manager->getTenantManager().setTenantSelected(nullptr);
+    manager->getTenantManager().setSelectedItem(nullptr);
     tenantsTableView->setModel(manager->getTenantManager().getTenantsAsModel());
     for (int row = 0; row < tenantsTableView->model()->rowCount(); ++row) {
         tenantsTableView->setRowHidden(row, false);
@@ -212,7 +212,7 @@ void QuanLy::loadTenantView()
 }
 void QuanLy::loadRoomView()
 {
-    manager->getRoomManager().setRoomSelected(nullptr);
+    manager->getRoomManager().setSelectedItem(nullptr);
     roomsTableView->setModel(manager->getRoomManager().getRoomsAsModel());
     for (int row = 0; row < roomsTableView->model()->rowCount(); ++row) {
         roomsTableView->setRowHidden(row, false);
@@ -237,7 +237,7 @@ void QuanLy::loadContractView()
 }
 void QuanLy::loadBillView()
 {
-    manager->getBillManager().setSelected(nullptr);
+    manager->getBillManager().setSelectedItem(nullptr);
     paymentsTableView->setModel(manager->getBillManager().getBillsAsModel());
     for (int row = 0; row < paymentsTableView->model()->rowCount(); ++row) {
         paymentsTableView->setRowHidden(row, false);
@@ -282,12 +282,12 @@ void QuanLy::addBillCall()
 {
     AddBillDialog addBillDialog(mainWindow);
     addBillDialog.setFixedSize(900, 800);
-    if (manager->getRoomManager().getRoomSelected()) {
-        if (manager->getRoomManager().getRoomSelected()->getStatus() != 1){
+    if (manager->getRoomManager().getSelectedItem()) {
+        if (manager->getRoomManager().getSelectedItem()->getStatus() != 1){
             QMessageBox::warning(mainWindow, "Lỗi", "Phòng này chưa có khách");
             return;
         }
-        addBillDialog.setRoom(manager->getRoomManager().getRoomSelected()->getId());
+        addBillDialog.setRoom(manager->getRoomManager().getSelectedItem()->getId());
         addBillDialog.exec();
         paymentsTableView->setModel(manager->getBillManager().getBillsAsModel());
     } else {
@@ -306,7 +306,7 @@ void QuanLy::addContractCall()
 // Edit
 void QuanLy::editTenantCall()
 {
-    Tenant *tenant = manager->getTenantManager().getTenantSelected();
+    Tenant *tenant = manager->getTenantManager().getSelectedItem();
     if (tenant == nullptr)
     {
         QMessageBox::warning(mainWindow, "Edit Tenant", "Please select a tenant to edit.");
@@ -318,7 +318,7 @@ void QuanLy::editTenantCall()
 }
 void QuanLy::editRoomCall()
 {
-    Room *room = manager->getRoomManager().getRoomSelected();
+    Room *room = manager->getRoomManager().getSelectedItem();
     if (room == nullptr)
     {
         QMessageBox::warning(mainWindow, "Edit Room", "Please select a room to edit.");
@@ -332,7 +332,7 @@ void QuanLy::editRoomCall()
 // Remove
 void QuanLy::removeTenantCall()
 {
-    Tenant *tenant = manager->getTenantManager().getTenantSelected();
+    Tenant *tenant = manager->getTenantManager().getSelectedItem();
     if (tenant == nullptr)
     {
         QMessageBox::warning(mainWindow, "Remove Tenant", "Please select a tenant to remove.");
@@ -357,7 +357,7 @@ void QuanLy::removeTenantCall()
 }
 void QuanLy::removeRoomCall()
 {
-    Room *room = manager->getRoomManager().getRoomSelected();
+    Room *room = manager->getRoomManager().getSelectedItem();
     if (room == nullptr)
     {
         QMessageBox::warning(mainWindow, "Remove Room", "Please select a room to remove.");

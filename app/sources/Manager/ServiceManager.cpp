@@ -1,4 +1,5 @@
 #include <Manager/ServiceManager.h>
+#include <Secure/DataSign.h>
 using namespace std;
 
 ServiceManager::ServiceManager() : Manager<Service>() {}
@@ -50,6 +51,11 @@ bool ServiceManager::saveToDatabase(bool showLog) {
     return true;
 }
 
+void ServiceManager::quicksave() {
+    saveToDatabase(false);
+    DataSign::saveDataSign();
+}
+
 bool ServiceManager::addService(int serviceType, int billId, int quantity, double price) {
     if (!isValidServiceType(serviceType) || !isValidQuantity(quantity) || !isValidPrice(price)) {
         cerr << "Invalid service parameters." << endl;
@@ -57,8 +63,7 @@ bool ServiceManager::addService(int serviceType, int billId, int quantity, doubl
     }
     int newServiceId = pk_manager.getNextKey();
     Service newService(newServiceId, serviceType, billId, quantity, price);
-    items.push_back(newService);
-    return true;
+    return add(newService);
 }
 
 int ServiceManager::getNextServiceId() {

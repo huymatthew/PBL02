@@ -6,6 +6,7 @@
 #include <Core/PrimaryKey.h>
 #include <Core/cVector.h>
 #include <iostream>
+
 using namespace std;
 
 template <typename T>
@@ -14,6 +15,7 @@ public:
     virtual ~Manager() {};
     virtual bool loadFromDatabase(bool showLog = false) = 0;
     virtual bool saveToDatabase(bool showLog = false) = 0;
+    virtual void quicksave() = 0;
 
     virtual bool add(const T& item);
     virtual bool remove(int id);
@@ -25,12 +27,16 @@ public:
     int getNextId() {
         return pk_manager.getNextKey();
     }
-    
+
+    T* getSelectedItem() const { return selectedItem; }
+    void setSelectedItem(T* item) { selectedItem = item; }
+
 protected:
     Vector<T> items;
     bool data_loaded;
     int item_count;
     PrimaryKey pk_manager;
+    T* selectedItem;
 
     typename Vector<T>::iterator findIterator(int id){
         for (auto it = items.begin(); it != items.end(); ++it) {
@@ -51,6 +57,7 @@ bool Manager<T>::add(const T& item) {
     items.push_back(item);
     pk_manager.addKey(item.getId());
     cout << "+ Added item ID: " << item.getId() << endl;
+    quicksave();
     return true;
 }
 
@@ -61,6 +68,7 @@ bool Manager<T>::remove(int id) {
         pk_manager.releaseKey(id);
         items.erase(it);
         cout << "- Removed item ID: " << id << endl;
+        quicksave();
         return true;
     }
     cerr << "Item not found for removal: " << id << endl;
@@ -84,6 +92,7 @@ bool Manager<T>::update(int id, const T& updatedItem) {
     }
     *it = updatedItem;
     cout << "* Updated item ID: " << id << endl;
+    quicksave();
     return true;
 }
 

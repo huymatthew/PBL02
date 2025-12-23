@@ -23,6 +23,7 @@ public:
 
     bool loadFromDatabase(bool showLog = false) override;
     bool saveToDatabase(bool showLog = false) override;
+    void quicksave() override;
     
     bool addRoom(const string& roomName, int roomType,
                 double monthlyRent, const string& description, int status);
@@ -42,13 +43,8 @@ public:
     QStandardItemModel* getRoomsAsModel() const;
     QStringList getRoomListForComboBox(int filter = 0) const;
 
-    Room* getRoomSelected();
-    void setRoomSelected(Room* room);
-
     Vector<Room*> getAllAvailableRooms();
-    
-private:
-    Room* selected;
+
     friend class DataManager;
 };
 

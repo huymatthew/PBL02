@@ -1,5 +1,7 @@
 #include <Manager/ContractManager.h>
 #include <Core/ExtraFormat.h>
+#include <Secure/DataSign.h>
+#include <Manager/DataManager.h>
 #include <QMessageBox>
 using namespace std;
 
@@ -27,7 +29,6 @@ bool ContractManager::loadFromDatabase(bool showLog) {
             cerr << "Duplicate contract ID found: " << id << endl;
             continue; 
         }
-        pk_manager.addKey(id);
         items.emplace_back(id, roomId, start, end, rent, deposit, status, notes);
         cout << "- Loaded contract ID: " << id << endl;
     }
@@ -57,6 +58,11 @@ bool ContractManager::saveToDatabase(bool showLog) {
     }
     return true;
 }
+void ContractManager::quicksave() {
+    saveToDatabase(false);
+    DataManager::getInstance().getRentManager().saveToDatabase(false);
+    DataSign::saveDataSign();
+}
 
 bool ContractManager::addContract(const int& roomId, const string& start, const string& end,
                                   double rent, double deposit, int status, const string& notes) {
@@ -75,9 +81,6 @@ void ContractManager::setStatusWhenDue(){
         }
     }
 }
-
-
-
 
 Contract* ContractManager::getActiveContractByRoom(const int& roomId){
     for (auto it = items.begin(); it != items.end(); ++it) {
@@ -119,14 +122,6 @@ bool ContractManager::roomUsed(int roomId) const {
         }
     }
     return false;
-}
-
-Contract* ContractManager::getSelected() const {
-    return selectedContract;
-}
-
-void ContractManager::setSelected(Contract* contract){
-    selectedContract = contract;
 }
 
 void ContractManager::deactivateContract(int contractId){

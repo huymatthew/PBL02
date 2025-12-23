@@ -1,5 +1,6 @@
 #include <Manager/BillManager.h>
 #include <Core/ExtraFormat.h>
+#include <Secure/DataSign.h>
 #include <iostream>
 
 using namespace std;
@@ -52,6 +53,11 @@ bool BillManager::saveToDatabase(bool showLog) {
         if (showLog) cout << "~ Saved bill ID: " << bill.getId() << endl;
     }
     return true;
+}
+
+void BillManager::quicksave() {
+    saveToDatabase(false);
+    DataSign::saveDataSign();
 }
 
 bool BillManager::addBill(int contractId, const string& month, double rent, double total, int status) {

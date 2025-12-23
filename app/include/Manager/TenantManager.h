@@ -4,6 +4,7 @@
 #include <QStandardItem>
 #include <QStandardItemModel>
 #include <Core/ExtraFormat.h>
+#include <Secure/DataSign.h>
 
 #include <Core/Manager.h>
 #include <Data/Tenant.h>
@@ -24,6 +25,7 @@ public:
 
     bool loadFromDatabase(bool showLog = false) override;
     bool saveToDatabase(bool showLog = false) override;
+    void quicksave() override;
     
     bool addTenant(const string& fullName, const string& phone,
                   const string& identityCard, const string& dateOfBirth, int gender);
@@ -34,18 +36,13 @@ public:
 
     QStandardItemModel* getTenantsAsModel() const;
 
-    Tenant* getTenantSelected();
-    void setTenantSelected(Tenant* tenant);
-
     // Validation
     bool identityCardExists(const string& identityCard) const;
     bool phoneExists(const string& phone) const;
     bool isValidIdentityCard(const string& identityCard) const;
     bool isValidPhone(const string& phone) const;
     bool isValidDateOfBirth(const string& dateOfBirth) const;
-    
-private:
-    Tenant* selected;
+
     string formatPhone(const string& phone) const;
     string formatIdentityCard(const string& identityCard) const;
 

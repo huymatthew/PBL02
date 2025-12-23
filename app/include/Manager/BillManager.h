@@ -21,6 +21,7 @@ public:
 
     bool loadFromDatabase(bool showLog = false) override;
     bool saveToDatabase(bool showLog = false) override;
+    void quicksave() override;
     
     bool addBill(int contractId, const string& month,
              double rent, double total, int status);
@@ -34,15 +35,7 @@ public:
 
     long getTotalRevenue(QDate fromDate,  QDate toDate) const;
     
-    
     QStandardItemModel* getBillsAsModel() const;
-
-    void setSelected(Bill* bill) {selected = bill;}
-    Bill* getSelected() {return selected;}
-
-private:
-    Bill* selected;
-
     friend class DataManager;
 };
 
