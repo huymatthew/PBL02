@@ -18,7 +18,7 @@ AddRoomDiag::AddRoomDiag(Room* room, QWidget* parent) : QDialog(parent), Ui_AddR
         lineEditRoomNumber->setText(QString::fromStdString(editingRoom->getRoomName()));
         comboBoxRoomType->setCurrentIndex(editingRoom->getRoomType());
         doubleSpinBoxRentPrice->setValue(editingRoom->getMonthlyRent());
-        plainTextEditDescription->setPlainText(QString::fromStdString(editingRoom->getDescription()));
+        plainTextEditDescription->setPlainText(QString::fromStdString(formatSpace(editingRoom->getDescription())));
         comboBoxStatus->setCurrentIndex(editingRoom->getStatus());
     }
 }

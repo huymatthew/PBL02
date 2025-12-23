@@ -157,7 +157,7 @@ void QuanLy::onShowTenantDetails(int tenantId){
     } else {tenantRoomText->setText("No Room");}
     
     manager->getTenantManager().setTenantSelected(tenant);
-    tenantNameText->setText(QString::fromStdString(tenant->getFullName()));
+    tenantNameText->setText(QString::fromStdString(formatSpace(tenant->getFullName())));
     tenantIdText->setText(QString::fromStdString(tenant->getIdentityCard()));
     tenantPhoneText->setText(QString::fromStdString(tenant->getPhone()));
     tenantGenderText->setText(QString::fromStdString(tenant->getGenderString()));
@@ -172,7 +172,7 @@ void QuanLy::onShowRoomDetails(int roomId)
     }
     manager->getRoomManager().setRoomSelected(room);
     roomNumberText->setText(QString::fromStdString(room->getRoomName()));
-    roomDescText->setText(QString::fromStdString(room->getDescription()));
+    roomDescText->setText(QString::fromStdString(formatSpace(room->getDescription())));
     roomPriceText->setText(QString::number(room->getMonthlyRent(), 'f', 0) + " VND");
 
     roomTypeText->setText(QString::fromStdString(room->getRoomTypeString()));

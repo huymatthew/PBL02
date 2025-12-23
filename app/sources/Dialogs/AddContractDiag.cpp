@@ -53,7 +53,7 @@ void AddContractDialog::on_saveButton_clicked() {
     ContractManager* contractManager = &DataManager::getInstance().getContractManager();
     
     string note = notes.toStdString();
-    std::replace(note.begin(), note.end(),' ', '_');
+    std::replace(note.begin(), note.end(),' ', '~');
     if (!contractManager->addContract(roomId, startDate.toString("yyyy-MM-dd").toStdString(),
     endDate.toString("yyyy-MM-dd").toStdString(), monthlyRent,
     deposit, status, note)) {

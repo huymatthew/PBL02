@@ -2,10 +2,17 @@
 ! Thêm chức năng mã hóa dữ liệu - DONE
 ! Thống nhất ngôn ngữ cho UI - DONE
 ! Thêm Custom Vector để lưu trữ dữ liệu - DONE
-! Thêm chức nangw tìm kiếm
-! Thêm chức năng thống kế
-! Hoàn thiện phần xóa dữ liệu
-! Hoàn thiện Database 
+! Thêm chức nangw tìm kiếm - DONE 
+! Thêm chức năng thống kế - DONE
+! Hoàn thiện phần xóa dữ liệu - DONE (Soft Delete)
+! Hoàn thiện Database - 99% DONE
+! Sửa lỗi hiển thị dữ liệu có khoảng trắng - DONE
+! Đảm bảo ACID cho database - ON PROGRESS...
+! Hoàn thiện thanh toán
+! Hiển thị Hợp đồng
+! Xử lý kiểm tra đầu vào !IMPORTANT 
+! ...
+
 x RoomType
     - 0 : Phòng đơn
     - 1 : Phòng đôi
@@ -24,6 +31,3 @@ x ContractStatus:
 x PaymentStatus:
     - 0 : Chưa thanh toán
     - 1 : Đã thanh toán
-
-
-! bỏ vhh khi hđ đang thuê

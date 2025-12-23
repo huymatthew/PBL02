@@ -58,7 +58,7 @@ string formatName(const string& name) {
     ostringstream oss;
     for (char c : name) {
         if (c == ' ')
-            oss << '_';
+            oss << '~';
         else
             oss << c;
     }
@@ -68,7 +68,7 @@ string formatName(const string& name) {
 string formatSpace(const string& str) {
     ostringstream oss;
     for (char c : str) {
-        if (c == '_')
+        if (c == '~')
             oss << ' ';
         else
             oss << c;

@@ -14,7 +14,7 @@ AddTenantDiag::AddTenantDiag(Tenant* tenant, QWidget* parent) : QDialog(parent),
     signalConnect();
 
     if (editingTenant != nullptr) {
-        lineEditFullName->setText(QString::fromStdString(editingTenant->getFullName()));
+        lineEditFullName->setText(QString::fromStdString(formatSpace(editingTenant->getFullName())));
         lineEditPhone->setText(QString::fromStdString(editingTenant->getPhone()));
         lineEditCCCD->setText(QString::fromStdString(editingTenant->getIdentityCard()));
         dateEditBirthDate->setDate(QDate::fromString(QString::fromStdString(editingTenant->getDateOfBirth()), "yyyy-MM-dd"));

@@ -57,5 +57,6 @@ bool DataSign::checkModified() {
     SecretManager::loadSecrets();
     long long stored_hash = SecretManager::filesign;
     long long current_hash = hashDataSign();
+    cout << "Stored Hash: " << stored_hash << ", Current Hash: " << current_hash << endl;
     return stored_hash != current_hash;
 }

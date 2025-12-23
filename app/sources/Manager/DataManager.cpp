@@ -15,7 +15,7 @@ void DataManager::loadAllData() {
     if (!dataLoaded) {
         if (DataSign::checkModified()) {
             cerr << "\033[1;33mError: Data files have been modified externally since last load.\033[0m" << endl;
-            //abort();
+            abort();
         }
         cout << "\033[1;32mLoading database...\033[0m" << endl;
         billM.loadFromDatabase();

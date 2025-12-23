@@ -42,7 +42,7 @@ void SearchFilterDialog::applySearchFilter() {
 
     for (int row = 0; row < view->model()->rowCount(); ++row) {
         QModelIndex index = view->model()->index(row, searchFieldIndex);
-        QString data = view->model()->data(index).toString().replace("_", " ");
+        QString data = view->model()->data(index).toString().replace('~', " ");
         Qt::CaseSensitivity cs = caseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
         if (data.contains(searchValue, cs) && shouldShowIt(row)) {
             view->setRowHidden(row, false);
