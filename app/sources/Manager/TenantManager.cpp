@@ -277,7 +277,7 @@ QStandardItemModel* TenantManager::getTenantsAsModel() const {
     for (const auto& tenant : items) {
         QList<QStandardItem*> row;
         row.append(new QStandardItem(idnumber(tenant.getId(), 6)));
-        row.append(new QStandardItem(QString::fromStdString(tenant.getFullName())));
+        row.append(new QStandardItem(QString::fromStdString(formatSpace(tenant.getFullName()))));
         row.append(new QStandardItem(QString::fromStdString(tenant.getGenderString())));
         row.append(new QStandardItem(QString::fromStdString(tenant.getPhone())));
         row.append(new QStandardItem(QString::fromStdString(tenant.getIdentityCard())));

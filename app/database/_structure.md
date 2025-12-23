@@ -79,6 +79,7 @@
 ### **Contract Status Enum:**
 - `0`: Không hoạt động/Đã kết thúc
 - `1`: Đang hoạt động
+- `2`: Vô Hiệu Hóa
 
 **File format:** `contract_id room_id start_date end_date monthly_rent deposit status notes`
 

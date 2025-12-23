@@ -65,6 +65,17 @@ string formatName(const string& name) {
     return oss.str();
 }
 
+string formatSpace(const string& str) {
+    ostringstream oss;
+    for (char c : str) {
+        if (c == '_')
+            oss << ' ';
+        else
+            oss << c;
+    }
+    return oss.str();
+}
+
 QString idnumber(const int& id, int length){
     QString s = QString::number(id);
     QString result = "";

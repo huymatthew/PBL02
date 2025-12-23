@@ -248,7 +248,7 @@ QStandardItemModel *RoomManager::getRoomsAsModel() const
         item->setData(room.getStatus(), Qt::UserRole);
         rowItems.append(item);
 
-        rowItems.append(new QStandardItem(QString::fromStdString(room.getDescription())));
+        rowItems.append(new QStandardItem(QString::fromStdString(formatSpace(room.getDescription()))));
         model->appendRow(rowItems);
     }
     return model;

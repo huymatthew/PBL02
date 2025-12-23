@@ -259,7 +259,7 @@ QStandardItemModel* ContractManager::getContractsAsModel() const {
 
         item->setData(contract.getStatus(), Qt::UserRole);
         rowItems.append(item);
-        rowItems.append(new QStandardItem(QString::fromStdString(contract.getNotes())));
+        rowItems.append(new QStandardItem(QString::fromStdString(formatSpace(contract.getNotes()))));
 
         model->appendRow(rowItems);
     }
