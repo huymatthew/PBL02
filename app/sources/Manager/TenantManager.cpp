@@ -6,7 +6,7 @@ using namespace std;
 TenantManager::TenantManager() : Manager<Tenant>() {}
 TenantManager::~TenantManager() {}
 
-bool TenantManager::loadFromDatabase() {
+bool TenantManager::loadFromDatabase(bool showLog) {
     cout << "\033[1;32m*Loading tenants from database...\033[0m" << endl;
     ifstream file("./app/database/tenants.dat");
     if (!file) {
@@ -28,12 +28,12 @@ bool TenantManager::loadFromDatabase() {
         }
         items.emplace_back(tenantId, fullName, phone, identityCard, dateOfBirth, gender);
         pk_manager.addKey(tenantId);
-        cout << "- Loaded tenant ID: " << tenantId << endl;
+        if (showLog) cout << "- Loaded tenant ID: " << tenantId << endl;
     }
     data_loaded = true;
     return true;
 }
-bool TenantManager::saveToDatabase() {
+bool TenantManager::saveToDatabase(bool showLog) {
     cout << "\033[1;33m*Saving tenants to database...\033[0m" << endl;
     ofstream file("./app/database/tenants.dat", ios::out | ios::trunc);
     if (!file) {
@@ -47,7 +47,7 @@ bool TenantManager::saveToDatabase() {
              << tenant.getIdentityCard() << " "
              << tenant.getDateOfBirth() << " "
              << tenant.getGender() << endl;
-        cout << "~ Saved tenant ID: " << tenant.getId() << endl;
+        if (showLog) cout << "~ Saved tenant ID: " << tenant.getId() << endl;
     }
     return true;
 }

@@ -18,7 +18,7 @@ public:
     ServiceTypeManager();
     ~ServiceTypeManager();
 
-    bool loadFromDatabase();
+    bool loadFromDatabase(bool showLog = false);
     
     ServiceType* getServiceType(int serviceType);
     ServiceType* getServiceTypeByName(const string& name);

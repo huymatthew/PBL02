@@ -6,7 +6,7 @@ using namespace std;
 ContractManager::ContractManager() : Manager<Contract>() {}
 ContractManager::~ContractManager() {}
 
-bool ContractManager::loadFromDatabase() {
+bool ContractManager::loadFromDatabase(bool showLog) {
     cout << "\033[1;32m*Loading contracts from database...\033[0m" << endl;
     ifstream file("./app/database/contracts.dat");
     if (!file) {
@@ -37,7 +37,7 @@ bool ContractManager::loadFromDatabase() {
 
     return true;
 }
-bool ContractManager::saveToDatabase() {
+bool ContractManager::saveToDatabase(bool showLog) {
     cout << "\033[1;33m*Saving contracts to database...\033[0m" << endl;
     ofstream file("./app/database/contracts.dat", ios::out | ios::trunc);
     if (!file) {
@@ -53,7 +53,7 @@ bool ContractManager::saveToDatabase() {
              << contract.getDeposit() << " "
              << contract.getStatus() << " "
              << contract.getNotes() << endl;
-        cout << "~ Saved contract ID: " << contract.getId() << endl;
+        if (showLog) cout << "~ Saved contract ID: " << contract.getId() << endl;
     }
     return true;
 }

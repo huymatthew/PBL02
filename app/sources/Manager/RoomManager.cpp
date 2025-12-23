@@ -6,7 +6,7 @@ using namespace std;
 RoomManager::RoomManager() : Manager<Room>() {}
 RoomManager::~RoomManager() {}
 
-bool RoomManager::loadFromDatabase()
+bool RoomManager::loadFromDatabase(bool showLog)
 {
     cout << "\033[1;32m*Loading rooms from database...\033[0m" << endl;
     ifstream file("./app/database/rooms.dat");
@@ -35,11 +35,11 @@ bool RoomManager::loadFromDatabase()
         }
         items.emplace_back(roomId, roomName, roomType, monthlyRent, description, status);
         pk_manager.addKey(roomId);
-        cout << "- Loaded room ID: " << roomId << endl;
+        if (showLog) cout << "- Loaded room ID: " << roomId << endl;
     }
     return true;
 }
-bool RoomManager::saveToDatabase()
+bool RoomManager::saveToDatabase(bool showLog)
 {
     cout << "\033[1;33m*Saving rooms to database...\033[0m" << endl;
     ofstream file("./app/database/rooms.dat", ios::out | ios::trunc);
@@ -56,7 +56,7 @@ bool RoomManager::saveToDatabase()
              << room.getMonthlyRent() << " "
              << room.getStatus()
              << room.getDescription() << endl;
-        cout << "~ Saved room ID: " << room.getId() << endl;
+        if (showLog) cout << "~ Saved room ID: " << room.getId() << endl;
     }
     return true;
 }

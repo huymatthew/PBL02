@@ -4,7 +4,7 @@ using namespace std;
 ServiceManager::ServiceManager() : Manager<Service>() {}
 ServiceManager::~ServiceManager() {}
 
-bool ServiceManager::loadFromDatabase() {
+bool ServiceManager::loadFromDatabase(bool showLog) {
     cout << "\033[1;32m*Loading services from database...\033[0m" << endl;
     ifstream file("./app/database/services.dat");
     if (!file) {
@@ -26,11 +26,11 @@ bool ServiceManager::loadFromDatabase() {
         }
         items.emplace_back(serviceID, serviceType, billID, quantity, price);
         pk_manager.addKey(serviceID);
-        cout << "- Loaded service ID: " << serviceID << endl;
+        if (showLog) cout << "- Loaded service ID: " << serviceID << endl;
     }
     return true;
 }
-bool ServiceManager::saveToDatabase() {
+bool ServiceManager::saveToDatabase(bool showLog) {
     cout << "\033[1;33m*Saving services to database...\033[0m" << endl;
     ofstream file("./app/database/services.dat", ios::out | ios::trunc);
     if (!file) {
@@ -43,9 +43,9 @@ bool ServiceManager::saveToDatabase() {
              << service.getBillId() << " "
              << service.getQuantity() << " "
              << service.getPrice() << endl;
-        cout << "~ Saved service ID: " << service.getId() << endl;
+        if (showLog) cout << "~ Saved service ID: " << service.getId() << endl;
     }
-    cout << items.size() << " services saved." << endl;
+    if (showLog) cout << items.size() << " services saved." << endl;
     file.close();
     return true;
 }

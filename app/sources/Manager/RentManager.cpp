@@ -30,7 +30,7 @@ int RentManager::getTenantIdByContract(int contractId) { // main tenant only
     }
     return -1; // Not found
 }
-void RentManager::loadFromDatabase() {
+void RentManager::loadFromDatabase(bool showLog) {
     cout << "\033[1;32m*Loading rents from database...\033[0m" << endl;
     ifstream file("./app/database/rents.dat");
     if (!file) {
@@ -46,12 +46,14 @@ void RentManager::loadFromDatabase() {
             continue;
         }
         rents.emplace_back(contractId, tenantId, isRep != 0);
-        cout << "- Loaded rent: Contract ID " << contractId << ", Tenant ID " <<
-        tenantId << ", Is Representative: " << (isRep != 0) << endl;
+        if (showLog) {
+            cout << "- Loaded rent: Contract ID " << contractId << ", Tenant ID "
+                  << tenantId << ", Is Representative: " << (isRep != 0) << endl;
+        }
     }
     data_loaded = true;
 }
-void RentManager::saveToDatabase() {
+void RentManager::saveToDatabase(bool showLog) {
     cout << "\033[1;33m*Saving rents to database...\033[0m" << endl;
     ofstream file("./app/database/rents.dat", ios::out | ios::trunc);
     if (!file) {
@@ -62,7 +64,7 @@ void RentManager::saveToDatabase() {
         file << rent.getId() << " "
              << rent.getTenantId() << " "
              << (rent.getIsRepresentative() ? 1 : 0) << endl;
-        cout << "~ Saved rent: Contract ID " << rent.getId() << ", Tenant ID "
+        if (showLog) cout << "~ Saved rent: Contract ID " << rent.getId() << ", Tenant ID "
              << rent.getTenantId() << ", Is Representative: "
              << (rent.getIsRepresentative() ? 1 : 0) << endl;
     }

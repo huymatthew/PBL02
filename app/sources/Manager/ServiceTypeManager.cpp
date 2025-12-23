@@ -6,7 +6,7 @@ ServiceTypeManager::ServiceTypeManager() : data_loaded(false) {}
 
 ServiceTypeManager::~ServiceTypeManager() {}
 
-bool ServiceTypeManager::loadFromDatabase() {
+bool ServiceTypeManager::loadFromDatabase(bool showLog) {
     cout << "\033[1;32m*Loading service types from database...\033[0m" << endl;
     ifstream file("./app/database/service_types.dat");
     if (!file) {
@@ -24,7 +24,7 @@ bool ServiceTypeManager::loadFromDatabase() {
             continue; 
         }
         serviceTypes.emplace_back(serviceType, name, price, unit);
-        cout << "- Loaded service type ID: " << serviceType << endl;
+        if (showLog) cout << "- Loaded service type ID: " << serviceType << endl;
     }
     data_loaded = true;
     return true;

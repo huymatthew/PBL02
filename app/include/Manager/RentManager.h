@@ -17,8 +17,8 @@ public:
     bool removeRent(int contractId, int tenantId);
 
     int getTenantIdByContract(int contractId);
-    void loadFromDatabase();
-    void saveToDatabase();
+    void loadFromDatabase(bool showLog = false);
+    void saveToDatabase(bool showLog = false);
 
     bool tenantRented(int tenantId);
 private:

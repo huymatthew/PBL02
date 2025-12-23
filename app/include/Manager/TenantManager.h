@@ -22,8 +22,8 @@ public:
     TenantManager();
     ~TenantManager();
 
-    bool loadFromDatabase() override;
-    bool saveToDatabase() override;
+    bool loadFromDatabase(bool showLog = false) override;
+    bool saveToDatabase(bool showLog = false) override;
     
     bool add(const Tenant& tenant) override;
     bool addTenant(const string& fullName, const string& phone,

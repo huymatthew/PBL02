@@ -32,8 +32,8 @@ public:
     
     static DataManager& getInstance();
 
-    void loadAllData();
-    void saveAllData();
+    void loadAllData(bool showLog = false);
+    void saveAllData(bool showLog = false);
 
     BillManager& getBillManager() { return billM; }
     ContractManager& getContractManager() { return contractM; }

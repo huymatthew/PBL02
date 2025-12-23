@@ -11,34 +11,34 @@ DataManager& DataManager::getInstance() {
     return instance;
 }
 
-void DataManager::loadAllData() {
+void DataManager::loadAllData(bool showLog) {
     if (!dataLoaded) {
         if (DataSign::checkModified()) {
             cerr << "\033[1;33mError: Data files have been modified externally since last load.\033[0m" << endl;
             abort();
         }
         cout << "\033[1;32mLoading database...\033[0m" << endl;
-        billM.loadFromDatabase();
-        contractM.loadFromDatabase();
-        roomM.loadFromDatabase();
-        tenantM.loadFromDatabase();
-        serviceM.loadFromDatabase();
-        serviceTypeM.loadFromDatabase();
-        rentM.loadFromDatabase();
+        billM.loadFromDatabase(showLog);
+        contractM.loadFromDatabase(showLog);
+        roomM.loadFromDatabase(showLog);
+        tenantM.loadFromDatabase(showLog);
+        serviceM.loadFromDatabase(showLog);
+        serviceTypeM.loadFromDatabase(showLog);
+        rentM.loadFromDatabase(showLog);
         dataLoaded = true;
         cout << "\033[1;32mDatabase loaded successfully.\033[0m" << endl;
     }
 }
 
-void DataManager::saveAllData() {
+void DataManager::saveAllData(bool showLog) {
     if (dataLoaded) {
         cout << "\033[1;31mSaving database...\033[0m" << endl;
-        billM.saveToDatabase();
-        contractM.saveToDatabase();
-        roomM.saveToDatabase();
-        tenantM.saveToDatabase();
-        serviceM.saveToDatabase();
-        rentM.saveToDatabase();
+        billM.saveToDatabase(showLog);
+        contractM.saveToDatabase(showLog);
+        roomM.saveToDatabase(showLog);
+        tenantM.saveToDatabase(showLog);
+        serviceM.saveToDatabase(showLog);
+        rentM.saveToDatabase(showLog);
         dataLoaded = false;
         cout << "\033[1;31mDatabase saved successfully.\033[0m" << endl;
         DataSign::saveDataSign();

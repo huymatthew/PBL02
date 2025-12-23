@@ -7,7 +7,7 @@ using namespace std;
 BillManager::BillManager() : Manager<Bill>() {}
 BillManager::~BillManager() {}
 
-bool BillManager::loadFromDatabase() {
+bool BillManager::loadFromDatabase(bool showLog) {
     cout << "\033[1;32m*Loading bills from database...\033[0m" << endl;
     ifstream file("./app/database/bills.dat");
     if (!file) {
@@ -29,12 +29,12 @@ bool BillManager::loadFromDatabase() {
             continue; 
         }
         items.emplace_back(id, contractId, month, rent, total, status);
-        cout << "- Loaded bill ID: " << id << endl;
+        if (showLog) cout << "- Loaded bill ID: " << id << endl;
     }
     return true;
 }
 
-bool BillManager::saveToDatabase() {
+bool BillManager::saveToDatabase(bool showLog) {
     cout << "\033[1;33m*Saving bills to database...\033[0m" << endl;
     ofstream file("./app/database/bills.dat", ios::out | ios::trunc);
     if (!file) {
@@ -49,7 +49,7 @@ bool BillManager::saveToDatabase() {
              << bill.getRoomRent() << " "
              << bill.getTotalAmount() << " "
              << bill.getStatus() << endl;
-        cout << "~ Saved bill ID: " << bill.getId() << endl;
+        if (showLog) cout << "~ Saved bill ID: " << bill.getId() << endl;
     }
     return true;
 }

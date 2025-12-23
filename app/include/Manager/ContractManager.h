@@ -23,8 +23,8 @@ public:
     ContractManager();
     ~ContractManager();
 
-    bool loadFromDatabase() override;
-    bool saveToDatabase() override;
+    bool loadFromDatabase(bool showLog = false) override;
+    bool saveToDatabase(bool showLog = false) override;
 
     bool add(const Contract& contract) override;
     bool addContract(const int& roomId,

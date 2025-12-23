@@ -21,8 +21,8 @@ public:
     RoomManager();
     ~RoomManager();
 
-    bool loadFromDatabase() override;
-    bool saveToDatabase() override;
+    bool loadFromDatabase(bool showLog = false) override;
+    bool saveToDatabase(bool showLog = false) override;
     
     bool add(const Room& room) override;
     bool addRoom(const string& roomName, int roomType,

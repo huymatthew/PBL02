@@ -12,14 +12,16 @@ template <typename T>
 class Manager {
 public:
     virtual ~Manager() {};
-    virtual bool loadFromDatabase() = 0;
-    virtual bool saveToDatabase() = 0;
-    virtual bool add(const T& item) = 0;
-    virtual bool remove(int id) = 0;
-    virtual bool update(int id, const T& updatedItem) = 0;
-    virtual T* get(int id) = 0;
-    virtual bool exists(int id) const = 0;
-    virtual int getCount() const = 0;
+    virtual bool loadFromDatabase(bool showLog = false) = 0;
+    virtual bool saveToDatabase(bool showLog = false) = 0;
+
+    virtual bool add(const T& item);
+    virtual bool remove(int id);
+    virtual bool update(int id, const T& updatedItem);
+    virtual T* get(int id);
+    virtual bool exists(int id) const;
+    virtual int getCount() const;
+
     int getNextId() {
         return pk_manager.getNextKey();
     }
@@ -37,8 +39,18 @@ protected:
         }
         return items.end();
     }
-
-    
 };
+
+template <typename T>
+bool Manager<T>::add(const T& item) {
+    if (exists(item.getId())) {
+        cerr << "Item ID already exists: " << item.getId() << endl;
+        return false;
+    }
+    items.push_back(item);
+    pk_manager.addKey(item.getId());
+    cout << "+ Added item ID: " << item.getId() << endl;
+    return true;
+}
 
 #endif // MANAGER_H

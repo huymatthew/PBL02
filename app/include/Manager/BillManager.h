@@ -19,8 +19,8 @@ public:
     BillManager();
     ~BillManager();
 
-    bool loadFromDatabase();
-    bool saveToDatabase();
+    bool loadFromDatabase(bool showLog = false) override;
+    bool saveToDatabase(bool showLog = false) override;
     
     bool add(const Bill& bill) override;
     bool addBill(int contractId, const string& month,

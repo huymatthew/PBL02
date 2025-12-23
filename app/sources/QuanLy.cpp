@@ -10,7 +10,7 @@ QuanLy::QuanLy(QMainWindow *mainWindow) : mainWindow(mainWindow)
     timeUpdate();
     signalAndSlotConnect();
     manager = &DataManager::getInstance();
-    manager->loadAllData();
+    manager->loadAllData(true);
     onChangedTabActive(0);
     cout << "\033[1;31m======================================================\033[0m" << endl;
 }
@@ -18,7 +18,7 @@ QuanLy::QuanLy(QMainWindow *mainWindow) : mainWindow(mainWindow)
 QuanLy::~QuanLy()
 {
     cout << "\033[1;31m======================================================\033[0m" << endl;
-    manager->saveAllData();
+    manager->saveAllData(true);
     cout << "\033[1;31m=== QuanLy destroyed. ===\033[0m" << endl;
 }
 

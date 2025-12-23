@@ -18,8 +18,8 @@ public:
     ServiceManager();
     ~ServiceManager();
 
-    bool loadFromDatabase() override;
-    bool saveToDatabase() override;
+    bool loadFromDatabase(bool showLog = false) override;
+    bool saveToDatabase(bool showLog = false) override;
     
     bool add(const Service& service) override;
     bool addService(int serviceType, int billId, int quantity, double price);
