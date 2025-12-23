@@ -67,7 +67,7 @@ void ContractManager::quicksave() {
 bool ContractManager::addContract(const int& roomId, const string& start, const string& end,
                                   double rent, double deposit, int status, const string& notes) {
     int newId = pk_manager.getNextKey();
-    Contract newContract(newId, roomId, start, end, rent, deposit, status, notes);
+    Contract newContract(newId, roomId, start, end, rent, deposit, status, formatName(notes));
     return add(newContract);
 }
 
@@ -160,6 +160,39 @@ void ContractManager::terminateContract(int contractId){
         }
         it->setStatus(0);
     }
+}
+
+bool ContractManager::validateItem(const Contract& item) const {
+    ostringstream err;
+    if (item.getId() <= 0) {
+        err << "Invalid contract ID: " << item.getId() << endl;
+    }
+    if (item.getRoomId() <= 0) {
+        err << "Invalid room ID for contract ID: " << item.getId() << endl;
+    }
+    if (item.getMonthlyRent() < 0) {
+        err << "Invalid monthly rent for contract ID: " << item.getId() << endl;
+    }
+    if (item.getDeposit() < 0) {
+        err << "Invalid deposit for contract ID: " << item.getId() << endl;
+    }
+    if (item.getStatus() < 0 || item.getStatus() > 2) {
+        err << "Invalid status for contract ID: " << item.getId() << endl;
+    }
+    if (item.getStartDate().length() != 10 || item.getStartDate()[4] != '-' || item.getStartDate()[7] != '-') {
+        err << "Invalid start date format for contract ID: " << item.getId() << endl;
+    }
+    if (item.getEndDate().length() != 10 || item.getEndDate()[4] != '-' || item.getEndDate()[7] != '-') {
+        err << "Invalid end date format for contract ID: " << item.getId() << endl;
+    }
+    if (item.getStartDate() >= item.getEndDate()) {
+        err << "Start date must be before end date for contract ID: " << item.getId() << endl;
+    }
+    if (err.str().length() > 0) {
+        QMessageBox::warning(nullptr, "Invalid Contract Data", QString::fromStdString(err.str()));
+        return false;
+    }
+    return true;
 }
 
 QStandardItemModel* ContractManager::getContractsAsModel() const {

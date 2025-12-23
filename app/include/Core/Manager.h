@@ -24,6 +24,8 @@ public:
     virtual bool exists(int id) const;
     virtual int getCount() const;
 
+    virtual bool validateItem(const T& item) const { return true; }
+
     int getNextId() {
         return pk_manager.getNextKey();
     }
@@ -54,6 +56,10 @@ bool Manager<T>::add(const T& item) {
         cerr << "Item ID already exists: " << item.getId() << endl;
         return false;
     }
+    if (!validateItem(item)) {
+        cerr << "Item validation failed: " << item.getId() << endl;
+        return false;
+    }
     items.push_back(item);
     pk_manager.addKey(item.getId());
     cout << "+ Added item ID: " << item.getId() << endl;
@@ -80,6 +86,10 @@ bool Manager<T>::update(int id, const T& updatedItem) {
     auto it = this->findIterator(id);
     if (it == items.end()) {
         cerr << "Item ID not found: " << id << endl;
+        return false;
+    }
+    if (!validateItem(updatedItem)) {
+        cerr << "Updated item validation failed: " << updatedItem.getId() << endl;
         return false;
     }
     if (updatedItem.getId() != id && exists(updatedItem.getId())) {

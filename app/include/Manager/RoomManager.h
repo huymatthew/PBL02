@@ -45,6 +45,8 @@ public:
 
     Vector<Room*> getAllAvailableRooms();
 
+    bool validateItem(const Room& item) const override;
+
     friend class DataManager;
 };
 

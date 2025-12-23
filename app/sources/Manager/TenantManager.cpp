@@ -1,5 +1,6 @@
 #include <Manager/TenantManager.h>
 #include <algorithm>
+#include <QMessageBox>
 
 using namespace std;
 
@@ -193,4 +194,31 @@ QStandardItemModel* TenantManager::getTenantsAsModel() const {
         model->appendRow(row);
     }
     return model;
+}
+
+bool TenantManager::validateItem(const Tenant& item) const {
+    ostringstream err;
+    if (item.getId() <= 0) {
+        err << "Invalid tenant ID: " << item.getId() << endl;
+    }
+    if (item.getFullName().empty()) {
+        err << "Tenant name cannot be empty for tenant ID: " << item.getId() << endl;
+    }
+    if (!isValidPhone(item.getPhone())) {
+        err << "Invalid phone number for tenant ID: " << item.getId() << endl;
+    }
+    if (!isValidIdentityCard(item.getIdentityCard())) {
+        err << "Invalid identity card for tenant ID: " << item.getId() << endl;
+    }
+    if (!isValidDateOfBirth(item.getDateOfBirth())) {
+        err << "Invalid date of birth for tenant ID: " << item.getId() << endl;
+    }
+    if (item.getGender() != 1 && item.getGender() != 2) {
+        err << "Invalid gender for tenant ID: " << item.getId() << endl;
+    }
+    if (err.str().length() > 0) {
+        QMessageBox::warning(nullptr, "Invalid Tenant Data", QString::fromStdString(err.str()));
+        return false;
+    }
+    return true;
 }

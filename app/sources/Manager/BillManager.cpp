@@ -1,6 +1,7 @@
 #include <Manager/BillManager.h>
 #include <Core/ExtraFormat.h>
 #include <Secure/DataSign.h>
+#include <QMessageBox>
 #include <iostream>
 
 using namespace std;
@@ -129,6 +130,32 @@ long BillManager::getTotalRevenue(QDate fromDate,  QDate toDate) const {
     return totalRevenue;
 }
 
+bool BillManager::validateItem(const Bill& item) const {
+    ostringstream err;
+    if (item.getId() <= 0) {
+        err << "Invalid bill ID: " << item.getId() << endl;
+    }
+    if (item.getContractId() <= 0) {
+        err << "Invalid contract ID for bill ID: " << item.getId() << endl;
+    }
+    if (item.getRoomRent() < 0) {
+        err << "Invalid room rent for bill ID: " << item.getId() << endl;
+    }
+    if (item.getTotalAmount() < 0) {
+        err << "Invalid total amount for bill ID: " << item.getId() << endl;
+    }
+    if (item.getStatus() < 0 || item.getStatus() > 2) {
+        err << "Invalid status for bill ID: " << item.getId() << endl;
+    }
+    if (item.getBillingMonth().length() != 7 || item.getBillingMonth()[4] != '-') {
+        err << "Invalid billing month format for bill ID: " << item.getId() << endl;
+    }
+    if (err.str().length() > 0) {
+        QMessageBox::warning(nullptr, "Invalid Bill Data", QString::fromStdString(err.str()));
+        return false;
+    }
+    return true;
+}
 
 QStandardItemModel* BillManager::getBillsAsModel() const {
     QStandardItemModel* model = new QStandardItemModel();

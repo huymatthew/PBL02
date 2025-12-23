@@ -44,6 +44,26 @@ void AddContractDialog::on_saveButton_clicked() {
         errorlog += "- Selected room is already occupied. Please choose another room.\n";
     }
 
+    // check overlap tenants
+    bool tenantOverlap = false;
+    unordered_set<int> tenantIds;
+    for (int i = 0; i < tenantList->count(); ++i) {
+        QListWidgetItem* item = tenantList->item(i);
+        QComboBox* tenantComboBox = qobject_cast<QComboBox*>(tenantList->itemWidget(item));
+        if (tenantComboBox) {
+            int tenantId = tenantComboBox->currentData().toInt();
+            if (tenantIds.find(tenantId) != tenantIds.end()) {
+                tenantOverlap = true;
+                break;
+            }
+            tenantIds.insert(tenantId);
+        }
+    }
+    if (tenantOverlap) {
+        errorlog += "- Duplicate tenants detected. Please ensure each tenant is added only once.\n";
+    }
+
+
     if (!errorlog.empty()) {
         QMessageBox::warning(this, "Input Error", QString::fromStdString(errorlog));
         return;
@@ -62,17 +82,11 @@ void AddContractDialog::on_saveButton_clicked() {
     }
     Contract newContract = *contractManager->getActiveContractByRoom(roomId);
 
-    bool checkOverlap[10000] = {false};
     for (int i = 0; i < tenantList->count(); ++i) {
         QListWidgetItem* item = tenantList->item(i);
         QComboBox* tenantComboBox = qobject_cast<QComboBox*>(tenantList->itemWidget(item));
         if (tenantComboBox) {
             int tenantId = tenantComboBox->currentData().toInt();
-            if (checkOverlap[tenantId]) {
-                QMessageBox::warning(this, "Input Error", "Duplicate tenant detected. Please ensure each tenant is added only once.");
-                return;
-            }
-            checkOverlap[tenantId] = true;
             DataManager::getInstance().getRentManager().addRent(newContract.getId(), tenantId, i == 0);
         }
     }

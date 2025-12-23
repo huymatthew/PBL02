@@ -7,10 +7,10 @@
 ! Hoàn thiện phần xóa dữ liệu - DONE (Soft Delete)
 ! Hoàn thiện Database - 99% DONE
 ! Sửa lỗi hiển thị dữ liệu có khoảng trắng - DONE
-! Đảm bảo ACID cho database - ON PROGRESS...
+! Đảm bảo ACID cho database - DONE
+! Xử lý kiểm tra đầu vào !IMPORTANT - DONE
 ! Hoàn thiện thanh toán
 ! Hiển thị Hợp đồng
-! Xử lý kiểm tra đầu vào !IMPORTANT 
 ! ...
 
 x RoomType

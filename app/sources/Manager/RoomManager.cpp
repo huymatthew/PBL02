@@ -1,6 +1,7 @@
 #include <Manager/RoomManager.h>
 #include <Core/ExtraFormat.h>
 #include <Secure/DataSign.h>
+#include <QMessageBox>
 
 using namespace std;
 
@@ -70,7 +71,7 @@ void RoomManager::quicksave()
 bool RoomManager::addRoom(const string &roomName, int roomType, double monthlyRent, const string &description, int status)
 {
     int roomId = pk_manager.getNextKey();
-    Room newRoom(roomId, roomName, roomType, monthlyRent, description, status);
+    Room newRoom(roomId, roomName, roomType, monthlyRent, formatName(description), status);
     return add(newRoom);
 }
 
@@ -221,4 +222,31 @@ Vector<Room*> RoomManager::getAllAvailableRooms(){
         }
     }
     return aRooms;
+}
+
+bool RoomManager::validateItem(const Room& item) const {
+    ostringstream err;
+    if (item.getId() <= 0) {
+        err << "Invalid room ID: " << item.getId() << endl;
+    }
+    if (item.getRoomName().empty()) {
+        err << "Room name cannot be empty for room ID: " << item.getId() << endl;
+    }
+    if (item.getRoomType() < 0 || item.getRoomType() > 2) {
+        err << "Invalid room type for room ID: " << item.getId() << endl;
+    }
+    if (item.getMonthlyRent() < 0) {
+        err << "Monthly rent cannot be negative for room ID: " << item.getId() << endl;
+    }
+    if (item.getStatus() < 0 || item.getStatus() > 1) {
+        err << "Invalid status for room ID: " << item.getId() << endl;
+    }
+    if (item.getRoomName().find(' ') != string::npos) {
+        err << "Room name cannot contain spaces for room ID: " << item.getId() << endl;
+    }
+    if (err.str().length() > 0) {
+        QMessageBox::warning(nullptr, "Invalid Room Data", QString::fromStdString(err.str()));
+        return false;
+    }
+    return true;
 }

@@ -36,6 +36,8 @@ public:
     long getTotalRevenue(QDate fromDate,  QDate toDate) const;
     
     QStandardItemModel* getBillsAsModel() const;
+
+    bool validateItem(const Bill& item) const override;
     friend class DataManager;
 };
 

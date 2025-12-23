@@ -1,5 +1,6 @@
 #include <Dialogs/AddTenantDiag.h>
 #include <Core/ExtraFormat.h>
+#include <QMessageBox>
 #include <iostream>
 
 using namespace std;
@@ -35,7 +36,7 @@ void AddTenantDiag::on_buttonBox_accepted() {
     int gender = comboBoxGender->currentIndex();
 
     if (fullName.empty() || phone.empty() || identityCard.empty() || dateOfBirth.empty()) {
-        cerr << "Error: All fields must be filled." << endl;
+        QMessageBox::warning(this, "Input Error", "Please fill in all required fields.");
         return;
     }
     fullName = formatName(fullName);

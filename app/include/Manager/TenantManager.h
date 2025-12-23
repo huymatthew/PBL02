@@ -46,6 +46,8 @@ public:
     string formatPhone(const string& phone) const;
     string formatIdentityCard(const string& identityCard) const;
 
+    bool validateItem(const Tenant& item) const override;
+
     friend class DataManager;
 };
 

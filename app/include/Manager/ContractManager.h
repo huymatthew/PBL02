@@ -42,6 +42,8 @@ public:
     bool roomUsed(int roomId) const;
     void deactivateContract(int contractId);
     void terminateContract(int contractId);
+
+    bool validateItem(const Contract& item) const override;
     
     QStandardItemModel* getContractsAsModel() const;
     friend class DataManager;
