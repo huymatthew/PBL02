@@ -1,5 +1,6 @@
 #include <Manager/DataManager.h>
 #include <set>
+#include <string>
 using namespace std;
 
 
@@ -12,6 +13,10 @@ DataManager& DataManager::getInstance() {
 
 void DataManager::loadAllData() {
     if (!dataLoaded) {
+        if (DataSign::checkModified()) {
+            cerr << "\033[1;33mError: Data files have been modified externally since last load.\033[0m" << endl;
+            //abort();
+        }
         cout << "\033[1;32mLoading database...\033[0m" << endl;
         billM.loadFromDatabase();
         contractM.loadFromDatabase();
@@ -36,6 +41,7 @@ void DataManager::saveAllData() {
         rentM.saveToDatabase();
         dataLoaded = false;
         cout << "\033[1;31mDatabase saved successfully.\033[0m" << endl;
+        DataSign::saveDataSign();
     }
 }
 Tenant* DataManager::getMainTenantFromContract(int contractId) {

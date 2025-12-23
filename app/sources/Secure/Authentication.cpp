@@ -83,3 +83,22 @@ void Authentication::saveinfo(){
         f << password << " " << salt << endl;
     }
 }
+
+bool Authentication::Auth(){
+    cout << "Choose your way: " << endl;
+    cout << "1. Login" << endl;
+    cout << "2. Change Password" << endl;
+    cout << "3. Exit" << endl;
+    int choice;
+    cin >> choice;        
+    if (choice == 1){
+        return Login();
+    }
+    else if (choice == 2){
+        ChangePassword();
+        return false;
+    }
+    else{
+        return false;
+    }
+}

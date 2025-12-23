@@ -9,6 +9,7 @@
 #include <Data/Service.h>
 #include <Data/ServiceType.h>
 #include <Data/Rent.h>
+#include <Secure/DataSign.h>
 
 #include <QStandardItemModel>
 #include <QString>
@@ -30,7 +31,7 @@ public:
     DataManager& operator=(const DataManager&) = delete;
     
     static DataManager& getInstance();
-    
+
     void loadAllData();
     void saveAllData();
 
@@ -54,7 +55,7 @@ public:
 private:
     DataManager();
     ~DataManager() = default;
-    
+
     BillManager billM;
     ContractManager contractM;
     RoomManager roomM;
